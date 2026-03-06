@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R Coding Conventions — Pharmaceutical Sciences</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --border: #e0dbd0;
+    --accent: #2d6a4f;
+    --accent2: #b5451b;
+    --accent3: #1a4f7a;
+    --text: #1e1e1e;
+    --muted: #6b6660;
+    --code-bg: #1e2430;
+    --code-text: #cdd6f4;
+    --good: #2d6a4f;
+    --bad: #b5451b;
+    --tag-bg: #e8f4ee;
+    --tag-text: #2d6a4f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  header {
+    background: var(--accent);
+    color: white;
+    padding: 48px 40px 36px;
+    border-bottom: 4px solid #1a4030;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    font-weight: 300;
+    max-width: 560px;
+  }
+
+  .nav-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-pills a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+
+  .nav-pills a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--tag-bg);
+  }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  section {
+    margin-bottom: 52px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .section-number {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .rule {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .rule-header {
+    padding: 14px 18px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    user-select: none;
+  }
+
+  .rule-header:hover { background: #fafaf8; }
+
+  .rule-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    flex: 1;
+  }
+
+  .rule-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .chevron {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 3px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .rule.open .chevron { transform: rotate(90deg); }
+
+  .rule-body {
+    display: none;
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .rule.open .rule-body { display: block; }
+
+  .rationale {
+    font-size: 0.875rem;
+    color: var(--muted);
+    background: #f9f8f5;
+    border-left: 3px solid var(--border);
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .compare { grid-template-columns: 1fr; }
+  }
+
+  .code-block {
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.82rem;
+  }
+
+  .code-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .code-label.good { background: var(--good); color: white; }
+  .code-label.bad  { background: var(--bad);  color: white; }
+  .code-label.neutral { background: var(--accent3); color: white; }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .single-code { margin-top: 12px; }
+
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-left: 8px;
+  }
+
+  .tag.warn {
+    background: #fef3ec;
+    color: var(--accent2);
+  }
+
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    margin-top: 12px;
+  }
+
+  .summary-table th {
+    background: var(--accent);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+  }
+
+  .summary-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:nth-child(even) td { background: #fafaf8; }
+
+  code.inline {
+    background: #eef0f5;
+    color: var(--accent3);
+    font-family: 'Source Code Pro', monospace;
+    font-size: 0.82em;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .comment { color: #6c7a96; }
+  .string  { color: #a6e3a1; }
+  .fn      { color: #89b4fa; }
+  .num     { color: #fab387; }
+  .kw      { color: #cba6f7; }
+  .op      { color: #89dceb; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>R Coding Conventions</h1>
+  <p>A shared style guide for pharmaceutical sciences practicals. Following these conventions makes your code readable, reproducible, and consistent across exercises.</p>
+</header>
+
+<nav class="nav-pills">
+  <a href="#naming">Naming</a>
+  <a href="#assignment">Assignment</a>
+  <a href="#printing">Printing</a>
+  <a href="#rounding">Rounding</a>
+  <a href="#pipes">Pipes & mutate</a>
+  <a href="#plotting">Plotting</a>
+  <a href="#comments">Comments</a>
+  <a href="#quickref">Quick Reference</a>
+</nav>
+
+<main>
+
+<!-- 1. NAMING -->
+<section id="naming">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <h2>Variable & Object Naming</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use <code class="inline">snake_case</code> for all variable names <span class="tag">Required</span></div>
+        <div class="rule-desc">Words separated by underscores — no dots, no camelCase</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Consistent naming makes it easy to scan code at a glance. Snake_case is the tidyverse standard and is used throughout all course materials.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">fill_mass_mg</span> <span class="op">&lt;-</span> <span class="num">174.2</span>
+<span class="fn">ibu_per_mg_powder</span> <span class="op">&lt;-</span> <span class="num">0.43</span>
+<span class="fn">label_claim_mg</span> <span class="op">&lt;-</span> <span class="num">75.0</span>
+<span class="fn">X_bar_s1</span> <span class="op">&lt;-</span> <span class="fn">mean</span>(stage1<span class="op">$</span>pct_label)</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">fillMassMg</span> <span class="op">&lt;-</span> <span class="num">174.2</span>     <span class="comment"># camelCase</span>
+<span class="fn">ibu.per.mg</span> <span class="op">&lt;-</span> <span class="num">0.43</span>      <span class="comment"># dots</span>
+<span class="fn">lc</span> <span class="op">&lt;-</span> <span class="num">75.0</span>              <span class="comment"># unclear</span>
+<span class="fn">x1</span> <span class="op">&lt;-</span> <span class="fn">mean</span>(stage1<span class="op">$</span>pct_label)</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Include units in variable names where relevant <span class="tag">Recommended</span></div>
+        <div class="rule-desc">Append <code class="inline">_mg</code>, <code class="inline">_pct</code>, <code class="inline">_um</code>, <code class="inline">_min</code> etc. to avoid confusion</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Pharmaceutical calculations often mix units (mg, µg, %, mL). Making the unit part of the name prevents subtle errors when combining variables.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">powder_mass_mg</span>  <span class="op">&lt;-</span> <span class="num">174.2</span>
+<span class="fn">concentration_ug_ml</span> <span class="op">&lt;-</span> <span class="num">7.56</span>
+<span class="fn">pct_label</span>       <span class="op">&lt;-</span> <span class="num">98.4</span>
+<span class="fn">time_min</span>        <span class="op">&lt;-</span> <span class="num">45</span></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">powder</span>  <span class="op">&lt;-</span> <span class="num">174.2</span>   <span class="comment"># mg or g?</span>
+<span class="fn">conc</span>    <span class="op">&lt;-</span> <span class="num">7.56</span>    <span class="comment"># ug/mL or mg/mL?</span>
+<span class="fn">label</span>   <span class="op">&lt;-</span> <span class="num">98.4</span>    <span class="comment"># % or mg?</span>
+<span class="fn">t</span>       <span class="op">&lt;-</span> <span class="num">45</span>      <span class="comment"># minutes or hours?</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. ASSIGNMENT -->
+<section id="assignment">
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <h2>Assignment Operator</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Always use <code class="inline">&lt;-</code> for assignment, never <code class="inline">=</code> <span class="tag">Required</span></div>
+        <div class="rule-desc">The arrow operator is the R standard and avoids confusion with function arguments</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Inside function calls, <code class="inline">=</code> sets arguments (e.g. <code class="inline">signif(x, digits = 3)</code>). Using <code class="inline">&lt;-</code> for all assignments keeps this distinction clear and avoids hard-to-spot bugs.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">label_claim_mg</span> <span class="op">&lt;-</span> <span class="num">75.0</span>
+<span class="fn">std_slope</span>      <span class="op">&lt;-</span> <span class="num">0.04478</span>
+<span class="fn">data</span>           <span class="op">&lt;-</span> <span class="fn">read_csv</span>(<span class="string">"file.csv"</span>)</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">label_claim_mg</span> = <span class="num">75.0</span>
+<span class="fn">std_slope</span>      = <span class="num">0.04478</span>
+<span class="fn">data</span>           = <span class="fn">read_csv</span>(<span class="string">"file.csv"</span>)</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Put spaces around <code class="inline">&lt;-</code> and operators <span class="tag">Required</span></div>
+        <div class="rule-desc">Space on both sides of assignment and arithmetic operators</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Spacing makes arithmetic readable, especially in multi-step pharmaceutical calculations where it's easy to misread a minus sign.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">C2</span> <span class="op">&lt;-</span> (absorbance <span class="op">-</span> std_intercept) <span class="op">/</span> std_slope
+<span class="fn">AV</span> <span class="op">&lt;-</span> k <span class="op">*</span> S
+<span class="fn">fill_mass_mg</span> <span class="op">&lt;-</span> mass_filled_mg <span class="op">-</span> mass_empty_mg</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">C2</span><span class="op">&lt;-</span>(absorbance<span class="op">-</span>std_intercept)<span class="op">/</span>std_slope
+<span class="fn">AV</span><span class="op">&lt;-</span>k<span class="op">*</span>S
+<span class="fn">fill_mass_mg</span><span class="op">&lt;-</span>mass_filled_mg<span class="op">-</span>mass_empty_mg</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PRINTING -->
+<section id="printing">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <h2>Printing Results</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use <code class="inline">cat()</code> to print labelled results <span class="tag">Required</span></div>
+        <div class="rule-desc">Always include a descriptive label and unit — never print a bare number</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">A bare number printed to the console has no context. In pharmaceutical reporting, always state what the number means and what unit it is in. <code class="inline">cat()</code> lets you compose a readable sentence from text and values.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">cat</span>(<span class="string">"Ibuprofen content:"</span>, 
+    <span class="fn">signif</span>(ibu_per_mg_powder, <span class="num">3</span>), 
+    <span class="string">"mg Ibuprofen per mg powder\n"</span>)
+
+<span class="fn">cat</span>(<span class="string">"Mean content (X̄):"</span>, <span class="fn">signif</span>(X_bar, <span class="num">4</span>), 
+    <span class="string">"% of label claim\n"</span>)</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre>ibu_per_mg_powder   <span class="comment"># just the variable</span>
+<span class="fn">print</span>(ibu_per_mg_powder)  <span class="comment"># no label</span>
+X_bar               <span class="comment"># no context</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use <code class="inline">view()</code> to inspect data frames <span class="tag">Required</span></div>
+        <div class="rule-desc">Opens the table viewer — do not print large data frames to the console</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Printing a 30-row data frame floods the console output and makes the document hard to read when rendered. Use <code class="inline">view(data)</code> to inspect it interactively, and <code class="inline">head(data)</code> if you need a preview in the document output.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">view</span>(data)        <span class="comment"># interactive inspection</span>
+<span class="fn">head</span>(data, <span class="num">5</span>)     <span class="comment"># first 5 rows in output</span></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">print</span>(data)       <span class="comment"># floods the output</span>
+data              <span class="comment"># dumps entire table</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ROUNDING -->
+<section id="rounding">
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <h2>Rounding & Significant Figures</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use <code class="inline">signif()</code> for final results, <code class="inline">round()</code> for fixed decimals <span class="tag">Required</span></div>
+        <div class="rule-desc">Only round at the point of printing — keep full precision in intermediate calculations</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Rounding intermediate values accumulates error. Store full-precision values in variables and only apply rounding when displaying the result. Use <code class="inline">signif(x, n)</code> when the number of significant figures matters (most analytical results), and <code class="inline">round(x, n)</code> when a fixed number of decimal places is needed (e.g. always show 2 decimal places for %).</div>
+      <div class="single-code code-block">
+        <div class="code-label neutral">Example</div>
+        <pre><span class="comment"># Store full precision — do NOT round here</span>
+<span class="fn">C2</span> <span class="op">&lt;-</span> (absorbance <span class="op">-</span> std_intercept) <span class="op">/</span> std_slope
+<span class="fn">ibu_per_mg</span> <span class="op">&lt;-</span> C2 <span class="op">*</span> <span class="num">20</span> <span class="op">/</span> <span class="num">0.1</span> <span class="op">*</span> <span class="num">50</span> <span class="op">/</span> <span class="num">1000</span> <span class="op">/</span> powder_mass_mg
+
+<span class="comment"># Only round when printing</span>
+<span class="fn">cat</span>(<span class="string">"Ibuprofen per mg powder:"</span>, <span class="fn">signif</span>(ibu_per_mg, <span class="num">3</span>), <span class="string">"mg/mg\n"</span>)
+<span class="fn">cat</span>(<span class="string">"Label claim %:"</span>, <span class="fn">round</span>(pct_label, <span class="num">2</span>), <span class="string">"%\n"</span>)</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Never round inside a <code class="inline">mutate()</code> column <span class="tag">Recommended</span></div>
+        <div class="rule-desc">Rounding a column used in later calculations propagates the error</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">If you round <code class="inline">fill_mass_mg</code> inside mutate and then use it to compute <code class="inline">ibu_mg</code>, you introduce a rounding error that compounds. Keep data columns at full precision; round only in <code class="inline">cat()</code> when reporting.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre>data <span class="op">%>%</span>
+  <span class="fn">mutate</span>(
+    fill_mass_mg <span class="op">=</span> mass_filled_mg <span class="op">-</span> mass_empty_mg,
+    ibu_mg       <span class="op">=</span> fill_mass_mg <span class="op">*</span> ibu_per_mg_powder
+  )</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre>data <span class="op">%>%</span>
+  <span class="fn">mutate</span>(
+    fill_mass_mg <span class="op">=</span> <span class="fn">round</span>(mass_filled_mg <span class="op">-</span> mass_empty_mg, <span class="num">1</span>),
+    ibu_mg       <span class="op">=</span> fill_mass_mg <span class="op">*</span> ibu_per_mg_powder
+  )</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PIPES -->
+<section id="pipes">
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <h2>Pipes &amp; Data Manipulation</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use <code class="inline">%>%</code> with each step on its own line <span class="tag">Required</span></div>
+        <div class="rule-desc">One function per line, indented 2 spaces, pipe at end of line</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Multi-step data manipulation written as a single long line is very hard to read and debug. Putting each step on its own line makes it easy to comment out a single step or add a new one.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre>data <span class="op">&lt;-</span> data <span class="op">%>%</span>
+  <span class="fn">mutate</span>(
+    fill_mass_mg <span class="op">=</span> mass_filled_mg <span class="op">-</span> mass_empty_mg,
+    ibu_mg       <span class="op">=</span> fill_mass_mg <span class="op">*</span> ibu_per_mg_powder,
+    pct_label    <span class="op">=</span> ibu_mg <span class="op">/</span> label_claim_mg <span class="op">*</span> <span class="num">100</span>
+  )</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre>data <span class="op">&lt;-</span> <span class="fn">mutate</span>(data, fill_mass_mg<span class="op">=</span>mass_filled_mg<span class="op">-</span>mass_empty_mg, ibu_mg<span class="op">=</span>fill_mass_mg<span class="op">*</span>ibu_per_mg_powder, pct_label<span class="op">=</span>ibu_mg<span class="op">/</span>label_claim_mg<span class="op">*</span><span class="num">100</span>)</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Group constants at the top of a code chunk <span class="tag">Recommended</span></div>
+        <div class="rule-desc">Define all "magic numbers" as named constants before using them</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Grouping constants at the top means students only need to change values in one place. It also makes the intent of the code clearer — it's obvious that <code class="inline">vol_flask1_mL</code> is a setup parameter, not a computed result.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="comment"># Constants — update these with your values</span>
+<span class="fn">vol_flask1_mL</span> <span class="op">&lt;-</span> <span class="num">50.0</span>
+<span class="fn">vol_aliquot_mL</span> <span class="op">&lt;-</span> <span class="num">0.1</span>
+<span class="fn">vol_flask2_mL</span> <span class="op">&lt;-</span> <span class="num">20.0</span>
+
+<span class="fn">C1</span> <span class="op">&lt;-</span> C2 <span class="op">*</span> vol_flask2_mL <span class="op">/</span> vol_aliquot_mL</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">C1</span> <span class="op">&lt;-</span> C2 <span class="op">*</span> <span class="num">20</span> <span class="op">/</span> <span class="num">0.1</span>  <span class="comment"># where do 20 and 0.1 come from?</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PLOTTING -->
+<section id="plotting">
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <h2>Plotting with ggplot2</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Always use <code class="inline">theme_classic()</code> as the base theme <span class="tag">Required</span></div>
+        <div class="rule-desc">Clean white background, no gridlines — appropriate for scientific figures</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale"><code class="inline">theme_classic()</code> produces figures that closely match the style expected in scientific reports and publications — white background, visible axis lines, no distracting grid. It is used consistently across all course exercises.</div>
+      <div class="single-code code-block">
+        <div class="code-label neutral">Standard template</div>
+        <pre><span class="fn">ggplot</span>(data, <span class="fn">aes</span>(x <span class="op">=</span> time_min, y <span class="op">=</span> mean_pct)) <span class="op">+</span>
+  <span class="fn">geom_line</span>() <span class="op">+</span>
+  <span class="fn">geom_point</span>() <span class="op">+</span>
+  <span class="fn">labs</span>(
+    x     <span class="op">=</span> <span class="string">"Time (min)"</span>,
+    y     <span class="op">=</span> <span class="string">"Dissolved (%)"</span>,
+    title <span class="op">=</span> <span class="string">"Dissolution profile — Ibuprofen 75 mg capsules"</span>
+  ) <span class="op">+</span>
+  <span class="fn">theme_classic</span>()</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Always label axes with units in parentheses <span class="tag">Required</span></div>
+        <div class="rule-desc">Use <code class="inline">labs(x = "...", y = "...")</code> — never leave default variable names as axis labels</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Default ggplot axis labels show the raw column name (e.g. <code class="inline">mean_pct</code>), which is unacceptable in a scientific figure. Always write a full, human-readable label with units.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">labs</span>(
+  x <span class="op">=</span> <span class="string">"Time (min)"</span>,
+  y <span class="op">=</span> <span class="string">"Ibuprofen released (mg)"</span>
+)</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="comment"># No labs() call — axis shows "time_min"
+# and "mean_mg" — not acceptable</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Each <code class="inline">+</code> layer goes on its own line <span class="tag">Required</span></div>
+        <div class="rule-desc">One geom or modifier per line, <code class="inline">+</code> at end of the preceding line</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">This mirrors the pipe convention for data manipulation. It makes it easy to comment out a layer (e.g. temporarily remove error bars) without breaking the rest of the plot code.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Do this</div>
+          <pre><span class="fn">ggplot</span>(data, <span class="fn">aes</span>(x <span class="op">=</span> time_min, y <span class="op">=</span> mean_mg)) <span class="op">+</span>
+  <span class="fn">geom_line</span>() <span class="op">+</span>
+  <span class="fn">geom_point</span>() <span class="op">+</span>
+  <span class="fn">geom_errorbar</span>(<span class="fn">aes</span>(ymin <span class="op">=</span> mean_mg <span class="op">-</span> sd_mg,
+                     ymax <span class="op">=</span> mean_mg <span class="op">+</span> sd_mg)) <span class="op">+</span>
+  <span class="fn">theme_classic</span>()</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Avoid this</div>
+          <pre><span class="fn">ggplot</span>(data,<span class="fn">aes</span>(x<span class="op">=</span>time_min,y<span class="op">=</span>mean_mg))<span class="op">+</span><span class="fn">geom_line</span>()<span class="op">+</span><span class="fn">geom_point</span>()<span class="op">+</span><span class="fn">theme_classic</span>()</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use <code class="inline">"steelblue"</code> as the default single-series colour <span class="tag">Recommended</span></div>
+        <div class="rule-desc">For multi-group plots, let ggplot assign colours automatically via <code class="inline">aes(color = group)</code></div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">A consistent default colour keeps all course figures looking coherent. For single-series plots, <code class="inline">"steelblue"</code> is readable on screen and prints well in greyscale. For multi-series plots, map the grouping variable to <code class="inline">color</code> inside <code class="inline">aes()</code> and let ggplot handle the palette.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Single series</div>
+          <pre><span class="fn">geom_line</span>(color <span class="op">=</span> <span class="string">"steelblue"</span>)
+<span class="fn">geom_point</span>(color <span class="op">=</span> <span class="string">"steelblue"</span>)</pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label good">✓ Multiple groups</div>
+          <pre><span class="fn">ggplot</span>(data, <span class="fn">aes</span>(x <span class="op">=</span> time_min, y <span class="op">=</span> mean_pct,
+              color <span class="op">=</span> formulation)) <span class="op">+</span>
+  <span class="fn">geom_line</span>() <span class="op">+</span>
+  <span class="fn">geom_point</span>()</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. COMMENTS -->
+<section id="comments">
+  <div class="section-header">
+    <div class="section-number">7</div>
+    <h2>Code Comments</h2>
+  </div>
+
+  <div class="rule open" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Comment <em>why</em>, not <em>what</em> — and always comment units <span class="tag">Required</span></div>
+        <div class="rule-desc">A comment should add information, not just repeat what the code already says</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="rationale">Restating the code in English adds no value. Useful comments explain the reasoning, the source (e.g. which EP table), or the unit of a variable.</div>
+      <div class="compare">
+        <div class="code-block">
+          <div class="code-label good">✓ Useful comments</div>
+          <pre><span class="fn">label_claim_mg</span> <span class="op">&lt;-</span> <span class="num">75.0</span>  <span class="comment"># mg — labelled dose per capsule</span>
+<span class="fn">k_s1</span> <span class="op">&lt;-</span> <span class="num">2.4</span>            <span class="comment"># EP 2.9.40, Table 2.9.40-1, n=10</span>
+<span class="fn">L1</span>   <span class="op">&lt;-</span> <span class="num">15.0</span>           <span class="comment"># acceptance limit, Stage 1 (%)</span></pre>
+        </div>
+        <div class="code-block">
+          <div class="code-label bad">✗ Unhelpful comments</div>
+          <pre><span class="fn">label_claim_mg</span> <span class="op">&lt;-</span> <span class="num">75.0</span>  <span class="comment"># set label claim to 75</span>
+<span class="fn">k_s1</span> <span class="op">&lt;-</span> <span class="num">2.4</span>            <span class="comment"># k value</span>
+<span class="fn">L1</span>   <span class="op">&lt;-</span> <span class="num">15.0</span>           <span class="comment"># L1</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" onclick="toggle(this)">
+    <div class="rule-header">
+      <div>
+        <div class="rule-title">Use section separator comments in long scripts <span class="tag">Recommended</span></div>
+        <div class="rule-desc">Group related lines with a <code class="inline"># ---</code> header comment</div>
+      </div>
+      <span class="chevron">▶</span>
+    </div>
+    <div class="rule-body">
+      <div class="single-code code-block">
+        <div class="code-label neutral">Example</div>
+        <pre><span class="comment"># --- Assay: Ibuprofen concentration from UV absorbance ---</span>
+<span class="fn">C2</span> <span class="op">&lt;-</span> (absorbance <span class="op">-</span> std_intercept) <span class="op">/</span> std_slope
+<span class="fn">C1</span> <span class="op">&lt;-</span> C2 <span class="op">*</span> vol_flask2_mL <span class="op">/</span> vol_aliquot_mL
+
+<span class="comment"># --- EP 2.9.40 Stage 1 acceptance value ---</span>
+<span class="fn">AV_s1</span> <span class="op">&lt;-</span> k_s1 <span class="op">*</span> S_s1</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. QUICK REFERENCE -->
+<section id="quickref">
+  <div class="section-header">
+    <div class="section-number">8</div>
+    <h2>Quick Reference Summary</h2>
+  </div>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Convention</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Variable names</td>
+        <td><code class="inline">snake_case</code>, include units (<code class="inline">_mg</code>, <code class="inline">_pct</code>, <code class="inline">_mL</code>)</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Assignment</td>
+        <td>Always <code class="inline">&lt;-</code> with spaces; <code class="inline">=</code> only inside function arguments</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Printing values</td>
+        <td><code class="inline">cat("label:", signif(x, 3), "unit\n")</code></td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Printing tables</td>
+        <td><code class="inline">view(data)</code> to inspect; <code class="inline">head(data, 5)</code> to preview in output</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Rounding</td>
+        <td><code class="inline">signif(x, n)</code> or <code class="inline">round(x, n)</code> only at print-time; full precision in calculations</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Pipes</td>
+        <td><code class="inline">%>%</code> with each step on its own indented line</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>ggplot theme</td>
+        <td>Always <code class="inline">theme_classic()</code></td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Axis labels</td>
+        <td><code class="inline">labs(x = "Name (unit)", y = "Name (unit)")</code> — always</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Plot layers</td>
+        <td>One <code class="inline">geom_*()</code> or modifier per line, <code class="inline">+</code> at end of line</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+      <tr>
+        <td>Default colour</td>
+        <td><code class="inline">"steelblue"</code> for single series; <code class="inline">aes(color = group)</code> for multi-series</td>
+        <td><span class="tag warn">Recommended</span></td>
+      </tr>
+      <tr>
+        <td>Constants</td>
+        <td>Define at top of chunk with inline unit comment</td>
+        <td><span class="tag warn">Recommended</span></td>
+      </tr>
+      <tr>
+        <td>Comments</td>
+        <td>Explain <em>why</em> and state units — not just what the code does</td>
+        <td><span class="tag">Required</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer>R Coding Conventions — Pharmaceutical Sciences · Updated 2026</footer>
+
+<script>
+  function toggle(el) {
+    el.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
