@@ -1,0 +1,68 @@
+---
+title: ""
+page-layout: full
+toc: false
+---
+
+::: {.hero-banner}
+# R for Pharmacy
+
+R references for pharmaceutical sciences practicals.
+Written for learners — plain language, tidyverse style, pharmacy examples.
+
+[Get Started](getting-started.qmd){.hero-btn}
+[Browse Functions](functions/index.qmd){.hero-btn .secondary}
+:::
+
+
+::: {.callout-tip}
+## No installation required
+Most code blocks on this site are **interactive**. Click **Run Code** to execute them right here in your browser — no R or RStudio installation needed.
+:::
+
+## Topics covered
+<div class="card-grid">
+<a href="getting-started.qmd" class="feature-card">
+<div class="card-icon">🚀</div>
+<h3>Getting Started</h3>
+<p>Set up R and RStudio, and run your very first lines of code.</p>
+</a>
+<a href="topics/data-handling.qmd" class="feature-card">
+<div class="card-icon">📂</div>
+<h3>Data Handling</h3>
+<p>Import spreadsheets, tidy messy data, and select the rows and columns you need.</p>
+</a>
+<a href="topics/visualization.qmd" class="feature-card">
+<div class="card-icon">📈</div>
+<h3>Visualization</h3>
+<p>Create plots with ggplot2.</p>
+</a>
+<a href="topics/descriptive-stats.qmd" class="feature-card">
+<div class="card-icon">📊</div>
+<h3>Descriptive Statistics</h3>
+<p>Summarise your data: means, medians, standard deviations, and more.</p>
+</a>
+<a href="topics/hypothesis-testing.qmd" class="feature-card" style="display:none">
+<div class="card-icon">🔬</div>
+<h3>Hypothesis Testing</h3>
+<p>t-tests, chi-square, and Mann–Whitney tests for clinical data.</p>
+</a>
+<a href="topics/regression.qmd" class="feature-card" style="display:none">
+<div class="card-icon">📐</div>
+<h3>Regression</h3>
+<p>Understand dose–response relationships with linear and logistic regression.</p>
+</a>
+</div>
+
+---
+
+## How to read a function page
+
+Each page follows the same structure:
+
+| Section | What you'll find |
+|---|---|
+| **Syntax** | All call variants with argument names |
+| **Description** | What each call variant does, in plain English |
+| **Examples** | Runnable examples — edit and re-run in your browser |
+| **Input Arguments** | Every argument explained with type and default value |

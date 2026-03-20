@@ -1,0 +1,141 @@
+---
+title: "signif( )"
+subtitle: "Round to a given number of significant figures. See [original documentation](https://rdrr.io/r/base/Round.html) for reference."
+---
+
+## Syntax
+Required arguments:
+```{r, eval=FALSE}
+signif(x, digits)
+```
+Advanced use — Required and optional arguments:
+```{r, eval=FALSE}
+signif(x, digits = 6)
+```
+
+## Description
+
+::: {.desc-item}
+`signif(x, digits)` rounds a number (or vector of numbers) to `digits` significant figures.
+Significant figures count from the first non-zero digit, regardless of the position of the decimal point.
+Use `signif()` when the *relative* precision of a measurement matters — which is the case for most analytical chemistry results.
+:::
+
+::: {.callout-note}
+## Coding convention — only round at the point of printing
+Store intermediate calculated values at full precision.
+Call `signif()` only inside `cat()` when displaying a final result.
+Rounding intermediate values introduces accumulating errors in multi-step pharmaceutical calculations.
+
+```r
+# ✓ Correct — full precision stored, rounded only when printed
+C2_ug_ml <- (absorbance - std_intercept) / std_slope
+cat("Concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
+
+# ✗ Avoid — rounding before using in further calculations
+C2_ug_ml <- signif((absorbance - std_intercept) / std_slope, 3)
+```
+:::
+
+## Examples
+
+### Reporting an analytical concentration
+
+```{webr-r}
+# UV–Vis: calculate ibuprofen concentration from absorbance
+std_intercept <- 0.003     # y-intercept of calibration curve
+std_slope     <- 0.01420   # slope (AU per µg/mL)
+absorbance    <- 0.445     # measured absorbance
+
+C2_ug_ml <- (absorbance - std_intercept) / std_slope   # full precision
+
+# Report to 3 significant figures
+cat("Sample concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
+```
+
+### Comparing `signif()` to the raw value
+
+```{webr-r}
+x <- 31.18765
+
+signif(x, 1)   # 1 sig fig: 30
+signif(x, 2)   # 2 sig figs: 31
+signif(x, 3)   # 3 sig figs: 31.2
+signif(x, 4)   # 4 sig figs: 31.19
+signif(x, 5)   # 5 sig figs: 31.188
+```
+
+### Works the same for very small and very large numbers
+
+```{webr-r}
+# Sig figs count from the first non-zero digit
+signif(0.0004512, 2)    # 0.00045 — first sig fig is the 4
+signif(158400, 3)       # 158000
+signif(0.10002, 3)      # 0.100
+```
+
+### Applying to a whole column
+
+When used inside `cat()` with a vector, `signif()` applies to every element.
+For adding a rounded column to a tibble, use `mutate()` — but only if the rounded value itself is the final deliverable (e.g., a formatted report column), not if it will be used in further calculations.
+
+```{webr-r}
+library(tibble)
+
+conc_values_ug_ml <- c(2.4837, 5.0124, 9.9841, 20.0152, 39.8760)
+
+# Print to 3 sig figs
+cat("Concentrations (µg/mL):", signif(conc_values_ug_ml, 3), "\n")
+```
+
+### `signif()` vs `round()` — which to use?
+
+```{webr-r}
+x <- 0.003418
+
+# signif — 3 sig figs regardless of decimal position
+signif(x, 3)   # 0.00342  (counts from the first non-zero digit: 3, 4, 1)
+
+# round  — fixed decimal places
+round(x, 3)    # 0.003    (only 3 decimal places — loses all sig figs here!)
+round(x, 5)    # 0.00342  (to get 3 sig figs you'd need to know the position)
+```
+
+::: {.callout-tip}
+## Rule of thumb
+Use `signif()` for most analytical and pharmacokinetic results where the number of significant figures is specified by the instrument or method (e.g., 3 sig figs from a UV spectrophotometer).
+Use `round()` when a fixed number of decimal places is required — such as percentages always displayed to 2 decimal places.
+:::
+
+## Input Arguments
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A single number or a numeric vector.
+`signif()` is vectorised — it applies element-wise to every value in the vector.
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>digits</code> — number of significant figures <span class="arg-types">integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The number of significant figures to keep.
+Must be a positive integer.
+A significant figure is any digit from the first non-zero digit onward.
+
+| `x` | `digits` | Result | Explanation |
+|---|---|---|---|
+| `31.187` | `3` | `31.2` | Digits: 3, 1, 2 |
+| `0.004512` | `2` | `0.0045` | Digits: 4, 5 |
+| `158400` | `3` | `158000` | Digits: 1, 5, 8 |
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Must be ≥ 1</p>
+</div>
+</details>
+:::

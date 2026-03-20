@@ -1,0 +1,166 @@
+---
+title: "tibble( )"
+subtitle: "Create a tidy data frame from column vectors. See [original documentation](https://tibble.tidyverse.org/reference/tibble.html) for reference."
+---
+
+## Syntax
+Required arguments:
+```{r, eval=FALSE}
+tibble(col1 = values, col2 = values, ...)
+```
+```{r, eval=FALSE}
+as_tibble(x)
+```
+Advanced use — Required and optional arguments:
+```{r, eval=FALSE}
+tibble(..., .rows = NULL, .name_repair = "check_unique")
+```
+
+## Description
+
+::: {.desc-item}
+`tibble(col1 = values, col2 = values, ...)` creates a data frame from named column vectors.
+A tibble is the tidyverse version of a `data.frame` — it has the same structure but with safer defaults and cleaner printing.
+:::
+
+---
+
+::: {.desc-item}
+`tibble(col1 = values, col2 = col1 * factor)` allows later columns to reference columns defined earlier in the same call.
+This is not possible with base R `data.frame()`.
+:::
+
+---
+
+::: {.desc-item}
+`as_tibble(x)` converts an existing base R `data.frame` (or matrix) into a tibble.
+:::
+
+::: {.callout-tip}
+## Why tibble instead of `data.frame()`?
+Tibbles never convert character columns to factors automatically, never recycle vectors of incompatible lengths silently, and print only the first 10 rows — they are designed to fail loudly and clearly, which makes bugs easier to find.
+:::
+
+## Examples
+
+### Calibration standards table
+
+```{webr-r}
+library(tibble)
+
+# UV–Vis calibration standards for ibuprofen assay
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),  # known concentrations
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
+standards
+```
+
+### Weighing data for content uniformity
+
+Later columns can reference earlier ones in the same `tibble()` call.
+
+```{webr-r}
+library(tibble)
+
+label_claim_mg    <- 75.0    # mg — labelled dose per capsule
+ibu_per_mg_powder <- 0.43    # from assay
+
+capsules <- tibble(
+  capsule_id     = 1:6,
+  mass_empty_mg  = c(91.2, 88.7, 90.1, 89.4, 92.0, 87.8),
+  mass_filled_mg = c(265.4, 263.1, 264.8, 263.9, 266.1, 262.7),
+  fill_mass_mg   = mass_filled_mg - mass_empty_mg   # references the two columns above
+)
+
+capsules
+```
+
+### Converting a base R `data.frame` to a tibble
+
+```{webr-r}
+library(tibble)
+
+# Imagine this was loaded with read.csv() (base R)
+df_base <- data.frame(
+  patient_id  = c("P01", "P02", "P03"),
+  weight_kg   = c(72.1, 85.4, 60.2),
+  dose_mg     = c(200, 400, 200)
+)
+
+# Convert to tibble for use in a tidyverse pipeline
+patients <- as_tibble(df_base)
+patients
+```
+
+### Tibble printing vs. data.frame printing
+
+```{webr-r}
+library(tibble)
+
+# A tibble shows column types and limits output to 10 rows
+large_tibble <- tibble(
+  id    = 1:20,
+  value = rnorm(20)
+)
+
+large_tibble   # prints first 10 rows and tells you 10 more exist
+```
+
+## Input Arguments
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>...</code> — name–value pairs <span class="arg-types">name = vector</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Each argument defines one column.
+The name becomes the column name; the value must be a vector (or single value, which is recycled to the length of the longest column).
+
+Key rules:
+- All vectors must be the same length, or length 1 (recycled)
+- Later arguments can reference earlier column names by name
+- Column names can contain spaces if wrapped in backticks: `` `fill mass (mg)` = ... `` (not recommended — use `snake_case` with units instead)
+
+```r
+tibble(
+  time_min   = c(0, 15, 30, 45, 60),   # 5 values
+  dose_mg    = 200                       # recycled to 5 rows
+)
+```
+
+<p class="data-types"><strong>Data Types:</strong> any vector type — <code>numeric</code>, <code>character</code>, <code>logical</code>, <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>x</code> — object to convert (<code>as_tibble</code> only) <span class="arg-types">data.frame | matrix | list</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The object to convert into a tibble.
+Typically used to convert a `data.frame` returned by base R functions like `read.csv()` into the tidyverse format.
+
+```r
+df <- read.csv("data.csv")   # returns a data.frame
+tbl <- as_tibble(df)          # convert for use with dplyr / tidyr
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>matrix</code> | <code>list</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.rows</code> — number of rows <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+The number of rows the tibble should have.
+Useful for creating an empty tibble with a known size:
+
+```r
+tibble(.rows = 10)   # empty tibble with 10 rows and no columns
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code></p>
+</div>
+</details>
+:::

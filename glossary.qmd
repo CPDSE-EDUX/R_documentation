@@ -1,0 +1,247 @@
+---
+title: "Glossary"
+subtitle: "Plain-language definitions of programming and R terms you'll encounter regularly."
+toc: true
+---
+
+### Argument
+A value you pass into a function to control what it does.
+Most functions take one or more arguments, separated by commas.
+
+```{r, eval=FALSE}
+round(x = conc_ug_ml, digits = 3)
+#         ^^^^^^^^^^  ^^^^^^^^^
+#         argument 1  argument 2
+```
+
+Arguments can be named (like above) or positional (by order). Named is clearer.
+
+### Assignment
+The act of putting a value into a variable. In R, assignment uses `<-`.
+
+```{r, eval=FALSE}
+conc_ug_ml <- 31.4    # reads as: "conc_ug_ml gets 31.4"
+```
+
+The `=` sign works too, but `<-` is the R convention and is preferred here.
+
+### Bug
+A mistake in your code that lets it run without error, but produces **wrong results**.
+Bugs are more dangerous than errors because R won't tell you something is wrong.
+
+**Example:** Using `read_csv2()` on a comma-separated file instead of `read_csv()` — the code runs, but every row gets crammed into one column.
+
+### Character (string)
+Text enclosed in quotes. R calls this `character`; other languages call it a "string".
+Used for labels, IDs, group names — anything that isn't a number.
+
+```{r, eval=FALSE}
+batch_id    <- "BT-2024-07"
+formulation <- "immediate release"
+```
+
+### Comment
+A note in your code that R ignores when running. Comments start with `#`.
+Use them to explain *why* you wrote something, not just what it does.
+
+```{r, eval=FALSE}
+std_slope <- 0.01420    # AU per µg/mL — from the calibration curve fit
+```
+
+### Console
+The panel in RStudio where output appears after you run code.
+Use `cat()` to print labelled results to the console:
+
+```{r, eval=FALSE}
+cat("Concentration:", conc_ug_ml, "µg/mL\n")
+# prints: Concentration: 31.4 µg/mL
+```
+
+### Data frame
+A table with rows and columns, where each column is a vector.
+All columns must be the same length. Columns can be different types (numeric, character, logical).
+In tidyverse style, always use a **tibble** instead of a base R `data.frame`.
+
+```{r, eval=FALSE}
+library(tibble)
+
+capsules <- tibble(
+  capsule_id   = 1:6,
+  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5, 174.3),
+  formulation  = "immediate release"    # character — recycled to all 6 rows
+)
+```
+
+### Debugging
+The process of finding and fixing a bug. Common strategies:
+
+- Print intermediate values with `cat()` to check what's actually stored in each variable
+- Run one line at a time and inspect the result
+- Read the error or warning message carefully — R usually tells you the line number
+
+### Error
+A message that appears when R **could not run** your code at all.
+Common causes: typo in a function name, wrong number of arguments, using a variable that doesn't exist yet.
+
+```
+Error in read_csv("data.csv") : could not find function "read_csv"
+# Cause: library(readr) was not called before using read_csv()
+```
+
+Fix the problem described in the message, then try again.
+
+### Function
+A reusable piece of code that does a specific task.
+You call a function by writing its name followed by parentheses.
+Everything inside the parentheses is what you're giving to the function.
+
+```{r, eval=FALSE}
+round(conc_ug_ml, 3)    # "round" is the function; conc_ug_ml and 3 are what you give it
+```
+
+### IDE
+Short for **Integrated Development Environment** — an application that combines everything you need to write and run code in one window: a code editor, a console, a file browser, and a plot viewer.
+RStudio is the IDE used in this course. Without one you'd write code in a plain text editor and switch to a separate terminal to run it.
+
+### Input
+The data or values you give to R — either typed directly, read from a file, or passed as arguments to a function.
+
+### Integer
+A whole number with no decimal part. Counts and indices are typically integers.
+In R you rarely need to declare something as integer explicitly — numeric works fine.
+
+### Logical
+A value that is either `TRUE` or `FALSE`. Produced by comparisons and used in filtering.
+
+```{r, eval=FALSE}
+pct_label <- 98.4
+
+pct_label > 85     # TRUE  — above lower acceptance limit
+pct_label > 115    # FALSE — not above upper limit
+```
+
+Logicals are what `filter()` uses behind the scenes to select rows.
+
+### NA
+R's symbol for a **missing value**. Stands for "Not Available".
+`NA` is not zero and not an empty string — it means the value is unknown.
+Many functions have an `na.rm = TRUE` argument to ignore `NA`s during calculation.
+
+```{r, eval=FALSE}
+fill_mass_mg <- c(174.2, NA, 174.7, 174.0)
+
+mean(fill_mass_mg)                    # returns NA — one missing value poisons the result
+mean(fill_mass_mg, na.rm = TRUE)      # returns 174.3 — ignores the missing value
+
+cat("Mean fill mass:", mean(fill_mass_mg, na.rm = TRUE), "mg\n")
+```
+
+### Numeric
+A number with decimal places (R calls this `double` internally). The most common type in pharmacy data.
+
+```{r, eval=FALSE}
+fill_mass_mg <- 174.3    # numeric
+pct_label    <- 98.41    # numeric
+```
+
+### Output
+What R produces and shows in the console after running code. This could be a number, a table, a plot, or a message.
+Always use `cat()` with a label and unit when printing a single calculated result:
+
+```{r, eval=FALSE}
+cat("Acceptance value:", round(AV_s1, 2), "\n")
+```
+
+### Package
+A collection of extra functions that extend what R can do.
+Base R comes with many useful functions, but packages like `dplyr` and `readr` add others.
+
+```{r, eval=FALSE}
+install.packages("tidyverse")    # download and install once (per computer)
+library(tidyverse)               # load all tidyverse packages for this session
+```
+
+### Pipe (`%>%`)
+Passes the output of one step directly into the next, left to right.
+Reads as "and then".
+
+```{r, eval=FALSE}
+n_oos_capsules <- capsules %>%
+  filter(pct_label < 85) %>%
+  nrow()
+
+cat("Out-of-spec capsules:", n_oos_capsules, "\n")
+```
+
+Without the pipe you'd have to nest functions inside each other, which is harder to read.
+
+### Return value
+What a function gives back after it runs.
+You can store the return value in a variable and then print it with `cat()`.
+
+```{r, eval=FALSE}
+conc_rounded_ug_ml <- round(conc_ug_ml, 3)
+cat("Concentration:", conc_rounded_ug_ml, "µg/mL\n")
+```
+
+### Script
+A plain text file (`.R` or `.qmd`) where you save your code so you can re-run it later.
+Running code directly in the console is fine for quick tests, but use a script for any work you want to keep.
+
+### Syntax
+The grammar rules of a programming language — which words go where, what punctuation is needed, and in what order things must appear.
+Just as "the patient dose received" is ungrammatical English, `500 <- dose_mg` is a syntax error in R.
+
+### Terminal
+A panel in RStudio (next to the Console tab) where you type operating system commands — not R code.
+Used for tasks like running git commands or navigating folders. For writing and running R code, use the **Console** instead.
+In RStudio, find it under the **Terminal** tab at the bottom of the screen.
+
+### Tibble
+A modern, tidyverse version of a data frame. Works the same way but with a few friendlier defaults:
+
+- Prints only the first 10 rows instead of flooding the console
+- Shows column types below the column names
+- Never silently converts text to factors
+
+```{r, eval=FALSE}
+library(tibble)
+library(readr)
+
+# Create manually
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
+# Or read from a file — read_csv() always returns a tibble
+dissolution <- read_csv("dissolution_data.csv")
+```
+
+### Variable
+A named container that stores a value so you can use it later.
+Think of it like a labelled test tube: you give it a name and fill it with something.
+
+```{r, eval=FALSE}
+dose_mg    <- 500          # stores the number 500 under the name "dose_mg"
+patient_id <- "P042"       # stores text
+```
+
+### Vector
+A sequence of values of the **same type**. The most basic data structure in R.
+A single number like `42` is actually a vector of length 1.
+
+```{r, eval=FALSE}
+conc_standards_ug_ml <- c(0, 2.5, 5.0, 10.0, 20.0, 40.0)    # numeric vector, length 6
+```
+
+Operations on a vector apply to every element at once (this is called *vectorisation*):
+
+```{r, eval=FALSE}
+conc_diluted_ug_ml <- conc_standards_ug_ml / 2
+cat("Diluted standards:", conc_diluted_ug_ml, "µg/mL\n")
+```
+
+### Warning
+A message that appears when R **did run** your code but something looks suspicious.
+Warnings don't always mean something went wrong — read them and decide if they matter.

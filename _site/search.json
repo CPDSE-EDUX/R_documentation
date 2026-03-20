@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R for Pharmacy",
+    "section": "",
+    "text": "R references for pharmaceutical sciences practicals. Written for learners — plain language, tidyverse style, pharmacy examples.\nGet Started Browse Functions"
+  },
+  {
+    "objectID": "index.html#topics-covered",
+    "href": "index.html#topics-covered",
+    "title": "R for Pharmacy",
+    "section": "Topics covered",
+    "text": "Topics covered\n\n\n\n🚀\n\n\nGetting Started\n\n\nSet up R and RStudio, and run your very first lines of code.\n\n \n\n📂\n\n\nData Handling\n\n\nImport spreadsheets, tidy messy data, and select the rows and columns you need.\n\n \n\n📈\n\n\nVisualization\n\n\nCreate plots with ggplot2.\n\n \n\n📊\n\n\nDescriptive Statistics\n\n\nSummarise your data: means, medians, standard deviations, and more.\n\n \n\n🔬\n\n\nHypothesis Testing\n\n\nt-tests, chi-square, and Mann–Whitney tests for clinical data.\n\n \n\n📐\n\n\nRegression\n\n\nUnderstand dose–response relationships with linear and logistic regression."
+  },
+  {
+    "objectID": "index.html#how-to-read-a-function-page",
+    "href": "index.html#how-to-read-a-function-page",
+    "title": "R for Pharmacy",
+    "section": "How to read a function page",
+    "text": "How to read a function page\nEach page follows the same structure:\n\n\n\n\n\n\n\nSection\nWhat you’ll find\n\n\n\n\nSyntax\nAll call variants with argument names\n\n\nDescription\nWhat each call variant does, in plain English\n\n\nExamples\nRunnable examples — edit and re-run in your browser\n\n\nInput Arguments\nEvery argument explained with type and default value"
+  }
+]

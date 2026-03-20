@@ -1,0 +1,100 @@
+---
+title: "Data Handling"
+subtitle: "Filter rows, pick columns, sort, and reshape your data with dplyr."
+toc: true
+---
+
+Run this setup chunk first — it creates the dataset used in all examples below.
+
+```{webr-r}
+library(dplyr)
+library(tibble)
+
+capsules <- tibble(
+  capsule_id   = 1:10,
+  batch        = c("A","A","A","A","A","B","B","B","B","B"),
+  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5,
+                   175.1, 174.8, 175.3, 174.6, 175.0),
+  pct_label    = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                   100.5, 100.2, 100.7, 99.9, 100.4)
+)
+
+capsules
+```
+
+## filter( )
+
+Keep only rows where a condition is `TRUE`.
+
+```{webr-r}
+# Keep only batch A capsules
+capsules %>%
+  filter(batch == "A")
+```
+
+```{webr-r}
+# Keep rows matching two conditions
+capsules %>%
+  filter(batch == "B" & pct_label > 100)
+```
+
+::: {.callout-tip}
+## Comparison operators
+`==` equal · `!=` not equal · `>` `<` `>=` `<=` greater/less than · `&` and · `|` or
+:::
+
+## select( )
+
+Keep only the columns you need.
+
+```{webr-r}
+capsules %>%
+  select(capsule_id, batch, pct_label)
+```
+
+```{webr-r}
+# Drop a column with -
+capsules %>%
+  select(-fill_mass_mg)
+```
+
+## rename( )
+
+Rename a column: `rename(new_name = old_name)`.
+
+```{webr-r}
+capsules %>%
+  rename(id = capsule_id, pct = pct_label)
+```
+
+## arrange( )
+
+Sort rows by a column. Wrap in `desc()` to sort highest-first.
+
+```{webr-r}
+capsules %>%
+  arrange(desc(pct_label))
+```
+
+## mutate( )
+
+Add or transform columns. See the full [`mutate()` reference page](mutate.qmd) for details.
+
+```{webr-r}
+label_claim_mg <- 75.0
+
+capsules %>%
+  mutate(ibu_mg = fill_mass_mg * 0.43) %>%
+  select(capsule_id, fill_mass_mg, ibu_mg, pct_label)
+```
+
+## Combining steps
+
+Chain any number of operations with the pipe — each result flows into the next.
+
+```{webr-r}
+capsules %>%
+  filter(batch == "B") %>%
+  arrange(pct_label) %>%
+  select(capsule_id, fill_mass_mg, pct_label)
+```

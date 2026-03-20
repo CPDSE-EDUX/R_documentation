@@ -1,0 +1,59 @@
+---
+title: "Function Reference"
+subtitle: "All documented R functions — alphabetical by name"
+toc: false
+sidebar: false
+---
+
+A complete index of every function covered in this reference. Click any card to open the full documentation page.
+
+---
+
+## Import & Create
+
+<div class="fn-card-grid">
+<a href="read-csv.qmd" class="fn-card">
+<span class="fn-name">read_csv( )</span>
+<span class="fn-pkg">readr</span>
+<p>Import a CSV file as a tibble.</p>
+</a>
+<a href="tibble.qmd" class="fn-card">
+<span class="fn-name">tibble( )</span>
+<span class="fn-pkg">tibble</span>
+<p>Create a tidy data frame from column vectors.</p>
+</a>
+</div>
+
+---
+
+## Transform
+
+<div class="fn-card-grid">
+<a href="mutate.qmd" class="fn-card">
+<span class="fn-name">mutate( )</span>
+<span class="fn-pkg">dplyr</span>
+<p>Add or transform columns in a data frame.</p>
+</a>
+</div>
+
+---
+
+## Report
+
+<div class="fn-card-grid">
+<a href="cat.qmd" class="fn-card">
+<span class="fn-name">cat( )</span>
+<span class="fn-pkg">base R</span>
+<p>Print labelled results with units to the console.</p>
+</a>
+<a href="round.qmd" class="fn-card">
+<span class="fn-name">round( )</span>
+<span class="fn-pkg">base R</span>
+<p>Round to a fixed number of decimal places.</p>
+</a>
+<a href="signif.qmd" class="fn-card">
+<span class="fn-name">signif( )</span>
+<span class="fn-pkg">base R</span>
+<p>Round to a given number of significant figures.</p>
+</a>
+</div>

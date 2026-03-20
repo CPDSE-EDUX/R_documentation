@@ -1,0 +1,126 @@
+---
+title: "Visualization"
+subtitle: "Create plots with ggplot2 — scatter, line, bar, and box plots."
+toc: true
+---
+
+All plots in this course use `theme_classic()` and labelled axes via `labs()`.
+Run the setup chunk first — it loads ggplot2 and creates the datasets.
+
+```{webr-r}
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# UV calibration standards
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
+# Dissolution profile — two batches
+dissolution <- tibble(
+  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 6),
+  pct_dissolved = c(28, 52, 71, 85, 94, 98,
+                    22, 45, 65, 80, 91, 96)
+)
+
+# Content uniformity — two batches
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 100.1,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 100.8)
+)
+```
+
+## Scatter plot
+
+Use `geom_point()` to plot individual observations — ideal for calibration curves.
+
+```{webr-r}
+ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  labs(
+    title = "UV Calibration Curve — Ibuprofen",
+    x     = "Concentration (µg/mL)",
+    y     = "Absorbance (AU)"
+  ) +
+  theme_classic()
+```
+
+Add a regression line with `geom_smooth()`:
+
+```{webr-r}
+ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#3C5E3E") +
+  labs(
+    title = "UV Calibration Curve — Ibuprofen",
+    x     = "Concentration (µg/mL)",
+    y     = "Absorbance (AU)"
+  ) +
+  theme_classic()
+```
+
+## Line plot
+
+Use `geom_line()` for data over time — ideal for dissolution profiles.
+Map `colour` to a grouping variable to show multiple batches.
+
+```{webr-r}
+ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title  = "Dissolution Profile",
+    x      = "Time (min)",
+    y      = "% Dissolved",
+    colour = "Batch"
+  ) +
+  theme_classic()
+```
+
+## Box plot
+
+Use `geom_boxplot()` to compare distributions across groups — ideal for batch comparisons.
+
+```{webr-r}
+ggplot(capsules, aes(x = batch, y = pct_label)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  labs(
+    title = "Content Uniformity by Batch",
+    x     = "Batch",
+    y     = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+## Bar chart
+
+Use `geom_col()` when you already have the values to plot (e.g. means from `summarise()`).
+
+```{webr-r}
+mean_by_batch <- capsules %>%
+  group_by(batch) %>%
+  summarise(mean_pct = mean(pct_label))
+
+ggplot(mean_by_batch, aes(x = batch, y = mean_pct)) +
+  geom_col(fill = "#5F7D61") +
+  labs(
+    title = "Mean % Label Claim by Batch",
+    x     = "Batch",
+    y     = "Mean % Label Claim"
+  ) +
+  theme_classic()
+```
+
+::: {.callout-tip}
+## ggplot2 layer logic
+Every plot starts with `ggplot(data, aes(...))` — this sets the data and axes.
+Add layers with `+`: `geom_point()`, `geom_line()`, `labs()`, `theme_classic()`.
+Order doesn't matter for most layers, but `theme_classic()` always goes last.
+:::

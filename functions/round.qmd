@@ -1,0 +1,157 @@
+---
+title: "round( )"
+subtitle: "Round to a fixed number of decimal places. See [original documentation](https://rdrr.io/r/base/Round.html) for reference."
+---
+
+## Syntax
+Required arguments:
+```{r, eval=FALSE}
+round(x)
+```
+Advanced use — Required and optional arguments:
+```{r, eval=FALSE}
+round(x, digits = 0)
+```
+
+## Description
+
+::: {.desc-item}
+`round(x, digits)` rounds a number (or numeric vector) to `digits` decimal places.
+Positive values of `digits` round to the right of the decimal point; negative values round to the left (e.g. `digits = -1` rounds to the nearest 10).
+:::
+
+::: {.callout-note}
+## Coding convention — only round at the point of printing
+Store all intermediate values at full precision.
+Call `round()` only inside `cat()` when reporting a final result.
+Never call `round()` inside `mutate()` on a column that will be used in subsequent calculations.
+
+```r
+# ✓ Correct
+pct_label <- ibu_mg / label_claim_mg * 100     # full precision stored
+cat("Label claim:", round(pct_label, 2), "%\n") # round only when printing
+
+# ✗ Avoid
+mutate(pct_label = round(ibu_mg / label_claim_mg * 100, 2))  # rounding contaminates downstream calcs
+```
+:::
+
+## Examples
+
+### Reporting percentage label claim to two decimal places
+
+```{webr-r}
+label_claim_mg <- 75.0
+ibu_mg         <- 74.21   # ibuprofen content from assay (full precision)
+
+pct_label <- ibu_mg / label_claim_mg * 100   # stored at full precision
+
+# Two decimal places is conventional for % label claim
+cat("Label claim:", round(pct_label, 2), "%\n")
+```
+
+### Reporting the acceptance value (AV) for EP 2.9.40
+
+```{webr-r}
+M    <- 100.0   # reference value (% label claim)
+k_s1 <- 2.4     # EP Table 2.9.40-1, Stage 1, n = 6
+L1   <- 15.0    # acceptance limit, Stage 1 (%)
+
+X_bar_pct <- 98.4   # mean of 6 capsules
+s_pct     <- 1.8    # standard deviation
+
+AV_s1 <- abs(M - X_bar_pct) + k_s1 * s_pct  # full precision calculation
+
+cat("Acceptance value AV:", round(AV_s1, 2), "\n")
+cat("Limit L1:           ", L1, "\n")
+cat("Decision:           ", ifelse(AV_s1 <= L1, "PASS ✓", "FAIL ✗"), "\n")
+```
+
+### Positive vs. negative `digits`
+
+```{webr-r}
+x <- 1587.346
+
+round(x, digits =  2)    # 1587.35   — 2 decimal places
+round(x, digits =  0)    # 1587      — nearest integer (default)
+round(x, digits = -1)    # 1590      — nearest 10
+round(x, digits = -2)    # 1600      — nearest 100
+round(x, digits = -3)    # 2000      — nearest 1000
+```
+
+### Applying to a vector of results
+
+```{webr-r}
+pct_label_values <- c(97.832, 102.144, 99.017, 101.566, 98.253, 100.801)
+
+# Print all values rounded to 2 decimal places
+cat("% label claim:", round(pct_label_values, 2), "\n")
+
+# Or print one per line
+for (val in pct_label_values) {
+  cat(" ", round(val, 2), "%\n")
+}
+```
+
+### `round()` vs `signif()` — which to use?
+
+```{webr-r}
+# round() fixes decimal places — useful for percentages, pH, temperatures
+round(7.438, 2)    # 7.44   — always 2 decimal places
+
+# signif() fixes significant figures — useful for concentrations, masses
+signif(7.438, 2)   # 7.4    — always 2 sig figs
+
+# They differ most when values span orders of magnitude
+values <- c(0.00412, 7.438, 1284.7)
+round(values,  2)    # 0.00, 7.44, 1284.70  — many sig figs lost for small values
+signif(values, 2)    # 0.0041, 7.4, 1300    — consistent precision
+```
+
+::: {.callout-tip}
+## Rule of thumb
+Use `round()` when a **fixed number of decimal places** is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p.
+Use `signif()` for analytical concentrations and masses where **significant figures** reflect instrument precision.
+:::
+
+## Input Arguments
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A single number or a numeric vector.
+`round()` is vectorised — it applies to every element of a vector.
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>digits</code> — number of decimal places <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Number of digits to the right of the decimal point.
+Default is `0`, which rounds to the nearest integer.
+Negative values round to the left of the decimal point.
+
+| `digits` | Meaning | Example: `round(1587.346, digits)` |
+|---|---|---|
+| `2` | 2 decimal places | `1587.35` |
+| `1` | 1 decimal place | `1587.3` |
+| `0` | nearest integer **(default)** | `1587` |
+| `-1` | nearest 10 | `1590` |
+| `-2` | nearest 100 | `1600` |
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>0</code></p>
+</div>
+</details>
+:::
+
+::: {.callout-warning}
+## Banker's rounding (round-half-to-even)
+R uses **banker's rounding**: when a value is exactly halfway between two options, it rounds to the nearest *even* digit.
+`round(0.5)` gives `0`, and `round(1.5)` gives `2`.
+This is statistically unbiased and follows IEC 60559, but it may differ from the "always round up" rule you learned in school.
+:::

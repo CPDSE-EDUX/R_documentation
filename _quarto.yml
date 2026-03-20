@@ -1,0 +1,106 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "R for Pharmacy"
+  description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
+  favicon: images/favicon.ico
+
+  navbar:
+    background: "#3C5E3E"
+    foreground: "#E4D7A1"
+    logo: /assets/images/logo_snake_gold.png
+    logo-alt: "CPDSE"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Getting Started"
+        href: getting-started.qmd
+      - text: "Functions"
+        menu:
+          - text: "All Functions"
+            href: functions/index.qmd
+          - text: "---"
+          - text: "Import & Create"
+          - text: "read_csv( )"
+            href: functions/read-csv.qmd
+          - text: "tibble( )"
+            href: functions/tibble.qmd
+          - text: "---"
+          - text: "Transform"
+          - text: "mutate( )"
+            href: functions/mutate.qmd
+          - text: "---"
+          - text: "Report"
+          - text: "cat( )"
+            href: functions/cat.qmd
+          - text: "round( )"
+            href: functions/round.qmd
+          - text: "signif( )"
+            href: functions/signif.qmd
+      - text: Glossary
+        href: glossary.qmd
+      - text: Coding Conventions
+        href: R_coding_conventions.html
+    right:
+      - icon: github
+        href: https://github.com/CPDSE-EDUX/R_documentation
+        aria-label: GitHub
+
+  sidebar:
+    - title: "Functions"
+      style: "docked"
+      background: "#F6F1DC"
+      collapse-level: 1
+      contents:
+        - section: "Import & Create"
+          contents:
+            - text: "read_csv( )"
+              href: functions/read-csv.qmd
+            - text: "tibble( )"
+              href: functions/tibble.qmd
+        - section: "Transform"
+          contents:
+            - text: "mutate( )"
+              href: functions/mutate.qmd
+        - section: "Report"
+          contents:
+            - text: "cat( )"
+              href: functions/cat.qmd
+            - text: "round( )"
+              href: functions/round.qmd
+            - text: "signif( )"
+              href: functions/signif.qmd
+
+  page-footer:
+    background: "#3C5E3E"
+    foreground: "#E4D7A1"
+    left: "[Center for Pharmaceutical Data Science Education](https://cpdse.dk)"
+    center: "Built with [Quarto](https://quarto.org) and [webR](https://webr.r-wasm.org)"
+    right: "© CPDSE 2026"
+
+  search: true
+
+filters:
+  - webr
+
+webr:
+  packages:
+    - dplyr
+    - ggplot2
+    - readr
+    - tibble
+  show-startup-message: false
+
+format:
+  html:
+    theme: [cosmo, custom.scss]
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    smooth-scroll: true
+    highlight-style: github
+    include-after-body: scripts.html

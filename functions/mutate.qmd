@@ -1,0 +1,187 @@
+---
+title: "mutate( )"
+subtitle: "Add or transform columns in a data frame. See [original documentation](https://dplyr.tidyverse.org/reference/mutate.html) for reference."
+---
+
+## Syntax
+Required arguments:
+```{r, eval=FALSE}
+df %>% mutate(new_col = expression)
+```
+```{r, eval=FALSE}
+df %>% mutate(new_col = expression, another_col = expression)
+```
+Advanced use — Required and optional arguments:
+```{r, eval=FALSE}
+df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
+```
+
+## Description
+
+::: {.desc-item}
+`df %>% mutate(new_col = expression)` adds a new column to a data frame.
+The expression on the right can reference any existing column by name.
+:::
+
+---
+
+::: {.desc-item}
+`df %>% mutate(col1 = ..., col2 = ...)` adds multiple columns in a single call.
+Later expressions can reference columns created earlier in the same `mutate()`.
+:::
+
+---
+
+::: {.desc-item}
+`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
+The default `"all"` retains every column, including unmodified ones.
+:::
+
+::: {.callout-note}
+## Coding convention — never round inside `mutate()`
+Store full-precision values in all columns.
+Apply `signif()` or `round()` only inside `cat()` when printing a final result.
+Rounding a column that feeds into later calculations accumulates error.
+:::
+
+## Examples
+
+### Capsule content uniformity — computing fill mass and % label claim
+
+```{webr-r}
+library(dplyr)
+library(tibble)
+
+# Constants — update these with your values
+label_claim_mg    <- 75.0   # mg — labelled dose per capsule
+ibu_per_mg_powder <- 0.43   # mg ibuprofen per mg powder (from UV assay)
+
+# Raw weighing data
+capsules <- tibble(
+  capsule_id     = 1:6,
+  mass_empty_mg  = c(91.2, 88.7, 90.1, 89.4, 92.0, 87.8),
+  mass_filled_mg = c(265.4, 263.1, 264.8, 263.9, 266.1, 262.7)
+)
+
+capsules <- capsules %>%
+  mutate(
+    fill_mass_mg = mass_filled_mg - mass_empty_mg,         # net fill weight
+    ibu_mg       = fill_mass_mg * ibu_per_mg_powder,       # ibuprofen per capsule
+    pct_label    = ibu_mg / label_claim_mg * 100           # % of label claim
+  )
+
+capsules
+```
+
+### Flagging out-of-specification results
+
+Use `mutate()` with `ifelse()` to add a pass/fail column based on a criterion.
+
+```{webr-r}
+library(dplyr)
+
+# EP 2.9.40 Stage 1: each unit must be within ±25 % of label claim (M ± 25)
+# Here we flag units outside 85–115 % as OOS (simplified uniform-content criterion)
+capsules <- capsules %>%
+  mutate(
+    oos = ifelse(pct_label < 85 | pct_label > 115, "OOS", "Pass")
+  )
+
+capsules[, c("capsule_id", "pct_label", "oos")]
+```
+
+### Concentration units conversion
+
+```{webr-r}
+library(dplyr)
+library(tibble)
+
+# Absorbance readings from a dissolution sample series
+samples <- tibble(
+  time_min    = c(15, 30, 45, 60, 90, 120),
+  absorbance  = c(0.142, 0.287, 0.401, 0.489, 0.531, 0.558)
+)
+
+# Standard curve: C (µg/mL) = (A - intercept) / slope
+std_intercept <- 0.003    # y-intercept of calibration curve
+std_slope     <- 0.01420  # slope (AU per µg/mL)
+vol_flask_mL  <- 50.0     # dissolution vessel volume
+dose_mg       <- 75.0     # labelled dose
+
+samples <- samples %>%
+  mutate(
+    conc_ug_ml  = (absorbance - std_intercept) / std_slope,   # Beer–Lambert inversion
+    conc_mg     = conc_ug_ml * vol_flask_mL / 1000,           # µg/mL → mg in vessel
+    pct_label   = conc_mg / dose_mg * 100                     # % label claim dissolved
+  )
+
+samples
+```
+
+## Input Arguments
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to modify. In a pipe (`%>%` or `%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
+
+```r
+# .data is passed automatically by the pipe:
+capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more expressions of the form `new_column_name = expression`.
+The right-hand side can reference any column in `.data` by name, and can also reference columns created earlier in the same `mutate()` call.
+Separate multiple expressions with commas.
+
+```r
+mutate(
+  fill_mass_mg = mass_filled_mg - mass_empty_mg,   # uses two existing columns
+  ibu_mg       = fill_mass_mg * ibu_per_mg_powder  # references the column just created above
+)
+```
+
+<p class="data-types"><strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.keep</code> <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls which columns from `.data` appear in the output alongside the new/modified columns.
+
+| Value | Behaviour |
+|---|---|
+| `"all"` | Keep all original columns **(default)** |
+| `"used"` | Keep only columns referenced in the expressions |
+| `"unused"` | Keep only columns *not* referenced |
+| `"none"` | Drop all original columns (equivalent to `transmute()`) |
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> — one of <code>"all"</code>, <code>"used"</code>, <code>"unused"</code>, <code>"none"</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.before</code> / <code>.after</code> <span class="arg-types">column name | integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls where the new columns are inserted.
+By default new columns are appended on the right.
+
+```r
+capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg, .after = mass_filled_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> unquoted column name or integer position</p>
+</div>
+</details>
+:::

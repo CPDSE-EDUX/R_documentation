@@ -1,0 +1,189 @@
+---
+title: "read_csv( )"
+subtitle: "Import a CSV file as a [tibble](tibble.qmd). See [original documentation](https://readr.tidyverse.org/reference/read_delim.html) for reference."
+---
+
+## Syntax
+Required arguments:
+```{r, eval=FALSE}
+read_csv(file)
+```
+```{r, eval=FALSE}
+read_csv2(file)
+```
+Advanced use - Required and optional arguments:
+```{r, eval=FALSE}
+read_csv(file, col_types = NULL, col_select = NULL, skip = 0, 
+         n_max = Inf, na = c("", "NA"), trim_ws = TRUE, 
+         show_col_types = TRUE, locale = locale(), ...)
+```
+
+## Description
+
+::: {.desc-item}
+`read_csv("file_name.csv")` reads a comma-separated values (.csv) file and returns a [tibble](tibble.qmd). Use if your file uses commas as column separators and dots for decimals.
+:::
+
+---
+
+::: {.desc-item}
+`read_csv2("file_name.csv")` reads a .csv file that uses semicolons as column separators and commas for decimals.
+:::
+
+---
+
+::: {.desc-item}
+`read_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c("", "NA"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...)` reads a .csv file into a [tibble](tibble.qmd) with smart defaults for speed and usability. Find explanations of all the arguments below.
+:::
+
+::: {.callout-tip}
+## Why 2 different functions?
+English standard vs. danish standard. To find out how your `.csv`file is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: `read_lines("file.csv", n_max = 3)`
+:::
+
+## Examples
+
+### Read a CSV file from your computer
+
+In practice you pass a file path:
+
+```{webr-r}
+library(tidyverse)
+
+data <- read_csv(
+  "https://github.com/CPDSE-EDUX/SDU-CodeClub/raw/main/debugging/dissolution_data.csv"
+)
+
+# Quick preview
+head(data)
+```
+
+### Check the file structure
+
+See if you have to use `read_csv()` or `read_csv2()` by printing the first 3 rows of your .csv file.
+
+```{webr-r}
+read_lines("file.csv", n_max = 3)
+```
+
+
+
+### Handle missing value codes
+
+Clinical data exports often encode missing values as `"N/A"`, `"-"`, or a blank space. Use the optional argument `na` to unify how missing data is handled.In this example, `N/A`, `-`, and empty cells are rewritten as `NA`.
+
+```{webr-r}
+library(tidyverse)
+
+
+df_na <- read_csv(
+  "data.csv",
+  na = c("", "N/A", "-")
+)
+```
+
+## Input Arguments
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>file</code> — path to the CSV file <span class="arg-types">character | connection</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A string giving the path to the CSV file.
+Use forward slashes (`/`) in file paths, even on Windows.
+
+```r
+read_csv("data/capsule_weights.csv")              # relative path
+read_csv("C:/Users/Sarah/Documents/data.csv")     # absolute path
+read_csv(I("col1,col2\n1,2\n3,4"))                # inline text (for demos/tests)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> (file path or URL) | <code>connection</code> | <code>I(text)</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>col_types</code> — column type specification <span class="arg-types">cols() specification</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Explicitly declares the type of one or more columns.
+If omitted, `read_csv()` guesses types from the first 1000 rows.
+
+Common column type functions:
+
+| Function | Type | Use when… |
+|---|---|---|
+| `col_character()` | text | IDs, codes, batch numbers |
+| `col_double()` | decimal number | concentrations, masses, percentages |
+| `col_integer()` | whole number | counts, time points in whole minutes |
+| `col_logical()` | TRUE/FALSE | binary flags |
+| `col_skip()` | — | ignore this column |
+
+```r
+read_csv("data.csv", col_types = cols(
+  batch_id = col_character(),
+  dose_mg  = col_double()
+))
+```
+
+<p class="data-types"><strong>Data Types:</strong> output of <code>cols()</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>na</code> — strings to interpret as missing <span class="arg-types">character vector</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+A character vector of strings that should be converted to `NA` when reading.
+Default is `c("", "NA")`.
+Extend this when your data uses other missing value codes.
+
+```r
+read_csv("data.csv", na = c("", "NA", "N/A", "ND", "Missing", "."))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> vector · Default: <code>c("", "NA")</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>skip</code> — rows to skip at the top <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Number of lines to skip before reading the header row.
+Useful when CSV files exported from instruments contain metadata rows above the column names.
+
+```r
+read_csv("instrument_export.csv", skip = 5)   # skip 5 metadata rows
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>0</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>n_max</code> — maximum number of rows to read <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Stop reading after this many data rows (not counting the header).
+Useful for previewing a large file or reading only a subset.
+
+```r
+read_csv("large_dataset.csv", n_max = 100)   # first 100 rows only
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> · Default: <code>Inf</code> (read all rows)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>show_col_types</code> — suppress column type message <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+By default, `read_csv()` prints a message listing each column's detected type.
+Set `show_col_types = FALSE` to suppress this message in your output.
+
+```r
+data <- read_csv("data.csv", show_col_types = FALSE)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>TRUE</code></p>
+</div>
+</details>
+:::

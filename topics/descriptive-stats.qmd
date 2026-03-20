@@ -1,0 +1,96 @@
+---
+title: "Descriptive Statistics"
+subtitle: "Summarise your data with means, standard deviations, and grouped summaries."
+toc: true
+---
+
+Run the setup chunk first — it creates the dataset used in all examples below.
+
+```{webr-r}
+library(dplyr)
+library(tibble)
+
+capsules <- tibble(
+  capsule_id   = 1:20,
+  batch        = rep(c("A", "B"), each = 10),
+  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5,
+                   174.3, 174.6, 174.1, 174.8, 174.4,
+                   175.1, 174.8, 175.3, 174.6, 175.0,
+                   175.2, 174.9, 175.4, 175.0, 175.3),
+  pct_label    = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                   100.2, 99.9,  100.4, 99.7, 100.1,
+                   100.5, 100.2, 100.7, 99.9, 100.4,
+                   101.0, 100.6, 100.9, 100.3, 100.8)
+)
+
+capsules
+```
+
+## Basic statistics
+
+Single-value summaries of a numeric vector. Always print with `cat()`.
+
+```{webr-r}
+cat("Mean % label claim:", signif(mean(capsules$pct_label), 5), "%\n")
+cat("SD:                ", signif(sd(capsules$pct_label),   3), "%\n")
+cat("Median:            ", signif(median(capsules$pct_label), 5), "%\n")
+cat("Min / Max:         ", min(capsules$pct_label), "/", max(capsules$pct_label), "%\n")
+cat("n:                 ", nrow(capsules), "capsules\n")
+```
+
+## summarise( )
+
+Compute multiple statistics at once and return them as a tibble.
+
+```{webr-r}
+capsules %>%
+  summarise(
+    n         = n(),
+    mean_pct  = mean(pct_label),
+    sd_pct    = sd(pct_label),
+    min_pct   = min(pct_label),
+    max_pct   = max(pct_label)
+  )
+```
+
+## group_by( ) + summarise( )
+
+Repeat the summary for each level of a grouping variable.
+
+```{webr-r}
+capsules %>%
+  group_by(batch) %>%
+  summarise(
+    n        = n(),
+    mean_pct = mean(pct_label),
+    sd_pct   = sd(pct_label),
+    min_pct  = min(pct_label),
+    max_pct  = max(pct_label)
+  )
+```
+
+## count( )
+
+Count the number of rows in each group — shorthand for `group_by() %>% summarise(n = n())`.
+
+```{webr-r}
+# How many capsules per batch?
+capsules %>%
+  count(batch)
+```
+
+## IQR and quantiles
+
+Useful for identifying spread and outliers in assay data.
+
+```{webr-r}
+cat("IQR:        ", IQR(capsules$pct_label), "%\n")
+cat("25th pctile:", quantile(capsules$pct_label, 0.25), "%\n")
+cat("75th pctile:", quantile(capsules$pct_label, 0.75), "%\n")
+```
+
+::: {.callout-note}
+## Coding convention — store then print
+Compute statistics at full precision, then round only inside `cat()` when reporting.
+Never round inside `summarise()` if the values will be used in further calculations.
+:::

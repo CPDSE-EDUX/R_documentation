@@ -1,0 +1,182 @@
+---
+title: "cat( )"
+subtitle: "Print labelled results with units to the console. See [original documentation](https://rdrr.io/r/base/cat.html) for reference."
+---
+
+## Syntax
+Required arguments:
+```{r, eval=FALSE}
+cat(...)
+```
+```{r, eval=FALSE}
+cat("Label:", value, "unit\n")
+cat("Label:", signif(value, digits), "unit\n")
+```
+Advanced use — Required and optional arguments:
+```{r, eval=FALSE}
+cat(..., sep = " ", file = "", append = FALSE)
+```
+
+## Description
+
+::: {.desc-item}
+`cat(...)` concatenates and prints its arguments to the console with no formatting.
+Unlike `print()`, it does not add quotes around character strings or display `[1]` index prefixes, making it ideal for producing clean, readable output.
+:::
+
+---
+
+::: {.desc-item}
+`cat("Label:", value, "unit\n")` is the standard pattern for reporting a named result with its unit.
+The `\n` at the end moves the cursor to a new line.
+:::
+
+---
+
+::: {.desc-item}
+`cat("Label:", signif(value, digits), "unit\n")` rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
+:::
+
+::: {.callout-note}
+## Coding convention — always label printed results
+Never print a bare variable name or call `print()` on a calculated value.
+Always use `cat()` with a descriptive label and the unit.
+A number without context is meaningless in a pharmaceutical report.
+:::
+
+## Examples
+
+### Print a single analytical result with units
+
+```{webr-r}
+# Full-precision intermediate — do NOT round here
+std_intercept <- 0.003
+std_slope     <- 0.01420   # AU per µg/mL
+absorbance    <- 0.445     # measured absorbance of sample
+
+C2_ug_ml <- (absorbance - std_intercept) / std_slope   # Beer–Lambert
+
+# Only round at the point of printing
+cat("Sample concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
+```
+
+### Print multiple results from a content uniformity assay
+
+```{webr-r}
+library(dplyr)
+library(tibble)
+
+label_claim_mg    <- 75.0
+ibu_per_mg_powder <- 0.43
+
+capsules <- tibble(
+  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5, 174.3)
+) %>%
+  mutate(
+    ibu_mg    = fill_mass_mg * ibu_per_mg_powder,
+    pct_label = ibu_mg / label_claim_mg * 100
+  )
+
+X_bar_pct <- mean(capsules$pct_label)
+s_pct     <- sd(capsules$pct_label)
+
+cat("Mean content (X̄):", signif(X_bar_pct, 4), "% of label claim\n")
+cat("Std deviation (s):", signif(s_pct, 3),     "%\n")
+cat("n:", nrow(capsules), "capsules\n")
+```
+
+### Print a pass/fail acceptance criterion
+
+```{webr-r}
+# EP 2.9.40 Stage 1: AV = |M - X̄| + k·s
+M    <- 100.0   # reference value (% label claim)
+k_s1 <- 2.4     # EP Table 2.9.40-1, Stage 1, n = 6
+L1   <- 15.0    # acceptance limit Stage 1 (%)
+
+X_bar_pct <- 98.4
+s_pct     <- 1.8
+
+AV_s1 <- abs(M - X_bar_pct) + k_s1 * s_pct
+
+cat("Acceptance value (AV):", round(AV_s1, 2), "\n")
+cat("Acceptance limit (L1):", L1, "\n")
+cat("Stage 1 result:", ifelse(AV_s1 <= L1, "PASS", "FAIL"), "\n")
+```
+
+### `sep` — custom separator between items
+
+```{webr-r}
+conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)
+
+# Default sep = " " (space between items)
+cat("Standards (µg/mL):", conc_values_ug_ml, "\n")
+
+# Comma-separated
+cat("Standards (µg/mL):", conc_values_ug_ml, sep = ", ")
+cat("\n")
+```
+
+## Input Arguments
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>...</code> — items to print <span class="arg-types">character | numeric | logical</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more values to print, separated by commas.
+Items are coerced to character before printing.
+Common usage combines a text label, a computed value (wrapped in `signif()` or `round()`), and a unit string:
+
+```r
+cat("Mean fill mass:", signif(X_bar, 4), "mg\n")
+```
+
+Use `\n` (newline) as the last item so the next output starts on a fresh line.
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> | <code>numeric</code> | <code>logical</code> | <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>sep</code> — separator between items <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+A character string inserted between consecutive items.
+Default is a single space `" "`.
+Set `sep = ""` to print items with no gap, or `sep = ", "` for comma-separated lists.
+
+```r
+cat("Result:", value, "mg\n")          # default: space between each item
+cat("A", "B", "C", sep = "-")          # prints: A-B-C
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> · Default: <code>" "</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>file</code> — output destination <span class="arg-types">character | connection</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Where to send the output.
+Default `""` prints to the console.
+Pass a file path string (or an open connection) to write to a file instead.
+
+```r
+cat("Result:", signif(AV_s1, 4), "\n", file = "results.txt")
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> (file path) | <code>connection</code> · Default: <code>""</code> (console)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>append</code> — append to file instead of overwriting <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Only relevant when `file` is a file path.
+If `TRUE`, new output is appended to the end of the file.
+If `FALSE` (default), the file is overwritten.
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>FALSE</code></p>
+</div>
+</details>
+:::
