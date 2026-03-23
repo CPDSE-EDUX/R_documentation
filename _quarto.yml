@@ -2,6 +2,13 @@ project:
   type: website
   output-dir: _site
 
+knitr:
+  opts_chunk:
+    echo: true
+
+execute:
+  engine: knitr
+
 website:
   title: "R for Pharmacy"
   description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
