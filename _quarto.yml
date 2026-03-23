@@ -2,12 +2,8 @@ project:
   type: website
   output-dir: _site
 
-knitr:
-  opts_chunk:
-    echo: true
-
-execute:
-  engine: knitr
+filters:
+  - webr
 
 website:
   title: "R for Pharmacy"

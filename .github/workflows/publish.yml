@@ -38,6 +38,9 @@ jobs:
             any::ggplot2
             any::readr
             any::tibble
+            
+      - name: Install quarto-webr extension
+        run: quarto add coatless/quarto-webr --no-prompt
 
       - name: Render Quarto project
         uses: quarto-dev/quarto-actions/render@v2
