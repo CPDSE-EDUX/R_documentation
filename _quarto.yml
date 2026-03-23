@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: _site
 
+engine: knitr
+
 website:
   title: "R for Pharmacy"
   description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
@@ -92,9 +94,6 @@ webr:
     - readr
     - tibble
   show-startup-message: false
-
-execute:
-  engine: knitr
 
 format:
   html:
