@@ -2,9 +2,6 @@ project:
   type: website
   output-dir: _site
 
-filters:
-  - webr
-
 website:
   title: "R for Pharmacy"
   description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
