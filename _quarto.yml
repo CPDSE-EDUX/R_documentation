@@ -93,6 +93,9 @@ webr:
     - tibble
   show-startup-message: false
 
+execute:
+  engine: knitr
+
 format:
   html:
     theme: [cosmo, custom.scss]

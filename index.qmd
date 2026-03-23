@@ -42,12 +42,12 @@ Most code blocks on this site are **interactive**. Click **Run Code** to execute
 <h3>Descriptive Statistics</h3>
 <p>Summarise your data: means, medians, standard deviations, and more.</p>
 </a>
-<a href="topics/hypothesis-testing.qmd" class="feature-card" style="display:none">
+<a href="#" class="feature-card" style="display:none">
 <div class="card-icon">🔬</div>
 <h3>Hypothesis Testing</h3>
 <p>t-tests, chi-square, and Mann–Whitney tests for clinical data.</p>
 </a>
-<a href="topics/regression.qmd" class="feature-card" style="display:none">
+<a href="#" class="feature-card" style="display:none">
 <div class="card-icon">📐</div>
 <h3>Regression</h3>
 <p>Understand dose–response relationships with linear and logistic regression.</p>
