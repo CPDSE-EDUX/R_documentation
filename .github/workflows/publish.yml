@@ -1,6 +1,8 @@
 on:
   release:
     branches: [main]
+    tags:
+      - 'v*'  # e.g., v0.0.1
   workflow_dispatch:
 
 name: Publish to GitHub Pages
