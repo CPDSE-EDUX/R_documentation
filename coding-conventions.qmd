@@ -1,0 +1,365 @@
+---
+title: "R Coding Conventions"
+subtitle: "A shared style guide for pharmaceutical sciences practicals"
+toc: true
+---
+::: {.hero-banner-conventions}
+# Use the Coding Conventions
+
+You can use AI to modify existing R code according to these code conventions. Therefore, we prepared a prompt you can use. All you have to add is your R code.
+
+[Open prompt in Claude.ai](https://claude.ai/new?q=You%20are%20an%20expert%20in%20R.%20Improve%20the%20attached%20R%20teaching%20materials%20to%20strictly%20follow%20these%20coding%20conventions%3A%20https%3A%2F%2Fraw.githubusercontent.com%2FCPDSE-EDUX%2FR_documentation%2Frefs%2Fheads%2Fmain%2FR_coding_conventions.html.%20Return%20the%20updated%20files%20and%20provide%20a%20clear%2C%20concise%20summary%20of%20all%20changes%20made%2C%20organized%20by%20category%20(e.g.%2C%20naming%2C%20indentation%2C%20comments%2C%20etc.).){.hero-btn-conventions target="_blank" rel="noopener noreferrer"}
+
+or
+
+[Copy a prompt to paste into any chatbot](#){.hero-btn-conventions .secondary .copy-text-btn target="_blank" rel="noopener noreferrer" data-copy-text="You are an expert in R. Improve the attached R teaching materials to strictly follow these coding conventions: https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/R_coding_conventions.html. Return the updated files and provide a clear, concise summary of all changes made, organized by category (e.g., naming, indentation, comments, etc.)."}
+:::
+
+Following these conventions makes your code readable, reproducible, and consistent across exercises.
+
+## 1. Variable and object naming
+
+### Use `snake_case` for all variable names
+
+Words should be separated by underscores. Do not use dots or camelCase.
+
+::: callout-important
+This is required and used throughout all course materials.
+:::
+
+```{r, eval=FALSE}
+# Do this
+fill_mass_mg      <- 174.2
+ibu_per_mg_powder <- 0.43
+label_claim_mg    <- 75.0
+X_bar_s1          <- mean(stage1$pct_label)
+
+# Avoid this
+fillMassMg <- 174.2     # camelCase
+ibu.per.mg <- 0.43      # dots
+lc         <- 75.0      # unclear
+x1         <- mean(stage1$pct_label)
+```
+
+### Include units in variable names where relevant
+
+Append units such as `_mg`, `_pct`, `_ug_ml`, `_min` to avoid ambiguity.
+
+```{r, eval=FALSE}
+# Do this
+powder_mass_mg      <- 174.2
+concentration_ug_ml <- 7.56
+pct_label           <- 98.4
+time_min            <- 45
+
+# Avoid this
+powder <- 174.2   # mg or g?
+conc   <- 7.56    # ug/mL or mg/mL?
+label  <- 98.4    # % or mg?
+t      <- 45      # minutes or hours?
+```
+
+## 2. Assignment operator
+
+### Always use `<-` for assignment, never `=`
+
+Use `=` only for function arguments.
+
+::: callout-important
+Using `<-` consistently avoids confusion between assignment and argument naming.
+:::
+
+```{r, eval=FALSE}
+# Do this
+label_claim_mg <- 75.0
+std_slope      <- 0.04478
+data           <- readr::read_csv("file.csv")
+
+# Avoid this
+label_claim_mg = 75.0
+std_slope      = 0.04478
+data           = readr::read_csv("file.csv")
+```
+
+### Put spaces around `<-` and operators
+
+```{r, eval=FALSE}
+# Do this
+C2           <- (absorbance - std_intercept) / std_slope
+AV           <- k * S
+fill_mass_mg <- mass_filled_mg - mass_empty_mg
+
+# Avoid this
+C2<-(absorbance-std_intercept)/std_slope
+AV<-k*S
+fill_mass_mg<-mass_filled_mg-mass_empty_mg
+```
+
+## 3. Printing results
+
+### Use `cat()` to print labelled results
+
+Always include a descriptive label and a unit.
+
+```{r, eval=FALSE}
+# Do this
+cat("Ibuprofen content:",
+		signif(ibu_per_mg_powder, 3),
+		"mg Ibuprofen per mg powder\n")
+
+cat("Mean content (X-bar):",
+		signif(X_bar, 4),
+		"% of label claim\n")
+
+# Avoid this
+ibu_per_mg_powder
+print(ibu_per_mg_powder)
+X_bar
+```
+
+### Use `view()` to inspect data frames
+
+Use `view(data)` for interactive inspection and `head(data, 5)` for short previews.
+
+```{r, eval=FALSE}
+# Do this
+view(data)
+head(data, 5)
+
+# Avoid this
+print(data)
+data
+```
+
+## 4. Rounding and significant figures
+
+### Use `signif()` for final results, `round()` for fixed decimals
+
+Keep full precision in intermediate calculations and round only when printing.
+
+```{r, eval=FALSE}
+# Store full precision
+C2         <- (absorbance - std_intercept) / std_slope
+ibu_per_mg <- C2 * 20 / 0.1 * 50 / 1000 / powder_mass_mg
+
+# Round only when printing
+cat("Ibuprofen per mg powder:", signif(ibu_per_mg, 3), "mg/mg\n")
+cat("Label claim %:", round(pct_label, 2), "%\n")
+```
+
+### Never round inside a `mutate()` column used later
+
+```{r, eval=FALSE}
+# Do this
+data %>%
+	dplyr::mutate(
+		fill_mass_mg = mass_filled_mg - mass_empty_mg,
+		ibu_mg       = fill_mass_mg * ibu_per_mg_powder
+	)
+
+# Avoid this
+data %>%
+	dplyr::mutate(
+		fill_mass_mg = round(mass_filled_mg - mass_empty_mg, 1),
+		ibu_mg       = fill_mass_mg * ibu_per_mg_powder
+	)
+```
+
+## 5. Pipes and data manipulation
+
+### Use `%>%` with each step on its own line
+
+One function per line, with clear indentation.
+
+```{r, eval=FALSE}
+# Do this
+data <- data %>%
+	dplyr::mutate(
+		fill_mass_mg = mass_filled_mg - mass_empty_mg,
+		ibu_mg       = fill_mass_mg * ibu_per_mg_powder,
+		pct_label    = ibu_mg / label_claim_mg * 100
+	)
+
+# Avoid this
+data <- dplyr::mutate(data, fill_mass_mg=mass_filled_mg-mass_empty_mg, ibu_mg=fill_mass_mg*ibu_per_mg_powder, pct_label=ibu_mg/label_claim_mg*100)
+```
+
+### Group constants at the top of a chunk
+
+```{r, eval=FALSE}
+# Do this
+vol_flask1_mL  <- 50.0
+vol_aliquot_mL <- 0.1
+vol_flask2_mL  <- 20.0
+
+C1 <- C2 * vol_flask2_mL / vol_aliquot_mL
+
+# Avoid this
+C1 <- C2 * 20 / 0.1
+```
+
+## 6. Plotting with ggplot2
+
+### Use `theme_classic()` as the base theme
+
+```{r, eval=FALSE}
+ggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_pct)) +
+	ggplot2::geom_line() +
+	ggplot2::geom_point() +
+	ggplot2::labs(
+		x = "Time (min)",
+		y = "Dissolved (%)",
+		title = "Dissolution profile - Ibuprofen 75 mg capsules"
+	) +
+	ggplot2::theme_classic()
+```
+
+### Always label axes with units in parentheses
+
+```{r, eval=FALSE}
+# Do this
+ggplot2::labs(
+	x = "Time (min)",
+	y = "Ibuprofen released (mg)"
+)
+
+# Avoid this: no labs() call, defaults to raw variable names
+```
+
+### Put each `+` layer on its own line
+
+```{r, eval=FALSE}
+# Do this
+ggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_mg)) +
+	ggplot2::geom_line() +
+	ggplot2::geom_point() +
+	ggplot2::geom_errorbar(
+		ggplot2::aes(ymin = mean_mg - sd_mg, ymax = mean_mg + sd_mg)
+	) +
+	ggplot2::theme_classic()
+
+# Avoid this
+ggplot2::ggplot(data, ggplot2::aes(x=time_min,y=mean_mg))+ggplot2::geom_line()+ggplot2::geom_point()+ggplot2::theme_classic()
+```
+
+### Use `"steelblue"` as the default single-series color
+
+For multi-group plots, map `color` in `aes(color = group)` and let ggplot choose.
+
+```{r, eval=FALSE}
+# Single series
+ggplot2::geom_line(color = "steelblue")
+ggplot2::geom_point(color = "steelblue")
+
+# Multiple groups
+ggplot2::ggplot(
+	data,
+	ggplot2::aes(x = time_min, y = mean_pct, color = formulation)
+) +
+	ggplot2::geom_line() +
+	ggplot2::geom_point()
+```
+
+## 7. Code comments
+
+### Comment why, not what, and always comment units
+
+```{r, eval=FALSE}
+# Useful comments
+label_claim_mg <- 75.0  # mg - labelled dose per capsule
+k_s1           <- 2.4   # EP 2.9.40, Table 2.9.40-1, n = 10
+L1             <- 15.0  # acceptance limit, Stage 1 (%)
+
+# Unhelpful comments
+label_claim_mg <- 75.0  # set label claim to 75
+k_s1           <- 2.4   # k value
+L1             <- 15.0  # L1
+```
+
+### Use section separator comments in long scripts
+
+```{r, eval=FALSE}
+# --- Assay: Ibuprofen concentration from UV absorbance ---
+C2 <- (absorbance - std_intercept) / std_slope
+C1 <- C2 * vol_flask2_mL / vol_aliquot_mL
+
+# --- EP 2.9.40 Stage 1 acceptance value ---
+AV_s1 <- k_s1 * S_s1
+```
+
+## 8. Quick reference summary
+
+| Topic | Convention | Level |
+|------------------------|------------------------|------------------------|
+| Variable names | `snake_case`, include units (`_mg`, `_pct`, `_mL`) | Required |
+| Assignment | Always `<-` with spaces; `=` only inside function arguments | Required |
+| Printing values | `cat("label:", signif(x, 3), "unit\n")` | Required |
+| Printing tables | `view(data)` to inspect; `head(data, 5)` to preview in output | Required |
+| Rounding | `signif(x, n)` or `round(x, n)` only at print-time; full precision in calculations | Required |
+| Pipes | `%>%` with each step on its own indented line | Required |
+| ggplot theme | Always `theme_classic()` | Required |
+| Axis labels | `labs(x = "Name (unit)", y = "Name (unit)")` | Required |
+| Plot layers | One `geom_*()` or modifier per line, `+` at end of line | Required |
+| Default color | `"steelblue"` for single series; `aes(color = group)` for multi-series | Recommended |
+| Constants | Define at top of chunk with inline unit comment | Recommended |
+| Comments | Explain why and state units, not just what the code does | Required |
+
+```{=html}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	var copyButtons = document.querySelectorAll('.copy-text-btn');
+	if (!copyButtons.length) return;
+
+	var copyWithFallback = function (text) {
+		var helper = document.createElement('textarea');
+		helper.value = text;
+		helper.setAttribute('readonly', '');
+		helper.style.position = 'fixed';
+		helper.style.left = '-9999px';
+		document.body.appendChild(helper);
+		helper.focus();
+		helper.select();
+		var ok = false;
+		try {
+			ok = document.execCommand('copy');
+		} catch (e) {
+			ok = false;
+		}
+		document.body.removeChild(helper);
+		return ok;
+	};
+
+	copyButtons.forEach(function (copyBtn) {
+		copyBtn.addEventListener('click', function (event) {
+			event.preventDefault();
+
+			var text = copyBtn.getAttribute('data-copy-text') || '';
+			if (!text) return;
+
+			var original = copyBtn.textContent;
+			var showState = function (label) {
+				copyBtn.textContent = label;
+				copyBtn.classList.add('copied');
+				setTimeout(function () {
+					copyBtn.textContent = original;
+					copyBtn.classList.remove('copied');
+				}, 1200);
+			};
+
+			if (navigator.clipboard && window.isSecureContext) {
+				navigator.clipboard.writeText(text)
+					.then(function () { showState('Copied'); })
+					.catch(function () {
+						var ok = copyWithFallback(text);
+						showState(ok ? 'Copied' : 'Copy failed');
+					});
+				return;
+			}
+
+			var ok = copyWithFallback(text);
+			showState(ok ? 'Copied' : 'Copy failed');
+		});
+	});
+});
+</script>
+```

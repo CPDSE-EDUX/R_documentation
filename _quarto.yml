@@ -42,7 +42,7 @@ website:
       - text: Glossary
         href: glossary.qmd
       - text: Coding Conventions
-        href: R_coding_conventions.html
+        href: coding-conventions.qmd
     right:
       - icon: github
         href: https://github.com/CPDSE-EDUX/R_documentation

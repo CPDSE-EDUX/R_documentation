@@ -552,5 +552,68 @@
     "title": "Descriptive Statistics",
     "section": "IQR and quantiles",
     "text": "IQR and quantiles\nUseful for identifying spread and outliers in assay data.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nCoding convention — store then print\n\n\n\nCompute statistics at full precision, then round only inside cat() when reporting. Never round inside summarise() if the values will be used in further calculations."
+  },
+  {
+    "objectID": "coding-conventions.html",
+    "href": "coding-conventions.html",
+    "title": "R Coding Conventions",
+    "section": "",
+    "text": "You can use AI to modify existing R code according to these code conventions. Therefore, we prepared a prompt you can use. All you have to add is your R code.\nOpen prompt in Claude.ai\nor\nCopy a prompt to paste into any chatbot\nFollowing these conventions makes your code readable, reproducible, and consistent across exercises."
+  },
+  {
+    "objectID": "coding-conventions.html#variable-and-object-naming",
+    "href": "coding-conventions.html#variable-and-object-naming",
+    "title": "R Coding Conventions",
+    "section": "1. Variable and object naming",
+    "text": "1. Variable and object naming\n\nUse snake_case for all variable names\nWords should be separated by underscores. Do not use dots or camelCase.\n\n\n\n\n\n\nImportant\n\n\n\nThis is required and used throughout all course materials.\n\n\n\n# Do this\nfill_mass_mg      &lt;- 174.2\nibu_per_mg_powder &lt;- 0.43\nlabel_claim_mg    &lt;- 75.0\nX_bar_s1          &lt;- mean(stage1$pct_label)\n\n# Avoid this\nfillMassMg &lt;- 174.2     # camelCase\nibu.per.mg &lt;- 0.43      # dots\nlc         &lt;- 75.0      # unclear\nx1         &lt;- mean(stage1$pct_label)\n\n\n\nInclude units in variable names where relevant\nAppend units such as _mg, _pct, _ug_ml, _min to avoid ambiguity.\n\n# Do this\npowder_mass_mg      &lt;- 174.2\nconcentration_ug_ml &lt;- 7.56\npct_label           &lt;- 98.4\ntime_min            &lt;- 45\n\n# Avoid this\npowder &lt;- 174.2   # mg or g?\nconc   &lt;- 7.56    # ug/mL or mg/mL?\nlabel  &lt;- 98.4    # % or mg?\nt      &lt;- 45      # minutes or hours?"
+  },
+  {
+    "objectID": "coding-conventions.html#assignment-operator",
+    "href": "coding-conventions.html#assignment-operator",
+    "title": "R Coding Conventions",
+    "section": "2. Assignment operator",
+    "text": "2. Assignment operator\n\nAlways use &lt;- for assignment, never =\nUse = only for function arguments.\n\n\n\n\n\n\nImportant\n\n\n\nUsing &lt;- consistently avoids confusion between assignment and argument naming.\n\n\n\n# Do this\nlabel_claim_mg &lt;- 75.0\nstd_slope      &lt;- 0.04478\ndata           &lt;- readr::read_csv(\"file.csv\")\n\n# Avoid this\nlabel_claim_mg = 75.0\nstd_slope      = 0.04478\ndata           = readr::read_csv(\"file.csv\")\n\n\n\nPut spaces around &lt;- and operators\n\n# Do this\nC2           &lt;- (absorbance - std_intercept) / std_slope\nAV           &lt;- k * S\nfill_mass_mg &lt;- mass_filled_mg - mass_empty_mg\n\n# Avoid this\nC2&lt;-(absorbance-std_intercept)/std_slope\nAV&lt;-k*S\nfill_mass_mg&lt;-mass_filled_mg-mass_empty_mg"
+  },
+  {
+    "objectID": "coding-conventions.html#printing-results",
+    "href": "coding-conventions.html#printing-results",
+    "title": "R Coding Conventions",
+    "section": "3. Printing results",
+    "text": "3. Printing results\n\nUse cat() to print labelled results\nAlways include a descriptive label and a unit.\n\n# Do this\ncat(\"Ibuprofen content:\",\n        signif(ibu_per_mg_powder, 3),\n        \"mg Ibuprofen per mg powder\\n\")\n\ncat(\"Mean content (X-bar):\",\n        signif(X_bar, 4),\n        \"% of label claim\\n\")\n\n# Avoid this\nibu_per_mg_powder\nprint(ibu_per_mg_powder)\nX_bar\n\n\n\nUse view() to inspect data frames\nUse view(data) for interactive inspection and head(data, 5) for short previews.\n\n# Do this\nview(data)\nhead(data, 5)\n\n# Avoid this\nprint(data)\ndata"
+  },
+  {
+    "objectID": "coding-conventions.html#rounding-and-significant-figures",
+    "href": "coding-conventions.html#rounding-and-significant-figures",
+    "title": "R Coding Conventions",
+    "section": "4. Rounding and significant figures",
+    "text": "4. Rounding and significant figures\n\nUse signif() for final results, round() for fixed decimals\nKeep full precision in intermediate calculations and round only when printing.\n\n# Store full precision\nC2         &lt;- (absorbance - std_intercept) / std_slope\nibu_per_mg &lt;- C2 * 20 / 0.1 * 50 / 1000 / powder_mass_mg\n\n# Round only when printing\ncat(\"Ibuprofen per mg powder:\", signif(ibu_per_mg, 3), \"mg/mg\\n\")\ncat(\"Label claim %:\", round(pct_label, 2), \"%\\n\")\n\n\n\nNever round inside a mutate() column used later\n\n# Do this\ndata %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = mass_filled_mg - mass_empty_mg,\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder\n    )\n\n# Avoid this\ndata %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = round(mass_filled_mg - mass_empty_mg, 1),\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder\n    )"
+  },
+  {
+    "objectID": "coding-conventions.html#pipes-and-data-manipulation",
+    "href": "coding-conventions.html#pipes-and-data-manipulation",
+    "title": "R Coding Conventions",
+    "section": "5. Pipes and data manipulation",
+    "text": "5. Pipes and data manipulation\n\nUse %&gt;% with each step on its own line\nOne function per line, with clear indentation.\n\n# Do this\ndata &lt;- data %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = mass_filled_mg - mass_empty_mg,\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder,\n        pct_label    = ibu_mg / label_claim_mg * 100\n    )\n\n# Avoid this\ndata &lt;- dplyr::mutate(data, fill_mass_mg=mass_filled_mg-mass_empty_mg, ibu_mg=fill_mass_mg*ibu_per_mg_powder, pct_label=ibu_mg/label_claim_mg*100)\n\n\n\nGroup constants at the top of a chunk\n\n# Do this\nvol_flask1_mL  &lt;- 50.0\nvol_aliquot_mL &lt;- 0.1\nvol_flask2_mL  &lt;- 20.0\n\nC1 &lt;- C2 * vol_flask2_mL / vol_aliquot_mL\n\n# Avoid this\nC1 &lt;- C2 * 20 / 0.1"
+  },
+  {
+    "objectID": "coding-conventions.html#plotting-with-ggplot2",
+    "href": "coding-conventions.html#plotting-with-ggplot2",
+    "title": "R Coding Conventions",
+    "section": "6. Plotting with ggplot2",
+    "text": "6. Plotting with ggplot2\n\nUse theme_classic() as the base theme\n\nggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_pct)) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point() +\n    ggplot2::labs(\n        x = \"Time (min)\",\n        y = \"Dissolved (%)\",\n        title = \"Dissolution profile - Ibuprofen 75 mg capsules\"\n    ) +\n    ggplot2::theme_classic()\n\n\n\nAlways label axes with units in parentheses\n\n# Do this\nggplot2::labs(\n    x = \"Time (min)\",\n    y = \"Ibuprofen released (mg)\"\n)\n\n# Avoid this: no labs() call, defaults to raw variable names\n\n\n\nPut each + layer on its own line\n\n# Do this\nggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_mg)) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point() +\n    ggplot2::geom_errorbar(\n        ggplot2::aes(ymin = mean_mg - sd_mg, ymax = mean_mg + sd_mg)\n    ) +\n    ggplot2::theme_classic()\n\n# Avoid this\nggplot2::ggplot(data, ggplot2::aes(x=time_min,y=mean_mg))+ggplot2::geom_line()+ggplot2::geom_point()+ggplot2::theme_classic()\n\n\n\nUse \"steelblue\" as the default single-series color\nFor multi-group plots, map color in aes(color = group) and let ggplot choose.\n\n# Single series\nggplot2::geom_line(color = \"steelblue\")\nggplot2::geom_point(color = \"steelblue\")\n\n# Multiple groups\nggplot2::ggplot(\n    data,\n    ggplot2::aes(x = time_min, y = mean_pct, color = formulation)\n) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point()"
+  },
+  {
+    "objectID": "coding-conventions.html#code-comments",
+    "href": "coding-conventions.html#code-comments",
+    "title": "R Coding Conventions",
+    "section": "7. Code comments",
+    "text": "7. Code comments\n\nComment why, not what, and always comment units\n\n# Useful comments\nlabel_claim_mg &lt;- 75.0  # mg - labelled dose per capsule\nk_s1           &lt;- 2.4   # EP 2.9.40, Table 2.9.40-1, n = 10\nL1             &lt;- 15.0  # acceptance limit, Stage 1 (%)\n\n# Unhelpful comments\nlabel_claim_mg &lt;- 75.0  # set label claim to 75\nk_s1           &lt;- 2.4   # k value\nL1             &lt;- 15.0  # L1\n\n\n\nUse section separator comments in long scripts\n\n# --- Assay: Ibuprofen concentration from UV absorbance ---\nC2 &lt;- (absorbance - std_intercept) / std_slope\nC1 &lt;- C2 * vol_flask2_mL / vol_aliquot_mL\n\n# --- EP 2.9.40 Stage 1 acceptance value ---\nAV_s1 &lt;- k_s1 * S_s1"
+  },
+  {
+    "objectID": "coding-conventions.html#quick-reference-summary",
+    "href": "coding-conventions.html#quick-reference-summary",
+    "title": "R Coding Conventions",
+    "section": "8. Quick reference summary",
+    "text": "8. Quick reference summary\n\n\n\n\n\n\n\n\nTopic\nConvention\nLevel\n\n\n\n\nVariable names\nsnake_case, include units (_mg, _pct, _mL)\nRequired\n\n\nAssignment\nAlways &lt;- with spaces; = only inside function arguments\nRequired\n\n\nPrinting values\ncat(\"label:\", signif(x, 3), \"unit\\n\")\nRequired\n\n\nPrinting tables\nview(data) to inspect; head(data, 5) to preview in output\nRequired\n\n\nRounding\nsignif(x, n) or round(x, n) only at print-time; full precision in calculations\nRequired\n\n\nPipes\n%&gt;% with each step on its own indented line\nRequired\n\n\nggplot theme\nAlways theme_classic()\nRequired\n\n\nAxis labels\nlabs(x = \"Name (unit)\", y = \"Name (unit)\")\nRequired\n\n\nPlot layers\nOne geom_*() or modifier per line, + at end of line\nRequired\n\n\nDefault color\n\"steelblue\" for single series; aes(color = group) for multi-series\nRecommended\n\n\nConstants\nDefine at top of chunk with inline unit comment\nRecommended\n\n\nComments\nExplain why and state units, not just what the code does\nRequired"
   }
 ]

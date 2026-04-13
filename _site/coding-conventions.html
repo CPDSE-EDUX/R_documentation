@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R Coding Conventions – R for Pharmacy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c204e07e9398e0b06c1187dd43a2cf14.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-3fde57da8767643ccf0efb986f1b10c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./assets/images/logo_snake_gold.png" alt="CPDSE" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">R for Pharmacy</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./getting-started.html"> 
+<span class="menu-text">Getting Started</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-functions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Functions</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-functions">    
+        <li>
+    <a class="dropdown-item" href="./functions/index.html">
+ <span class="dropdown-text">All Functions</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Import &amp; Create</li>
+        <li>
+    <a class="dropdown-item" href="./functions/read-csv.html">
+ <span class="dropdown-text">read_csv( )</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./functions/tibble.html">
+ <span class="dropdown-text">tibble( )</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Transform</li>
+        <li>
+    <a class="dropdown-item" href="./functions/mutate.html">
+ <span class="dropdown-text">mutate( )</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Report</li>
+        <li>
+    <a class="dropdown-item" href="./functions/cat.html">
+ <span class="dropdown-text">cat( )</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./functions/round.html">
+ <span class="dropdown-text">round( )</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./functions/signif.html">
+ <span class="dropdown-text">signif( )</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./glossary.html"> 
+<span class="menu-text">Glossary</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./coding-conventions.html" aria-current="page"> 
+<span class="menu-text">Coding Conventions</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/CPDSE-EDUX/R_documentation"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#use-the-coding-conventions" id="toc-use-the-coding-conventions" class="nav-link active" data-scroll-target="#use-the-coding-conventions">Use the Coding Conventions</a></li>
+  <li><a href="#variable-and-object-naming" id="toc-variable-and-object-naming" class="nav-link" data-scroll-target="#variable-and-object-naming">1. Variable and object naming</a>
+  <ul class="collapse">
+  <li><a href="#use-snake_case-for-all-variable-names" id="toc-use-snake_case-for-all-variable-names" class="nav-link" data-scroll-target="#use-snake_case-for-all-variable-names">Use <code>snake_case</code> for all variable names</a></li>
+  <li><a href="#include-units-in-variable-names-where-relevant" id="toc-include-units-in-variable-names-where-relevant" class="nav-link" data-scroll-target="#include-units-in-variable-names-where-relevant">Include units in variable names where relevant</a></li>
+  </ul></li>
+  <li><a href="#assignment-operator" id="toc-assignment-operator" class="nav-link" data-scroll-target="#assignment-operator">2. Assignment operator</a>
+  <ul class="collapse">
+  <li><a href="#always-use---for-assignment-never" id="toc-always-use---for-assignment-never" class="nav-link" data-scroll-target="#always-use---for-assignment-never">Always use <code>&lt;-</code> for assignment, never <code>=</code></a></li>
+  <li><a href="#put-spaces-around---and-operators" id="toc-put-spaces-around---and-operators" class="nav-link" data-scroll-target="#put-spaces-around---and-operators">Put spaces around <code>&lt;-</code> and operators</a></li>
+  </ul></li>
+  <li><a href="#printing-results" id="toc-printing-results" class="nav-link" data-scroll-target="#printing-results">3. Printing results</a>
+  <ul class="collapse">
+  <li><a href="#use-cat-to-print-labelled-results" id="toc-use-cat-to-print-labelled-results" class="nav-link" data-scroll-target="#use-cat-to-print-labelled-results">Use <code>cat()</code> to print labelled results</a></li>
+  <li><a href="#use-view-to-inspect-data-frames" id="toc-use-view-to-inspect-data-frames" class="nav-link" data-scroll-target="#use-view-to-inspect-data-frames">Use <code>view()</code> to inspect data frames</a></li>
+  </ul></li>
+  <li><a href="#rounding-and-significant-figures" id="toc-rounding-and-significant-figures" class="nav-link" data-scroll-target="#rounding-and-significant-figures">4. Rounding and significant figures</a>
+  <ul class="collapse">
+  <li><a href="#use-signif-for-final-results-round-for-fixed-decimals" id="toc-use-signif-for-final-results-round-for-fixed-decimals" class="nav-link" data-scroll-target="#use-signif-for-final-results-round-for-fixed-decimals">Use <code>signif()</code> for final results, <code>round()</code> for fixed decimals</a></li>
+  <li><a href="#never-round-inside-a-mutate-column-used-later" id="toc-never-round-inside-a-mutate-column-used-later" class="nav-link" data-scroll-target="#never-round-inside-a-mutate-column-used-later">Never round inside a <code>mutate()</code> column used later</a></li>
+  </ul></li>
+  <li><a href="#pipes-and-data-manipulation" id="toc-pipes-and-data-manipulation" class="nav-link" data-scroll-target="#pipes-and-data-manipulation">5. Pipes and data manipulation</a>
+  <ul class="collapse">
+  <li><a href="#use-with-each-step-on-its-own-line" id="toc-use-with-each-step-on-its-own-line" class="nav-link" data-scroll-target="#use-with-each-step-on-its-own-line">Use <code>%&gt;%</code> with each step on its own line</a></li>
+  <li><a href="#group-constants-at-the-top-of-a-chunk" id="toc-group-constants-at-the-top-of-a-chunk" class="nav-link" data-scroll-target="#group-constants-at-the-top-of-a-chunk">Group constants at the top of a chunk</a></li>
+  </ul></li>
+  <li><a href="#plotting-with-ggplot2" id="toc-plotting-with-ggplot2" class="nav-link" data-scroll-target="#plotting-with-ggplot2">6. Plotting with ggplot2</a>
+  <ul class="collapse">
+  <li><a href="#use-theme_classic-as-the-base-theme" id="toc-use-theme_classic-as-the-base-theme" class="nav-link" data-scroll-target="#use-theme_classic-as-the-base-theme">Use <code>theme_classic()</code> as the base theme</a></li>
+  <li><a href="#always-label-axes-with-units-in-parentheses" id="toc-always-label-axes-with-units-in-parentheses" class="nav-link" data-scroll-target="#always-label-axes-with-units-in-parentheses">Always label axes with units in parentheses</a></li>
+  <li><a href="#put-each-layer-on-its-own-line" id="toc-put-each-layer-on-its-own-line" class="nav-link" data-scroll-target="#put-each-layer-on-its-own-line">Put each <code>+</code> layer on its own line</a></li>
+  <li><a href="#use-steelblue-as-the-default-single-series-color" id="toc-use-steelblue-as-the-default-single-series-color" class="nav-link" data-scroll-target="#use-steelblue-as-the-default-single-series-color">Use <code>"steelblue"</code> as the default single-series color</a></li>
+  </ul></li>
+  <li><a href="#code-comments" id="toc-code-comments" class="nav-link" data-scroll-target="#code-comments">7. Code comments</a>
+  <ul class="collapse">
+  <li><a href="#comment-why-not-what-and-always-comment-units" id="toc-comment-why-not-what-and-always-comment-units" class="nav-link" data-scroll-target="#comment-why-not-what-and-always-comment-units">Comment why, not what, and always comment units</a></li>
+  <li><a href="#use-section-separator-comments-in-long-scripts" id="toc-use-section-separator-comments-in-long-scripts" class="nav-link" data-scroll-target="#use-section-separator-comments-in-long-scripts">Use section separator comments in long scripts</a></li>
+  </ul></li>
+  <li><a href="#quick-reference-summary" id="toc-quick-reference-summary" class="nav-link" data-scroll-target="#quick-reference-summary">8. Quick reference summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">R Coding Conventions</h1>
+<p class="subtitle lead">A shared style guide for pharmaceutical sciences practicals</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="use-the-coding-conventions" class="level1 hero-banner-conventions">
+<h1>Use the Coding Conventions</h1>
+<p>You can use AI to modify existing R code according to these code conventions. Therefore, we prepared a prompt you can use. All you have to add is your R code.</p>
+<p><a href="https://claude.ai/new?q=You%20are%20an%20expert%20in%20R.%20Improve%20the%20attached%20R%20teaching%20materials%20to%20strictly%20follow%20these%20coding%20conventions%3A%20https%3A%2F%2Fraw.githubusercontent.com%2FCPDSE-EDUX%2FR_documentation%2Frefs%2Fheads%2Fmain%2FR_coding_conventions.html.%20Return%20the%20updated%20files%20and%20provide%20a%20clear%2C%20concise%20summary%20of%20all%20changes%20made%2C%20organized%20by%20category%20(e.g.%2C%20naming%2C%20indentation%2C%20comments%2C%20etc.)." class="hero-btn-conventions" target="_blank" rel="noopener noreferrer">Open prompt in Claude.ai</a></p>
+<p>or</p>
+<p><a href="#" class="hero-btn-conventions secondary copy-text-btn" target="_blank" rel="noopener noreferrer" data-copy-text="You are an expert in R. Improve the attached R teaching materials to strictly follow these coding conventions: https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/R_coding_conventions.html. Return the updated files and provide a clear, concise summary of all changes made, organized by category (e.g., naming, indentation, comments, etc.).">Copy a prompt to paste into any chatbot</a></p>
+</section>
+<p>Following these conventions makes your code readable, reproducible, and consistent across exercises.</p>
+<section id="variable-and-object-naming" class="level2">
+<h2 class="anchored" data-anchor-id="variable-and-object-naming">1. Variable and object naming</h2>
+<section id="use-snake_case-for-all-variable-names" class="level3">
+<h3 class="anchored" data-anchor-id="use-snake_case-for-all-variable-names">Use <code>snake_case</code> for all variable names</h3>
+<p>Words should be separated by underscores. Do not use dots or camelCase.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is required and used throughout all course materials.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fill_mass_mg      <span class="ot">&lt;-</span> <span class="fl">174.2</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ibu_per_mg_powder <span class="ot">&lt;-</span> <span class="fl">0.43</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>label_claim_mg    <span class="ot">&lt;-</span> <span class="fl">75.0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X_bar_s1          <span class="ot">&lt;-</span> <span class="fu">mean</span>(stage1<span class="sc">$</span>pct_label)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fillMassMg <span class="ot">&lt;-</span> <span class="fl">174.2</span>     <span class="co"># camelCase</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>ibu.per.mg <span class="ot">&lt;-</span> <span class="fl">0.43</span>      <span class="co"># dots</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>lc         <span class="ot">&lt;-</span> <span class="fl">75.0</span>      <span class="co"># unclear</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>x1         <span class="ot">&lt;-</span> <span class="fu">mean</span>(stage1<span class="sc">$</span>pct_label)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="include-units-in-variable-names-where-relevant" class="level3">
+<h3 class="anchored" data-anchor-id="include-units-in-variable-names-where-relevant">Include units in variable names where relevant</h3>
+<p>Append units such as <code>_mg</code>, <code>_pct</code>, <code>_ug_ml</code>, <code>_min</code> to avoid ambiguity.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>powder_mass_mg      <span class="ot">&lt;-</span> <span class="fl">174.2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>concentration_ug_ml <span class="ot">&lt;-</span> <span class="fl">7.56</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pct_label           <span class="ot">&lt;-</span> <span class="fl">98.4</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>time_min            <span class="ot">&lt;-</span> <span class="dv">45</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>powder <span class="ot">&lt;-</span> <span class="fl">174.2</span>   <span class="co"># mg or g?</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>conc   <span class="ot">&lt;-</span> <span class="fl">7.56</span>    <span class="co"># ug/mL or mg/mL?</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>label  <span class="ot">&lt;-</span> <span class="fl">98.4</span>    <span class="co"># % or mg?</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>t      <span class="ot">&lt;-</span> <span class="dv">45</span>      <span class="co"># minutes or hours?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="assignment-operator" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-operator">2. Assignment operator</h2>
+<section id="always-use---for-assignment-never" class="level3">
+<h3 class="anchored" data-anchor-id="always-use---for-assignment-never">Always use <code>&lt;-</code> for assignment, never <code>=</code></h3>
+<p>Use <code>=</code> only for function arguments.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using <code>&lt;-</code> consistently avoids confusion between assignment and argument naming.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>label_claim_mg <span class="ot">&lt;-</span> <span class="fl">75.0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>std_slope      <span class="ot">&lt;-</span> <span class="fl">0.04478</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>data           <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"file.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>label_claim_mg <span class="ot">=</span> <span class="fl">75.0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>std_slope      <span class="ot">=</span> <span class="fl">0.04478</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>data           <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="put-spaces-around---and-operators" class="level3">
+<h3 class="anchored" data-anchor-id="put-spaces-around---and-operators">Put spaces around <code>&lt;-</code> and operators</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>C2           <span class="ot">&lt;-</span> (absorbance <span class="sc">-</span> std_intercept) <span class="sc">/</span> std_slope</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>AV           <span class="ot">&lt;-</span> k <span class="sc">*</span> S</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fill_mass_mg <span class="ot">&lt;-</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>C2<span class="ot">&lt;-</span>(absorbance<span class="sc">-</span>std_intercept)<span class="sc">/</span>std_slope</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>AV<span class="ot">&lt;-</span>k<span class="sc">*</span>S</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>fill_mass_mg<span class="ot">&lt;-</span>mass_filled_mg<span class="sc">-</span>mass_empty_mg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="printing-results" class="level2">
+<h2 class="anchored" data-anchor-id="printing-results">3. Printing results</h2>
+<section id="use-cat-to-print-labelled-results" class="level3">
+<h3 class="anchored" data-anchor-id="use-cat-to-print-labelled-results">Use <code>cat()</code> to print labelled results</h3>
+<p>Always include a descriptive label and a unit.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ibuprofen content:"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">signif</span>(ibu_per_mg_powder, <span class="dv">3</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mg Ibuprofen per mg powder</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean content (X-bar):"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">signif</span>(X_bar, <span class="dv">4</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"% of label claim</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ibu_per_mg_powder</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ibu_per_mg_powder)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>X_bar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="use-view-to-inspect-data-frames" class="level3">
+<h3 class="anchored" data-anchor-id="use-view-to-inspect-data-frames">Use <code>view()</code> to inspect data frames</h3>
+<p>Use <code>view(data)</code> for interactive inspection and <code>head(data, 5)</code> for short previews.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(data)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data, <span class="dv">5</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="rounding-and-significant-figures" class="level2">
+<h2 class="anchored" data-anchor-id="rounding-and-significant-figures">4. Rounding and significant figures</h2>
+<section id="use-signif-for-final-results-round-for-fixed-decimals" class="level3">
+<h3 class="anchored" data-anchor-id="use-signif-for-final-results-round-for-fixed-decimals">Use <code>signif()</code> for final results, <code>round()</code> for fixed decimals</h3>
+<p>Keep full precision in intermediate calculations and round only when printing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store full precision</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>C2         <span class="ot">&lt;-</span> (absorbance <span class="sc">-</span> std_intercept) <span class="sc">/</span> std_slope</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ibu_per_mg <span class="ot">&lt;-</span> C2 <span class="sc">*</span> <span class="dv">20</span> <span class="sc">/</span> <span class="fl">0.1</span> <span class="sc">*</span> <span class="dv">50</span> <span class="sc">/</span> <span class="dv">1000</span> <span class="sc">/</span> powder_mass_mg</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Round only when printing</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Ibuprofen per mg powder:"</span>, <span class="fu">signif</span>(ibu_per_mg, <span class="dv">3</span>), <span class="st">"mg/mg</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label claim %:"</span>, <span class="fu">round</span>(pct_label, <span class="dv">2</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="never-round-inside-a-mutate-column-used-later" class="level3">
+<h3 class="anchored" data-anchor-id="never-round-inside-a-mutate-column-used-later">Never round inside a <code>mutate()</code> column used later</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ibu_mg       =</span> fill_mass_mg <span class="sc">*</span> ibu_per_mg_powder</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill_mass_mg =</span> <span class="fu">round</span>(mass_filled_mg <span class="sc">-</span> mass_empty_mg, <span class="dv">1</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">ibu_mg       =</span> fill_mass_mg <span class="sc">*</span> ibu_per_mg_powder</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="pipes-and-data-manipulation" class="level2">
+<h2 class="anchored" data-anchor-id="pipes-and-data-manipulation">5. Pipes and data manipulation</h2>
+<section id="use-with-each-step-on-its-own-line" class="level3">
+<h3 class="anchored" data-anchor-id="use-with-each-step-on-its-own-line">Use <code>%&gt;%</code> with each step on its own line</h3>
+<p>One function per line, with clear indentation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">ibu_mg       =</span> fill_mass_mg <span class="sc">*</span> ibu_per_mg_powder,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">pct_label    =</span> ibu_mg <span class="sc">/</span> label_claim_mg <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(data, <span class="at">fill_mass_mg=</span>mass_filled_mg<span class="sc">-</span>mass_empty_mg, <span class="at">ibu_mg=</span>fill_mass_mg<span class="sc">*</span>ibu_per_mg_powder, <span class="at">pct_label=</span>ibu_mg<span class="sc">/</span>label_claim_mg<span class="sc">*</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="group-constants-at-the-top-of-a-chunk" class="level3">
+<h3 class="anchored" data-anchor-id="group-constants-at-the-top-of-a-chunk">Group constants at the top of a chunk</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>vol_flask1_mL  <span class="ot">&lt;-</span> <span class="fl">50.0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>vol_aliquot_mL <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>vol_flask2_mL  <span class="ot">&lt;-</span> <span class="fl">20.0</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>C1 <span class="ot">&lt;-</span> C2 <span class="sc">*</span> vol_flask2_mL <span class="sc">/</span> vol_aliquot_mL</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>C1 <span class="ot">&lt;-</span> C2 <span class="sc">*</span> <span class="dv">20</span> <span class="sc">/</span> <span class="fl">0.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="plotting-with-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-with-ggplot2">6. Plotting with ggplot2</h2>
+<section id="use-theme_classic-as-the-base-theme" class="level3">
+<h3 class="anchored" data-anchor-id="use-theme_classic-as-the-base-theme">Use <code>theme_classic()</code> as the base theme</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> time_min, <span class="at">y =</span> mean_pct)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">"Time (min)"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">"Dissolved (%)"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Dissolution profile - Ibuprofen 75 mg capsules"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="always-label-axes-with-units-in-parentheses" class="level3">
+<h3 class="anchored" data-anchor-id="always-label-axes-with-units-in-parentheses">Always label axes with units in parentheses</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">labs</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time (min)"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Ibuprofen released (mg)"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this: no labs() call, defaults to raw variable names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="put-each-layer-on-its-own-line" class="level3">
+<h3 class="anchored" data-anchor-id="put-each-layer-on-its-own-line">Put each <code>+</code> layer on its own line</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Do this</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> time_min, <span class="at">y =</span> mean_mg)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_errorbar</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">ymin =</span> mean_mg <span class="sc">-</span> sd_mg, <span class="at">ymax =</span> mean_mg <span class="sc">+</span> sd_mg)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Avoid this</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(data, ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x=</span>time_min,<span class="at">y=</span>mean_mg))<span class="sc">+</span>ggplot2<span class="sc">::</span><span class="fu">geom_line</span>()<span class="sc">+</span>ggplot2<span class="sc">::</span><span class="fu">geom_point</span>()<span class="sc">+</span>ggplot2<span class="sc">::</span><span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="use-steelblue-as-the-default-single-series-color" class="level3">
+<h3 class="anchored" data-anchor-id="use-steelblue-as-the-default-single-series-color">Use <code>"steelblue"</code> as the default single-series color</h3>
+<p>For multi-group plots, map <code>color</code> in <code>aes(color = group)</code> and let ggplot choose.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Single series</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple groups</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    data,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">x =</span> time_min, <span class="at">y =</span> mean_pct, <span class="at">color =</span> formulation)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="code-comments" class="level2">
+<h2 class="anchored" data-anchor-id="code-comments">7. Code comments</h2>
+<section id="comment-why-not-what-and-always-comment-units" class="level3">
+<h3 class="anchored" data-anchor-id="comment-why-not-what-and-always-comment-units">Comment why, not what, and always comment units</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Useful comments</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>label_claim_mg <span class="ot">&lt;-</span> <span class="fl">75.0</span>  <span class="co"># mg - labelled dose per capsule</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>k_s1           <span class="ot">&lt;-</span> <span class="fl">2.4</span>   <span class="co"># EP 2.9.40, Table 2.9.40-1, n = 10</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>L1             <span class="ot">&lt;-</span> <span class="fl">15.0</span>  <span class="co"># acceptance limit, Stage 1 (%)</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Unhelpful comments</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>label_claim_mg <span class="ot">&lt;-</span> <span class="fl">75.0</span>  <span class="co"># set label claim to 75</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>k_s1           <span class="ot">&lt;-</span> <span class="fl">2.4</span>   <span class="co"># k value</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>L1             <span class="ot">&lt;-</span> <span class="fl">15.0</span>  <span class="co"># L1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="use-section-separator-comments-in-long-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="use-section-separator-comments-in-long-scripts">Use section separator comments in long scripts</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Assay: Ibuprofen concentration from UV absorbance ---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>C2 <span class="ot">&lt;-</span> (absorbance <span class="sc">-</span> std_intercept) <span class="sc">/</span> std_slope</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>C1 <span class="ot">&lt;-</span> C2 <span class="sc">*</span> vol_flask2_mL <span class="sc">/</span> vol_aliquot_mL</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># --- EP 2.9.40 Stage 1 acceptance value ---</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>AV_s1 <span class="ot">&lt;-</span> k_s1 <span class="sc">*</span> S_s1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="quick-reference-summary" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference-summary">8. Quick reference summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Topic</th>
+<th>Convention</th>
+<th>Level</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variable names</td>
+<td><code>snake_case</code>, include units (<code>_mg</code>, <code>_pct</code>, <code>_mL</code>)</td>
+<td>Required</td>
+</tr>
+<tr class="even">
+<td>Assignment</td>
+<td>Always <code>&lt;-</code> with spaces; <code>=</code> only inside function arguments</td>
+<td>Required</td>
+</tr>
+<tr class="odd">
+<td>Printing values</td>
+<td><code>cat("label:", signif(x, 3), "unit\n")</code></td>
+<td>Required</td>
+</tr>
+<tr class="even">
+<td>Printing tables</td>
+<td><code>view(data)</code> to inspect; <code>head(data, 5)</code> to preview in output</td>
+<td>Required</td>
+</tr>
+<tr class="odd">
+<td>Rounding</td>
+<td><code>signif(x, n)</code> or <code>round(x, n)</code> only at print-time; full precision in calculations</td>
+<td>Required</td>
+</tr>
+<tr class="even">
+<td>Pipes</td>
+<td><code>%&gt;%</code> with each step on its own indented line</td>
+<td>Required</td>
+</tr>
+<tr class="odd">
+<td>ggplot theme</td>
+<td>Always <code>theme_classic()</code></td>
+<td>Required</td>
+</tr>
+<tr class="even">
+<td>Axis labels</td>
+<td><code>labs(x = "Name (unit)", y = "Name (unit)")</code></td>
+<td>Required</td>
+</tr>
+<tr class="odd">
+<td>Plot layers</td>
+<td>One <code>geom_*()</code> or modifier per line, <code>+</code> at end of line</td>
+<td>Required</td>
+</tr>
+<tr class="even">
+<td>Default color</td>
+<td><code>"steelblue"</code> for single series; <code>aes(color = group)</code> for multi-series</td>
+<td>Recommended</td>
+</tr>
+<tr class="odd">
+<td>Constants</td>
+<td>Define at top of chunk with inline unit comment</td>
+<td>Recommended</td>
+</tr>
+<tr class="even">
+<td>Comments</td>
+<td>Explain why and state units, not just what the code does</td>
+<td>Required</td>
+</tr>
+</tbody>
+</table>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var copyButtons = document.querySelectorAll('.copy-text-btn');
+    if (!copyButtons.length) return;
+
+    var copyWithFallback = function (text) {
+        var helper = document.createElement('textarea');
+        helper.value = text;
+        helper.setAttribute('readonly', '');
+        helper.style.position = 'fixed';
+        helper.style.left = '-9999px';
+        document.body.appendChild(helper);
+        helper.focus();
+        helper.select();
+        var ok = false;
+        try {
+            ok = document.execCommand('copy');
+        } catch (e) {
+            ok = false;
+        }
+        document.body.removeChild(helper);
+        return ok;
+    };
+
+    copyButtons.forEach(function (copyBtn) {
+        copyBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            var text = copyBtn.getAttribute('data-copy-text') || '';
+            if (!text) return;
+
+            var original = copyBtn.textContent;
+            var showState = function (label) {
+                copyBtn.textContent = label;
+                copyBtn.classList.add('copied');
+                setTimeout(function () {
+                    copyBtn.textContent = original;
+                    copyBtn.classList.remove('copied');
+                }, 1200);
+            };
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(function () { showState('Copied'); })
+                    .catch(function () {
+                        var ok = copyWithFallback(text);
+                        showState(ok ? 'Copied' : 'Copy failed');
+                    });
+                return;
+            }
+
+            var ok = copyWithFallback(text);
+            showState(ok ? 'Copied' : 'Copy failed');
+        });
+    });
+});
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+
+// Collapse / Expand All toggle for argument sections (MATLAB-style)
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  document.querySelectorAll('.collapse-btn').forEach(function (btn) {
+
+    btn.addEventListener('click', function () {
+
+      var section = btn.closest('.arg-section');
+
+      var items   = section.querySelectorAll('details.arg-item');
+
+      var anyOpen = Array.from(items).some(function (d) { return d.open; });
+
+      items.forEach(function (d) { d.open = !anyOpen; });
+
+      btn.textContent = anyOpen ? 'Expand All' : 'Collapse All';
+
+    });
+
+  });
+
+});
+
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://cpdse.dk">Center for Pharmaceutical Data Science Education</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>Built with <a href="https://quarto.org">Quarto</a> and <a href="https://webr.r-wasm.org">webR</a></p>
+</div>
+    <div class="nav-footer-right">
+<p>© CPDSE 2026</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
