@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c204e07e9398e0b06c1187dd43a2cf14.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5ff5ecd0b624c430e004d3ceb46815cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-3fde57da8767643ccf0efb986f1b10c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1735,7 +1735,7 @@ globalThis.qwebrExecuteCode = async function (
 <span class="menu-text">Glossary</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../R_coding_conventions.html"> 
+    <a class="nav-link" href="../coding-conventions.html"> 
 <span class="menu-text">Coding Conventions</span></a>
   </li>  
 </ul>
@@ -1847,8 +1847,16 @@ globalThis.qwebrExecuteCode = async function (
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link active" data-scroll-target="#syntax">Syntax</a></li>
+  <li><a href="#required-arguments" id="toc-required-arguments" class="nav-link active" data-scroll-target="#required-arguments">Required arguments</a>
+  <ul class="collapse">
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
+  </ul></li>
+  <li><a href="#required-and-optional-arguments" id="toc-required-and-optional-arguments" class="nav-link" data-scroll-target="#required-and-optional-arguments">Required and optional arguments:</a>
+  <ul class="collapse">
+  <li><a href="#syntax-1" id="toc-syntax-1" class="nav-link" data-scroll-target="#syntax-1">Syntax</a></li>
+  <li><a href="#description-1" id="toc-description-1" class="nav-link" data-scroll-target="#description-1">Description</a></li>
+  </ul></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
   <ul class="collapse">
   <li><a href="#read-a-csv-file-from-your-computer" id="toc-read-a-csv-file-from-your-computer" class="nav-link" data-scroll-target="#read-a-csv-file-from-your-computer">Read a CSV file from your computer</a></li>
@@ -2166,34 +2174,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<section id="syntax" class="level2">
-<h2 class="anchored" data-anchor-id="syntax">Syntax</h2>
-<p>Required arguments:</p>
+<section id="required-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="required-arguments">Required arguments</h2>
+<section id="syntax" class="level3">
+<h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Advanced use - Required and optional arguments:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(file, <span class="at">col_types =</span> <span class="cn">NULL</span>, <span class="at">col_select =</span> <span class="cn">NULL</span>, <span class="at">skip =</span> <span class="dv">0</span>, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_max =</span> <span class="cn">Inf</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>), <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">show_col_types =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(), ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-<section id="description" class="level2">
-<h2 class="anchored" data-anchor-id="description">Description</h2>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description">Description</h3>
 <div class="desc-item">
 <p><code>read_csv("file_name.csv")</code> reads a comma-separated values (.csv) file and returns a <a href="../functions/tibble.html">tibble</a>. Use if your file uses commas as column separators and dots for decimals.</p>
 </div>
-<hr>
 <div class="desc-item">
 <p><code>read_csv2("file_name.csv")</code> reads a .csv file that uses semicolons as column separators and commas for decimals.</p>
-</div>
-<hr>
-<div class="desc-item">
-<p><code>read_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c("", "NA"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...)</code> reads a .csv file into a <a href="../functions/tibble.html">tibble</a> with smart defaults for speed and usability. Find explanations of all the arguments below.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2208,6 +2206,24 @@ Why 2 different functions?
 <p>English standard vs.&nbsp;danish standard. To find out how your <code>.csv</code>file is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: <code>read_lines("file.csv", n_max = 3)</code></p>
 </div>
 </div>
+</section>
+</section>
+<section id="required-and-optional-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="required-and-optional-arguments">Required and optional arguments:</h2>
+<section id="syntax-1" class="level3">
+<h3 class="anchored" data-anchor-id="syntax-1">Syntax</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(file, <span class="at">col_types =</span> <span class="cn">NULL</span>, <span class="at">col_select =</span> <span class="cn">NULL</span>, <span class="at">skip =</span> <span class="dv">0</span>, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_max =</span> <span class="cn">Inf</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>), <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">show_col_types =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(), ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="description-1" class="level3">
+<h3 class="anchored" data-anchor-id="description-1">Description</h3>
+<div class="desc-item">
+<p><code>read_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c("", "NA"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...)</code> reads a .csv file into a <a href="../functions/tibble.html">tibble</a> with smart defaults for speed and usability. Find explanations of all the arguments below.</p>
+</div>
+</section>
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>

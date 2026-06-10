@@ -343,7 +343,7 @@
     "href": "functions/read-csv.html",
     "title": "read_csv( )",
     "section": "",
-    "text": "Required arguments:\n\nread_csv(file)\n\n\nread_csv2(file)\n\nAdvanced use - Required and optional arguments:\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)",
+    "text": "read_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
     "crumbs": [
       "Import & Create",
       "read_csv( )"
@@ -615,5 +615,71 @@
     "title": "R Coding Conventions",
     "section": "8. Quick reference summary",
     "text": "8. Quick reference summary\n\n\n\n\n\n\n\n\nTopic\nConvention\nLevel\n\n\n\n\nVariable names\nsnake_case, include units (_mg, _pct, _mL)\nRequired\n\n\nAssignment\nAlways &lt;- with spaces; = only inside function arguments\nRequired\n\n\nPrinting values\ncat(\"label:\", signif(x, 3), \"unit\\n\")\nRequired\n\n\nPrinting tables\nview(data) to inspect; head(data, 5) to preview in output\nRequired\n\n\nRounding\nsignif(x, n) or round(x, n) only at print-time; full precision in calculations\nRequired\n\n\nPipes\n%&gt;% with each step on its own indented line\nRequired\n\n\nggplot theme\nAlways theme_classic()\nRequired\n\n\nAxis labels\nlabs(x = \"Name (unit)\", y = \"Name (unit)\")\nRequired\n\n\nPlot layers\nOne geom_*() or modifier per line, + at end of line\nRequired\n\n\nDefault color\n\"steelblue\" for single series; aes(color = group) for multi-series\nRecommended\n\n\nConstants\nDefine at top of chunk with inline unit comment\nRecommended\n\n\nComments\nExplain why and state units, not just what the code does\nRequired"
+  },
+  {
+    "objectID": "functions/read-csv.html#basic-use",
+    "href": "functions/read-csv.html#basic-use",
+    "title": "read_csv( )",
+    "section": "",
+    "text": "Syntax: Required arguments:\n\nread_csv(file)\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(file)\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
+  },
+  {
+    "objectID": "functions/read-csv.html#advanced-use",
+    "href": "functions/read-csv.html#advanced-use",
+    "title": "read_csv( )",
+    "section": "Advanced Use",
+    "text": "Advanced Use\nSyntax: Required and optional arguments:\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)\n\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
+  },
+  {
+    "objectID": "functions/read-csv.html#basic-use---required-arguments",
+    "href": "functions/read-csv.html#basic-use---required-arguments",
+    "title": "read_csv( )",
+    "section": "",
+    "text": "read_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
+  },
+  {
+    "objectID": "functions/read-csv.html#advanced-use---required-and-optional-arguments",
+    "href": "functions/read-csv.html#advanced-use---required-and-optional-arguments",
+    "title": "read_csv( )",
+    "section": "Advanced Use - Required and optional arguments:",
+    "text": "Advanced Use - Required and optional arguments:\n\nSyntax\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)\n\n\n\nDescription\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
+  },
+  {
+    "objectID": "functions/read-csv.html#required-arguments",
+    "href": "functions/read-csv.html#required-arguments",
+    "title": "read_csv( )",
+    "section": "",
+    "text": "read_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
+  },
+  {
+    "objectID": "functions/read-csv.html#required-and-optional-arguments",
+    "href": "functions/read-csv.html#required-and-optional-arguments",
+    "title": "read_csv( )",
+    "section": "Required and optional arguments:",
+    "text": "Required and optional arguments:\n\nSyntax\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)\n\n\n\nDescription\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
   }
 ]

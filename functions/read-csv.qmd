@@ -3,43 +3,48 @@ title: "read_csv( )"
 subtitle: "Import a CSV file as a [tibble](tibble.qmd). See [original documentation](https://readr.tidyverse.org/reference/read_delim.html) for reference."
 ---
 
-## Syntax
-Required arguments:
+## Required arguments
+
+### Syntax
+
 ```{r, eval=FALSE}
 read_csv(file)
 ```
+
 ```{r, eval=FALSE}
 read_csv2(file)
 ```
-Advanced use - Required and optional arguments:
-```{r, eval=FALSE}
-read_csv(file, col_types = NULL, col_select = NULL, skip = 0, 
-         n_max = Inf, na = c("", "NA"), trim_ws = TRUE, 
-         show_col_types = TRUE, locale = locale(), ...)
-```
 
-## Description
+### Description
 
 ::: {.desc-item}
 `read_csv("file_name.csv")` reads a comma-separated values (.csv) file and returns a [tibble](tibble.qmd). Use if your file uses commas as column separators and dots for decimals.
 :::
-
----
-
 ::: {.desc-item}
 `read_csv2("file_name.csv")` reads a .csv file that uses semicolons as column separators and commas for decimals.
-:::
-
----
-
-::: {.desc-item}
-`read_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c("", "NA"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...)` reads a .csv file into a [tibble](tibble.qmd) with smart defaults for speed and usability. Find explanations of all the arguments below.
 :::
 
 ::: {.callout-tip}
 ## Why 2 different functions?
 English standard vs. danish standard. To find out how your `.csv`file is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: `read_lines("file.csv", n_max = 3)`
 :::
+
+## Required and optional arguments:
+
+### Syntax
+
+```{r, eval=FALSE}
+read_csv(file, col_types = NULL, col_select = NULL, skip = 0, 
+         n_max = Inf, na = c("", "NA"), trim_ws = TRUE, 
+         show_col_types = TRUE, locale = locale(), ...)
+```
+
+### Description
+
+::: {.desc-item}
+`read_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c("", "NA"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...)` reads a .csv file into a [tibble](tibble.qmd) with smart defaults for speed and usability. Find explanations of all the arguments below.
+:::
+
 
 ## Examples
 
@@ -48,10 +53,10 @@ English standard vs. danish standard. To find out how your `.csv`file is formatt
 In practice you pass a file path:
 
 ```{webr-r}
-library(tidyverse)
+library(readr)
 
 data <- read_csv(
-  "https://github.com/CPDSE-EDUX/SDU-CodeClub/raw/main/debugging/dissolution_data.csv"
+  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv"
 )
 
 # Quick preview
@@ -73,8 +78,7 @@ read_lines("file.csv", n_max = 3)
 Clinical data exports often encode missing values as `"N/A"`, `"-"`, or a blank space. Use the optional argument `na` to unify how missing data is handled.In this example, `N/A`, `-`, and empty cells are rewritten as `NA`.
 
 ```{webr-r}
-library(tidyverse)
-
+library(readr)
 
 df_na <- read_csv(
   "data.csv",
