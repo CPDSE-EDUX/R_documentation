@@ -87,6 +87,7 @@ filters:
 
 webr:
   packages:
+    - curl
     - dplyr
     - ggplot2
     - readr
