@@ -3,34 +3,41 @@ title: "tibble( )"
 subtitle: "Create a tidy data frame from column vectors. See [original documentation](https://tibble.tidyverse.org/reference/tibble.html) for reference."
 ---
 
-## Syntax
-Required arguments:
+<a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">tibble documentation ↗</a>
+
+## Required arguments
+
+### Syntax
+
 ```{r, eval=FALSE}
 tibble(col1 = values, col2 = values, ...)
 ```
+
 ```{r, eval=FALSE}
 as_tibble(x)
 ```
-Advanced use — Required and optional arguments:
-```{r, eval=FALSE}
-tibble(..., .rows = NULL, .name_repair = "check_unique")
-```
 
-## Description
+| Parameter | Type | Description |
+|---|---|---|
+| `...` | [name = vector]{.pill} | Named column vectors — one argument per column. |
+| `x` | [data.frame]{.pill} | Existing object to convert (`as_tibble()` only). |
+
+::: {.returns-box}
+[Returns]{.returns-label}
+A tibble — the tidyverse data frame, with safer defaults and cleaner printing than base `data.frame()`.
+:::
+
+### Description
 
 ::: {.desc-item}
 `tibble(col1 = values, col2 = values, ...)` creates a data frame from named column vectors.
 A tibble is the tidyverse version of a `data.frame` — it has the same structure but with safer defaults and cleaner printing.
 :::
 
----
-
 ::: {.desc-item}
 `tibble(col1 = values, col2 = col1 * factor)` allows later columns to reference columns defined earlier in the same call.
 This is not possible with base R `data.frame()`.
 :::
-
----
 
 ::: {.desc-item}
 `as_tibble(x)` converts an existing base R `data.frame` (or matrix) into a tibble.
@@ -43,7 +50,9 @@ Tibbles never convert character columns to factors automatically, never recycle 
 
 ## Examples
 
-### Calibration standards table
+<details class="example-item">
+<summary>Calibration standards table</summary>
+<div class="example-body">
 
 ```{webr-r}
 library(tibble)
@@ -56,9 +65,12 @@ standards <- tibble(
 
 standards
 ```
+</div>
+</details>
 
-### Weighing data for content uniformity
-
+<details class="example-item">
+<summary>Weighing data for content uniformity</summary>
+<div class="example-body">
 Later columns can reference earlier ones in the same `tibble()` call.
 
 ```{webr-r}
@@ -76,8 +88,12 @@ capsules <- tibble(
 
 capsules
 ```
+</div>
+</details>
 
-### Converting a base R `data.frame` to a tibble
+<details class="example-item">
+<summary>Converting a base R <code>data.frame</code> to a tibble</summary>
+<div class="example-body">
 
 ```{webr-r}
 library(tibble)
@@ -93,8 +109,12 @@ df_base <- data.frame(
 patients <- as_tibble(df_base)
 patients
 ```
+</div>
+</details>
 
-### Tibble printing vs. data.frame printing
+<details class="example-item">
+<summary>Tibble printing vs. data.frame printing</summary>
+<div class="example-body">
 
 ```{webr-r}
 library(tibble)
@@ -107,6 +127,22 @@ large_tibble <- tibble(
 
 large_tibble   # prints first 10 rows and tells you 10 more exist
 ```
+</div>
+</details>
+
+## Required and optional arguments
+
+### Syntax
+
+```{r, eval=FALSE}
+tibble(..., .rows = NULL, .name_repair = "check_unique")
+```
+
+### Description
+
+::: {.desc-item}
+`tibble(..., .rows = NULL, .name_repair = "check_unique")` exposes the optional arguments: `.rows` fixes the number of rows (useful for an empty tibble), and `.name_repair` controls how duplicate or invalid column names are handled.
+:::
 
 ## Input Arguments
 

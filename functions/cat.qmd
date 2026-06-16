@@ -3,35 +3,41 @@ title: "cat( )"
 subtitle: "Print labelled results with units to the console. See [original documentation](https://rdrr.io/r/base/cat.html) for reference."
 ---
 
-## Syntax
-Required arguments:
+<a class="source-link" href="https://rdrr.io/r/base/cat.html" target="_blank" rel="noopener">base R documentation ↗</a>
+
+## Required arguments
+
+### Syntax
+
 ```{r, eval=FALSE}
 cat(...)
 ```
+
 ```{r, eval=FALSE}
 cat("Label:", value, "unit\n")
 cat("Label:", signif(value, digits), "unit\n")
 ```
-Advanced use — Required and optional arguments:
-```{r, eval=FALSE}
-cat(..., sep = " ", file = "", append = FALSE)
-```
 
-## Description
+| Parameter | Type | Description |
+|---|---|---|
+| `...` | [character]{.pill} [numeric]{.pill} | The items to print — labels, computed values, and unit strings. |
+
+::: {.returns-box}
+[Returns]{.returns-label}
+Nothing usable — `cat()` writes to the console and invisibly returns `NULL`. It is called for its printing side effect.
+:::
+
+### Description
 
 ::: {.desc-item}
 `cat(...)` concatenates and prints its arguments to the console with no formatting.
 Unlike `print()`, it does not add quotes around character strings or display `[1]` index prefixes, making it ideal for producing clean, readable output.
 :::
 
----
-
 ::: {.desc-item}
 `cat("Label:", value, "unit\n")` is the standard pattern for reporting a named result with its unit.
 The `\n` at the end moves the cursor to a new line.
 :::
-
----
 
 ::: {.desc-item}
 `cat("Label:", signif(value, digits), "unit\n")` rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
@@ -46,7 +52,9 @@ A number without context is meaningless in a pharmaceutical report.
 
 ## Examples
 
-### Print a single analytical result with units
+<details class="example-item">
+<summary>Print a single analytical result with units</summary>
+<div class="example-body">
 
 ```{webr-r}
 # Full-precision intermediate — do NOT round here
@@ -59,8 +67,12 @@ C2_ug_ml <- (absorbance - std_intercept) / std_slope   # Beer–Lambert
 # Only round at the point of printing
 cat("Sample concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
 ```
+</div>
+</details>
 
-### Print multiple results from a content uniformity assay
+<details class="example-item">
+<summary>Print multiple results from a content uniformity assay</summary>
+<div class="example-body">
 
 ```{webr-r}
 library(dplyr)
@@ -84,8 +96,12 @@ cat("Mean content (X̄):", signif(X_bar_pct, 4), "% of label claim\n")
 cat("Std deviation (s):", signif(s_pct, 3),     "%\n")
 cat("n:", nrow(capsules), "capsules\n")
 ```
+</div>
+</details>
 
-### Print a pass/fail acceptance criterion
+<details class="example-item">
+<summary>Print a pass/fail acceptance criterion</summary>
+<div class="example-body">
 
 ```{webr-r}
 # EP 2.9.40 Stage 1: AV = |M - X̄| + k·s
@@ -102,8 +118,12 @@ cat("Acceptance value (AV):", round(AV_s1, 2), "\n")
 cat("Acceptance limit (L1):", L1, "\n")
 cat("Stage 1 result:", ifelse(AV_s1 <= L1, "PASS", "FAIL"), "\n")
 ```
+</div>
+</details>
 
-### `sep` — custom separator between items
+<details class="example-item">
+<summary><code>sep</code> — custom separator between items</summary>
+<div class="example-body">
 
 ```{webr-r}
 conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)
@@ -115,6 +135,22 @@ cat("Standards (µg/mL):", conc_values_ug_ml, "\n")
 cat("Standards (µg/mL):", conc_values_ug_ml, sep = ", ")
 cat("\n")
 ```
+</div>
+</details>
+
+## Required and optional arguments
+
+### Syntax
+
+```{r, eval=FALSE}
+cat(..., sep = " ", file = "", append = FALSE)
+```
+
+### Description
+
+::: {.desc-item}
+`cat(..., sep = " ", file = "", append = FALSE)` exposes the optional arguments that control how and where output is written: `sep` sets the separator between items, while `file` and `append` redirect output to a file instead of the console.
+:::
 
 ## Input Arguments
 

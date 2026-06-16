@@ -95,29 +95,18 @@
     "href": "functions/tibble.html",
     "title": "tibble( )",
     "section": "",
-    "text": "Required arguments:\n\ntibble(col1 = values, col2 = values, ...)\n\n\nas_tibble(x)\n\nAdvanced use — Required and optional arguments:\n\ntibble(..., .rows = NULL, .name_repair = \"check_unique\")",
+    "text": "tibble documentation ↗",
     "crumbs": [
       "Import & Create",
       "tibble( )"
     ]
   },
   {
-    "objectID": "functions/tibble.html#syntax",
-    "href": "functions/tibble.html#syntax",
+    "objectID": "functions/tibble.html#required-arguments",
+    "href": "functions/tibble.html#required-arguments",
     "title": "tibble( )",
-    "section": "",
-    "text": "Required arguments:\n\ntibble(col1 = values, col2 = values, ...)\n\n\nas_tibble(x)\n\nAdvanced use — Required and optional arguments:\n\ntibble(..., .rows = NULL, .name_repair = \"check_unique\")",
-    "crumbs": [
-      "Import & Create",
-      "tibble( )"
-    ]
-  },
-  {
-    "objectID": "functions/tibble.html#description",
-    "href": "functions/tibble.html#description",
-    "title": "tibble( )",
-    "section": "Description",
-    "text": "Description\n\ntibble(col1 = values, col2 = values, ...) creates a data frame from named column vectors. A tibble is the tidyverse version of a data.frame — it has the same structure but with safer defaults and cleaner printing.\n\n\n\ntibble(col1 = values, col2 = col1 * factor) allows later columns to reference columns defined earlier in the same call. This is not possible with base R data.frame().\n\n\n\nas_tibble(x) converts an existing base R data.frame (or matrix) into a tibble.\n\n\n\n\n\n\n\nWhy tibble instead of data.frame()?\n\n\n\nTibbles never convert character columns to factors automatically, never recycle vectors of incompatible lengths silently, and print only the first 10 rows — they are designed to fail loudly and clearly, which makes bugs easier to find.",
+    "section": "Required arguments",
+    "text": "Required arguments\n\nSyntax\n\ntibble(col1 = values, col2 = values, ...)\n\n\nas_tibble(x)\n\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\n...\nname = vector\nNamed column vectors — one argument per column.\n\n\nx\ndata.frame\nExisting object to convert (as_tibble() only).\n\n\n\n\nReturns A tibble — the tidyverse data frame, with safer defaults and cleaner printing than base data.frame().\n\n\n\nDescription\n\ntibble(col1 = values, col2 = values, ...) creates a data frame from named column vectors. A tibble is the tidyverse version of a data.frame — it has the same structure but with safer defaults and cleaner printing.\n\n\ntibble(col1 = values, col2 = col1 * factor) allows later columns to reference columns defined earlier in the same call. This is not possible with base R data.frame().\n\n\nas_tibble(x) converts an existing base R data.frame (or matrix) into a tibble.\n\n\n\n\n\n\n\nWhy tibble instead of data.frame()?\n\n\n\nTibbles never convert character columns to factors automatically, never recycle vectors of incompatible lengths silently, and print only the first 10 rows — they are designed to fail loudly and clearly, which makes bugs easier to find.",
     "crumbs": [
       "Import & Create",
       "tibble( )"
@@ -128,7 +117,18 @@
     "href": "functions/tibble.html#examples",
     "title": "tibble( )",
     "section": "Examples",
-    "text": "Examples\n\nCalibration standards table\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nWeighing data for content uniformity\nLater columns can reference earlier ones in the same tibble() call.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nConverting a base R data.frame to a tibble\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nTibble printing vs. data.frame printing\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "Examples\n\n\nCalibration standards table\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nWeighing data for content uniformity\n\n\nLater columns can reference earlier ones in the same tibble() call.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nConverting a base R data.frame to a tibble\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nTibble printing vs. data.frame printing\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Import & Create",
+      "tibble( )"
+    ]
+  },
+  {
+    "objectID": "functions/tibble.html#required-and-optional-arguments",
+    "href": "functions/tibble.html#required-and-optional-arguments",
+    "title": "tibble( )",
+    "section": "Required and optional arguments",
+    "text": "Required and optional arguments\n\nSyntax\n\ntibble(..., .rows = NULL, .name_repair = \"check_unique\")\n\n\n\nDescription\n\ntibble(..., .rows = NULL, .name_repair = \"check_unique\") exposes the optional arguments: .rows fixes the number of rows (useful for an empty tibble), and .name_repair controls how duplicate or invalid column names are handled.",
     "crumbs": [
       "Import & Create",
       "tibble( )"
@@ -150,29 +150,18 @@
     "href": "functions/round.html",
     "title": "round( )",
     "section": "",
-    "text": "Required arguments:\n\nround(x)\n\nAdvanced use — Required and optional arguments:\n\nround(x, digits = 0)",
+    "text": "base R documentation ↗",
     "crumbs": [
       "Report",
       "round( )"
     ]
   },
   {
-    "objectID": "functions/round.html#syntax",
-    "href": "functions/round.html#syntax",
+    "objectID": "functions/round.html#required-arguments",
+    "href": "functions/round.html#required-arguments",
     "title": "round( )",
-    "section": "",
-    "text": "Required arguments:\n\nround(x)\n\nAdvanced use — Required and optional arguments:\n\nround(x, digits = 0)",
-    "crumbs": [
-      "Report",
-      "round( )"
-    ]
-  },
-  {
-    "objectID": "functions/round.html#description",
-    "href": "functions/round.html#description",
-    "title": "round( )",
-    "section": "Description",
-    "text": "Description\n\nround(x, digits) rounds a number (or numeric vector) to digits decimal places. Positive values of digits round to the right of the decimal point; negative values round to the left (e.g. digits = -1 rounds to the nearest 10).\n\n\n\n\n\n\n\nCoding convention — only round at the point of printing\n\n\n\nStore all intermediate values at full precision. Call round() only inside cat() when reporting a final result. Never call round() inside mutate() on a column that will be used in subsequent calculations.\n# ✓ Correct\npct_label &lt;- ibu_mg / label_claim_mg * 100     # full precision stored\ncat(\"Label claim:\", round(pct_label, 2), \"%\\n\") # round only when printing\n\n# ✗ Avoid\nmutate(pct_label = round(ibu_mg / label_claim_mg * 100, 2))  # rounding contaminates downstream calcs",
+    "section": "Required arguments",
+    "text": "Required arguments\n\nSyntax\n\nround(x)\n\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\nx\nnumeric\nThe number (or numeric vector) you want to round.\n\n\n\n\nReturns A numeric vector the same length as x, rounded to the specified number of decimal places.\n\n\n\nDescription\n\nround(x, digits) rounds a number (or numeric vector) to digits decimal places. Positive values of digits round to the right of the decimal point; negative values round to the left (e.g. digits = -1 rounds to the nearest 10).\n\n\n\n\n\n\n\nCoding convention — only round at the point of printing\n\n\n\nStore all intermediate values at full precision. Call round() only inside cat() when reporting a final result. Never call round() inside mutate() on a column that will be used in subsequent calculations.\n# ✓ Correct\npct_label &lt;- ibu_mg / label_claim_mg * 100     # full precision stored\ncat(\"Label claim:\", round(pct_label, 2), \"%\\n\") # round only when printing\n\n# ✗ Avoid\nmutate(pct_label = round(ibu_mg / label_claim_mg * 100, 2))  # rounding contaminates downstream calcs",
     "crumbs": [
       "Report",
       "round( )"
@@ -183,7 +172,18 @@
     "href": "functions/round.html#examples",
     "title": "round( )",
     "section": "Examples",
-    "text": "Examples\n\nReporting percentage label claim to two decimal places\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nReporting the acceptance value (AV) for EP 2.9.40\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nPositive vs. negative digits\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nApplying to a vector of results\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nround() vs signif() — which to use?\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nRule of thumb\n\n\n\nUse round() when a fixed number of decimal places is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p. Use signif() for analytical concentrations and masses where significant figures reflect instrument precision.",
+    "text": "Examples\n\n\nReporting percentage label claim to two decimal places\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nReporting the acceptance value (AV) for EP 2.9.40\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPositive vs. negative digits\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nApplying to a vector of results\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nround() vs signif() — which to use?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Report",
+      "round( )"
+    ]
+  },
+  {
+    "objectID": "functions/round.html#required-and-optional-arguments",
+    "href": "functions/round.html#required-and-optional-arguments",
+    "title": "round( )",
+    "section": "Required and optional arguments",
+    "text": "Required and optional arguments\n\nSyntax\n\nround(x, digits = 0)\n\n\n\nDescription\n\nround(x, digits = 0) adds the optional digits argument that controls how many decimal places to keep. The default 0 rounds to the nearest integer; negative values round to the left of the decimal point.\n\n\n\n\n\n\n\nRule of thumb\n\n\n\nUse round() when a fixed number of decimal places is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p. Use signif() for analytical concentrations and masses where significant figures reflect instrument precision.",
     "crumbs": [
       "Report",
       "round( )"
@@ -205,29 +205,18 @@
     "href": "functions/mutate.html",
     "title": "mutate( )",
     "section": "",
-    "text": "Required arguments:\n\ndf %&gt;% mutate(new_col = expression)\n\n\ndf %&gt;% mutate(new_col = expression, another_col = expression)\n\nAdvanced use — Required and optional arguments:\n\ndf %&gt;% mutate(..., .keep = \"all\", .before = NULL, .after = NULL)",
+    "text": "dplyr documentation ↗",
     "crumbs": [
       "Transform",
       "mutate( )"
     ]
   },
   {
-    "objectID": "functions/mutate.html#syntax",
-    "href": "functions/mutate.html#syntax",
+    "objectID": "functions/mutate.html#required-arguments",
+    "href": "functions/mutate.html#required-arguments",
     "title": "mutate( )",
-    "section": "",
-    "text": "Required arguments:\n\ndf %&gt;% mutate(new_col = expression)\n\n\ndf %&gt;% mutate(new_col = expression, another_col = expression)\n\nAdvanced use — Required and optional arguments:\n\ndf %&gt;% mutate(..., .keep = \"all\", .before = NULL, .after = NULL)",
-    "crumbs": [
-      "Transform",
-      "mutate( )"
-    ]
-  },
-  {
-    "objectID": "functions/mutate.html#description",
-    "href": "functions/mutate.html#description",
-    "title": "mutate( )",
-    "section": "Description",
-    "text": "Description\n\ndf %&gt;% mutate(new_col = expression) adds a new column to a data frame. The expression on the right can reference any existing column by name.\n\n\n\ndf %&gt;% mutate(col1 = ..., col2 = ...) adds multiple columns in a single call. Later expressions can reference columns created earlier in the same mutate().\n\n\n\ndf %&gt;% mutate(..., .keep = \"all\") controls which columns are kept in the result. The default \"all\" retains every column, including unmodified ones.\n\n\n\n\n\n\n\nCoding convention — never round inside mutate()\n\n\n\nStore full-precision values in all columns. Apply signif() or round() only inside cat() when printing a final result. Rounding a column that feeds into later calculations accumulates error.",
+    "section": "Required arguments",
+    "text": "Required arguments\n\nSyntax\n\ndf %&gt;% mutate(new_col = expression)\n\n\ndf %&gt;% mutate(new_col = expression, another_col = expression)\n\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\n.data\ntibble\nThe data frame to modify (supplied automatically by the pipe).\n\n\n...\nname = expr\nOne or more new_col = expression pairs defining columns.\n\n\n\n\nReturns A tibble (or data frame) with the new or modified columns added.\n\n\n\nDescription\n\ndf %&gt;% mutate(new_col = expression) adds a new column to a data frame. The expression on the right can reference any existing column by name.\n\n\ndf %&gt;% mutate(col1 = ..., col2 = ...) adds multiple columns in a single call. Later expressions can reference columns created earlier in the same mutate().\n\n\n\n\n\n\n\nCoding convention — never round inside mutate()\n\n\n\nStore full-precision values in all columns. Apply signif() or round() only inside cat() when printing a final result. Rounding a column that feeds into later calculations accumulates error.",
     "crumbs": [
       "Transform",
       "mutate( )"
@@ -238,7 +227,18 @@
     "href": "functions/mutate.html#examples",
     "title": "mutate( )",
     "section": "Examples",
-    "text": "Examples\n\nCapsule content uniformity — computing fill mass and % label claim\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nFlagging out-of-specification results\nUse mutate() with ifelse() to add a pass/fail column based on a criterion.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nConcentration units conversion\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "Examples\n\n\nCapsule content uniformity — computing fill mass and % label claim\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nFlagging out-of-specification results\n\n\nUse mutate() with ifelse() to add a pass/fail column based on a criterion.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nConcentration units conversion\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Transform",
+      "mutate( )"
+    ]
+  },
+  {
+    "objectID": "functions/mutate.html#required-and-optional-arguments",
+    "href": "functions/mutate.html#required-and-optional-arguments",
+    "title": "mutate( )",
+    "section": "Required and optional arguments",
+    "text": "Required and optional arguments\n\nSyntax\n\ndf %&gt;% mutate(..., .keep = \"all\", .before = NULL, .after = NULL)\n\n\n\nDescription\n\ndf %&gt;% mutate(..., .keep = \"all\") controls which columns are kept in the result. The default \"all\" retains every column, including unmodified ones. The optional .before / .after arguments control where new columns are inserted.",
     "crumbs": [
       "Transform",
       "mutate( )"
@@ -260,29 +260,18 @@
     "href": "functions/cat.html",
     "title": "cat( )",
     "section": "",
-    "text": "Required arguments:\n\ncat(...)\n\n\ncat(\"Label:\", value, \"unit\\n\")\ncat(\"Label:\", signif(value, digits), \"unit\\n\")\n\nAdvanced use — Required and optional arguments:\n\ncat(..., sep = \" \", file = \"\", append = FALSE)",
+    "text": "base R documentation ↗",
     "crumbs": [
       "Report",
       "cat( )"
     ]
   },
   {
-    "objectID": "functions/cat.html#syntax",
-    "href": "functions/cat.html#syntax",
+    "objectID": "functions/cat.html#required-arguments",
+    "href": "functions/cat.html#required-arguments",
     "title": "cat( )",
-    "section": "",
-    "text": "Required arguments:\n\ncat(...)\n\n\ncat(\"Label:\", value, \"unit\\n\")\ncat(\"Label:\", signif(value, digits), \"unit\\n\")\n\nAdvanced use — Required and optional arguments:\n\ncat(..., sep = \" \", file = \"\", append = FALSE)",
-    "crumbs": [
-      "Report",
-      "cat( )"
-    ]
-  },
-  {
-    "objectID": "functions/cat.html#description",
-    "href": "functions/cat.html#description",
-    "title": "cat( )",
-    "section": "Description",
-    "text": "Description\n\ncat(...) concatenates and prints its arguments to the console with no formatting. Unlike print(), it does not add quotes around character strings or display [1] index prefixes, making it ideal for producing clean, readable output.\n\n\n\ncat(\"Label:\", value, \"unit\\n\") is the standard pattern for reporting a named result with its unit. The \\n at the end moves the cursor to a new line.\n\n\n\ncat(\"Label:\", signif(value, digits), \"unit\\n\") rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.\n\n\n\n\n\n\n\nCoding convention — always label printed results\n\n\n\nNever print a bare variable name or call print() on a calculated value. Always use cat() with a descriptive label and the unit. A number without context is meaningless in a pharmaceutical report.",
+    "section": "Required arguments",
+    "text": "Required arguments\n\nSyntax\n\ncat(...)\n\n\ncat(\"Label:\", value, \"unit\\n\")\ncat(\"Label:\", signif(value, digits), \"unit\\n\")\n\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\n...\ncharacter numeric\nThe items to print — labels, computed values, and unit strings.\n\n\n\n\nReturns Nothing usable — cat() writes to the console and invisibly returns NULL. It is called for its printing side effect.\n\n\n\nDescription\n\ncat(...) concatenates and prints its arguments to the console with no formatting. Unlike print(), it does not add quotes around character strings or display [1] index prefixes, making it ideal for producing clean, readable output.\n\n\ncat(\"Label:\", value, \"unit\\n\") is the standard pattern for reporting a named result with its unit. The \\n at the end moves the cursor to a new line.\n\n\ncat(\"Label:\", signif(value, digits), \"unit\\n\") rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.\n\n\n\n\n\n\n\nCoding convention — always label printed results\n\n\n\nNever print a bare variable name or call print() on a calculated value. Always use cat() with a descriptive label and the unit. A number without context is meaningless in a pharmaceutical report.",
     "crumbs": [
       "Report",
       "cat( )"
@@ -293,7 +282,18 @@
     "href": "functions/cat.html#examples",
     "title": "cat( )",
     "section": "Examples",
-    "text": "Examples\n\nPrint a single analytical result with units\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nPrint multiple results from a content uniformity assay\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nPrint a pass/fail acceptance criterion\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nsep — custom separator between items\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "Examples\n\n\nPrint a single analytical result with units\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPrint multiple results from a content uniformity assay\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPrint a pass/fail acceptance criterion\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nsep — custom separator between items\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Report",
+      "cat( )"
+    ]
+  },
+  {
+    "objectID": "functions/cat.html#required-and-optional-arguments",
+    "href": "functions/cat.html#required-and-optional-arguments",
+    "title": "cat( )",
+    "section": "Required and optional arguments",
+    "text": "Required and optional arguments\n\nSyntax\n\ncat(..., sep = \" \", file = \"\", append = FALSE)\n\n\n\nDescription\n\ncat(..., sep = \" \", file = \"\", append = FALSE) exposes the optional arguments that control how and where output is written: sep sets the separator between items, while file and append redirect output to a file instead of the console.",
     "crumbs": [
       "Report",
       "cat( )"
@@ -309,6 +309,69 @@
       "Report",
       "cat( )"
     ]
+  },
+  {
+    "objectID": "coding-conventions.html",
+    "href": "coding-conventions.html",
+    "title": "R Coding Conventions",
+    "section": "",
+    "text": "You can use AI to modify existing R code according to these code conventions. Therefore, we prepared a prompt you can use. All you have to add is your R code.\nOpen prompt in Claude.ai\nor\nCopy a prompt to paste into any chatbot\nFollowing these conventions makes your code readable, reproducible, and consistent across exercises."
+  },
+  {
+    "objectID": "coding-conventions.html#variable-and-object-naming",
+    "href": "coding-conventions.html#variable-and-object-naming",
+    "title": "R Coding Conventions",
+    "section": "1. Variable and object naming",
+    "text": "1. Variable and object naming\n\nUse snake_case for all variable names\nWords should be separated by underscores. Do not use dots or camelCase.\n\n\n\n\n\n\nImportant\n\n\n\nThis is required and used throughout all course materials.\n\n\n\n# Do this\nfill_mass_mg      &lt;- 174.2\nibu_per_mg_powder &lt;- 0.43\nlabel_claim_mg    &lt;- 75.0\nX_bar_s1          &lt;- mean(stage1$pct_label)\n\n# Avoid this\nfillMassMg &lt;- 174.2     # camelCase\nibu.per.mg &lt;- 0.43      # dots\nlc         &lt;- 75.0      # unclear\nx1         &lt;- mean(stage1$pct_label)\n\n\n\nInclude units in variable names where relevant\nAppend units such as _mg, _pct, _ug_ml, _min to avoid ambiguity.\n\n# Do this\npowder_mass_mg      &lt;- 174.2\nconcentration_ug_ml &lt;- 7.56\npct_label           &lt;- 98.4\ntime_min            &lt;- 45\n\n# Avoid this\npowder &lt;- 174.2   # mg or g?\nconc   &lt;- 7.56    # ug/mL or mg/mL?\nlabel  &lt;- 98.4    # % or mg?\nt      &lt;- 45      # minutes or hours?"
+  },
+  {
+    "objectID": "coding-conventions.html#assignment-operator",
+    "href": "coding-conventions.html#assignment-operator",
+    "title": "R Coding Conventions",
+    "section": "2. Assignment operator",
+    "text": "2. Assignment operator\n\nAlways use &lt;- for assignment, never =\nUse = only for function arguments.\n\n\n\n\n\n\nImportant\n\n\n\nUsing &lt;- consistently avoids confusion between assignment and argument naming.\n\n\n\n# Do this\nlabel_claim_mg &lt;- 75.0\nstd_slope      &lt;- 0.04478\ndata           &lt;- readr::read_csv(\"file.csv\")\n\n# Avoid this\nlabel_claim_mg = 75.0\nstd_slope      = 0.04478\ndata           = readr::read_csv(\"file.csv\")\n\n\n\nPut spaces around &lt;- and operators\n\n# Do this\nC2           &lt;- (absorbance - std_intercept) / std_slope\nAV           &lt;- k * S\nfill_mass_mg &lt;- mass_filled_mg - mass_empty_mg\n\n# Avoid this\nC2&lt;-(absorbance-std_intercept)/std_slope\nAV&lt;-k*S\nfill_mass_mg&lt;-mass_filled_mg-mass_empty_mg"
+  },
+  {
+    "objectID": "coding-conventions.html#printing-results",
+    "href": "coding-conventions.html#printing-results",
+    "title": "R Coding Conventions",
+    "section": "3. Printing results",
+    "text": "3. Printing results\n\nUse cat() to print labelled results\nAlways include a descriptive label and a unit.\n\n# Do this\ncat(\"Ibuprofen content:\",\n        signif(ibu_per_mg_powder, 3),\n        \"mg Ibuprofen per mg powder\\n\")\n\ncat(\"Mean content (X-bar):\",\n        signif(X_bar, 4),\n        \"% of label claim\\n\")\n\n# Avoid this\nibu_per_mg_powder\nprint(ibu_per_mg_powder)\nX_bar\n\n\n\nUse view() to inspect data frames\nUse view(data) for interactive inspection and head(data, 5) for short previews.\n\n# Do this\nview(data)\nhead(data, 5)\n\n# Avoid this\nprint(data)\ndata"
+  },
+  {
+    "objectID": "coding-conventions.html#rounding-and-significant-figures",
+    "href": "coding-conventions.html#rounding-and-significant-figures",
+    "title": "R Coding Conventions",
+    "section": "4. Rounding and significant figures",
+    "text": "4. Rounding and significant figures\n\nUse signif() for final results, round() for fixed decimals\nKeep full precision in intermediate calculations and round only when printing.\n\n# Store full precision\nC2         &lt;- (absorbance - std_intercept) / std_slope\nibu_per_mg &lt;- C2 * 20 / 0.1 * 50 / 1000 / powder_mass_mg\n\n# Round only when printing\ncat(\"Ibuprofen per mg powder:\", signif(ibu_per_mg, 3), \"mg/mg\\n\")\ncat(\"Label claim %:\", round(pct_label, 2), \"%\\n\")\n\n\n\nNever round inside a mutate() column used later\n\n# Do this\ndata %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = mass_filled_mg - mass_empty_mg,\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder\n    )\n\n# Avoid this\ndata %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = round(mass_filled_mg - mass_empty_mg, 1),\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder\n    )"
+  },
+  {
+    "objectID": "coding-conventions.html#pipes-and-data-manipulation",
+    "href": "coding-conventions.html#pipes-and-data-manipulation",
+    "title": "R Coding Conventions",
+    "section": "5. Pipes and data manipulation",
+    "text": "5. Pipes and data manipulation\n\nUse %&gt;% with each step on its own line\nOne function per line, with clear indentation.\n\n# Do this\ndata &lt;- data %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = mass_filled_mg - mass_empty_mg,\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder,\n        pct_label    = ibu_mg / label_claim_mg * 100\n    )\n\n# Avoid this\ndata &lt;- dplyr::mutate(data, fill_mass_mg=mass_filled_mg-mass_empty_mg, ibu_mg=fill_mass_mg*ibu_per_mg_powder, pct_label=ibu_mg/label_claim_mg*100)\n\n\n\nGroup constants at the top of a chunk\n\n# Do this\nvol_flask1_mL  &lt;- 50.0\nvol_aliquot_mL &lt;- 0.1\nvol_flask2_mL  &lt;- 20.0\n\nC1 &lt;- C2 * vol_flask2_mL / vol_aliquot_mL\n\n# Avoid this\nC1 &lt;- C2 * 20 / 0.1"
+  },
+  {
+    "objectID": "coding-conventions.html#plotting-with-ggplot2",
+    "href": "coding-conventions.html#plotting-with-ggplot2",
+    "title": "R Coding Conventions",
+    "section": "6. Plotting with ggplot2",
+    "text": "6. Plotting with ggplot2\n\nUse theme_classic() as the base theme\n\nggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_pct)) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point() +\n    ggplot2::labs(\n        x = \"Time (min)\",\n        y = \"Dissolved (%)\",\n        title = \"Dissolution profile - Ibuprofen 75 mg capsules\"\n    ) +\n    ggplot2::theme_classic()\n\n\n\nAlways label axes with units in parentheses\n\n# Do this\nggplot2::labs(\n    x = \"Time (min)\",\n    y = \"Ibuprofen released (mg)\"\n)\n\n# Avoid this: no labs() call, defaults to raw variable names\n\n\n\nPut each + layer on its own line\n\n# Do this\nggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_mg)) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point() +\n    ggplot2::geom_errorbar(\n        ggplot2::aes(ymin = mean_mg - sd_mg, ymax = mean_mg + sd_mg)\n    ) +\n    ggplot2::theme_classic()\n\n# Avoid this\nggplot2::ggplot(data, ggplot2::aes(x=time_min,y=mean_mg))+ggplot2::geom_line()+ggplot2::geom_point()+ggplot2::theme_classic()\n\n\n\nUse \"steelblue\" as the default single-series color\nFor multi-group plots, map color in aes(color = group) and let ggplot choose.\n\n# Single series\nggplot2::geom_line(color = \"steelblue\")\nggplot2::geom_point(color = \"steelblue\")\n\n# Multiple groups\nggplot2::ggplot(\n    data,\n    ggplot2::aes(x = time_min, y = mean_pct, color = formulation)\n) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point()"
+  },
+  {
+    "objectID": "coding-conventions.html#code-comments",
+    "href": "coding-conventions.html#code-comments",
+    "title": "R Coding Conventions",
+    "section": "7. Code comments",
+    "text": "7. Code comments\n\nComment why, not what, and always comment units\n\n# Useful comments\nlabel_claim_mg &lt;- 75.0  # mg - labelled dose per capsule\nk_s1           &lt;- 2.4   # EP 2.9.40, Table 2.9.40-1, n = 10\nL1             &lt;- 15.0  # acceptance limit, Stage 1 (%)\n\n# Unhelpful comments\nlabel_claim_mg &lt;- 75.0  # set label claim to 75\nk_s1           &lt;- 2.4   # k value\nL1             &lt;- 15.0  # L1\n\n\n\nUse section separator comments in long scripts\n\n# --- Assay: Ibuprofen concentration from UV absorbance ---\nC2 &lt;- (absorbance - std_intercept) / std_slope\nC1 &lt;- C2 * vol_flask2_mL / vol_aliquot_mL\n\n# --- EP 2.9.40 Stage 1 acceptance value ---\nAV_s1 &lt;- k_s1 * S_s1"
+  },
+  {
+    "objectID": "coding-conventions.html#quick-reference-summary",
+    "href": "coding-conventions.html#quick-reference-summary",
+    "title": "R Coding Conventions",
+    "section": "8. Quick reference summary",
+    "text": "8. Quick reference summary\n\n\n\n\n\n\n\n\nTopic\nConvention\nLevel\n\n\n\n\nVariable names\nsnake_case, include units (_mg, _pct, _mL)\nRequired\n\n\nAssignment\nAlways &lt;- with spaces; = only inside function arguments\nRequired\n\n\nPrinting values\ncat(\"label:\", signif(x, 3), \"unit\\n\")\nRequired\n\n\nPrinting tables\nview(data) to inspect; head(data, 5) to preview in output\nRequired\n\n\nRounding\nsignif(x, n) or round(x, n) only at print-time; full precision in calculations\nRequired\n\n\nPipes\n%&gt;% with each step on its own indented line\nRequired\n\n\nggplot theme\nAlways theme_classic()\nRequired\n\n\nAxis labels\nlabs(x = \"Name (unit)\", y = \"Name (unit)\")\nRequired\n\n\nPlot layers\nOne geom_*() or modifier per line, + at end of line\nRequired\n\n\nDefault color\n\"steelblue\" for single series; aes(color = group) for multi-series\nRecommended\n\n\nConstants\nDefine at top of chunk with inline unit comment\nRecommended\n\n\nComments\nExplain why and state units, not just what the code does\nRequired"
   },
   {
     "objectID": "functions/index.html",
@@ -343,29 +406,18 @@
     "href": "functions/read-csv.html",
     "title": "read_csv( )",
     "section": "",
-    "text": "read_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
+    "text": "readr documentation ↗",
     "crumbs": [
       "Import & Create",
       "read_csv( )"
     ]
   },
   {
-    "objectID": "functions/read-csv.html#syntax",
-    "href": "functions/read-csv.html#syntax",
+    "objectID": "functions/read-csv.html#required-arguments",
+    "href": "functions/read-csv.html#required-arguments",
     "title": "read_csv( )",
-    "section": "",
-    "text": "Required arguments:\n\nread_csv(file)\n\n\nread_csv2(file)\n\nAdvanced use - Required and optional arguments:\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
-  },
-  {
-    "objectID": "functions/read-csv.html#description",
-    "href": "functions/read-csv.html#description",
-    "title": "read_csv( )",
-    "section": "Description",
-    "text": "Description\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
+    "section": "Required arguments",
+    "text": "Required arguments\n\nSyntax\n\nread_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\nfile\ncharacter\nPath (or URL) to the .csv file you want to read.\n\n\n\n\nReturns A tibble — a tidy data frame containing the contents of the CSV file.\n\n\n\nDescription\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
     "crumbs": [
       "Import & Create",
       "read_csv( )"
@@ -376,7 +428,18 @@
     "href": "functions/read-csv.html#examples",
     "title": "read_csv( )",
     "section": "Examples",
-    "text": "Examples\n\nRead a CSV file from your computer\nIn practice you pass a file path:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nCheck the file structure\nSee if you have to use read_csv() or read_csv2() by printing the first 3 rows of your .csv file.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nHandle missing value codes\nClinical data exports often encode missing values as \"N/A\", \"-\", or a blank space. Use the optional argument na to unify how missing data is handled.In this example, N/A, -, and empty cells are rewritten as NA.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "text": "Examples\n\n\nRead a CSV file from your computer\n\n\nIn practice you pass a file path:\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nCheck the file structure\n\n\nSee if you have to use read_csv() or read_csv2() by printing the first 3 rows of your .csv file.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nHandle missing value codes\n\n\nClinical data exports often encode missing values as \"N/A\", \"-\", or a blank space. Use the optional argument na to unify how missing data is handled. In this example, N/A, -, and empty cells are rewritten as NA.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Import & Create",
+      "read_csv( )"
+    ]
+  },
+  {
+    "objectID": "functions/read-csv.html#required-and-optional-arguments",
+    "href": "functions/read-csv.html#required-and-optional-arguments",
+    "title": "read_csv( )",
+    "section": "Required and optional arguments",
+    "text": "Required and optional arguments\n\nSyntax\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0,\n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE,\n         show_col_types = TRUE, locale = locale(), ...)\n\n\n\nDescription\n\nread_csv(file, ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
     "crumbs": [
       "Import & Create",
       "read_csv( )"
@@ -398,29 +461,18 @@
     "href": "functions/signif.html",
     "title": "signif( )",
     "section": "",
-    "text": "Required arguments:\n\nsignif(x, digits)\n\nAdvanced use — Required and optional arguments:\n\nsignif(x, digits = 6)",
+    "text": "base R documentation ↗",
     "crumbs": [
       "Report",
       "signif( )"
     ]
   },
   {
-    "objectID": "functions/signif.html#syntax",
-    "href": "functions/signif.html#syntax",
+    "objectID": "functions/signif.html#required-arguments",
+    "href": "functions/signif.html#required-arguments",
     "title": "signif( )",
-    "section": "",
-    "text": "Required arguments:\n\nsignif(x, digits)\n\nAdvanced use — Required and optional arguments:\n\nsignif(x, digits = 6)",
-    "crumbs": [
-      "Report",
-      "signif( )"
-    ]
-  },
-  {
-    "objectID": "functions/signif.html#description",
-    "href": "functions/signif.html#description",
-    "title": "signif( )",
-    "section": "Description",
-    "text": "Description\n\nsignif(x, digits) rounds a number (or vector of numbers) to digits significant figures. Significant figures count from the first non-zero digit, regardless of the position of the decimal point. Use signif() when the relative precision of a measurement matters — which is the case for most analytical chemistry results.\n\n\n\n\n\n\n\nCoding convention — only round at the point of printing\n\n\n\nStore intermediate calculated values at full precision. Call signif() only inside cat() when displaying a final result. Rounding intermediate values introduces accumulating errors in multi-step pharmaceutical calculations.\n# ✓ Correct — full precision stored, rounded only when printed\nC2_ug_ml &lt;- (absorbance - std_intercept) / std_slope\ncat(\"Concentration:\", signif(C2_ug_ml, 3), \"µg/mL\\n\")\n\n# ✗ Avoid — rounding before using in further calculations\nC2_ug_ml &lt;- signif((absorbance - std_intercept) / std_slope, 3)",
+    "section": "Required arguments",
+    "text": "Required arguments\n\nSyntax\n\nsignif(x, digits)\n\n\n\n\n\n\n\n\n\nParameter\nType\nDescription\n\n\n\n\nx\nnumeric\nThe number (or numeric vector) you want to round.\n\n\ndigits\ninteger\nHow many significant figures to keep.\n\n\n\n\nReturns A numeric vector the same length as x, rounded to the requested number of significant figures.\n\n\n\nDescription\n\nsignif(x, digits) rounds a number (or vector of numbers) to digits significant figures. Significant figures count from the first non-zero digit, regardless of the position of the decimal point. Use signif() when the relative precision of a measurement matters — which is the case for most analytical chemistry results.\n\n\n\n\n\n\n\nCoding convention — only round at the point of printing\n\n\n\nStore intermediate calculated values at full precision. Call signif() only inside cat() when displaying a final result. Rounding intermediate values introduces accumulating errors in multi-step pharmaceutical calculations.\n# ✓ Correct — full precision stored, rounded only when printed\nC2_ug_ml &lt;- (absorbance - std_intercept) / std_slope\ncat(\"Concentration:\", signif(C2_ug_ml, 3), \"µg/mL\\n\")\n\n# ✗ Avoid — rounding before using in further calculations\nC2_ug_ml &lt;- signif((absorbance - std_intercept) / std_slope, 3)",
     "crumbs": [
       "Report",
       "signif( )"
@@ -431,7 +483,18 @@
     "href": "functions/signif.html#examples",
     "title": "signif( )",
     "section": "Examples",
-    "text": "Examples\n\nReporting an analytical concentration\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nComparing signif() to the raw value\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nWorks the same for very small and very large numbers\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nApplying to a whole column\nWhen used inside cat() with a vector, signif() applies to every element. For adding a rounded column to a tibble, use mutate() — but only if the rounded value itself is the final deliverable (e.g., a formatted report column), not if it will be used in further calculations.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\nsignif() vs round() — which to use?\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nRule of thumb\n\n\n\nUse signif() for most analytical and pharmacokinetic results where the number of significant figures is specified by the instrument or method (e.g., 3 sig figs from a UV spectrophotometer). Use round() when a fixed number of decimal places is required — such as percentages always displayed to 2 decimal places.",
+    "text": "Examples\n\n\nReporting an analytical concentration\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nComparing signif() to the raw value\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nWorks the same for very small and very large numbers\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nApplying to a whole column\n\n\nWhen used inside cat() with a vector, signif() applies to every element. For adding a rounded column to a tibble, use mutate() — but only if the rounded value itself is the final deliverable (e.g., a formatted report column), not if it will be used in further calculations.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nsignif() vs round() — which to use?\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.",
+    "crumbs": [
+      "Report",
+      "signif( )"
+    ]
+  },
+  {
+    "objectID": "functions/signif.html#required-and-optional-arguments",
+    "href": "functions/signif.html#required-and-optional-arguments",
+    "title": "signif( )",
+    "section": "Required and optional arguments",
+    "text": "Required and optional arguments\n\nSyntax\n\nsignif(x, digits = 6)\n\n\n\nDescription\n\nsignif(x, digits = 6) shows the default value of digits. If you omit digits, R keeps 6 significant figures. In practice you should always state digits explicitly to match the precision of your method.\n\n\n\n\n\n\n\nRule of thumb\n\n\n\nUse signif() for most analytical and pharmacokinetic results where the number of significant figures is specified by the instrument or method (e.g., 3 sig figs from a UV spectrophotometer). Use round() when a fixed number of decimal places is required — such as percentages always displayed to 2 decimal places.",
     "crumbs": [
       "Report",
       "signif( )"
@@ -467,7 +530,7 @@
     "href": "getting-started.html#the-rstudio-interface",
     "title": "Getting Started",
     "section": "The RStudio interface",
-    "text": "The RStudio interface\nWhen you open RStudio you will see four panes:\n\n\n\n\n\n\n\nPane\nPurpose\n\n\n\n\nSource (top-left)\nWrite and save R scripts (.R files)\n\n\nConsole (bottom-left)\nRun code interactively and see output\n\n\nEnvironment (top-right)\nSee all objects currently in memory\n\n\nFiles / Plots (bottom-right)\nBrowse files, view plots, read help pages"
+    "text": "The RStudio interface\nWhen you open RStudio you will see four panes:\n\n\n\n\n\n\n\nPane\nPurpose\n\n\n\n\nSource (top-left)\nWrite and save R scripts (.R files)\n\n\nConsole (bottom-left)\nRun code interactively and see output\n\n\nEnvironment (top-right)\nSee all objects currently in memory\n\n\nFiles / Plots (bottom-right)\nBrowse files, view plots, read help pages\n\n\n\n\n\n\nRStudio Panels"
   },
   {
     "objectID": "getting-started.html#your-first-lines-of-r",
@@ -552,134 +615,5 @@
     "title": "Descriptive Statistics",
     "section": "IQR and quantiles",
     "text": "IQR and quantiles\nUseful for identifying spread and outliers in assay data.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nCoding convention — store then print\n\n\n\nCompute statistics at full precision, then round only inside cat() when reporting. Never round inside summarise() if the values will be used in further calculations."
-  },
-  {
-    "objectID": "coding-conventions.html",
-    "href": "coding-conventions.html",
-    "title": "R Coding Conventions",
-    "section": "",
-    "text": "You can use AI to modify existing R code according to these code conventions. Therefore, we prepared a prompt you can use. All you have to add is your R code.\nOpen prompt in Claude.ai\nor\nCopy a prompt to paste into any chatbot\nFollowing these conventions makes your code readable, reproducible, and consistent across exercises."
-  },
-  {
-    "objectID": "coding-conventions.html#variable-and-object-naming",
-    "href": "coding-conventions.html#variable-and-object-naming",
-    "title": "R Coding Conventions",
-    "section": "1. Variable and object naming",
-    "text": "1. Variable and object naming\n\nUse snake_case for all variable names\nWords should be separated by underscores. Do not use dots or camelCase.\n\n\n\n\n\n\nImportant\n\n\n\nThis is required and used throughout all course materials.\n\n\n\n# Do this\nfill_mass_mg      &lt;- 174.2\nibu_per_mg_powder &lt;- 0.43\nlabel_claim_mg    &lt;- 75.0\nX_bar_s1          &lt;- mean(stage1$pct_label)\n\n# Avoid this\nfillMassMg &lt;- 174.2     # camelCase\nibu.per.mg &lt;- 0.43      # dots\nlc         &lt;- 75.0      # unclear\nx1         &lt;- mean(stage1$pct_label)\n\n\n\nInclude units in variable names where relevant\nAppend units such as _mg, _pct, _ug_ml, _min to avoid ambiguity.\n\n# Do this\npowder_mass_mg      &lt;- 174.2\nconcentration_ug_ml &lt;- 7.56\npct_label           &lt;- 98.4\ntime_min            &lt;- 45\n\n# Avoid this\npowder &lt;- 174.2   # mg or g?\nconc   &lt;- 7.56    # ug/mL or mg/mL?\nlabel  &lt;- 98.4    # % or mg?\nt      &lt;- 45      # minutes or hours?"
-  },
-  {
-    "objectID": "coding-conventions.html#assignment-operator",
-    "href": "coding-conventions.html#assignment-operator",
-    "title": "R Coding Conventions",
-    "section": "2. Assignment operator",
-    "text": "2. Assignment operator\n\nAlways use &lt;- for assignment, never =\nUse = only for function arguments.\n\n\n\n\n\n\nImportant\n\n\n\nUsing &lt;- consistently avoids confusion between assignment and argument naming.\n\n\n\n# Do this\nlabel_claim_mg &lt;- 75.0\nstd_slope      &lt;- 0.04478\ndata           &lt;- readr::read_csv(\"file.csv\")\n\n# Avoid this\nlabel_claim_mg = 75.0\nstd_slope      = 0.04478\ndata           = readr::read_csv(\"file.csv\")\n\n\n\nPut spaces around &lt;- and operators\n\n# Do this\nC2           &lt;- (absorbance - std_intercept) / std_slope\nAV           &lt;- k * S\nfill_mass_mg &lt;- mass_filled_mg - mass_empty_mg\n\n# Avoid this\nC2&lt;-(absorbance-std_intercept)/std_slope\nAV&lt;-k*S\nfill_mass_mg&lt;-mass_filled_mg-mass_empty_mg"
-  },
-  {
-    "objectID": "coding-conventions.html#printing-results",
-    "href": "coding-conventions.html#printing-results",
-    "title": "R Coding Conventions",
-    "section": "3. Printing results",
-    "text": "3. Printing results\n\nUse cat() to print labelled results\nAlways include a descriptive label and a unit.\n\n# Do this\ncat(\"Ibuprofen content:\",\n        signif(ibu_per_mg_powder, 3),\n        \"mg Ibuprofen per mg powder\\n\")\n\ncat(\"Mean content (X-bar):\",\n        signif(X_bar, 4),\n        \"% of label claim\\n\")\n\n# Avoid this\nibu_per_mg_powder\nprint(ibu_per_mg_powder)\nX_bar\n\n\n\nUse view() to inspect data frames\nUse view(data) for interactive inspection and head(data, 5) for short previews.\n\n# Do this\nview(data)\nhead(data, 5)\n\n# Avoid this\nprint(data)\ndata"
-  },
-  {
-    "objectID": "coding-conventions.html#rounding-and-significant-figures",
-    "href": "coding-conventions.html#rounding-and-significant-figures",
-    "title": "R Coding Conventions",
-    "section": "4. Rounding and significant figures",
-    "text": "4. Rounding and significant figures\n\nUse signif() for final results, round() for fixed decimals\nKeep full precision in intermediate calculations and round only when printing.\n\n# Store full precision\nC2         &lt;- (absorbance - std_intercept) / std_slope\nibu_per_mg &lt;- C2 * 20 / 0.1 * 50 / 1000 / powder_mass_mg\n\n# Round only when printing\ncat(\"Ibuprofen per mg powder:\", signif(ibu_per_mg, 3), \"mg/mg\\n\")\ncat(\"Label claim %:\", round(pct_label, 2), \"%\\n\")\n\n\n\nNever round inside a mutate() column used later\n\n# Do this\ndata %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = mass_filled_mg - mass_empty_mg,\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder\n    )\n\n# Avoid this\ndata %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = round(mass_filled_mg - mass_empty_mg, 1),\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder\n    )"
-  },
-  {
-    "objectID": "coding-conventions.html#pipes-and-data-manipulation",
-    "href": "coding-conventions.html#pipes-and-data-manipulation",
-    "title": "R Coding Conventions",
-    "section": "5. Pipes and data manipulation",
-    "text": "5. Pipes and data manipulation\n\nUse %&gt;% with each step on its own line\nOne function per line, with clear indentation.\n\n# Do this\ndata &lt;- data %&gt;%\n    dplyr::mutate(\n        fill_mass_mg = mass_filled_mg - mass_empty_mg,\n        ibu_mg       = fill_mass_mg * ibu_per_mg_powder,\n        pct_label    = ibu_mg / label_claim_mg * 100\n    )\n\n# Avoid this\ndata &lt;- dplyr::mutate(data, fill_mass_mg=mass_filled_mg-mass_empty_mg, ibu_mg=fill_mass_mg*ibu_per_mg_powder, pct_label=ibu_mg/label_claim_mg*100)\n\n\n\nGroup constants at the top of a chunk\n\n# Do this\nvol_flask1_mL  &lt;- 50.0\nvol_aliquot_mL &lt;- 0.1\nvol_flask2_mL  &lt;- 20.0\n\nC1 &lt;- C2 * vol_flask2_mL / vol_aliquot_mL\n\n# Avoid this\nC1 &lt;- C2 * 20 / 0.1"
-  },
-  {
-    "objectID": "coding-conventions.html#plotting-with-ggplot2",
-    "href": "coding-conventions.html#plotting-with-ggplot2",
-    "title": "R Coding Conventions",
-    "section": "6. Plotting with ggplot2",
-    "text": "6. Plotting with ggplot2\n\nUse theme_classic() as the base theme\n\nggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_pct)) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point() +\n    ggplot2::labs(\n        x = \"Time (min)\",\n        y = \"Dissolved (%)\",\n        title = \"Dissolution profile - Ibuprofen 75 mg capsules\"\n    ) +\n    ggplot2::theme_classic()\n\n\n\nAlways label axes with units in parentheses\n\n# Do this\nggplot2::labs(\n    x = \"Time (min)\",\n    y = \"Ibuprofen released (mg)\"\n)\n\n# Avoid this: no labs() call, defaults to raw variable names\n\n\n\nPut each + layer on its own line\n\n# Do this\nggplot2::ggplot(data, ggplot2::aes(x = time_min, y = mean_mg)) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point() +\n    ggplot2::geom_errorbar(\n        ggplot2::aes(ymin = mean_mg - sd_mg, ymax = mean_mg + sd_mg)\n    ) +\n    ggplot2::theme_classic()\n\n# Avoid this\nggplot2::ggplot(data, ggplot2::aes(x=time_min,y=mean_mg))+ggplot2::geom_line()+ggplot2::geom_point()+ggplot2::theme_classic()\n\n\n\nUse \"steelblue\" as the default single-series color\nFor multi-group plots, map color in aes(color = group) and let ggplot choose.\n\n# Single series\nggplot2::geom_line(color = \"steelblue\")\nggplot2::geom_point(color = \"steelblue\")\n\n# Multiple groups\nggplot2::ggplot(\n    data,\n    ggplot2::aes(x = time_min, y = mean_pct, color = formulation)\n) +\n    ggplot2::geom_line() +\n    ggplot2::geom_point()"
-  },
-  {
-    "objectID": "coding-conventions.html#code-comments",
-    "href": "coding-conventions.html#code-comments",
-    "title": "R Coding Conventions",
-    "section": "7. Code comments",
-    "text": "7. Code comments\n\nComment why, not what, and always comment units\n\n# Useful comments\nlabel_claim_mg &lt;- 75.0  # mg - labelled dose per capsule\nk_s1           &lt;- 2.4   # EP 2.9.40, Table 2.9.40-1, n = 10\nL1             &lt;- 15.0  # acceptance limit, Stage 1 (%)\n\n# Unhelpful comments\nlabel_claim_mg &lt;- 75.0  # set label claim to 75\nk_s1           &lt;- 2.4   # k value\nL1             &lt;- 15.0  # L1\n\n\n\nUse section separator comments in long scripts\n\n# --- Assay: Ibuprofen concentration from UV absorbance ---\nC2 &lt;- (absorbance - std_intercept) / std_slope\nC1 &lt;- C2 * vol_flask2_mL / vol_aliquot_mL\n\n# --- EP 2.9.40 Stage 1 acceptance value ---\nAV_s1 &lt;- k_s1 * S_s1"
-  },
-  {
-    "objectID": "coding-conventions.html#quick-reference-summary",
-    "href": "coding-conventions.html#quick-reference-summary",
-    "title": "R Coding Conventions",
-    "section": "8. Quick reference summary",
-    "text": "8. Quick reference summary\n\n\n\n\n\n\n\n\nTopic\nConvention\nLevel\n\n\n\n\nVariable names\nsnake_case, include units (_mg, _pct, _mL)\nRequired\n\n\nAssignment\nAlways &lt;- with spaces; = only inside function arguments\nRequired\n\n\nPrinting values\ncat(\"label:\", signif(x, 3), \"unit\\n\")\nRequired\n\n\nPrinting tables\nview(data) to inspect; head(data, 5) to preview in output\nRequired\n\n\nRounding\nsignif(x, n) or round(x, n) only at print-time; full precision in calculations\nRequired\n\n\nPipes\n%&gt;% with each step on its own indented line\nRequired\n\n\nggplot theme\nAlways theme_classic()\nRequired\n\n\nAxis labels\nlabs(x = \"Name (unit)\", y = \"Name (unit)\")\nRequired\n\n\nPlot layers\nOne geom_*() or modifier per line, + at end of line\nRequired\n\n\nDefault color\n\"steelblue\" for single series; aes(color = group) for multi-series\nRecommended\n\n\nConstants\nDefine at top of chunk with inline unit comment\nRecommended\n\n\nComments\nExplain why and state units, not just what the code does\nRequired"
-  },
-  {
-    "objectID": "functions/read-csv.html#basic-use",
-    "href": "functions/read-csv.html#basic-use",
-    "title": "read_csv( )",
-    "section": "",
-    "text": "Syntax: Required arguments:\n\nread_csv(file)\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(file)\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
-  },
-  {
-    "objectID": "functions/read-csv.html#advanced-use",
-    "href": "functions/read-csv.html#advanced-use",
-    "title": "read_csv( )",
-    "section": "Advanced Use",
-    "text": "Advanced Use\nSyntax: Required and optional arguments:\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)\n\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
-  },
-  {
-    "objectID": "functions/read-csv.html#basic-use---required-arguments",
-    "href": "functions/read-csv.html#basic-use---required-arguments",
-    "title": "read_csv( )",
-    "section": "",
-    "text": "read_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
-  },
-  {
-    "objectID": "functions/read-csv.html#advanced-use---required-and-optional-arguments",
-    "href": "functions/read-csv.html#advanced-use---required-and-optional-arguments",
-    "title": "read_csv( )",
-    "section": "Advanced Use - Required and optional arguments:",
-    "text": "Advanced Use - Required and optional arguments:\n\nSyntax\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)\n\n\n\nDescription\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
-  },
-  {
-    "objectID": "functions/read-csv.html#required-arguments",
-    "href": "functions/read-csv.html#required-arguments",
-    "title": "read_csv( )",
-    "section": "",
-    "text": "read_csv(file)\n\n\nread_csv2(file)\n\n\n\n\n\nread_csv(\"file_name.csv\") reads a comma-separated values (.csv) file and returns a tibble. Use if your file uses commas as column separators and dots for decimals.\n\n\nread_csv2(\"file_name.csv\") reads a .csv file that uses semicolons as column separators and commas for decimals.\n\n\n\n\n\n\n\nWhy 2 different functions?\n\n\n\nEnglish standard vs. danish standard. To find out how your .csvfile is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: read_lines(\"file.csv\", n_max = 3)",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
-  },
-  {
-    "objectID": "functions/read-csv.html#required-and-optional-arguments",
-    "href": "functions/read-csv.html#required-and-optional-arguments",
-    "title": "read_csv( )",
-    "section": "Required and optional arguments:",
-    "text": "Required and optional arguments:\n\nSyntax\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, \n         n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, \n         show_col_types = TRUE, locale = locale(), ...)\n\n\n\nDescription\n\nread_csv(file, col_types = NULL, col_select = NULL, skip = 0, n_max = Inf, na = c(\"\", \"NA\"), trim_ws = TRUE, show_col_types = TRUE, locale = locale(), ...) reads a .csv file into a tibble with smart defaults for speed and usability. Find explanations of all the arguments below.",
-    "crumbs": [
-      "Import & Create",
-      "read_csv( )"
-    ]
   }
 ]

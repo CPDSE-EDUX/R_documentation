@@ -14,12 +14,12 @@ $soft-white:    #F9F9F9;
 $primary:                $forest-green;
 $link-color:             $sage-green;
 $link-hover-color:       darken($sage-green, 18%);
-$body-bg:                $soft-white;
+$body-bg:                white;
 $body-color:             $charcoal;
 $headings-color:         $forest-green;
 
-$font-family-sans-serif: Verdana, Geneva, Tahoma, sans-serif;
-$font-family-monospace:  "Courier New", Courier, monospace;
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+$font-family-monospace:  'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 $font-size-root:         15px;
 
 // Navbar
@@ -28,29 +28,53 @@ $navbar-fg:              $warm-sand;
 $navbar-hl:              $antique-gold;
 
 // Sidebar
-$sidebar-bg:             $ivory;
+$sidebar-bg:             $soft-white;
 $sidebar-fg:             $charcoal;
 $sidebar-hl:             $forest-green;
 
 // Code (inline)
-$code-bg:                $ivory;
+$code-bg:                #f2f2f2;
 $code-color:             $forest-green;
 
 // Borders
-$border-color:           $warm-sand;
+$border-color:           #e8e8e8;
 
 /*-- scss:rules --*/
 
+// ── Design tokens (from reference example) ────────────────────────────────────
+// Scoped to page content; navbar / sidebar / footer keep CPDSE branding.
+$sans:      'Inter', system-ui, -apple-system, sans-serif;
+$mono:      'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+$c-bg:        #ffffff;
+$c-bg-sec:    #f7f7f5;
+$c-bg-ter:    #f0efe9;
+$c-text:      #1a1a18;
+$c-text-sec:  #5a5a56;
+$c-text-ter:  #9a9a94;
+$c-border:    rgba(0,0,0,0.10);
+$c-border-md: rgba(0,0,0,0.18);
+$c-green:     #0f6e56;
+$c-blue:      #185fa5;
+$c-orange:    #d85a30;
+$c-purple:    #534ab7;
+$radius-md:   0px;
+$radius-lg:   0px;
+
 // ── Global ────────────────────────────────────────────────────────────────────
 
-body { font-size: 15px; }
+body {
+  font-family: $sans;
+  font-size: 15px;
+  line-height: 1.7;
+  color: $c-text;
+}
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
 .navbar {
-  border-bottom: 3px solid $antique-gold;
+  border-bottom: 2px solid $antique-gold;
   font-size: 0.875rem;
 
   .navbar-brand {
@@ -70,7 +94,7 @@ a:hover { text-decoration: underline; }
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 
 .sidebar {
-  border-right: 1px solid $warm-sand;
+  border-right: 1px solid #ebebeb;
   font-size: 0.875rem;
 
   .sidebar-title {
@@ -90,196 +114,265 @@ a:hover { text-decoration: underline; }
   }
 }
 
-// ── Page title — MATLAB-style function name in monospace ──────────────────────
+// ── Page title — function name in monospace ───────────────────────────────────
 
 .quarto-title h1.title {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 2rem;
-  font-weight: 700;
-  color: $forest-green;
-  border-bottom: 3px solid $antique-gold;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.3rem;
+  font-family: $mono;
+  font-size: 26px;
+  font-weight: 500;
+  color: $c-text;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0.5rem;
 }
 
 .quarto-title .description,
 .quarto-title .subtitle {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 0.95rem;
-  color: $sage-green;
+  font-family: $sans;
+  font-size: 15px;
+  line-height: 1.7;
+  color: $c-text-sec;
   font-weight: 400;
   margin-top: 0.15rem;
+
+  a { color: $c-blue; }
 }
 
 // ── Content headings ──────────────────────────────────────────────────────────
 
 h2 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: $forest-green;
+  font-family: $sans;
+  font-size: 16px;
+  font-weight: 500;
+  color: $c-text;
   margin-top: 2.5rem;
-  border-bottom: 2px solid $warm-sand;
-  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0 0 0.5rem;
+  border-bottom: 0.5px solid $c-border;
+  border-left: none;
 }
 
 h3 {
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: $charcoal;
+  font-family: $sans;
+  font-size: 13px;
+  font-weight: 500;
+  color: $c-text;
   margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
 // ── Inline code ───────────────────────────────────────────────────────────────
 
 code:not(pre code) {
-  background: $ivory;
-  color: $forest-green;
-  padding: 0.1em 0.35em;
-  border-radius: 3px;
-  font-size: 0.875em;
-  font-family: "Courier New", Courier, monospace;
+  background: $c-bg-sec;
+  color: $c-text;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.86em;
+  font-family: $mono;
 }
 
-// ── Code blocks ───────────────────────────────────────────────────────────────
+// ── Code blocks → "syntax block" look ─────────────────────────────────────────
+// Static (non-interactive) code such as Syntax examples and ✓/✗ snippets.
+
+div.sourceCode {
+  background: $c-bg-sec;
+  border: 0.5px solid $c-border;
+  border-radius: $radius-lg;
+  margin-bottom: 1.5rem;
+}
 
 pre.sourceCode {
-  background: $ivory;
-  border-radius: 6px;
-  border: 1px solid $warm-sand;
-  font-size: 0.84rem;
+  background: transparent;
+  border: none;
+  border-radius: $radius-lg;
+  padding: 1rem 1.25rem;
+  font-family: $mono;
+  font-size: 14px;
+  line-height: 1.7;
+  code { font-family: $mono; }
 }
 
-div.sourceCode { background: $ivory; border-radius: 6px; }
-
 // ── webR Monaco editor — token color overrides ─────────────────────────────
-// Numbers (.mtk7) default to a green nearly identical to comments (.mtk8);
-// shift them to warm amber so they read as distinct.
+
 .qwebr-editor .mtk7 { color: #E5C07B !important; }
 
-// ── MATLAB-style collapsible argument items ───────────────────────────────────
+// ── Content tables → "param table" look ───────────────────────────────────────
 
-.arg-section { margin: 1rem 0 1.5rem; }
+#quarto-document-content table,
+.page-columns table,
+main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-family: $sans;
+
+  th {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: $c-text-ter;
+    text-align: left;
+    padding: 0 1rem 0.5rem 0;
+    border-bottom: 0.5px solid $c-border;
+    background: transparent;
+  }
+
+  td {
+    font-size: 13px;
+    padding: 0.75rem 1rem 0.75rem 0;
+    vertical-align: top;
+    border-bottom: 0.5px solid $c-border;
+    color: $c-text;
+    background: transparent;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  code:not(pre code) {
+    font-size: 12px;
+    background: $c-bg-sec;
+    padding: 1px 5px;
+  }
+}
+
+// ── Collapsible argument items → "optional-arg accordion" look ────────────────
+
+.arg-section { margin: 0.5rem 0 1.5rem; }
 
 .collapse-toolbar {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .collapse-btn {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: $sans;
   font-size: 0.75rem;
-  font-weight: 600;
-  color: $sage-green;
+  font-weight: 500;
+  color: $c-text-sec;
   background: none;
-  border: 1.5px solid $sage-green;
-  border-radius: 4px;
-  padding: 3px 10px;
+  border: none;
+  padding: 2px 0;
   cursor: pointer;
-  transition: all 0.15s;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 
-  &:hover {
-    background: $ivory;
-    color: $forest-green;
-    border-color: $forest-green;
-  }
+  &:hover { color: $c-text; }
 }
 
 details.arg-item {
-  border: 1px solid $warm-sand;
-  border-radius: 6px;
-  margin-bottom: 6px;
+  border: 0.5px solid $c-border;
+  border-radius: $radius-lg;
+  margin-bottom: 0.75rem;
   overflow: hidden;
 
+  &:last-child { border-bottom: 0.5px solid $c-border; }
+
   summary {
-    background: $ivory;
-    padding: 0.6rem 1rem;
+    background: $c-bg;
+    padding: 0.85rem 1.25rem;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 13px;
     list-style: none;
     display: flex;
     align-items: center;
     gap: 0.5em;
     transition: background 0.15s;
 
-    &:hover { background: darken($ivory, 5%); }
+    &::-webkit-details-marker { display: none; }
+    &:hover { background: $c-bg-sec; }
 
-    &::before {
-      content: "▶";
-      font-size: 0.58rem;
-      color: $sage-green;
+    // chevron on the right, like the example's optional-arg
+    &::after {
+      content: "";
+      width: 14px;
+      height: 14px;
+      margin-left: auto;
       flex-shrink: 0;
-      transition: transform 0.2s;
-      display: inline-block;
+      background: $c-text-ter;
+      -webkit-mask: no-repeat center / contain
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      mask: no-repeat center / contain
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      transition: transform 0.18s ease;
     }
 
     code {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: $forest-green;
+      font-family: $mono;
+      font-size: 13px;
+      font-weight: 500;
+      color: $c-text;
       background: none;
       padding: 0;
     }
   }
 
-  &[open] > summary::before { transform: rotate(90deg); }
+  &[open] > summary { border-bottom: 0.5px solid $c-border; }
+  &[open] > summary::after { transform: rotate(180deg); }
 
   .arg-body {
-    padding: 0.8rem 1.2rem;
-    border-top: 1px solid $warm-sand;
-    font-size: 0.88rem;
-    background: white;
-    line-height: 1.65;
+    padding: 0.875rem 1.25rem 1rem;
+    font-size: 13px;
+    color: $c-text-sec;
+    background: none;
+    line-height: 1.75;
+    border-top: none;
   }
 }
 
 .arg-types {
-  font-size: 0.75rem;
-  color: $sage-green;
-  font-style: italic;
+  font-family: $mono;
+  font-size: 11px;
+  color: $c-text-ter;
+  font-style: normal;
   margin-left: 4px;
 }
 
 .arg-badge {
   display: inline-block;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border-radius: 3px;
-  padding: 1px 6px;
+  font-family: $mono;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  border: 0.5px solid $c-border;
+  border-radius: 4px;
+  padding: 2px 7px;
   margin-left: 6px;
   vertical-align: middle;
 
-  &.required { background: $forest-green; color: $ivory; }
-  &.optional { background: $mint-gray;    color: $charcoal; }
+  &.required { background: $c-bg-sec; color: $c-green; }
+  &.optional { background: $c-bg-sec; color: $c-text-sec; }
 }
 
 .data-types {
-  font-size: 0.78rem;
-  color: $sage-green;
+  font-size: 12px;
+  color: $c-text-ter;
   margin-top: 0.75rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid $warm-sand;
+  padding-top: 0.5rem;
+  border-top: 0.5px solid $c-border;
 }
 
-// ── Per-syntax-variant descriptions (MATLAB "Description" bullet style) ────────
+// ── Per-syntax-variant descriptions ───────────────────────────────────────────
 
 .desc-item {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid lighten($ivory, 3%);
-  font-size: 0.9rem;
-  line-height: 1.65;
+  padding: 0.6rem 0;
+  border-bottom: 0.5px solid $c-border;
+  font-size: 13px;
+  color: $c-text-sec;
+  line-height: 1.7;
   &:last-child { border-bottom: none; }
 }
 
 // ── See Also ──────────────────────────────────────────────────────────────────
 
 .see-also {
-  background: $ivory;
-  border: 1px solid $warm-sand;
-  border-radius: 6px;
-  padding: 0.85rem 1.2rem;
+  border-top: 1px solid #ebebeb;
+  padding: 1rem 0 0;
   margin-top: 2.5rem;
   font-size: 0.88rem;
   color: $charcoal;
@@ -289,25 +382,206 @@ details.arg-item {
 
 // ── Callouts ──────────────────────────────────────────────────────────────────
 
-.callout { border-radius: 4px; font-size: 0.9rem; }
-.callout-tip     { border-color: $sage-green; }
-.callout-note    { border-color: $antique-gold; }
-.callout-warning { border-color: #c0392b; }
-.callout-tip  .callout-title { color: $sage-green; }
-.callout-note .callout-title { color: darken($antique-gold, 22%); }
+.callout {
+  border: 0.5px solid $c-border;
+  border-radius: $radius-lg;
+  font-size: 13px;
+  border-left-width: 3px;
+  background: $c-bg-sec;
+}
+.callout-tip     { border-left-color: $c-green;  }
+.callout-note    { border-left-color: $c-blue;   }
+.callout-warning { border-left-color: $c-orange; }
+.callout .callout-title { font-family: $sans; font-weight: 500; }
+.callout-tip     .callout-title { color: $c-green; }
+.callout-note    .callout-title { color: $c-blue; }
+.callout-warning .callout-title { color: $c-orange; }
+
+// ── Interactive webR blocks — keep editor functional, match card framing ──────
+
+.qwebr-interactive-area {
+  border: 0.5px solid $c-border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.qwebr-editor { font-family: $mono; }
+
+.qwebr-output-code-area pre {
+  font-family: $mono;
+  font-size: 13px;
+  background: $c-bg-sec;
+}
+
+.qwebr-button {
+  font-family: $sans;
+  font-size: 13px;
+}
+
+// ── Source link pill (e.g. "readr docs") ──────────────────────────────────────
+
+.source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: $sans;
+  font-size: 12px;
+  font-weight: 500;
+  color: $c-text-ter;
+  text-decoration: none;
+  border: 0.5px solid $c-border;
+  border-radius: 6px;
+  padding: 4px 10px;
+  margin-bottom: 2rem;
+
+  &:hover {
+    color: $c-text-sec;
+    border-color: $c-border-md;
+    text-decoration: none;
+  }
+}
+
+// ── Type pill (param tables, arg headers) ─────────────────────────────────────
+
+.pill {
+  display: inline-block;
+  font-family: $mono;
+  font-size: 11px;
+  background: $c-bg-sec;
+  border: 0.5px solid $c-border;
+  border-radius: 4px;
+  padding: 2px 7px;
+  color: $c-text-sec;
+  white-space: nowrap;
+}
+
+// ── Returns box ───────────────────────────────────────────────────────────────
+
+.returns-box {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-top: 0.5px solid $c-border;
+  border-bottom: 0.5px solid $c-border;
+  padding: 0.875rem 0;
+  margin-bottom: 1.5rem;
+  font-size: 13px;
+  color: $c-text-sec;
+  line-height: 1.7;
+
+  .returns-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: $c-text-ter;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+// ── Example cards — foldable, same style as arg-item accordions ───────────────
+
+details.example-item {
+  border: 0.5px solid $c-border;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+
+  &:last-child { border-bottom: 0.5px solid $c-border; }
+
+  summary {
+    background: $c-bg;
+    padding: 0.85rem 1.25rem;
+    cursor: pointer;
+    font-family: $sans;
+    font-size: 13px;
+    font-weight: 500;
+    color: $c-text;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: background 0.15s;
+
+    &::-webkit-details-marker { display: none; }
+    &:hover { background: $c-bg-sec; }
+
+    &::after {
+      content: "";
+      width: 14px;
+      height: 14px;
+      margin-left: auto;
+      flex-shrink: 0;
+      background: $c-text-ter;
+      -webkit-mask: no-repeat center / contain
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      mask: no-repeat center / contain
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      transition: transform 0.18s ease;
+    }
+  }
+
+  &[open] > summary {
+    border-bottom: 0.5px solid $c-border;
+    background: $c-bg-sec;
+  }
+  &[open] > summary::after { transform: rotate(180deg); }
+
+  .example-body {
+    padding: 0.875rem 1.25rem 1rem;
+    font-size: 13px;
+    color: $c-text-sec;
+    line-height: 1.75;
+
+    > p:first-child { margin-top: 0; }
+
+    // editor and static code sit flush — no double border
+    .qwebr-interactive-area {
+      border: 0.5px solid $c-border;
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    div.sourceCode {
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.output-block {
+  padding: 0.75rem 1.25rem;
+  border-top: 0.5px solid $c-border;
+  background: $c-bg-sec;
+  font-family: $mono;
+  font-size: 13px;
+  color: $c-text-sec;
+  line-height: 1.6;
+
+  .output-label {
+    font-family: $sans;
+    font-size: 10px;
+    font-weight: 500;
+    color: $c-text-ter;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 3px;
+  }
+}
 
 // ── TOC ───────────────────────────────────────────────────────────────────────
 
 #TOC {
   font-size: 0.82rem;
 
-  .nav-link { color: $sage-green; }
+  .nav-link { color: #888; }
   .nav-link:hover { color: $forest-green; }
 
   .nav-link.active {
     color: $forest-green;
     font-weight: 700;
-    border-left: 3px solid $antique-gold;
+    border-left: 2px solid $antique-gold;
     padding-left: 0.5rem;
   }
 }
@@ -322,7 +596,7 @@ details.arg-item {
   color: $sage-green;
   margin: 1.75rem 0 0.6rem;
   padding-bottom: 0.3rem;
-  border-bottom: 1px solid $warm-sand;
+  border-bottom: 1px solid #ebebeb;
 }
 
 .hero-banner {
@@ -388,16 +662,14 @@ details.arg-item {
   gap: 1rem;
   margin: 0.5rem 0 0;
 
-  // Quarto/Pandoc sometimes injects empty <p> tags inside HTML blocks;
-  // hide them so they don't create phantom grid cells
   > p { display: none; }
 }
 
 .fn-card {
   background: white;
-  border: 1px solid $warm-sand;
+  border: 1px solid #ebebeb;
   border-top: 3px solid $forest-green;
-  border-radius: 6px;
+  border-radius: 4px;
   padding: 1.1rem 1.1rem 0.9rem;
   text-decoration: none;
   color: $charcoal;
@@ -405,8 +677,8 @@ details.arg-item {
   transition: box-shadow 0.15s, transform 0.15s;
 
   &:hover {
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
-    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
     text-decoration: none;
     border-top-color: $sage-green;
   }
@@ -437,7 +709,6 @@ details.arg-item {
     line-height: 1.5;
   }
 }
-
 
 // ── Coding Conventions ──────────────────────────────────────────────────
 
@@ -470,11 +741,11 @@ details.arg-item {
     color: rgba($forest-green, 0.9);
 
     a {
-      color: $antique-gold; // Link color
+      color: $antique-gold;
       text-decoration: none;
 
       &:hover {
-        color: lighten($antique-gold, 10%); // Hover color
+        color: lighten($antique-gold, 10%);
         text-decoration: underline;
       }
     }
@@ -524,8 +795,8 @@ details.arg-item {
 
 .feature-card {
   background: white;
-  border: 1px solid $border-color;
-  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  border-radius: 6px;
   padding: 1.5rem;
   transition: box-shadow 0.2s, transform 0.2s;
   text-decoration: none;
@@ -533,7 +804,7 @@ details.arg-item {
   display: block;
 
   &:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     transform: translateY(-2px);
     text-decoration: none;
     color: inherit;
@@ -561,7 +832,7 @@ details.arg-item {
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 .nav-footer {
-  border-top: 3px solid $antique-gold;
+  border-top: 2px solid $antique-gold;
   background: $forest-green;
   font-size: 0.82rem;
 
@@ -576,16 +847,9 @@ details.arg-item {
 @media (max-width: 768px) {
   .hero-banner { padding: 2.5rem 1rem; h1 { font-size: 1.65rem; } }
   .fn-card-grid { grid-template-columns: 1fr 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
   .fn-card-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 768px) {
-  .hero-banner {
-    padding: 2.5rem 1rem;
-    h1 { font-size: 2rem; }
-  }
-  .card-grid { grid-template-columns: 1fr; }
 }

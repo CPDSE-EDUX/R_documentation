@@ -2,6 +2,7 @@
 title: "Visualization"
 subtitle: "Create plots with ggplot2 — scatter, line, bar, and box plots."
 toc: true
+engine: knitr
 ---
 
 All plots in this course use `theme_classic()` and labelled axes via `labs()`.

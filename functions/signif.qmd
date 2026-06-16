@@ -3,17 +3,27 @@ title: "signif( )"
 subtitle: "Round to a given number of significant figures. See [original documentation](https://rdrr.io/r/base/Round.html) for reference."
 ---
 
-## Syntax
-Required arguments:
+<a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">base R documentation ↗</a>
+
+## Required arguments
+
+### Syntax
+
 ```{r, eval=FALSE}
 signif(x, digits)
 ```
-Advanced use — Required and optional arguments:
-```{r, eval=FALSE}
-signif(x, digits = 6)
-```
 
-## Description
+| Parameter | Type | Description |
+|---|---|---|
+| `x` | [numeric]{.pill} | The number (or numeric vector) you want to round. |
+| `digits` | [integer]{.pill} | How many significant figures to keep. |
+
+::: {.returns-box}
+[Returns]{.returns-label}
+A numeric vector the same length as `x`, rounded to the requested number of significant figures.
+:::
+
+### Description
 
 ::: {.desc-item}
 `signif(x, digits)` rounds a number (or vector of numbers) to `digits` significant figures.
@@ -39,7 +49,9 @@ C2_ug_ml <- signif((absorbance - std_intercept) / std_slope, 3)
 
 ## Examples
 
-### Reporting an analytical concentration
+<details class="example-item">
+<summary>Reporting an analytical concentration</summary>
+<div class="example-body">
 
 ```{webr-r}
 # UV–Vis: calculate ibuprofen concentration from absorbance
@@ -52,8 +64,12 @@ C2_ug_ml <- (absorbance - std_intercept) / std_slope   # full precision
 # Report to 3 significant figures
 cat("Sample concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
 ```
+</div>
+</details>
 
-### Comparing `signif()` to the raw value
+<details class="example-item">
+<summary>Comparing <code>signif()</code> to the raw value</summary>
+<div class="example-body">
 
 ```{webr-r}
 x <- 31.18765
@@ -64,8 +80,12 @@ signif(x, 3)   # 3 sig figs: 31.2
 signif(x, 4)   # 4 sig figs: 31.19
 signif(x, 5)   # 5 sig figs: 31.188
 ```
+</div>
+</details>
 
-### Works the same for very small and very large numbers
+<details class="example-item">
+<summary>Works the same for very small and very large numbers</summary>
+<div class="example-body">
 
 ```{webr-r}
 # Sig figs count from the first non-zero digit
@@ -73,9 +93,12 @@ signif(0.0004512, 2)    # 0.00045 — first sig fig is the 4
 signif(158400, 3)       # 158000
 signif(0.10002, 3)      # 0.100
 ```
+</div>
+</details>
 
-### Applying to a whole column
-
+<details class="example-item">
+<summary>Applying to a whole column</summary>
+<div class="example-body">
 When used inside `cat()` with a vector, `signif()` applies to every element.
 For adding a rounded column to a tibble, use `mutate()` — but only if the rounded value itself is the final deliverable (e.g., a formatted report column), not if it will be used in further calculations.
 
@@ -87,8 +110,12 @@ conc_values_ug_ml <- c(2.4837, 5.0124, 9.9841, 20.0152, 39.8760)
 # Print to 3 sig figs
 cat("Concentrations (µg/mL):", signif(conc_values_ug_ml, 3), "\n")
 ```
+</div>
+</details>
 
-### `signif()` vs `round()` — which to use?
+<details class="example-item">
+<summary><code>signif()</code> vs <code>round()</code> — which to use?</summary>
+<div class="example-body">
 
 ```{webr-r}
 x <- 0.003418
@@ -100,6 +127,24 @@ signif(x, 3)   # 0.00342  (counts from the first non-zero digit: 3, 4, 1)
 round(x, 3)    # 0.003    (only 3 decimal places — loses all sig figs here!)
 round(x, 5)    # 0.00342  (to get 3 sig figs you'd need to know the position)
 ```
+</div>
+</details>
+
+## Required and optional arguments
+
+### Syntax
+
+```{r, eval=FALSE}
+signif(x, digits = 6)
+```
+
+### Description
+
+::: {.desc-item}
+`signif(x, digits = 6)` shows the default value of `digits`.
+If you omit `digits`, R keeps 6 significant figures.
+In practice you should always state `digits` explicitly to match the precision of your method.
+:::
 
 ::: {.callout-tip}
 ## Rule of thumb

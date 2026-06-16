@@ -78,7 +78,7 @@ capsules %>%
 
 ## mutate( )
 
-Add or transform columns. See the full [`mutate()` reference page](mutate.qmd) for details.
+Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
 
 ```{webr-r}
 label_claim_mg <- 75.0

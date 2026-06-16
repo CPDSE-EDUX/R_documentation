@@ -3,38 +3,40 @@ title: "mutate( )"
 subtitle: "Add or transform columns in a data frame. See [original documentation](https://dplyr.tidyverse.org/reference/mutate.html) for reference."
 ---
 
-## Syntax
-Required arguments:
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">dplyr documentation ↗</a>
+
+## Required arguments
+
+### Syntax
+
 ```{r, eval=FALSE}
 df %>% mutate(new_col = expression)
 ```
+
 ```{r, eval=FALSE}
 df %>% mutate(new_col = expression, another_col = expression)
 ```
-Advanced use — Required and optional arguments:
-```{r, eval=FALSE}
-df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
-```
 
-## Description
+| Parameter | Type | Description |
+|---|---|---|
+| `.data` | [tibble]{.pill} | The data frame to modify (supplied automatically by the pipe). |
+| `...` | [name = expr]{.pill} | One or more `new_col = expression` pairs defining columns. |
+
+::: {.returns-box}
+[Returns]{.returns-label}
+A [tibble](tibble.qmd) (or data frame) with the new or modified columns added.
+:::
+
+### Description
 
 ::: {.desc-item}
 `df %>% mutate(new_col = expression)` adds a new column to a data frame.
 The expression on the right can reference any existing column by name.
 :::
 
----
-
 ::: {.desc-item}
 `df %>% mutate(col1 = ..., col2 = ...)` adds multiple columns in a single call.
 Later expressions can reference columns created earlier in the same `mutate()`.
-:::
-
----
-
-::: {.desc-item}
-`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
-The default `"all"` retains every column, including unmodified ones.
 :::
 
 ::: {.callout-note}
@@ -46,7 +48,9 @@ Rounding a column that feeds into later calculations accumulates error.
 
 ## Examples
 
-### Capsule content uniformity — computing fill mass and % label claim
+<details class="example-item">
+<summary>Capsule content uniformity — computing fill mass and % label claim</summary>
+<div class="example-body">
 
 ```{webr-r}
 library(dplyr)
@@ -72,9 +76,12 @@ capsules <- capsules %>%
 
 capsules
 ```
+</div>
+</details>
 
-### Flagging out-of-specification results
-
+<details class="example-item">
+<summary>Flagging out-of-specification results</summary>
+<div class="example-body">
 Use `mutate()` with `ifelse()` to add a pass/fail column based on a criterion.
 
 ```{webr-r}
@@ -89,8 +96,12 @@ capsules <- capsules %>%
 
 capsules[, c("capsule_id", "pct_label", "oos")]
 ```
+</div>
+</details>
 
-### Concentration units conversion
+<details class="example-item">
+<summary>Concentration units conversion</summary>
+<div class="example-body">
 
 ```{webr-r}
 library(dplyr)
@@ -117,6 +128,24 @@ samples <- samples %>%
 
 samples
 ```
+</div>
+</details>
+
+## Required and optional arguments
+
+### Syntax
+
+```{r, eval=FALSE}
+df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
+```
+
+### Description
+
+::: {.desc-item}
+`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
+The default `"all"` retains every column, including unmodified ones.
+The optional `.before` / `.after` arguments control where new columns are inserted.
+:::
 
 ## Input Arguments
 

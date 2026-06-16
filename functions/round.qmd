@@ -3,17 +3,26 @@ title: "round( )"
 subtitle: "Round to a fixed number of decimal places. See [original documentation](https://rdrr.io/r/base/Round.html) for reference."
 ---
 
-## Syntax
-Required arguments:
+<a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">base R documentation ↗</a>
+
+## Required arguments
+
+### Syntax
+
 ```{r, eval=FALSE}
 round(x)
 ```
-Advanced use — Required and optional arguments:
-```{r, eval=FALSE}
-round(x, digits = 0)
-```
 
-## Description
+| Parameter | Type | Description |
+|---|---|---|
+| `x` | [numeric]{.pill} | The number (or numeric vector) you want to round. |
+
+::: {.returns-box}
+[Returns]{.returns-label}
+A numeric vector the same length as `x`, rounded to the specified number of decimal places.
+:::
+
+### Description
 
 ::: {.desc-item}
 `round(x, digits)` rounds a number (or numeric vector) to `digits` decimal places.
@@ -38,7 +47,9 @@ mutate(pct_label = round(ibu_mg / label_claim_mg * 100, 2))  # rounding contamin
 
 ## Examples
 
-### Reporting percentage label claim to two decimal places
+<details class="example-item">
+<summary>Reporting percentage label claim to two decimal places</summary>
+<div class="example-body">
 
 ```{webr-r}
 label_claim_mg <- 75.0
@@ -49,8 +60,12 @@ pct_label <- ibu_mg / label_claim_mg * 100   # stored at full precision
 # Two decimal places is conventional for % label claim
 cat("Label claim:", round(pct_label, 2), "%\n")
 ```
+</div>
+</details>
 
-### Reporting the acceptance value (AV) for EP 2.9.40
+<details class="example-item">
+<summary>Reporting the acceptance value (AV) for EP 2.9.40</summary>
+<div class="example-body">
 
 ```{webr-r}
 M    <- 100.0   # reference value (% label claim)
@@ -66,8 +81,12 @@ cat("Acceptance value AV:", round(AV_s1, 2), "\n")
 cat("Limit L1:           ", L1, "\n")
 cat("Decision:           ", ifelse(AV_s1 <= L1, "PASS ✓", "FAIL ✗"), "\n")
 ```
+</div>
+</details>
 
-### Positive vs. negative `digits`
+<details class="example-item">
+<summary>Positive vs. negative <code>digits</code></summary>
+<div class="example-body">
 
 ```{webr-r}
 x <- 1587.346
@@ -78,8 +97,12 @@ round(x, digits = -1)    # 1590      — nearest 10
 round(x, digits = -2)    # 1600      — nearest 100
 round(x, digits = -3)    # 2000      — nearest 1000
 ```
+</div>
+</details>
 
-### Applying to a vector of results
+<details class="example-item">
+<summary>Applying to a vector of results</summary>
+<div class="example-body">
 
 ```{webr-r}
 pct_label_values <- c(97.832, 102.144, 99.017, 101.566, 98.253, 100.801)
@@ -92,8 +115,12 @@ for (val in pct_label_values) {
   cat(" ", round(val, 2), "%\n")
 }
 ```
+</div>
+</details>
 
-### `round()` vs `signif()` — which to use?
+<details class="example-item">
+<summary><code>round()</code> vs <code>signif()</code> — which to use?</summary>
+<div class="example-body">
 
 ```{webr-r}
 # round() fixes decimal places — useful for percentages, pH, temperatures
@@ -107,6 +134,23 @@ values <- c(0.00412, 7.438, 1284.7)
 round(values,  2)    # 0.00, 7.44, 1284.70  — many sig figs lost for small values
 signif(values, 2)    # 0.0041, 7.4, 1300    — consistent precision
 ```
+</div>
+</details>
+
+## Required and optional arguments
+
+### Syntax
+
+```{r, eval=FALSE}
+round(x, digits = 0)
+```
+
+### Description
+
+::: {.desc-item}
+`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
+The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
+:::
 
 ::: {.callout-tip}
 ## Rule of thumb
