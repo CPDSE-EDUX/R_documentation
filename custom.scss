@@ -133,7 +133,7 @@ a:hover { text-decoration: underline; }
   line-height: 1.7;
   color: $c-text-sec;
   font-weight: 400;
-  margin-top: 0.15rem;
+  margin-top: 0.75rem;
 
   a { color: $c-blue; }
 }
@@ -273,7 +273,7 @@ details.arg-item {
   &:last-child { border-bottom: 0.5px solid $c-border; }
 
   summary {
-    background: $c-bg;
+    background: $c-bg-sec;
     padding: 0.85rem 1.25rem;
     cursor: pointer;
     font-size: 13px;
@@ -284,7 +284,7 @@ details.arg-item {
     transition: background 0.15s;
 
     &::-webkit-details-marker { display: none; }
-    &:hover { background: $c-bg-sec; }
+    &:hover { background: $c-bg-ter; }
 
     // chevron on the right, like the example's optional-arg
     &::after {
@@ -318,7 +318,7 @@ details.arg-item {
     padding: 0.875rem 1.25rem 1rem;
     font-size: 13px;
     color: $c-text-sec;
-    background: none;
+    background: $c-bg;
     line-height: 1.75;
     border-top: none;
   }
@@ -382,20 +382,13 @@ details.arg-item {
 
 // ── Callouts ──────────────────────────────────────────────────────────────────
 
-.callout {
-  border: 0.5px solid $c-border;
-  border-radius: $radius-lg;
-  font-size: 13px;
-  border-left-width: 3px;
-  background: $c-bg-sec;
-}
-.callout-tip     { border-left-color: $c-green;  }
-.callout-note    { border-left-color: $c-blue;   }
-.callout-warning { border-left-color: $c-orange; }
-.callout .callout-title { font-family: $sans; font-weight: 500; }
-.callout-tip     .callout-title { color: $c-green; }
-.callout-note    .callout-title { color: $c-blue; }
-.callout-warning .callout-title { color: $c-orange; }
+.callout-tip     { border: 2px solid #1a9d6f !important; }
+.callout-note    { border: 2px solid #4a90d9 !important; }
+.callout-warning { border: 2px solid #e8a020 !important; }
+
+// ── Hide webR Code Links sidebar section ──────────────────────────────────────
+
+.quarto-code-links { display: none !important; }
 
 // ── Interactive webR blocks — keep editor functional, match card framing ──────
 
@@ -481,6 +474,72 @@ details.arg-item {
   }
 }
 
+.example-section { margin: 0.5rem 0 1.5rem; }
+
+// ── Topic cards — large collapsible sections for Getting Started page ────────
+
+details.topic-card {
+  border: 1px solid $c-border-md;
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+
+  > summary {
+    background: $c-bg-sec;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-family: $sans;
+    font-size: 15px;
+    font-weight: 600;
+    color: $forest-green;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    transition: background 0.15s;
+
+    &::-webkit-details-marker { display: none; }
+    &:hover { background: $c-bg-ter; }
+
+    &::after {
+      content: "";
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
+      flex-shrink: 0;
+      background: $sage-green;
+      -webkit-mask: no-repeat center / contain
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      mask: no-repeat center / contain
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      transition: transform 0.18s ease;
+    }
+  }
+
+  &[open] > summary {
+    border-bottom: 1px solid $c-border-md;
+    background: $c-bg-sec;
+  }
+  &[open] > summary::after { transform: rotate(180deg); }
+
+  .topic-card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+    background: $c-bg;
+    font-size: 14px;
+    line-height: 1.75;
+    color: $c-text;
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: $forest-green;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    > *:first-child { margin-top: 0; }
+  }
+}
+
 // ── Example cards — foldable, same style as arg-item accordions ───────────────
 
 details.example-item {
@@ -491,7 +550,7 @@ details.example-item {
   &:last-child { border-bottom: 0.5px solid $c-border; }
 
   summary {
-    background: $c-bg;
+    background: $c-bg-sec;
     padding: 0.85rem 1.25rem;
     cursor: pointer;
     font-family: $sans;
@@ -505,7 +564,7 @@ details.example-item {
     transition: background 0.15s;
 
     &::-webkit-details-marker { display: none; }
-    &:hover { background: $c-bg-sec; }
+    &:hover { background: $c-bg-ter; }
 
     &::after {
       content: "";

@@ -5,22 +5,13 @@ subtitle: "Round to a fixed number of decimal places. See [original documentatio
 
 <a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">base R documentation ↗</a>
 
-## Required arguments
+## Syntax
 
-### Syntax
+### Required Arguments
 
 ```{r, eval=FALSE}
 round(x)
 ```
-
-| Parameter | Type | Description |
-|---|---|---|
-| `x` | [numeric]{.pill} | The number (or numeric vector) you want to round. |
-
-::: {.returns-box}
-[Returns]{.returns-label}
-A numeric vector the same length as `x`, rounded to the specified number of decimal places.
-:::
 
 ### Description
 
@@ -45,7 +36,71 @@ mutate(pct_label = round(ibu_mg / label_claim_mg * 100, 2))  # rounding contamin
 ```
 :::
 
+### Required and optional arguments
+
+```{r, eval=FALSE}
+round(x, digits = 0)
+```
+
+### Description
+
+::: {.desc-item}
+`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
+The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
+:::
+
+::: {.callout-tip}
+## Rule of thumb
+Use `round()` when a **fixed number of decimal places** is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p.
+Use `signif()` for analytical concentrations and masses where **significant figures** reflect instrument precision.
+:::
+
+## Argument Overview
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A single number or a numeric vector.
+`round()` is vectorised — it applies to every element of a vector.
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>digits</code> — number of decimal places <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Number of digits to the right of the decimal point.
+Default is `0`, which rounds to the nearest integer.
+Negative values round to the left of the decimal point.
+
+| `digits` | Meaning | Example: `round(1587.346, digits)` |
+|---|---|---|
+| `2` | 2 decimal places | `1587.35` |
+| `1` | 1 decimal place | `1587.3` |
+| `0` | nearest integer **(default)** | `1587` |
+| `-1` | nearest 10 | `1590` |
+| `-2` | nearest 100 | `1600` |
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>0</code></p>
+</div>
+</details>
+:::
+
+::: {.callout-warning}
+## Banker's rounding (round-half-to-even)
+R uses **banker's rounding**: when a value is exactly halfway between two options, it rounds to the nearest *even* digit.
+`round(0.5)` gives `0`, and `round(1.5)` gives `2`.
+This is statistically unbiased and follows IEC 60559, but it may differ from the "always round up" rule you learned in school.
+:::
+
 ## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
 <summary>Reporting percentage label claim to two decimal places</summary>
@@ -137,65 +192,4 @@ signif(values, 2)    # 0.0041, 7.4, 1300    — consistent precision
 </div>
 </details>
 
-## Required and optional arguments
-
-### Syntax
-
-```{r, eval=FALSE}
-round(x, digits = 0)
-```
-
-### Description
-
-::: {.desc-item}
-`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
-The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
-:::
-
-::: {.callout-tip}
-## Rule of thumb
-Use `round()` when a **fixed number of decimal places** is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p.
-Use `signif()` for analytical concentrations and masses where **significant figures** reflect instrument precision.
-:::
-
-## Input Arguments
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-A single number or a numeric vector.
-`round()` is vectorised — it applies to every element of a vector.
-
-<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
 </div>
-</details>
-
-<details class="arg-item">
-<summary><code>digits</code> — number of decimal places <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Number of digits to the right of the decimal point.
-Default is `0`, which rounds to the nearest integer.
-Negative values round to the left of the decimal point.
-
-| `digits` | Meaning | Example: `round(1587.346, digits)` |
-|---|---|---|
-| `2` | 2 decimal places | `1587.35` |
-| `1` | 1 decimal place | `1587.3` |
-| `0` | nearest integer **(default)** | `1587` |
-| `-1` | nearest 10 | `1590` |
-| `-2` | nearest 100 | `1600` |
-
-<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>0</code></p>
-</div>
-</details>
-:::
-
-::: {.callout-warning}
-## Banker's rounding (round-half-to-even)
-R uses **banker's rounding**: when a value is exactly halfway between two options, it rounds to the nearest *even* digit.
-`round(0.5)` gives `0`, and `round(1.5)` gives `2`.
-This is statistically unbiased and follows IEC 60559, but it may differ from the "always round up" rule you learned in school.
-:::

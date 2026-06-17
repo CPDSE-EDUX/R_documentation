@@ -5,23 +5,13 @@ subtitle: "Round to a given number of significant figures. See [original documen
 
 <a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">base R documentation ↗</a>
 
-## Required arguments
+## Syntax
 
-### Syntax
+### Required Arguments
 
 ```{r, eval=FALSE}
 signif(x, digits)
 ```
-
-| Parameter | Type | Description |
-|---|---|---|
-| `x` | [numeric]{.pill} | The number (or numeric vector) you want to round. |
-| `digits` | [integer]{.pill} | How many significant figures to keep. |
-
-::: {.returns-box}
-[Returns]{.returns-label}
-A numeric vector the same length as `x`, rounded to the requested number of significant figures.
-:::
 
 ### Description
 
@@ -47,7 +37,63 @@ C2_ug_ml <- signif((absorbance - std_intercept) / std_slope, 3)
 ```
 :::
 
+### Required and optional arguments
+
+```{r, eval=FALSE}
+signif(x, digits = 6)
+```
+
+### Description
+
+::: {.desc-item}
+`signif(x, digits = 6)` shows the default value of `digits`.
+If you omit `digits`, R keeps 6 significant figures.
+In practice you should always state `digits` explicitly to match the precision of your method.
+:::
+
+::: {.callout-tip}
+## Rule of thumb
+Use `signif()` for most analytical and pharmacokinetic results where the number of significant figures is specified by the instrument or method (e.g., 3 sig figs from a UV spectrophotometer).
+Use `round()` when a fixed number of decimal places is required — such as percentages always displayed to 2 decimal places.
+:::
+
+## Argument Overview
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A single number or a numeric vector.
+`signif()` is vectorised — it applies element-wise to every value in the vector.
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>digits</code> — number of significant figures <span class="arg-types">integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The number of significant figures to keep.
+Must be a positive integer.
+A significant figure is any digit from the first non-zero digit onward.
+
+| `x` | `digits` | Result | Explanation |
+|---|---|---|---|
+| `31.187` | `3` | `31.2` | Digits: 3, 1, 2 |
+| `0.004512` | `2` | `0.0045` | Digits: 4, 5 |
+| `158400` | `3` | `158000` | Digits: 1, 5, 8 |
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Must be ≥ 1</p>
+</div>
+</details>
+:::
+
 ## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
 <summary>Reporting an analytical concentration</summary>
@@ -130,57 +176,4 @@ round(x, 5)    # 0.00342  (to get 3 sig figs you'd need to know the position)
 </div>
 </details>
 
-## Required and optional arguments
-
-### Syntax
-
-```{r, eval=FALSE}
-signif(x, digits = 6)
-```
-
-### Description
-
-::: {.desc-item}
-`signif(x, digits = 6)` shows the default value of `digits`.
-If you omit `digits`, R keeps 6 significant figures.
-In practice you should always state `digits` explicitly to match the precision of your method.
-:::
-
-::: {.callout-tip}
-## Rule of thumb
-Use `signif()` for most analytical and pharmacokinetic results where the number of significant figures is specified by the instrument or method (e.g., 3 sig figs from a UV spectrophotometer).
-Use `round()` when a fixed number of decimal places is required — such as percentages always displayed to 2 decimal places.
-:::
-
-## Input Arguments
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-A single number or a numeric vector.
-`signif()` is vectorised — it applies element-wise to every value in the vector.
-
-<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
 </div>
-</details>
-
-<details class="arg-item">
-<summary><code>digits</code> — number of significant figures <span class="arg-types">integer</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The number of significant figures to keep.
-Must be a positive integer.
-A significant figure is any digit from the first non-zero digit onward.
-
-| `x` | `digits` | Result | Explanation |
-|---|---|---|---|
-| `31.187` | `3` | `31.2` | Digits: 3, 1, 2 |
-| `0.004512` | `2` | `0.0045` | Digits: 4, 5 |
-| `158400` | `3` | `158000` | Digits: 1, 5, 8 |
-
-<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Must be ≥ 1</p>
-</div>
-</details>
-:::

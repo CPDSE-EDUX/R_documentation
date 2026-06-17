@@ -5,9 +5,9 @@ subtitle: "Add or transform columns in a data frame. See [original documentation
 
 <a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">dplyr documentation ↗</a>
 
-## Required arguments
+## Syntax
 
-### Syntax
+### Required Arguments
 
 ```{r, eval=FALSE}
 df %>% mutate(new_col = expression)
@@ -16,16 +16,6 @@ df %>% mutate(new_col = expression)
 ```{r, eval=FALSE}
 df %>% mutate(new_col = expression, another_col = expression)
 ```
-
-| Parameter | Type | Description |
-|---|---|---|
-| `.data` | [tibble]{.pill} | The data frame to modify (supplied automatically by the pipe). |
-| `...` | [name = expr]{.pill} | One or more `new_col = expression` pairs defining columns. |
-
-::: {.returns-box}
-[Returns]{.returns-label}
-A [tibble](tibble.qmd) (or data frame) with the new or modified columns added.
-:::
 
 ### Description
 
@@ -46,7 +36,92 @@ Apply `signif()` or `round()` only inside `cat()` when printing a final result.
 Rounding a column that feeds into later calculations accumulates error.
 :::
 
+### Required and optional arguments
+
+```{r, eval=FALSE}
+df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
+```
+
+### Description
+
+::: {.desc-item}
+`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
+The default `"all"` retains every column, including unmodified ones.
+The optional `.before` / `.after` arguments control where new columns are inserted.
+:::
+
+## Argument Overview
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to modify. In a pipe (`%>%` or `%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
+
+```r
+# .data is passed automatically by the pipe:
+capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more expressions of the form `new_column_name = expression`.
+The right-hand side can reference any column in `.data` by name, and can also reference columns created earlier in the same `mutate()` call.
+Separate multiple expressions with commas.
+
+```r
+mutate(
+  fill_mass_mg = mass_filled_mg - mass_empty_mg,   # uses two existing columns
+  ibu_mg       = fill_mass_mg * ibu_per_mg_powder  # references the column just created above
+)
+```
+
+<p class="data-types"><strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.keep</code> <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls which columns from `.data` appear in the output alongside the new/modified columns.
+
+| Value | Behaviour |
+|---|---|
+| `"all"` | Keep all original columns **(default)** |
+| `"used"` | Keep only columns referenced in the expressions |
+| `"unused"` | Keep only columns *not* referenced |
+| `"none"` | Drop all original columns (equivalent to `transmute()`) |
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> — one of <code>"all"</code>, <code>"used"</code>, <code>"unused"</code>, <code>"none"</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.before</code> / <code>.after</code> <span class="arg-types">column name | integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls where the new columns are inserted.
+By default new columns are appended on the right.
+
+```r
+capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg, .after = mass_filled_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> unquoted column name or integer position</p>
+</div>
+</details>
+:::
+
 ## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
 <summary>Capsule content uniformity — computing fill mass and % label claim</summary>
@@ -131,86 +206,4 @@ samples
 </div>
 </details>
 
-## Required and optional arguments
-
-### Syntax
-
-```{r, eval=FALSE}
-df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
-```
-
-### Description
-
-::: {.desc-item}
-`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
-The default `"all"` retains every column, including unmodified ones.
-The optional `.before` / `.after` arguments control where new columns are inserted.
-:::
-
-## Input Arguments
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The data frame to modify. In a pipe (`%>%` or `%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
-
-```r
-# .data is passed automatically by the pipe:
-capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
 </div>
-</details>
-
-<details class="arg-item">
-<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-One or more expressions of the form `new_column_name = expression`.
-The right-hand side can reference any column in `.data` by name, and can also reference columns created earlier in the same `mutate()` call.
-Separate multiple expressions with commas.
-
-```r
-mutate(
-  fill_mass_mg = mass_filled_mg - mass_empty_mg,   # uses two existing columns
-  ibu_mg       = fill_mass_mg * ibu_per_mg_powder  # references the column just created above
-)
-```
-
-<p class="data-types"><strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.keep</code> <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls which columns from `.data` appear in the output alongside the new/modified columns.
-
-| Value | Behaviour |
-|---|---|
-| `"all"` | Keep all original columns **(default)** |
-| `"used"` | Keep only columns referenced in the expressions |
-| `"unused"` | Keep only columns *not* referenced |
-| `"none"` | Drop all original columns (equivalent to `transmute()`) |
-
-<p class="data-types"><strong>Data Types:</strong> <code>character</code> — one of <code>"all"</code>, <code>"used"</code>, <code>"unused"</code>, <code>"none"</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.before</code> / <code>.after</code> <span class="arg-types">column name | integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls where the new columns are inserted.
-By default new columns are appended on the right.
-
-```r
-capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg, .after = mass_filled_mg)
-```
-
-<p class="data-types"><strong>Data Types:</strong> unquoted column name or integer position</p>
-</div>
-</details>
-:::
