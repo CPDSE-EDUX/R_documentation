@@ -5,7 +5,7 @@ project:
 website:
   title: "R for Pharmacy"
   description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
-  favicon: images/favicon.ico
+  favicon: assets/images/favicon.ico
 
   navbar:
     background: "#3C5E3E"
