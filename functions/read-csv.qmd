@@ -1,13 +1,23 @@
 ---
 title: "read_csv( )"
-subtitle: "Import a CSV file as a [tibble](tibble.qmd). readcsv() and readcsv2() are both specific implementations of the more general read_delim() function from the readr package."
+subtitle: "Import a CSV file as a [tibble](tibble.qmd). readcsv() and readcsv2() are from the readr package, which is part of the tidyverse."
 ---
 
+<div class="source-links">
 <a class="source-link" href="https://readr.tidyverse.org/reference/read_delim.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-import.html" target="_blank" rel="noopener">Cheatsheet ↗</a>
+<a class="source-link" href="/assets/data/dissolution_data_raw.csv" download>Example File (.csv) ↓</a>
+</div>
+
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
 
 ## Syntax
-
-### Required Arguments
 
 ```{r, eval=FALSE}
 read_csv(file)
@@ -35,34 +45,8 @@ read_lines("https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debug
 ```
 :::
 
-### Required and Optional Arguments
-
-```{r, eval=FALSE}
-read_csv(
-  file,
-  col_names = TRUE,
-  col_types = NULL,
-  col_select = NULL,
-  id = NULL,
-  locale = default_locale(),
-  na = c("", "NA"),
-  quoted_na = TRUE,
-  quote = "\"",
-  comment = "",
-  trim_ws = TRUE,
-  skip = 0,
-  n_max = Inf,
-  guess_max = min(1000, n_max),
-  name_repair = "unique",
-  num_threads = readr_threads(),
-  progress = show_progress(),
-  show_col_types = should_show_types(),
-  skip_empty_rows = TRUE,
-  lazy = should_read_lazy()
-)
-```
-
 ## Argument Overview
+Required arguments must be included when using a function while optional arguments can be included on demand.
 
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
@@ -98,33 +82,6 @@ read_csv("data.csv", col_names = c("id", "dose", "response"))
 </details>
 
 <details class="arg-item">
-<summary><code>col_types</code> — column type specification <span class="arg-types">cols() specification</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Explicitly declares the type of one or more columns.
-If omitted, `read_csv()` guesses types from the first `guess_max` rows.
-
-Common column type functions:
-
-| Function | Type | Use when… |
-|---|---|---|
-| `col_character()` | text | IDs, codes, batch numbers |
-| `col_double()` | decimal number | concentrations, masses, percentages |
-| `col_integer()` | whole number | counts, time points in whole minutes |
-| `col_logical()` | TRUE/FALSE | binary flags |
-| `col_skip()` | — | ignore this column |
-
-```r
-read_csv("data.csv", col_types = cols(
-  batch_id = col_character(),
-  dose_mg  = col_double()
-))
-```
-
-<p class="data-types"><strong>Data Types:</strong> output of <code>cols()</code></p>
-</div>
-</details>
-
-<details class="arg-item">
 <summary><code>col_select</code> — select columns to read <span class="arg-types">tidy-select</span> <span class="arg-badge optional">Optional</span></summary>
 <div class="arg-body">
 Read only a subset of columns. Accepts tidy-select syntax — column names, ranges, or helper functions like `starts_with()`.
@@ -138,31 +95,6 @@ read_csv("data.csv", col_select = starts_with("conc"))
 </div>
 </details>
 
-<details class="arg-item">
-<summary><code>id</code> — add a column with the file path <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-If provided, a new column with this name is added containing the file path. Useful when reading multiple files and tracking their source.
-
-```r
-read_csv("data.csv", id = "source_file")
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>character</code> · Default: <code>NULL</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>locale</code> — locale settings for parsing <span class="arg-types">locale()</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls locale-specific parsing: date formats, decimal marks, encoding, and timezone. Use `locale()` to customise.
-
-```r
-read_csv("data.csv", locale = locale(decimal_mark = ",", encoding = "UTF-8"))
-```
-
-<p class="data-types"><strong>Data Types:</strong> output of <code>locale()</code> · Default: <code>default_locale()</code></p>
-</div>
-</details>
 
 <details class="arg-item">
 <summary><code>na</code> — strings to interpret as missing <span class="arg-types">character vector</span> <span class="arg-badge optional">Optional</span></summary>
@@ -179,31 +111,7 @@ read_csv("data.csv", na = c("", "NA", "N/A", "ND", "Missing", "."))
 </div>
 </details>
 
-<details class="arg-item">
-<summary><code>quoted_na</code> — treat quoted NA as missing <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-If `TRUE` (default), `"NA"` inside quotes is treated as a missing value. Set to `FALSE` to keep it as the string `"NA"`.
 
-```r
-read_csv("data.csv", quoted_na = FALSE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>TRUE</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>quote</code> — quoting character <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-The single character used to quote strings. Defaults to `"\""`(double quote). Change if your file uses single quotes.
-
-```r
-read_csv("data.csv", quote = "'")
-```
-
-<p class="data-types"><strong>Data Types:</strong> single <code>character</code> · Default: <code>"\""</code></p>
-</div>
-</details>
 
 <details class="arg-item">
 <summary><code>comment</code> — comment character <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
@@ -260,19 +168,6 @@ read_csv("large_dataset.csv", n_max = 100)   # first 100 rows only
 </details>
 
 <details class="arg-item">
-<summary><code>guess_max</code> — rows used to guess column types <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Number of rows scanned to guess column types when `col_types` is not set. Increase if your file has inconsistent values in early rows.
-
-```r
-read_csv("data.csv", guess_max = 5000)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>min(1000, n_max)</code></p>
-</div>
-</details>
-
-<details class="arg-item">
 <summary><code>name_repair</code> — strategy for duplicate or invalid column names <span class="arg-types">character | function</span> <span class="arg-badge optional">Optional</span></summary>
 <div class="arg-body">
 How to handle column names that are duplicated or syntactically invalid. Common options: `"unique"` (default), `"minimal"`, `"universal"`, or a custom function.
@@ -282,46 +177,6 @@ read_csv("data.csv", name_repair = "universal")
 ```
 
 <p class="data-types"><strong>Data Types:</strong> <code>character</code> | <code>function</code> · Default: <code>"unique"</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>num_threads</code> — number of threads for parsing <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Number of processing threads used when reading. Defaults to the value of `readr_threads()`, which uses all available cores.
-
-```r
-read_csv("data.csv", num_threads = 1)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>readr_threads()</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>progress</code> — show a progress bar <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-If `TRUE`, a progress bar is displayed when reading large files. Automatically suppressed in non-interactive sessions.
-
-```r
-read_csv("large_dataset.csv", progress = FALSE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>show_progress()</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>show_col_types</code> — suppress column type message <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-By default, `read_csv()` prints a message listing each column's detected type.
-Set `show_col_types = FALSE` to suppress this message in your output.
-
-```r
-data <- read_csv("data.csv", show_col_types = FALSE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>should_show_types()</code></p>
 </div>
 </details>
 
@@ -338,18 +193,6 @@ read_csv("data.csv", skip_empty_rows = FALSE)
 </div>
 </details>
 
-<details class="arg-item">
-<summary><code>lazy</code> — read file lazily <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-If `TRUE`, the file is read lazily — only the parts that are actually accessed are loaded into memory. Useful for large files when you only need a few columns.
-
-```r
-read_csv("large_dataset.csv", lazy = TRUE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>should_read_lazy()</code></p>
-</div>
-</details>
 :::
 
 ## Examples
@@ -381,7 +224,7 @@ head(data)
 See if you have to use `read_csv()` or `read_csv2()` by printing the first 3 rows of your .csv file.
 
 ```{webr-r}
-read_lines("file.csv", n_max = 3)
+read_lines("https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv", n_max = 3)
 ```
 </div>
 </details>
@@ -389,15 +232,127 @@ read_lines("file.csv", n_max = 3)
 <details class="example-item">
 <summary>Handle missing value codes</summary>
 <div class="example-body">
-Clinical data exports often encode missing values as `"N/A"`, `"-"`, or a blank space. Use the optional argument `na` to unify how missing data is handled. In this example, `N/A`, `-`, and empty cells are rewritten as `NA`.
+The [example file](/assets/data/dissolution_data_raw.csv) above has missing absorbance readings encoded three different ways — `"N/A"`, `"-"`, and a blank cell. Use the optional argument `na` to unify how all of them are handled, so they all become `NA`.
 
 ```{webr-r}
 library(readr)
 
 df_na <- read_csv(
-  "data.csv",
+  "/assets/data/dissolution_data_raw.csv",
+  skip = 2,
   na = c("", "N/A", "-")
 )
+
+df_na
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Skip blank rows left over from instrument exports</summary>
+<div class="example-body">
+The [example file](/assets/data/dissolution_data_raw.csv) also has a fully blank row between tablet 1 and tablet 2 — common after copy-pasting from Excel. By default `skip_empty_rows = TRUE` drops it automatically. Set it to `FALSE` if you need to keep it (it shows up as a row of `NA`s).
+
+```{webr-r}
+library(readr)
+
+read_csv("/assets/data/dissolution_data_raw.csv", skip = 2)
+read_csv("/assets/data/dissolution_data_raw.csv", skip = 2, skip_empty_rows = FALSE)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Select only the columns you need</summary>
+<div class="example-body">
+The dissolution data has 5 columns (`tablet`, `weight_mg`, `time_min`, `absorbance`, `dilution`). Use `col_select` to keep only the ones relevant to your analysis — here, just the tablet ID and the measured absorbance over time.
+
+```{webr-r}
+library(readr)
+
+df_subset <- read_csv(
+  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv",
+  col_select = c(tablet, time_min, absorbance)
+)
+
+head(df_subset)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Skip metadata rows from an instrument export</summary>
+<div class="example-body">
+The [example file](/assets/data/dissolution_data_raw.csv) starts with 2 lines of instrument metadata (device name, run date) before the real header row. Use `skip` to jump straight to the data — without it, `read_csv()` would try to use the device name as your column names.
+
+```{webr-r}
+library(readr)
+
+# without skip — the metadata line becomes a bogus header
+read_csv("/assets/data/dissolution_data_raw.csv")
+
+# with skip — the real header and data are read correctly
+read_csv("/assets/data/dissolution_data_raw.csv", skip = 2)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Preview the first rows of a large file</summary>
+<div class="example-body">
+Use `n_max` to read in only a handful of rows — useful for previewing a large dataset without loading the whole thing.
+
+```{webr-r}
+library(readr)
+
+df_preview <- read_csv(
+  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv",
+  n_max = 5
+)
+
+df_preview
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Ignore comment lines in the file</summary>
+<div class="example-body">
+Some exported `.csv` files include annotation lines starting with `#`. Tell `read_csv()` to ignore everything after `#` on a line with the `comment` argument, so these annotations don't get parsed as data.
+
+```{webr-r}
+library(readr)
+
+annotated_csv <- I(
+"tablet,weight_mg,time_min,absorbance,dilution
+# dissolution apparatus 2, paddle speed 50 rpm
+1,498,5,0.149,1
+1,498,10,0.498,1
+# vessel temperature held at 37C
+1,498,15,0.492,2"
+)
+
+df_clean <- read_csv(annotated_csv, comment = "#")
+df_clean
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Set your own column names</summary>
+<div class="example-body">
+If a file has no header row, or you want clearer column names than the original file provides, supply a character vector to `col_names`. Make sure the order matches the columns in the file, and use `skip = 1` to drop the original header row.
+
+```{webr-r}
+library(readr)
+
+df_named <- read_csv(
+  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv",
+  col_names = c("tablet_id", "weight_mg", "time_min", "abs", "dilution_factor"),
+  skip = 1
+)
+
+head(df_named)
 ```
 </div>
 </details>

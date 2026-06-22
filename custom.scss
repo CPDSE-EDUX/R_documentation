@@ -414,6 +414,13 @@ details.arg-item {
 
 // ── Source link pill (e.g. "readr docs") ──────────────────────────────────────
 
+.source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
 .source-link {
   display: inline-flex;
   align-items: center;
@@ -434,6 +441,12 @@ details.arg-item {
     text-decoration: none;
   }
 }
+
+// Buttons grouped in a flex row shouldn't each add bottom margin
+.source-links .source-link {
+  margin-bottom: 0;
+}
+
 
 // ── Type pill (param tables, arg headers) ─────────────────────────────────────
 
