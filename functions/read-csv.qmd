@@ -240,13 +240,13 @@ df_na
 <details class="example-item">
 <summary>Skip blank rows left over from instrument exports</summary>
 <div class="example-body">
-The [example file](/assets/data/dissolution_data_raw.csv) also has a fully blank row between tablet 1 and tablet 2 — common after copy-pasting from Excel. By default `skip_empty_rows = TRUE` drops it automatically. Set it to `FALSE` if you need to keep it (it shows up as a row of `NA`s).
+The [example file](https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv) also has a fully blank row between tablet 1 and tablet 2 — common after copy-pasting from Excel. By default `skip_empty_rows = TRUE` drops it automatically. Set it to `FALSE` if you need to keep it (it shows up as a row of `NA`s).
 
 ```{webr-r}
 library(tidyverse)
 
-read_csv("/assets/data/dissolution_data_raw.csv", skip = 2)
-read_csv("/assets/data/dissolution_data_raw.csv", skip = 2, skip_empty_rows = FALSE)
+read_csv("https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv", skip = 2)
+read_csv("https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv", skip = 2, skip_empty_rows = FALSE)
 ```
 </div>
 </details>
