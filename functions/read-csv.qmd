@@ -6,13 +6,13 @@ subtitle: "Import a CSV file as a [tibble](tibble.qmd). readcsv() and readcsv2()
 <div class="source-links">
 <a class="source-link" href="https://readr.tidyverse.org/reference/read_delim.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-import.html" target="_blank" rel="noopener">Cheatsheet ↗</a>
+</div>
 
 ## Required Library
 ```r
 install.packages("tidyverse")
 library(tidyverse)
 ```
-
 
 ## Syntax
 

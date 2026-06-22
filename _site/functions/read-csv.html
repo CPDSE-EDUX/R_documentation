@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../images/favicon.ico" rel="icon">
+<link href="../assets/images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -405,7 +405,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"read_lines(\"https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv\", n_max = 3)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\ndata <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv\"\n)\n\n# Quick preview\nhead(data)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"read_lines(\"https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv\", n_max = 3)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\ndf_na <- read_csv(\n  \"/assets/data/dissolution_data_raw.csv\",\n  skip = 2,\n  na = c(\"\", \"N/A\", \"-\")\n)\n\ndf_na","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\nread_csv(\"/assets/data/dissolution_data_raw.csv\", skip = 2)\nread_csv(\"/assets/data/dissolution_data_raw.csv\", skip = 2, skip_empty_rows = FALSE)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\ndf_subset <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv\",\n  col_select = c(tablet, time_min, absorbance)\n)\n\nhead(df_subset)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\n# without skip — the metadata line becomes a bogus header\nread_csv(\"/assets/data/dissolution_data_raw.csv\")\n\n# with skip — the real header and data are read correctly\nread_csv(\"/assets/data/dissolution_data_raw.csv\", skip = 2)","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\ndf_preview <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv\",\n  n_max = 5\n)\n\ndf_preview","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\nannotated_csv <- I(\n\"tablet,weight_mg,time_min,absorbance,dilution\n# dissolution apparatus 2, paddle speed 50 rpm\n1,498,5,0.149,1\n1,498,10,0.498,1\n# vessel temperature held at 37C\n1,498,15,0.492,2\"\n)\n\ndf_clean <- read_csv(annotated_csv, comment = \"#\")\ndf_clean","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(readr)\n\ndf_named <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv\",\n  col_names = c(\"tablet_id\", \"weight_mg\", \"time_min\", \"abs\", \"dilution_factor\"),\n  skip = 1\n)\n\nhead(df_named)","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"read_lines(\"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\", n_max = 3)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndata <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\"\n)\n\n# Quick preview\nhead(data)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_na <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\",\n  skip = 2,\n  na = c(\"\", \"N/A\", \"-\")\n)\n\ndf_na","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\nread_csv(\"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\", skip = 2)\nread_csv(\"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\", skip = 2, skip_empty_rows = FALSE)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_subset <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\",\n  col_select = c(tablet, time_min, absorbance)\n)\n\nhead(df_subset)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\n# without skip — the metadata line becomes a bogus header\nread_csv(\"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\")\n\n# with skip — the real header and data are read correctly\nread_csv(\"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\", skip = 2)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_preview <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\",\n  n_max = 5\n)\n\ndf_preview","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\nannotated_csv <- I(\n\"tablet,weight_mg,time_min,absorbance,dilution\n# dissolution apparatus 2, paddle speed 50 rpm\n1,498,5,0.149,1\n1,498,10,0.498,1\n# vessel temperature held at 37C\n1,498,15,0.492,2\"\n)\n\ndf_clean <- read_csv(annotated_csv, comment = \"#\")\ndf_clean","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_named <- read_csv(\n  \"https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv\",\n  col_names = c(\"tablet_id\", \"weight_mg\", \"time_min\", \"abs\", \"dilution_factor\"),\n  skip = 1\n)\n\nhead(df_named)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -2354,21 +2354,11 @@ Read a CSV file from your computer
 </details>
 <details class="example-item">
 <summary>
-Check the file structure
-</summary>
-<div class="example-body">
-<p>See if you have to use <code>read_csv()</code> or <code>read_csv2()</code> by printing the first 3 rows of your .csv file.</p>
-<div id="qwebr-insertion-location-3"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="example-item">
-<summary>
 Handle missing value codes
 </summary>
 <div class="example-body">
-<p>The <a href="..\assets/data/dissolution_data_raw.csv">example file</a> above has missing absorbance readings encoded three different ways — <code>"N/A"</code>, <code>"-"</code>, and a blank cell. Use the optional argument <code>na</code> to unify how all of them are handled, so they all become <code>NA</code>.</p>
-<div id="qwebr-insertion-location-4"></div>
+<p>The <a href="https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv">example file</a> above has missing absorbance readings encoded three different ways — <code>"N/A"</code>, <code>"-"</code>, and a blank cell. Use the optional argument <code>na</code> to unify how all of them are handled, so they all become <code>NA</code>.</p>
+<div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2377,8 +2367,8 @@ Handle missing value codes
 Skip blank rows left over from instrument exports
 </summary>
 <div class="example-body">
-<p>The <a href="..\assets/data/dissolution_data_raw.csv">example file</a> also has a fully blank row between tablet 1 and tablet 2 — common after copy-pasting from Excel. By default <code>skip_empty_rows = TRUE</code> drops it automatically. Set it to <code>FALSE</code> if you need to keep it (it shows up as a row of <code>NA</code>s).</p>
-<div id="qwebr-insertion-location-5"></div>
+<p>The <a href="https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv">example file</a> also has a fully blank row between tablet 1 and tablet 2 — common after copy-pasting from Excel. By default <code>skip_empty_rows = TRUE</code> drops it automatically. Set it to <code>FALSE</code> if you need to keep it (it shows up as a row of <code>NA</code>s).</p>
+<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2388,7 +2378,7 @@ Select only the columns you need
 </summary>
 <div class="example-body">
 <p>The dissolution data has 5 columns (<code>tablet</code>, <code>weight_mg</code>, <code>time_min</code>, <code>absorbance</code>, <code>dilution</code>). Use <code>col_select</code> to keep only the ones relevant to your analysis — here, just the tablet ID and the measured absorbance over time.</p>
-<div id="qwebr-insertion-location-6"></div>
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2397,8 +2387,8 @@ Select only the columns you need
 Skip metadata rows from an instrument export
 </summary>
 <div class="example-body">
-<p>The <a href="..\assets/data/dissolution_data_raw.csv">example file</a> starts with 2 lines of instrument metadata (device name, run date) before the real header row. Use <code>skip</code> to jump straight to the data — without it, <code>read_csv()</code> would try to use the device name as your column names.</p>
-<div id="qwebr-insertion-location-7"></div>
+<p>The <a href="https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv">example file</a> starts with 2 lines of instrument metadata (device name, run date) before the real header row. Use <code>skip</code> to jump straight to the data — without it, <code>read_csv()</code> would try to use the device name as your column names.</p>
+<div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2408,7 +2398,7 @@ Preview the first rows of a large file
 </summary>
 <div class="example-body">
 <p>Use <code>n_max</code> to read in only a handful of rows — useful for previewing a large dataset without loading the whole thing.</p>
-<div id="qwebr-insertion-location-8"></div>
+<div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2418,7 +2408,7 @@ Ignore comment lines in the file
 </summary>
 <div class="example-body">
 <p>Some exported <code>.csv</code> files include annotation lines starting with <code>#</code>. Tell <code>read_csv()</code> to ignore everything after <code>#</code> on a line with the <code>comment</code> argument, so these annotations don’t get parsed as data.</p>
-<div id="qwebr-insertion-location-9"></div>
+<div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2428,7 +2418,7 @@ Set your own column names
 </summary>
 <div class="example-body">
 <p>If a file has no header row, or you want clearer column names than the original file provides, supply a character vector to <code>col_names</code>. Make sure the order matches the columns in the file, and use <code>skip = 1</code> to drop the original header row.</p>
-<div id="qwebr-insertion-location-10"></div>
+<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
