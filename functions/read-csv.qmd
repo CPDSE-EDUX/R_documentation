@@ -6,9 +6,6 @@ subtitle: "Import a CSV file as a [tibble](tibble.qmd). readcsv() and readcsv2()
 <div class="source-links">
 <a class="source-link" href="https://readr.tidyverse.org/reference/read_delim.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-import.html" target="_blank" rel="noopener">Cheatsheet ↗</a>
-<a class="source-link" href="/assets/data/dissolution_data_raw.csv" download>Example File (.csv) ↓</a>
-</div>
-
 
 ## Required Library
 ```r
@@ -41,7 +38,7 @@ read_csv2(file)
 English standard vs. danish standard. To find out how your `.csv`file is formatted, open it with a text editor on your computer or use the following code to print the first rows with R: `read_lines("file.csv", n_max = 3)`
 
 ```{webr-r}
-read_lines("https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv", n_max = 3)
+read_lines("https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv", n_max = 3)
 ```
 :::
 
@@ -196,6 +193,9 @@ read_csv("data.csv", skip_empty_rows = FALSE)
 :::
 
 ## Examples
+<a class="source-link" href="https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv" target="_blank" rel="noopener">Example File (.csv) ↗</a>
+</div>
+
 
 <div class="example-section">
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
@@ -206,10 +206,10 @@ read_csv("data.csv", skip_empty_rows = FALSE)
 In practice you pass a file path:
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 data <- read_csv(
-  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv"
+  "https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv"
 )
 
 # Quick preview
@@ -219,26 +219,15 @@ head(data)
 </details>
 
 <details class="example-item">
-<summary>Check the file structure</summary>
-<div class="example-body">
-See if you have to use `read_csv()` or `read_csv2()` by printing the first 3 rows of your .csv file.
-
-```{webr-r}
-read_lines("https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv", n_max = 3)
-```
-</div>
-</details>
-
-<details class="example-item">
 <summary>Handle missing value codes</summary>
 <div class="example-body">
-The [example file](/assets/data/dissolution_data_raw.csv) above has missing absorbance readings encoded three different ways — `"N/A"`, `"-"`, and a blank cell. Use the optional argument `na` to unify how all of them are handled, so they all become `NA`.
+The [example file](https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv) above has missing absorbance readings encoded three different ways — `"N/A"`, `"-"`, and a blank cell. Use the optional argument `na` to unify how all of them are handled, so they all become `NA`.
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 df_na <- read_csv(
-  "/assets/data/dissolution_data_raw.csv",
+  "https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv",
   skip = 2,
   na = c("", "N/A", "-")
 )
@@ -254,7 +243,7 @@ df_na
 The [example file](/assets/data/dissolution_data_raw.csv) also has a fully blank row between tablet 1 and tablet 2 — common after copy-pasting from Excel. By default `skip_empty_rows = TRUE` drops it automatically. Set it to `FALSE` if you need to keep it (it shows up as a row of `NA`s).
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 read_csv("/assets/data/dissolution_data_raw.csv", skip = 2)
 read_csv("/assets/data/dissolution_data_raw.csv", skip = 2, skip_empty_rows = FALSE)
@@ -268,10 +257,10 @@ read_csv("/assets/data/dissolution_data_raw.csv", skip = 2, skip_empty_rows = FA
 The dissolution data has 5 columns (`tablet`, `weight_mg`, `time_min`, `absorbance`, `dilution`). Use `col_select` to keep only the ones relevant to your analysis — here, just the tablet ID and the measured absorbance over time.
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 df_subset <- read_csv(
-  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv",
+  "https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv",
   col_select = c(tablet, time_min, absorbance)
 )
 
@@ -283,16 +272,16 @@ head(df_subset)
 <details class="example-item">
 <summary>Skip metadata rows from an instrument export</summary>
 <div class="example-body">
-The [example file](/assets/data/dissolution_data_raw.csv) starts with 2 lines of instrument metadata (device name, run date) before the real header row. Use `skip` to jump straight to the data — without it, `read_csv()` would try to use the device name as your column names.
+The [example file](https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv) starts with 2 lines of instrument metadata (device name, run date) before the real header row. Use `skip` to jump straight to the data — without it, `read_csv()` would try to use the device name as your column names.
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 # without skip — the metadata line becomes a bogus header
-read_csv("/assets/data/dissolution_data_raw.csv")
+read_csv("https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv")
 
 # with skip — the real header and data are read correctly
-read_csv("/assets/data/dissolution_data_raw.csv", skip = 2)
+read_csv("https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv", skip = 2)
 ```
 </div>
 </details>
@@ -303,10 +292,10 @@ read_csv("/assets/data/dissolution_data_raw.csv", skip = 2)
 Use `n_max` to read in only a handful of rows — useful for previewing a large dataset without loading the whole thing.
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 df_preview <- read_csv(
-  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv",
+  "https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv",
   n_max = 5
 )
 
@@ -321,7 +310,7 @@ df_preview
 Some exported `.csv` files include annotation lines starting with `#`. Tell `read_csv()` to ignore everything after `#` on a line with the `comment` argument, so these annotations don't get parsed as data.
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 annotated_csv <- I(
 "tablet,weight_mg,time_min,absorbance,dilution
@@ -344,10 +333,10 @@ df_clean
 If a file has no header row, or you want clearer column names than the original file provides, supply a character vector to `col_names`. Make sure the order matches the columns in the file, and use `skip = 1` to drop the original header row.
 
 ```{webr-r}
-library(readr)
+library(tidyverse)
 
 df_named <- read_csv(
-  "https://raw.githubusercontent.com/CPDSE-EDUX/SDU-CodeClub/main/debugging/dissolution_data.csv",
+  "https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/dissolution_data_raw.csv",
   col_names = c("tablet_id", "weight_mg", "time_min", "abs", "dilution_factor"),
   skip = 1
 )

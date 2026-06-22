@@ -44,16 +44,9 @@ When you open RStudio you will see four panes:
 
 ### Installing packages
 
-Install packages once from CRAN using `install.packages()`:
+Install packages once from CRAN using `install.packages()`.
 
-```r
-install.packages("dplyr")
-install.packages("readr")
-install.packages("tibble")
-install.packages("ggplot2")
-```
-
-You install a package when you need functions it provides. Most functions you will need in the beginning are included in the tidyverse, so instead of installing different tidyverse packages (dplyr, readr, ggplot2, ...), you can also just install the basic tidyverse:
+You install a package when you need functions it provides. Most functions you will need in the beginning are included in the tidyverse, so you can usually just install the tidyverse:
 
 ```r
 install.packages("tidyverse")
@@ -64,14 +57,6 @@ You only need to do this once per computer. So instead of writing it in your scr
 ### Loading packages
 
 At the top of every script, load the packages you need with `library()`. This tells R which installed packages to make available in the current session.
-
-```r
-library(dplyr)      
-library(readr) 
-library(tibble)
-```
-
-Again, you can also choose to load the tidyverse instead of individual tidyverse packages:
 
 ```r
 library(tidyverse)
