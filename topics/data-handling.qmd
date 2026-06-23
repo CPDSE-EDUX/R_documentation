@@ -4,20 +4,14 @@ subtitle: "Filter rows, pick columns, sort, and reshape your data with dplyr."
 toc: true
 ---
 
-Run this setup chunk first — it creates the dataset used in all examples below.
+Run this setup chunk first — it loads the dataset used in all examples below.
 
 ```{webr-r}
-library(dplyr)
-library(tibble)
+library(tidyverse)
+#library(dplyr)
+#library(tibble)
 
-capsules <- tibble(
-  capsule_id   = 1:10,
-  batch        = c("A","A","A","A","A","B","B","B","B","B"),
-  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5,
-                   175.1, 174.8, 175.3, 174.6, 175.0),
-  pct_label    = c(99.8, 100.1, 100.3, 99.6, 100.0,
-                   100.5, 100.2, 100.7, 99.9, 100.4)
-)
+capsules <- read_csv("/home/web_user/capsules.csv")
 
 capsules
 ```

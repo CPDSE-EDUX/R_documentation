@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - assets/data/**
 
 website:
   title: "Basic R for Pharmacy"
@@ -103,6 +105,8 @@ webr:
     - ggplot2
     - readr
     - tibble
+  files:
+    - assets/data/**
   show-startup-message: false
 
 format:
