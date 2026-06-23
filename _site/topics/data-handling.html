@@ -372,7 +372,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\n#library(dplyr)\n#library(tibble)\n\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep only batch A capsules\ncapsules %>%\n  filter(batch == \"A\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep rows matching two conditions\ncapsules %>%\n  filter(batch == \"B\" & pct_label > 100)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  select(capsule_id, batch, pct_label)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Drop a column with -\ncapsules %>%\n  select(-fill_mass_mg)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  rename(id = capsule_id, pct = pct_label)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  arrange(desc(pct_label))","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"label_claim_mg <- 75.0\n\ncapsules %>%\n  mutate(ibu_mg = fill_mass_mg * 0.43) %>%\n  select(capsule_id, fill_mass_mg, ibu_mg, pct_label)","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  filter(batch == \"B\") %>%\n  arrange(pct_label) %>%\n  select(capsule_id, fill_mass_mg, pct_label)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\n#library(dplyr)\n#library(tibble)\n\n# Load from mounted webR paths first; fallback to downloading from site URLs.\nload_capsules <- function() {\n  candidate_paths <- c(\n    \"/home/web_user/capsules.csv\",\n    \"capsules.csv\",\n    \"assets/data/capsules.csv\",\n    \"../assets/data/capsules.csv\",\n    \"/assets/data/capsules.csv\"\n  )\n\n  for (path in candidate_paths) {\n    out <- tryCatch(\n      read_csv(path, show_col_types = FALSE),\n      error = function(e) NULL\n    )\n    if (!is.null(out)) return(out)\n  }\n\n  candidate_urls <- c(\n    \"../assets/data/capsules.csv\",\n    \"/assets/data/capsules.csv\"\n  )\n\n  for (url in candidate_urls) {\n    out <- tryCatch({\n      tmp <- tempfile(fileext = \".csv\")\n      utils::download.file(url, destfile = tmp, mode = \"wb\", quiet = TRUE)\n      read_csv(tmp, show_col_types = FALSE)\n    }, error = function(e) NULL)\n    if (!is.null(out)) return(out)\n  }\n\n  stop(\n    \"Could not load capsules.csv from webR mounted paths or site asset URLs. \"\n  )\n}\n\ncapsules <- load_capsules()\n\ncapsules","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep only batch A capsules\ncapsules %>%\n  filter(batch == \"A\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep rows matching two conditions\ncapsules %>%\n  filter(batch == \"B\" & pct_label > 100)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  select(capsule_id, batch, pct_label)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Drop a column with -\ncapsules %>%\n  select(-fill_mass_mg)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  rename(id = capsule_id, pct = pct_label)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  arrange(desc(pct_label))","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"label_claim_mg <- 75.0\n\ncapsules %>%\n  mutate(ibu_mg = fill_mass_mg * 0.43) %>%\n  select(capsule_id, fill_mass_mg, ibu_mg, pct_label)","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  filter(batch == \"B\") %>%\n  arrange(pct_label) %>%\n  select(capsule_id, fill_mass_mg, pct_label)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1629,7 +1629,7 @@ globalThis.qwebrExecuteCode = async function (
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1744,20 +1744,7 @@ globalThis.qwebrExecuteCode = async function (
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#filter" id="toc-filter" class="nav-link active" data-scroll-target="#filter">filter( )</a></li>
-  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select">select( )</a></li>
-  <li><a href="#rename" id="toc-rename" class="nav-link" data-scroll-target="#rename">rename( )</a></li>
-  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange">arrange( )</a></li>
-  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate">mutate( )</a></li>
-  <li><a href="#combining-steps" id="toc-combining-steps" class="nav-link" data-scroll-target="#combining-steps">Combining steps</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
@@ -2065,11 +2052,21 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
+<details class="topic-card" open="">
+<summary>
+Setup
+</summary>
+<div class="topic-card-body">
 <p>Run this setup chunk first — it loads the dataset used in all examples below.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<section id="filter" class="level2">
-<h2 class="anchored" data-anchor-id="filter">filter( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+filter( )
+</summary>
+<div class="topic-card-body">
 <p>Keep only rows where a condition is <code>TRUE</code>.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -2088,41 +2085,62 @@ Comparison operators
 <p><code>==</code> equal · <code>!=</code> not equal · <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code> greater/less than · <code>&amp;</code> and · <code>|</code> or</p>
 </div>
 </div>
-</section>
-<section id="select" class="level2">
-<h2 class="anchored" data-anchor-id="select">select( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+select( )
+</summary>
+<div class="topic-card-body">
 <p>Keep only the columns you need.</p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="rename" class="level2">
-<h2 class="anchored" data-anchor-id="rename">rename( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+rename( )
+</summary>
+<div class="topic-card-body">
 <p>Rename a column: <code>rename(new_name = old_name)</code>.</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="arrange" class="level2">
-<h2 class="anchored" data-anchor-id="arrange">arrange( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+arrange( )
+</summary>
+<div class="topic-card-body">
 <p>Sort rows by a column. Wrap in <code>desc()</code> to sort highest-first.</p>
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="mutate" class="level2">
-<h2 class="anchored" data-anchor-id="mutate">mutate( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+mutate( )
+</summary>
+<div class="topic-card-body">
 <p>Add or transform columns. See the full <a href="../functions/mutate.html"><code>mutate()</code> reference page</a> for details.</p>
 <div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="combining-steps" class="level2">
-<h2 class="anchored" data-anchor-id="combining-steps">Combining steps</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Combining steps
+</summary>
+<div class="topic-card-body">
 <p>Chain any number of operations with the pipe — each result flows into the next.</p>
 <div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</details>
 
 
-</section>
 
 </main> <!-- /main -->
 <script>

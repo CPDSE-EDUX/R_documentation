@@ -1,8 +1,12 @@
 ---
 title: "Data Handling"
 subtitle: "Filter rows, pick columns, sort, and reshape your data with dplyr."
-toc: true
+toc: false
 ---
+
+<details class="topic-card" open>
+<summary>Setup</summary>
+<div class="topic-card-body">
 
 Run this setup chunk first — it loads the dataset used in all examples below.
 
@@ -11,12 +15,54 @@ library(tidyverse)
 #library(dplyr)
 #library(tibble)
 
-capsules <- read_csv("/home/web_user/capsules.csv")
+# Load from mounted webR paths first; fallback to downloading from site URLs.
+load_capsules <- function() {
+  candidate_paths <- c(
+    "/home/web_user/capsules.csv",
+    "capsules.csv",
+    "assets/data/capsules.csv",
+    "../assets/data/capsules.csv",
+    "/assets/data/capsules.csv"
+  )
+
+  for (path in candidate_paths) {
+    out <- tryCatch(
+      read_csv(path, show_col_types = FALSE),
+      error = function(e) NULL
+    )
+    if (!is.null(out)) return(out)
+  }
+
+  candidate_urls <- c(
+    "../assets/data/capsules.csv",
+    "/assets/data/capsules.csv"
+  )
+
+  for (url in candidate_urls) {
+    out <- tryCatch({
+      tmp <- tempfile(fileext = ".csv")
+      utils::download.file(url, destfile = tmp, mode = "wb", quiet = TRUE)
+      read_csv(tmp, show_col_types = FALSE)
+    }, error = function(e) NULL)
+    if (!is.null(out)) return(out)
+  }
+
+  stop(
+    "Could not load capsules.csv from webR mounted paths or site asset URLs. "
+  )
+}
+
+capsules <- load_capsules()
 
 capsules
 ```
 
-## filter( )
+</div>
+</details>
+
+<details class="topic-card">
+<summary>filter( )</summary>
+<div class="topic-card-body">
 
 Keep only rows where a condition is `TRUE`.
 
@@ -37,7 +83,12 @@ capsules %>%
 `==` equal · `!=` not equal · `>` `<` `>=` `<=` greater/less than · `&` and · `|` or
 :::
 
-## select( )
+</div>
+</details>
+
+<details class="topic-card">
+<summary>select( )</summary>
+<div class="topic-card-body">
 
 Keep only the columns you need.
 
@@ -52,7 +103,12 @@ capsules %>%
   select(-fill_mass_mg)
 ```
 
-## rename( )
+</div>
+</details>
+
+<details class="topic-card">
+<summary>rename( )</summary>
+<div class="topic-card-body">
 
 Rename a column: `rename(new_name = old_name)`.
 
@@ -61,7 +117,12 @@ capsules %>%
   rename(id = capsule_id, pct = pct_label)
 ```
 
-## arrange( )
+</div>
+</details>
+
+<details class="topic-card">
+<summary>arrange( )</summary>
+<div class="topic-card-body">
 
 Sort rows by a column. Wrap in `desc()` to sort highest-first.
 
@@ -70,7 +131,12 @@ capsules %>%
   arrange(desc(pct_label))
 ```
 
-## mutate( )
+</div>
+</details>
+
+<details class="topic-card">
+<summary>mutate( )</summary>
+<div class="topic-card-body">
 
 Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
 
@@ -82,7 +148,12 @@ capsules %>%
   select(capsule_id, fill_mass_mg, ibu_mg, pct_label)
 ```
 
-## Combining steps
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Combining steps</summary>
+<div class="topic-card-body">
 
 Chain any number of operations with the pipe — each result flows into the next.
 
@@ -92,3 +163,6 @@ capsules %>%
   arrange(pct_label) %>%
   select(capsule_id, fill_mass_mg, pct_label)
 ```
+
+</div>
+</details>

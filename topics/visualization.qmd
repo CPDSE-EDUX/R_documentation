@@ -1,9 +1,13 @@
 ---
 title: "Visualization"
 subtitle: "Create plots with ggplot2 — scatter, line, bar, and box plots."
-toc: true
+toc: false
 engine: knitr
 ---
+
+<details class="topic-card" open>
+<summary>Setup</summary>
+<div class="topic-card-body">
 
 All plots in this course use `theme_classic()` and labelled axes via `labs()`.
 Run the setup chunk first — it loads ggplot2 and creates the datasets.
@@ -37,7 +41,12 @@ capsules <- tibble(
 )
 ```
 
-## Scatter plot
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Scatter plot</summary>
+<div class="topic-card-body">
 
 Use `geom_point()` to plot individual observations — ideal for calibration curves.
 
@@ -66,7 +75,12 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
   theme_classic()
 ```
 
-## Line plot
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Line plot</summary>
+<div class="topic-card-body">
 
 Use `geom_line()` for data over time — ideal for dissolution profiles.
 Map `colour` to a grouping variable to show multiple batches.
@@ -84,7 +98,12 @@ ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
   theme_classic()
 ```
 
-## Box plot
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Box plot</summary>
+<div class="topic-card-body">
 
 Use `geom_boxplot()` to compare distributions across groups — ideal for batch comparisons.
 
@@ -100,7 +119,12 @@ ggplot(capsules, aes(x = batch, y = pct_label)) +
   theme_classic()
 ```
 
-## Bar chart
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Bar chart</summary>
+<div class="topic-card-body">
 
 Use `geom_col()` when you already have the values to plot (e.g. means from `summarise()`).
 
@@ -125,3 +149,6 @@ Every plot starts with `ggplot(data, aes(...))` — this sets the data and axes.
 Add layers with `+`: `geom_point()`, `geom_line()`, `labs()`, `theme_classic()`.
 Order doesn't matter for most layers, but `theme_classic()` always goes last.
 :::
+
+</div>
+</details>

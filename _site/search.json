@@ -4,84 +4,14 @@
     "href": "topics/visualization.html",
     "title": "Visualization",
     "section": "",
-    "text": "All plots in this course use theme_classic() and labelled axes via labs(). Run the setup chunk first — it loads ggplot2 and creates the datasets."
-  },
-  {
-    "objectID": "topics/visualization.html#scatter-plot",
-    "href": "topics/visualization.html#scatter-plot",
-    "title": "Visualization",
-    "section": "Scatter plot",
-    "text": "Scatter plot\nUse geom_point() to plot individual observations — ideal for calibration curves.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nAdd a regression line with geom_smooth():\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/visualization.html#line-plot",
-    "href": "topics/visualization.html#line-plot",
-    "title": "Visualization",
-    "section": "Line plot",
-    "text": "Line plot\nUse geom_line() for data over time — ideal for dissolution profiles. Map colour to a grouping variable to show multiple batches.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/visualization.html#box-plot",
-    "href": "topics/visualization.html#box-plot",
-    "title": "Visualization",
-    "section": "Box plot",
-    "text": "Box plot\nUse geom_boxplot() to compare distributions across groups — ideal for batch comparisons.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/visualization.html#bar-chart",
-    "href": "topics/visualization.html#bar-chart",
-    "title": "Visualization",
-    "section": "Bar chart",
-    "text": "Bar chart\nUse geom_col() when you already have the values to plot (e.g. means from summarise()).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nggplot2 layer logic\n\n\n\nEvery plot starts with ggplot(data, aes(...)) — this sets the data and axes. Add layers with +: geom_point(), geom_line(), labs(), theme_classic(). Order doesn’t matter for most layers, but theme_classic() always goes last."
+    "text": "Setup\n\n\nAll plots in this course use theme_classic() and labelled axes via labs(). Run the setup chunk first — it loads ggplot2 and creates the datasets.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nScatter plot\n\n\nUse geom_point() to plot individual observations — ideal for calibration curves.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nAdd a regression line with geom_smooth():\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nLine plot\n\n\nUse geom_line() for data over time — ideal for dissolution profiles. Map colour to a grouping variable to show multiple batches.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nBox plot\n\n\nUse geom_boxplot() to compare distributions across groups — ideal for batch comparisons.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nBar chart\n\n\nUse geom_col() when you already have the values to plot (e.g. means from summarise()).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nggplot2 layer logic\n\n\n\nEvery plot starts with ggplot(data, aes(...)) — this sets the data and axes. Add layers with +: geom_point(), geom_line(), labs(), theme_classic(). Order doesn’t matter for most layers, but theme_classic() always goes last."
   },
   {
     "objectID": "topics/data-handling.html",
     "href": "topics/data-handling.html",
     "title": "Data Handling",
     "section": "",
-    "text": "Run this setup chunk first — it loads the dataset used in all examples below."
-  },
-  {
-    "objectID": "topics/data-handling.html#filter",
-    "href": "topics/data-handling.html#filter",
-    "title": "Data Handling",
-    "section": "filter( )",
-    "text": "filter( )\nKeep only rows where a condition is TRUE.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nComparison operators\n\n\n\n== equal · != not equal · &gt; &lt; &gt;= &lt;= greater/less than · & and · | or"
-  },
-  {
-    "objectID": "topics/data-handling.html#select",
-    "href": "topics/data-handling.html#select",
-    "title": "Data Handling",
-    "section": "select( )",
-    "text": "select( )\nKeep only the columns you need.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/data-handling.html#rename",
-    "href": "topics/data-handling.html#rename",
-    "title": "Data Handling",
-    "section": "rename( )",
-    "text": "rename( )\nRename a column: rename(new_name = old_name).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/data-handling.html#arrange",
-    "href": "topics/data-handling.html#arrange",
-    "title": "Data Handling",
-    "section": "arrange( )",
-    "text": "arrange( )\nSort rows by a column. Wrap in desc() to sort highest-first.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/data-handling.html#mutate",
-    "href": "topics/data-handling.html#mutate",
-    "title": "Data Handling",
-    "section": "mutate( )",
-    "text": "mutate( )\nAdd or transform columns. See the full mutate() reference page for details.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/data-handling.html#combining-steps",
-    "href": "topics/data-handling.html#combining-steps",
-    "title": "Data Handling",
-    "section": "Combining steps",
-    "text": "Combining steps\nChain any number of operations with the pipe — each result flows into the next.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Setup\n\n\nRun this setup chunk first — it loads the dataset used in all examples below.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nfilter( )\n\n\nKeep only rows where a condition is TRUE.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nComparison operators\n\n\n\n== equal · != not equal · &gt; &lt; &gt;= &lt;= greater/less than · & and · | or\n\n\n\n\n\n\nselect( )\n\n\nKeep only the columns you need.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nrename( )\n\n\nRename a column: rename(new_name = old_name).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\narrange( )\n\n\nSort rows by a column. Wrap in desc() to sort highest-first.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nmutate( )\n\n\nAdd or transform columns. See the full mutate() reference page for details.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nCombining steps\n\n\nChain any number of operations with the pipe — each result flows into the next.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "glossary.html",
@@ -544,41 +474,6 @@
     "href": "topics/descriptive-stats.html",
     "title": "Descriptive Statistics",
     "section": "",
-    "text": "Run the setup chunk first — it creates the dataset used in all examples below."
-  },
-  {
-    "objectID": "topics/descriptive-stats.html#basic-statistics",
-    "href": "topics/descriptive-stats.html#basic-statistics",
-    "title": "Descriptive Statistics",
-    "section": "Basic statistics",
-    "text": "Basic statistics\nSingle-value summaries of a numeric vector. Always print with cat().\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/descriptive-stats.html#summarise",
-    "href": "topics/descriptive-stats.html#summarise",
-    "title": "Descriptive Statistics",
-    "section": "summarise( )",
-    "text": "summarise( )\nCompute multiple statistics at once and return them as a tibble.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/descriptive-stats.html#group_by-summarise",
-    "href": "topics/descriptive-stats.html#group_by-summarise",
-    "title": "Descriptive Statistics",
-    "section": "group_by( ) + summarise( )",
-    "text": "group_by( ) + summarise( )\nRepeat the summary for each level of a grouping variable.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/descriptive-stats.html#count",
-    "href": "topics/descriptive-stats.html#count",
-    "title": "Descriptive Statistics",
-    "section": "count( )",
-    "text": "count( )\nCount the number of rows in each group — shorthand for group_by() %&gt;% summarise(n = n()).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
-  },
-  {
-    "objectID": "topics/descriptive-stats.html#iqr-and-quantiles",
-    "href": "topics/descriptive-stats.html#iqr-and-quantiles",
-    "title": "Descriptive Statistics",
-    "section": "IQR and quantiles",
-    "text": "IQR and quantiles\nUseful for identifying spread and outliers in assay data.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nCoding convention — store then print\n\n\n\nCompute statistics at full precision, then round only inside cat() when reporting. Never round inside summarise() if the values will be used in further calculations."
+    "text": "Setup\n\n\nRun the setup chunk first — it creates the dataset used in all examples below.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nBasic statistics\n\n\nSingle-value summaries of a numeric vector. Always print with cat().\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nsummarise( )\n\n\nCompute multiple statistics at once and return them as a tibble.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\ngroup_by( ) + summarise( )\n\n\nRepeat the summary for each level of a grouping variable.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\ncount( )\n\n\nCount the number of rows in each group — shorthand for group_by() %&gt;% summarise(n = n()).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nIQR and quantiles\n\n\nUseful for identifying spread and outliers in assay data.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nCoding convention — store then print\n\n\n\nCompute statistics at full precision, then round only inside cat() when reporting. Never round inside summarise() if the values will be used in further calculations."
   }
 ]

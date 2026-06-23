@@ -1629,7 +1629,7 @@ globalThis.qwebrExecuteCode = async function (
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1744,19 +1744,7 @@ globalThis.qwebrExecuteCode = async function (
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#basic-statistics" id="toc-basic-statistics" class="nav-link active" data-scroll-target="#basic-statistics">Basic statistics</a></li>
-  <li><a href="#summarise" id="toc-summarise" class="nav-link" data-scroll-target="#summarise">summarise( )</a></li>
-  <li><a href="#group_by-summarise" id="toc-group_by-summarise" class="nav-link" data-scroll-target="#group_by-summarise">group_by( ) + summarise( )</a></li>
-  <li><a href="#count" id="toc-count" class="nav-link" data-scroll-target="#count">count( )</a></li>
-  <li><a href="#iqr-and-quantiles" id="toc-iqr-and-quantiles" class="nav-link" data-scroll-target="#iqr-and-quantiles">IQR and quantiles</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
@@ -2064,35 +2052,61 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
+<details class="topic-card" open="">
+<summary>
+Setup
+</summary>
+<div class="topic-card-body">
 <p>Run the setup chunk first — it creates the dataset used in all examples below.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<section id="basic-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="basic-statistics">Basic statistics</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Basic statistics
+</summary>
+<div class="topic-card-body">
 <p>Single-value summaries of a numeric vector. Always print with <code>cat()</code>.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="summarise" class="level2">
-<h2 class="anchored" data-anchor-id="summarise">summarise( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+summarise( )
+</summary>
+<div class="topic-card-body">
 <p>Compute multiple statistics at once and return them as a tibble.</p>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="group_by-summarise" class="level2">
-<h2 class="anchored" data-anchor-id="group_by-summarise">group_by( ) + summarise( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+group_by( ) + summarise( )
+</summary>
+<div class="topic-card-body">
 <p>Repeat the summary for each level of a grouping variable.</p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="count" class="level2">
-<h2 class="anchored" data-anchor-id="count">count( )</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+count( )
+</summary>
+<div class="topic-card-body">
 <p>Count the number of rows in each group — shorthand for <code>group_by() %&gt;% summarise(n = n())</code>.</p>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="iqr-and-quantiles" class="level2">
-<h2 class="anchored" data-anchor-id="iqr-and-quantiles">IQR and quantiles</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+IQR and quantiles
+</summary>
+<div class="topic-card-body">
 <p>Useful for identifying spread and outliers in assay data.</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -2109,9 +2123,10 @@ Coding convention — store then print
 <p>Compute statistics at full precision, then round only inside <code>cat()</code> when reporting. Never round inside <code>summarise()</code> if the values will be used in further calculations.</p>
 </div>
 </div>
+</div>
+</details>
 
 
-</section>
 
 </main> <!-- /main -->
 <script>

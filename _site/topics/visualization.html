@@ -1629,7 +1629,7 @@ globalThis.qwebrExecuteCode = async function (
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1744,18 +1744,7 @@ globalThis.qwebrExecuteCode = async function (
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link active" data-scroll-target="#scatter-plot">Scatter plot</a></li>
-  <li><a href="#line-plot" id="toc-line-plot" class="nav-link" data-scroll-target="#line-plot">Line plot</a></li>
-  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot">Box plot</a></li>
-  <li><a href="#bar-chart" id="toc-bar-chart" class="nav-link" data-scroll-target="#bar-chart">Bar chart</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
@@ -2063,32 +2052,54 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
+<details class="topic-card" open="">
+<summary>
+Setup
+</summary>
+<div class="topic-card-body">
 <p>All plots in this course use <code>theme_classic()</code> and labelled axes via <code>labs()</code>. Run the setup chunk first — it loads ggplot2 and creates the datasets.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<section id="scatter-plot" class="level2">
-<h2 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Scatter plot
+</summary>
+<div class="topic-card-body">
 <p>Use <code>geom_point()</code> to plot individual observations — ideal for calibration curves.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Add a regression line with <code>geom_smooth()</code>:</p>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="line-plot" class="level2">
-<h2 class="anchored" data-anchor-id="line-plot">Line plot</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Line plot
+</summary>
+<div class="topic-card-body">
 <p>Use <code>geom_line()</code> for data over time — ideal for dissolution profiles. Map <code>colour</code> to a grouping variable to show multiple batches.</p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="box-plot" class="level2">
-<h2 class="anchored" data-anchor-id="box-plot">Box plot</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Box plot
+</summary>
+<div class="topic-card-body">
 <p>Use <code>geom_boxplot()</code> to compare distributions across groups — ideal for batch comparisons.</p>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="bar-chart" class="level2">
-<h2 class="anchored" data-anchor-id="bar-chart">Bar chart</h2>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Bar chart
+</summary>
+<div class="topic-card-body">
 <p>Use <code>geom_col()</code> when you already have the values to plot (e.g.&nbsp;means from <code>summarise()</code>).</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
@@ -2105,9 +2116,10 @@ ggplot2 layer logic
 <p>Every plot starts with <code>ggplot(data, aes(...))</code> — this sets the data and axes. Add layers with <code>+</code>: <code>geom_point()</code>, <code>geom_line()</code>, <code>labs()</code>, <code>theme_classic()</code>. Order doesn’t matter for most layers, but <code>theme_classic()</code> always goes last.</p>
 </div>
 </div>
+</div>
+</details>
 
 
-</section>
 
 </main> <!-- /main -->
 <script>
