@@ -15,11 +15,6 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 :::
 
 
-::: {.callout-tip}
-## Run Code Online
-Many code blocks on this site are **interactive**. Click **Run Code** to execute them right here in your browser — no R or RStudio installation needed.
-:::
-
 ## Topics covered
 <div class="card-grid">
 <a href="getting-started.qmd" class="feature-card">
@@ -64,3 +59,8 @@ Many code blocks on this site are **interactive**. Click **Run Code** to execute
 | **Syntax** | How to use the function |
 | **Argument Overview** | Relevant arguments explained |
 | **Examples** | Examples for how to use the function with different arguments|
+
+::: {.callout-tip}
+## Run Code Online
+Many code blocks on this site are **interactive**. Click **Run Code** to execute them right here in your browser — no R or RStudio installation needed.
+:::

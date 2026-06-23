@@ -572,7 +572,7 @@
     "href": "index.html#how-to-read-a-function-page",
     "title": "Basic R for Pharmacy",
     "section": "How to read a function page",
-    "text": "How to read a function page\n\n\n\n\n\n\n\nSection\nWhat you’ll find\n\n\n\n\nRequired Library\nWhat library is needed to use the function\n\n\nSyntax\nHow to use the function\n\n\nArgument Overview\nRelevant arguments explained\n\n\nExamples\nExamples for how to use the function with different arguments"
+    "text": "How to read a function page\n\n\n\n\n\n\n\nSection\nWhat you’ll find\n\n\n\n\nRequired Library\nWhat library is needed to use the function\n\n\nSyntax\nHow to use the function\n\n\nArgument Overview\nRelevant arguments explained\n\n\nExamples\nExamples for how to use the function with different arguments\n\n\n\n\n\n\n\n\n\nRun Code Online\n\n\n\nMany code blocks on this site are interactive. Click Run Code to execute them right here in your browser — no R or RStudio installation needed."
   },
   {
     "objectID": "topics/descriptive-stats.html",
