@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../images/favicon.ico" rel="icon">
+<link href="../assets/images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-56538c235882d4f9bbb148ee96d0a819.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1850,13 +1850,8 @@ globalThis.qwebrExecuteCode = async function (
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link active" data-scroll-target="#syntax">Syntax</a>
-  <ul class="collapse">
-  <li><a href="#required-arguments" id="toc-required-arguments" class="nav-link" data-scroll-target="#required-arguments">Required Arguments</a></li>
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
-  <li><a href="#required-and-optional-arguments" id="toc-required-and-optional-arguments" class="nav-link" data-scroll-target="#required-and-optional-arguments">Required and optional arguments</a></li>
-  <li><a href="#description-1" id="toc-description-1" class="nav-link" data-scroll-target="#description-1">Description</a></li>
-  </ul></li>
+  <li><a href="#required-library" id="toc-required-library" class="nav-link active" data-scroll-target="#required-library">Required Library</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
   <li><a href="#argument-overview" id="toc-argument-overview" class="nav-link" data-scroll-target="#argument-overview">Argument Overview</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul>
@@ -2152,7 +2147,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../functions/read-csv.html">Import &amp; Create</a></li><li class="breadcrumb-item"><a href="../functions/tibble.html">tibble( )</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">tibble( )</h1>
-<p class="subtitle lead">Create a tidy data frame from column vectors. See <a href="https://tibble.tidyverse.org/reference/tibble.html">original documentation</a> for reference.</p>
+<p class="subtitle lead">Create a tidy data frame from column vectors. tibble() is from the tibble package, which is part of the tidyverse.</p>
 </div>
 
 
@@ -2169,28 +2164,39 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<p><a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">tibble documentation ↗</a></p>
+<div class="source-links">
+<p><a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">Original Documentation ↗</a></p>
+</div>
+<section id="required-library" class="level2">
+<h2 class="anchored" data-anchor-id="required-library">Required Library</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="syntax" class="level2">
 <h2 class="anchored" data-anchor-id="syntax">Syntax</h2>
-<section id="required-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="required-arguments">Required Arguments</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">col1 =</span> values, <span class="at">col2 =</span> values, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">col1 =</span> values, <span class="at">col2 =</span> values, ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
 <div class="desc-item">
 <p><code>tibble(col1 = values, col2 = values, ...)</code> creates a data frame from named column vectors. A tibble is the tidyverse version of a <code>data.frame</code> — it has the same structure but with safer defaults and cleaner printing.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="desc-item">
+<p><code>as_tibble(x)</code> converts an existing base R <code>data.frame</code> (or matrix) into a tibble.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">col1 =</span> values, <span class="at">col2 =</span> col1 <span class="sc">*</span> factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="desc-item">
 <p><code>tibble(col1 = values, col2 = col1 * factor)</code> allows later columns to reference columns defined earlier in the same call. This is not possible with base R <code>data.frame()</code>.</p>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(..., <span class="at">.rows =</span> <span class="cn">NULL</span>, <span class="at">.name_repair =</span> <span class="st">"check_unique"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="desc-item">
-<p><code>as_tibble(x)</code> converts an existing base R <code>data.frame</code> (or matrix) into a tibble.</p>
+<p><code>tibble(..., .rows = NULL, .name_repair = "check_unique")</code> exposes the optional arguments: <code>.rows</code> fixes the number of rows (useful for an empty tibble), and <code>.name_repair</code> controls how duplicate or invalid column names are handled.</p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2206,21 +2212,11 @@ Why tibble instead of <code>data.frame()</code>?
 </div>
 </div>
 </section>
-<section id="required-and-optional-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="required-and-optional-arguments">Required and optional arguments</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(..., <span class="at">.rows =</span> <span class="cn">NULL</span>, <span class="at">.name_repair =</span> <span class="st">"check_unique"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="description-1" class="level3">
-<h3 class="anchored" data-anchor-id="description-1">Description</h3>
-<div class="desc-item">
-<p><code>tibble(..., .rows = NULL, .name_repair = "check_unique")</code> exposes the optional arguments: <code>.rows</code> fixes the number of rows (useful for an empty tibble), and <code>.name_repair</code> controls how duplicate or invalid column names are handled.</p>
-</div>
-</section>
-</section>
 <section id="argument-overview" class="level2">
 <h2 class="anchored" data-anchor-id="argument-overview">Argument Overview</h2>
+<p class="arg-intro">
+Required arguments must be included when using a function while optional arguments can be included on demand.
+</p>
 <div class="arg-section">
 <div class="collapse-toolbar">
 <button class="collapse-btn">
@@ -2234,10 +2230,10 @@ Expand All
 <div class="arg-body">
 <p>Each argument defines one column. The name becomes the column name; the value must be a vector (or single value, which is recycled to the length of the longest column).</p>
 <p>Key rules: - All vectors must be the same length, or length 1 (recycled) - Later arguments can reference earlier column names by name - Column names can contain spaces if wrapped in backticks: <code>`fill mass (mg)` = ...</code> (not recommended — use <code>snake_case</code> with units instead)</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_min   =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>),   <span class="co"># 5 values</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dose_mg    =</span> <span class="dv">200</span>                       <span class="co"># recycled to 5 rows</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_min   =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>),   <span class="co"># 5 values</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dose_mg    =</span> <span class="dv">200</span>                       <span class="co"># recycled to 5 rows</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> any vector type — <code>numeric</code>, <code>character</code>, <code>logical</code>, <code>integer</code>
 </p>
@@ -2249,8 +2245,8 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>The object to convert into a tibble. Typically used to convert a <code>data.frame</code> returned by base R functions like <code>read.csv()</code> into the tidyverse format.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data.csv"</span>)   <span class="co"># returns a data.frame</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)          <span class="co"># convert for use with dplyr / tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data.csv"</span>)   <span class="co"># returns a data.frame</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)          <span class="co"># convert for use with dplyr / tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>data.frame</code> | <code>matrix</code> | <code>list</code>
 </p>
@@ -2262,7 +2258,7 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>The number of rows the tibble should have. Useful for creating an empty tibble with a known size:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">.rows =</span> <span class="dv">10</span>)   <span class="co"># empty tibble with 10 rows and no columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">.rows =</span> <span class="dv">10</span>)   <span class="co"># empty tibble with 10 rows and no columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>integer</code>
 </p>
@@ -2323,7 +2319,7 @@ Tibble printing vs.&nbsp;data.frame printing
 </main> <!-- /main -->
 <script>
 
-// Collapse / Expand All toggle for argument sections (MATLAB-style)
+// Collapse / Expand All toggle for argument and example sections
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -2331,9 +2327,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function () {
 
-      var section = btn.closest('.arg-section');
+      var section = btn.closest('.arg-section, .example-section');
 
-      var items   = section.querySelectorAll('details.arg-item');
+      if (!section) return;
+
+
+
+      var items = section.querySelectorAll('details.arg-item, details.example-item');
+
+      if (!items.length) return;
+
+
 
       var anyOpen = Array.from(items).some(function (d) { return d.open; });
 

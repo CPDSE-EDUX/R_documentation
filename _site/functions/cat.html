@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../images/favicon.ico" rel="icon">
+<link href="../assets/images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9484908ef69a6eeeac264dfdef059766.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1850,13 +1850,8 @@ globalThis.qwebrExecuteCode = async function (
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link active" data-scroll-target="#syntax">Syntax</a>
-  <ul class="collapse">
-  <li><a href="#required-arguments" id="toc-required-arguments" class="nav-link" data-scroll-target="#required-arguments">Required Arguments</a></li>
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
-  <li><a href="#required-and-optional-arguments" id="toc-required-and-optional-arguments" class="nav-link" data-scroll-target="#required-and-optional-arguments">Required and optional arguments</a></li>
-  <li><a href="#description-1" id="toc-description-1" class="nav-link" data-scroll-target="#description-1">Description</a></li>
-  </ul></li>
+  <li><a href="#required-library" id="toc-required-library" class="nav-link active" data-scroll-target="#required-library">Required Library</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
   <li><a href="#argument-overview" id="toc-argument-overview" class="nav-link" data-scroll-target="#argument-overview">Argument Overview</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul>
@@ -2152,7 +2147,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../functions/cat.html">Report</a></li><li class="breadcrumb-item"><a href="../functions/cat.html">cat( )</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">cat( )</h1>
-<p class="subtitle lead">Print labelled results with units to the console. See <a href="https://rdrr.io/r/base/cat.html">original documentation</a> for reference.</p>
+<p class="subtitle lead">Print labelled results with units to the console. cat() is a base R function.</p>
 </div>
 
 
@@ -2169,29 +2164,38 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<p><a class="source-link" href="https://rdrr.io/r/base/cat.html" target="_blank" rel="noopener">base R documentation ↗</a></p>
+<div class="source-links">
+<p><a class="source-link" href="https://rdrr.io/r/base/cat.html" target="_blank" rel="noopener">Original Documentation ↗</a></p>
+</div>
+<section id="required-library" class="level2">
+<h2 class="anchored" data-anchor-id="required-library">Required Library</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat() is part of base R — no package installation needed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="syntax" class="level2">
 <h2 class="anchored" data-anchor-id="syntax">Syntax</h2>
-<section id="required-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="required-arguments">Required Arguments</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label:"</span>, value, <span class="st">"unit</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label:"</span>, <span class="fu">signif</span>(value, digits), <span class="st">"unit</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
 <div class="desc-item">
 <p><code>cat(...)</code> concatenates and prints its arguments to the console with no formatting. Unlike <code>print()</code>, it does not add quotes around character strings or display <code>[1]</code> index prefixes, making it ideal for producing clean, readable output.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label:"</span>, value, <span class="st">"unit</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="desc-item">
 <p><code>cat("Label:", value, "unit\n")</code> is the standard pattern for reporting a named result with its unit. The <code>\n</code> at the end moves the cursor to a new line.</p>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label:"</span>, <span class="fu">signif</span>(value, digits), <span class="st">"unit</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="desc-item">
 <p><code>cat("Label:", signif(value, digits), "unit\n")</code> rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(..., <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">file =</span> <span class="st">""</span>, <span class="at">append =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="desc-item">
+<p><code>cat(..., sep = " ", file = "", append = FALSE)</code> exposes the optional arguments that control how and where output is written: <code>sep</code> sets the separator between items, while <code>file</code> and <code>append</code> redirect output to a file instead of the console.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2207,21 +2211,11 @@ Coding convention — always label printed results
 </div>
 </div>
 </section>
-<section id="required-and-optional-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="required-and-optional-arguments">Required and optional arguments</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(..., <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">file =</span> <span class="st">""</span>, <span class="at">append =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="description-1" class="level3">
-<h3 class="anchored" data-anchor-id="description-1">Description</h3>
-<div class="desc-item">
-<p><code>cat(..., sep = " ", file = "", append = FALSE)</code> exposes the optional arguments that control how and where output is written: <code>sep</code> sets the separator between items, while <code>file</code> and <code>append</code> redirect output to a file instead of the console.</p>
-</div>
-</section>
-</section>
 <section id="argument-overview" class="level2">
 <h2 class="anchored" data-anchor-id="argument-overview">Argument Overview</h2>
+<p class="arg-intro">
+Required arguments must be included when using a function while optional arguments can be included on demand.
+</p>
 <div class="arg-section">
 <div class="collapse-toolbar">
 <button class="collapse-btn">
@@ -2234,7 +2228,7 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>One or more values to print, separated by commas. Items are coerced to character before printing. Common usage combines a text label, a computed value (wrapped in <code>signif()</code> or <code>round()</code>), and a unit string:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean fill mass:"</span>, <span class="fu">signif</span>(X_bar, <span class="dv">4</span>), <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean fill mass:"</span>, <span class="fu">signif</span>(X_bar, <span class="dv">4</span>), <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Use <code>\n</code> (newline) as the last item so the next output starts on a fresh line.</p>
 <p class="data-types">
 <strong>Data Types:</strong> <code>character</code> | <code>numeric</code> | <code>logical</code> | <code>integer</code>
@@ -2247,8 +2241,8 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>A character string inserted between consecutive items. Default is a single space <code>" "</code>. Set <code>sep = ""</code> to print items with no gap, or <code>sep = ", "</code> for comma-separated lists.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, value, <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)          <span class="co"># default: space between each item</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="at">sep =</span> <span class="st">"-"</span>)          <span class="co"># prints: A-B-C</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, value, <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)          <span class="co"># default: space between each item</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="at">sep =</span> <span class="st">"-"</span>)          <span class="co"># prints: A-B-C</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>character</code> · Default: <code>” “</code>
 </p>
@@ -2260,7 +2254,7 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>Where to send the output. Default <code>""</code> prints to the console. Pass a file path string (or an open connection) to write to a file instead.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, <span class="fu">signif</span>(AV_s1, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="st">"results.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, <span class="fu">signif</span>(AV_s1, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="st">"results.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>character</code> (file path) | <code>connection</code> · Default: <code>““</code> (console)
 </p>
@@ -2331,7 +2325,7 @@ Print a pass/fail acceptance criterion
 </main> <!-- /main -->
 <script>
 
-// Collapse / Expand All toggle for argument sections (MATLAB-style)
+// Collapse / Expand All toggle for argument and example sections
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -2339,9 +2333,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function () {
 
-      var section = btn.closest('.arg-section');
+      var section = btn.closest('.arg-section, .example-section');
 
-      var items   = section.querySelectorAll('details.arg-item');
+      if (!section) return;
+
+
+
+      var items = section.querySelectorAll('details.arg-item, details.example-item');
+
+      if (!items.length) return;
+
+
 
       var anyOpen = Array.from(items).some(function (d) { return d.open; });
 

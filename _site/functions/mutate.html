@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../images/favicon.ico" rel="icon">
+<link href="../assets/images/favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9484908ef69a6eeeac264dfdef059766.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1850,13 +1850,8 @@ globalThis.qwebrExecuteCode = async function (
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link active" data-scroll-target="#syntax">Syntax</a>
-  <ul class="collapse">
-  <li><a href="#required-arguments" id="toc-required-arguments" class="nav-link" data-scroll-target="#required-arguments">Required Arguments</a></li>
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
-  <li><a href="#required-and-optional-arguments" id="toc-required-and-optional-arguments" class="nav-link" data-scroll-target="#required-and-optional-arguments">Required and optional arguments</a></li>
-  <li><a href="#description-1" id="toc-description-1" class="nav-link" data-scroll-target="#description-1">Description</a></li>
-  </ul></li>
+  <li><a href="#required-library" id="toc-required-library" class="nav-link active" data-scroll-target="#required-library">Required Library</a></li>
+  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
   <li><a href="#argument-overview" id="toc-argument-overview" class="nav-link" data-scroll-target="#argument-overview">Argument Overview</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul>
@@ -2152,7 +2147,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../functions/mutate.html">Transform</a></li><li class="breadcrumb-item"><a href="../functions/mutate.html">mutate( )</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">mutate( )</h1>
-<p class="subtitle lead">Add or transform columns in a data frame. See <a href="https://dplyr.tidyverse.org/reference/mutate.html">original documentation</a> for reference.</p>
+<p class="subtitle lead">Add or transform columns in a data frame. mutate() is from the dplyr package, which is part of the tidyverse.</p>
 </div>
 
 
@@ -2169,25 +2164,33 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<p><a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">dplyr documentation ↗</a></p>
+<div class="source-links">
+<p><a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">Original Documentation ↗</a> <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a></p>
+</div>
+<section id="required-library" class="level2">
+<h2 class="anchored" data-anchor-id="required-library">Required Library</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="syntax" class="level2">
 <h2 class="anchored" data-anchor-id="syntax">Syntax</h2>
-<section id="required-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="required-arguments">Required Arguments</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">new_col =</span> expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">new_col =</span> expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">new_col =</span> expression, <span class="at">another_col =</span> expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="description" class="level3">
-<h3 class="anchored" data-anchor-id="description">Description</h3>
 <div class="desc-item">
 <p><code>df %&gt;% mutate(new_col = expression)</code> adds a new column to a data frame. The expression on the right can reference any existing column by name.</p>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">new_col =</span> expression, <span class="at">another_col =</span> expression)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="desc-item">
 <p><code>df %&gt;% mutate(col1 = ..., col2 = ...)</code> adds multiple columns in a single call. Later expressions can reference columns created earlier in the same <code>mutate()</code>.</p>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(..., <span class="at">.keep =</span> <span class="st">"all"</span>, <span class="at">.before =</span> <span class="cn">NULL</span>, <span class="at">.after =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="desc-item">
+<p><code>df %&gt;% mutate(..., .keep = "all")</code> controls which columns are kept in the result. The default <code>"all"</code> retains every column, including unmodified ones. The optional <code>.before</code> / <code>.after</code> arguments control where new columns are inserted.</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2203,21 +2206,11 @@ Coding convention — never round inside <code>mutate()</code>
 </div>
 </div>
 </section>
-<section id="required-and-optional-arguments" class="level3">
-<h3 class="anchored" data-anchor-id="required-and-optional-arguments">Required and optional arguments</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(..., <span class="at">.keep =</span> <span class="st">"all"</span>, <span class="at">.before =</span> <span class="cn">NULL</span>, <span class="at">.after =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="description-1" class="level3">
-<h3 class="anchored" data-anchor-id="description-1">Description</h3>
-<div class="desc-item">
-<p><code>df %&gt;% mutate(..., .keep = "all")</code> controls which columns are kept in the result. The default <code>"all"</code> retains every column, including unmodified ones. The optional <code>.before</code> / <code>.after</code> arguments control where new columns are inserted.</p>
-</div>
-</section>
-</section>
 <section id="argument-overview" class="level2">
 <h2 class="anchored" data-anchor-id="argument-overview">Argument Overview</h2>
+<p class="arg-intro">
+Required arguments must be included when using a function while optional arguments can be included on demand.
+</p>
 <div class="arg-section">
 <div class="collapse-toolbar">
 <button class="collapse-btn">
@@ -2230,8 +2223,8 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>The data frame to modify. In a pipe (<code>%&gt;%</code> or <code>%&gt;%</code>), this is passed automatically from the left-hand side — you do not write it explicitly.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .data is passed automatically by the pipe:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>capsules <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .data is passed automatically by the pipe:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>capsules <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code>
 </p>
@@ -2243,10 +2236,10 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>One or more expressions of the form <code>new_column_name = expression</code>. The right-hand side can reference any column in <code>.data</code> by name, and can also reference columns created earlier in the same <code>mutate()</code> call. Separate multiple expressions with commas.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg,   <span class="co"># uses two existing columns</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ibu_mg       =</span> fill_mass_mg <span class="sc">*</span> ibu_per_mg_powder  <span class="co"># references the column just created above</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg,   <span class="co"># uses two existing columns</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ibu_mg       =</span> fill_mass_mg <span class="sc">*</span> ibu_per_mg_powder  <span class="co"># references the column just created above</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)
 </p>
@@ -2295,7 +2288,7 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>Controls where the new columns are inserted. By default new columns are appended on the right.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>capsules <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg, <span class="at">.after =</span> mass_filled_mg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>capsules <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg, <span class="at">.after =</span> mass_filled_mg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> unquoted column name or integer position
 </p>
@@ -2347,7 +2340,7 @@ Concentration units conversion
 </main> <!-- /main -->
 <script>
 
-// Collapse / Expand All toggle for argument sections (MATLAB-style)
+// Collapse / Expand All toggle for argument and example sections
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -2355,9 +2348,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function () {
 
-      var section = btn.closest('.arg-section');
+      var section = btn.closest('.arg-section, .example-section');
 
-      var items   = section.querySelectorAll('details.arg-item');
+      if (!section) return;
+
+
+
+      var items = section.querySelectorAll('details.arg-item, details.example-item');
+
+      if (!items.length) return;
+
+
 
       var anyOpen = Array.from(items).some(function (d) { return d.open; });
 

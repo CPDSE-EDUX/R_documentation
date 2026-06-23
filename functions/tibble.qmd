@@ -1,36 +1,48 @@
 ---
 title: "tibble( )"
-subtitle: "Create a tidy data frame from column vectors. See [original documentation](https://tibble.tidyverse.org/reference/tibble.html) for reference."
+subtitle: "Create a tidy data frame from column vectors. tibble() is from the tibble package, which is part of the tidyverse."
 ---
 
-<a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">tibble documentation ↗</a>
+<div class="source-links">
+<a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
 
 ## Syntax
-
-### Required Arguments
 
 ```{r, eval=FALSE}
 tibble(col1 = values, col2 = values, ...)
 ```
-
-```{r, eval=FALSE}
-as_tibble(x)
-```
-
-### Description
-
 ::: {.desc-item}
 `tibble(col1 = values, col2 = values, ...)` creates a data frame from named column vectors.
 A tibble is the tidyverse version of a `data.frame` — it has the same structure but with safer defaults and cleaner printing.
 :::
 
+```{r, eval=FALSE}
+as_tibble(x)
+```
+::: {.desc-item}
+`as_tibble(x)` converts an existing base R `data.frame` (or matrix) into a tibble.
+:::
+
+```{r, eval=FALSE}
+tibble(col1 = values, col2 = col1 * factor)
+```
 ::: {.desc-item}
 `tibble(col1 = values, col2 = col1 * factor)` allows later columns to reference columns defined earlier in the same call.
 This is not possible with base R `data.frame()`.
 :::
 
+```{r, eval=FALSE}
+tibble(..., .rows = NULL, .name_repair = "check_unique")
+```
 ::: {.desc-item}
-`as_tibble(x)` converts an existing base R `data.frame` (or matrix) into a tibble.
+`tibble(..., .rows = NULL, .name_repair = "check_unique")` exposes the optional arguments: `.rows` fixes the number of rows (useful for an empty tibble), and `.name_repair` controls how duplicate or invalid column names are handled.
 :::
 
 ::: {.callout-tip}
@@ -38,19 +50,8 @@ This is not possible with base R `data.frame()`.
 Tibbles never convert character columns to factors automatically, never recycle vectors of incompatible lengths silently, and print only the first 10 rows — they are designed to fail loudly and clearly, which makes bugs easier to find.
 :::
 
-### Required and optional arguments
-
-```{r, eval=FALSE}
-tibble(..., .rows = NULL, .name_repair = "check_unique")
-```
-
-### Description
-
-::: {.desc-item}
-`tibble(..., .rows = NULL, .name_repair = "check_unique")` exposes the optional arguments: `.rows` fixes the number of rows (useful for an empty tibble), and `.name_repair` controls how duplicate or invalid column names are handled.
-:::
-
 ## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>

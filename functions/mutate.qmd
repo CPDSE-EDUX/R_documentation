@@ -1,32 +1,44 @@
 ---
 title: "mutate( )"
-subtitle: "Add or transform columns in a data frame. See [original documentation](https://dplyr.tidyverse.org/reference/mutate.html) for reference."
+subtitle: "Add or transform columns in a data frame. mutate() is from the dplyr package, which is part of the tidyverse."
 ---
 
-<a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">dplyr documentation ↗</a>
+<div class="source-links">
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
 
 ## Syntax
-
-### Required Arguments
 
 ```{r, eval=FALSE}
 df %>% mutate(new_col = expression)
 ```
-
-```{r, eval=FALSE}
-df %>% mutate(new_col = expression, another_col = expression)
-```
-
-### Description
-
 ::: {.desc-item}
 `df %>% mutate(new_col = expression)` adds a new column to a data frame.
 The expression on the right can reference any existing column by name.
 :::
 
+```{r, eval=FALSE}
+df %>% mutate(new_col = expression, another_col = expression)
+```
 ::: {.desc-item}
 `df %>% mutate(col1 = ..., col2 = ...)` adds multiple columns in a single call.
 Later expressions can reference columns created earlier in the same `mutate()`.
+:::
+
+```{r, eval=FALSE}
+df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
+```
+::: {.desc-item}
+`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
+The default `"all"` retains every column, including unmodified ones.
+The optional `.before` / `.after` arguments control where new columns are inserted.
 :::
 
 ::: {.callout-note}
@@ -36,21 +48,8 @@ Apply `signif()` or `round()` only inside `cat()` when printing a final result.
 Rounding a column that feeds into later calculations accumulates error.
 :::
 
-### Required and optional arguments
-
-```{r, eval=FALSE}
-df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
-```
-
-### Description
-
-::: {.desc-item}
-`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
-The default `"all"` retains every column, including unmodified ones.
-The optional `.before` / `.after` arguments control where new columns are inserted.
-:::
-
 ## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>

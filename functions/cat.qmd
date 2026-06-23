@@ -1,37 +1,47 @@
 ---
 title: "cat( )"
-subtitle: "Print labelled results with units to the console. See [original documentation](https://rdrr.io/r/base/cat.html) for reference."
+subtitle: "Print labelled results with units to the console. cat() is a base R function."
 ---
 
-<a class="source-link" href="https://rdrr.io/r/base/cat.html" target="_blank" rel="noopener">base R documentation ↗</a>
+<div class="source-links">
+<a class="source-link" href="https://rdrr.io/r/base/cat.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# cat() is part of base R — no package installation needed
+```
 
 ## Syntax
-
-### Required Arguments
 
 ```{r, eval=FALSE}
 cat(...)
 ```
-
-```{r, eval=FALSE}
-cat("Label:", value, "unit\n")
-cat("Label:", signif(value, digits), "unit\n")
-```
-
-### Description
-
 ::: {.desc-item}
 `cat(...)` concatenates and prints its arguments to the console with no formatting.
 Unlike `print()`, it does not add quotes around character strings or display `[1]` index prefixes, making it ideal for producing clean, readable output.
 :::
 
+```{r, eval=FALSE}
+cat("Label:", value, "unit\n")
+```
 ::: {.desc-item}
 `cat("Label:", value, "unit\n")` is the standard pattern for reporting a named result with its unit.
 The `\n` at the end moves the cursor to a new line.
 :::
 
+```{r, eval=FALSE}
+cat("Label:", signif(value, digits), "unit\n")
+```
 ::: {.desc-item}
 `cat("Label:", signif(value, digits), "unit\n")` rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
+:::
+
+```{r, eval=FALSE}
+cat(..., sep = " ", file = "", append = FALSE)
+```
+::: {.desc-item}
+`cat(..., sep = " ", file = "", append = FALSE)` exposes the optional arguments that control how and where output is written: `sep` sets the separator between items, while `file` and `append` redirect output to a file instead of the console.
 :::
 
 ::: {.callout-note}
@@ -41,19 +51,8 @@ Always use `cat()` with a descriptive label and the unit.
 A number without context is meaningless in a pharmaceutical report.
 :::
 
-### Required and optional arguments
-
-```{r, eval=FALSE}
-cat(..., sep = " ", file = "", append = FALSE)
-```
-
-### Description
-
-::: {.desc-item}
-`cat(..., sep = " ", file = "", append = FALSE)` exposes the optional arguments that control how and where output is written: `sep` sets the separator between items, while `file` and `append` redirect output to a file instead of the console.
-:::
-
 ## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>

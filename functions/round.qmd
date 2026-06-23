@@ -1,23 +1,33 @@
 ---
 title: "round( )"
-subtitle: "Round to a fixed number of decimal places. See [original documentation](https://rdrr.io/r/base/Round.html) for reference."
+subtitle: "Round to a fixed number of decimal places. round() is a base R function."
 ---
 
-<a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">base R documentation ↗</a>
+<div class="source-links">
+<a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# round() is part of base R — no package installation needed
+```
 
 ## Syntax
-
-### Required Arguments
 
 ```{r, eval=FALSE}
 round(x)
 ```
-
-### Description
-
 ::: {.desc-item}
 `round(x, digits)` rounds a number (or numeric vector) to `digits` decimal places.
 Positive values of `digits` round to the right of the decimal point; negative values round to the left (e.g. `digits = -1` rounds to the nearest 10).
+:::
+
+```{r, eval=FALSE}
+round(x, digits = 0)
+```
+::: {.desc-item}
+`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
+The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
 :::
 
 ::: {.callout-note}
@@ -36,26 +46,21 @@ mutate(pct_label = round(ibu_mg / label_claim_mg * 100, 2))  # rounding contamin
 ```
 :::
 
-### Required and optional arguments
-
-```{r, eval=FALSE}
-round(x, digits = 0)
-```
-
-### Description
-
-::: {.desc-item}
-`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
-The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
-:::
-
 ::: {.callout-tip}
 ## Rule of thumb
 Use `round()` when a **fixed number of decimal places** is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p.
 Use `signif()` for analytical concentrations and masses where **significant figures** reflect instrument precision.
 :::
 
+::: {.callout-warning}
+## Banker's rounding (round-half-to-even)
+R uses **banker's rounding**: when a value is exactly halfway between two options, it rounds to the nearest *even* digit.
+`round(0.5)` gives `0`, and `round(1.5)` gives `2`.
+This is statistically unbiased and follows IEC 60559, but it may differ from the "always round up" rule you learned in school.
+:::
+
 ## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
