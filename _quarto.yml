@@ -15,8 +15,17 @@ website:
     left:
       - text: "Home"
         href: index.qmd
-      - text: "Getting Started"
-        href: getting-started.qmd
+      - text: "Topics covered"
+        menu:
+          - text: "Getting Started"
+            href: getting-started.qmd
+          - text: "---"
+          - text: "Data Handling"
+            href: topics/data-handling.qmd
+          - text: "Descriptive Statistics"
+            href: topics/descriptive-stats.qmd
+          - text: "Visualization"
+            href: topics/visualization.qmd
       - text: "Functions"
         menu:
           - text: "All Functions"

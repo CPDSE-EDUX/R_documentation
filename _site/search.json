@@ -572,7 +572,7 @@
     "href": "index.html#how-to-read-a-function-page",
     "title": "R for Pharmacy",
     "section": "How to read a function page",
-    "text": "How to read a function page\nEach page follows the same structure:\n\n\n\n\n\n\n\nSection\nWhat you’ll find\n\n\n\n\nSyntax\nAll call variants with argument names\n\n\nDescription\nWhat each call variant does, in plain English\n\n\nExamples\nRunnable examples — edit and re-run in your browser\n\n\nInput Arguments\nEvery argument explained with type and default value"
+    "text": "How to read a function page\nEach page follows the same structure:\n\n\n\n\n\n\n\nSection\nWhat you’ll find\n\n\n\n\nRequired Library\nWhat library is needed to use the function\n\n\nSyntax\nHow to use the function\n\n\nArgument Overview\nRelevant arguments explained\n\n\nExamples\nExamples for how to use the function with different arguments"
   },
   {
     "objectID": "topics/descriptive-stats.html",

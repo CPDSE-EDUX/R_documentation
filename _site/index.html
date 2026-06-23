@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./images/favicon.ico" rel="icon">
+<link href="./assets/images/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9484908ef69a6eeeac264dfdef059766.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -100,10 +100,30 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./getting-started.html"> 
-<span class="menu-text">Getting Started</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-topics-covered" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Topics covered</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-topics-covered">    
+        <li>
+    <a class="dropdown-item" href="./getting-started.html">
+ <span class="dropdown-text">Getting Started</span></a>
   </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="./topics/data-handling.html">
+ <span class="dropdown-text">Data Handling</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./topics/descriptive-stats.html">
+ <span class="dropdown-text">Descriptive Statistics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./topics/visualization.html">
+ <span class="dropdown-text">Visualization</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-functions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Functions</span>
@@ -279,20 +299,20 @@ Understand dose–response relationships with linear and logistic regression.
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Syntax</strong></td>
-<td>All call variants with argument names</td>
+<td><strong>Required Library</strong></td>
+<td>What library is needed to use the function</td>
 </tr>
 <tr class="even">
-<td><strong>Description</strong></td>
-<td>What each call variant does, in plain English</td>
+<td><strong>Syntax</strong></td>
+<td>How to use the function</td>
 </tr>
 <tr class="odd">
-<td><strong>Examples</strong></td>
-<td>Runnable examples — edit and re-run in your browser</td>
+<td><strong>Argument Overview</strong></td>
+<td>Relevant arguments explained</td>
 </tr>
 <tr class="even">
-<td><strong>Input Arguments</strong></td>
-<td>Every argument explained with type and default value</td>
+<td><strong>Examples</strong></td>
+<td>Examples for how to use the function with different arguments</td>
 </tr>
 </tbody>
 </table>
@@ -303,7 +323,7 @@ Understand dose–response relationships with linear and logistic regression.
 </main> <!-- /main -->
 <script>
 
-// Collapse / Expand All toggle for argument sections (MATLAB-style)
+// Collapse / Expand All toggle for argument and example sections
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -311,9 +331,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function () {
 
-      var section = btn.closest('.arg-section');
+      var section = btn.closest('.arg-section, .example-section');
 
-      var items   = section.querySelectorAll('details.arg-item');
+      if (!section) return;
+
+
+
+      var items = section.querySelectorAll('details.arg-item, details.example-item');
+
+      if (!items.length) return;
+
+
 
       var anyOpen = Array.from(items).some(function (d) { return d.open; });
 

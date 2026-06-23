@@ -58,11 +58,9 @@ Most code blocks on this site are **interactive**. Click **Run Code** to execute
 
 ## How to read a function page
 
-Each page follows the same structure:
-
 | Section | What you'll find |
 |---|---|
-| **Syntax** | All call variants with argument names |
-| **Description** | What each call variant does, in plain English |
-| **Examples** | Runnable examples — edit and re-run in your browser |
-| **Input Arguments** | Every argument explained with type and default value |
+| **Required Library** | What library is needed to use the function |
+| **Syntax** | How to use the function |
+| **Argument Overview** | Relevant arguments explained |
+| **Examples** | Examples for how to use the function with different arguments|
