@@ -243,6 +243,13 @@ main table {
 
 .arg-section { margin: 0.5rem 0 1.5rem; }
 
+.arg-intro {
+  margin: 0.25rem 0 0.85rem;
+  font-size: 13px;
+  color: $c-text-sec;
+  line-height: 1.65;
+}
+
 .collapse-toolbar {
   display: flex;
   justify-content: flex-end;
@@ -361,11 +368,135 @@ details.arg-item {
 
 .desc-item {
   padding: 0.6rem 0;
-  border-bottom: 0.5px solid $c-border;
   font-size: 13px;
   color: $c-text-sec;
   line-height: 1.7;
-  &:last-child { border-bottom: none; }
+}
+
+.csv-flow {
+  margin-top: 0.65rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.csv-sheet,
+.tibble-card {
+  border: 0.5px solid $c-border;
+  background: $c-bg;
+  min-width: 220px;
+  max-width: 340px;
+}
+
+.csv-card-title {
+  background: $c-bg-sec;
+  display: flex;
+  align-items: center;
+  font-family: $sans;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $c-text-ter;
+  border-bottom: 0.5px solid $c-border;
+  padding: 0.2rem 0.5rem;
+}
+
+.csv-card-body {
+  padding: 0.15rem 0.65rem 0.1rem;
+}
+
+.csv-sheet div.sourceCode {
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+
+.csv-sheet pre.text,
+.csv-sheet pre.sourceCode {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.csv-sheet pre.text code,
+.csv-sheet pre.sourceCode code {
+  padding: 0;
+  background: transparent;
+}
+
+.csv-sheet pre.sourceCode code {
+  color: $c-text;
+}
+
+.csv-flow-arrow {
+  font-size: 20px;
+  line-height: 1;
+  color: $c-text-ter;
+  font-weight: 600;
+  align-self: center;
+}
+
+.tibble-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+
+  th,
+  td {
+    font-family: $mono;
+    font-size: 11px;
+    text-transform: none;
+    letter-spacing: normal;
+    padding: 0.18rem 0.5rem;
+    border-bottom: 0.5px solid $c-border;
+    text-align: left;
+    color: $c-text;
+    background: transparent;
+  }
+
+  th {
+    font-weight: 600;
+    color: $c-text-sec;
+    border-bottom: 0.5px solid $c-border-md;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.tibble-card table thead th {
+  padding-top: 0.1rem;
+}
+
+.tibble-card p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .csv-flow {
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .csv-flow-arrow {
+    width: 100%;
+    text-align: center;
+  }
+
+  .csv-sheet,
+  .tibble-card {
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+  }
 }
 
 // ── See Also ──────────────────────────────────────────────────────────────────
@@ -487,7 +618,15 @@ details.arg-item {
   }
 }
 
-.example-section { margin: 0.5rem 0 1.5rem; }
+.example-section { margin: 0 0 1.5rem; }
+
+section#examples > p {
+  margin: 0 0 0.65rem;
+}
+
+section#examples > p .source-link {
+  margin-bottom: 0;
+}
 
 // ── Topic cards — large collapsible sections for Getting Started page ────────
 
