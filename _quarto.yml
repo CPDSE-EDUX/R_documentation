@@ -3,13 +3,15 @@ project:
   output-dir: _site
 
 website:
-  title: "R for Pharmacy"
+  title: "Basic R for Pharmacy"
   description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
   favicon: assets/images/favicon.ico
 
   navbar:
     background: "#3C5E3E"
     foreground: "#E4D7A1"
+    title: "CPDSE"
+    title-href: "https://cpdse.dk"
     logo: /assets/images/logo_snake_gold.png
     logo-alt: "CPDSE"
     left:

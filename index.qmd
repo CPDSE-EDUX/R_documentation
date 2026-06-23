@@ -5,10 +5,10 @@ toc: false
 ---
 
 ::: {.hero-banner}
-# R for Pharmacy
+# Basic R for Pharmacy
 
-R references for pharmaceutical sciences practicals.
-Written for learners — plain language, tidyverse style, pharmacy examples.
+R for pharmaceutical sciences practicals.
+Written for learners in plain language, tidyverse style, and with pharmacy examples.
 
 [Get Started](getting-started.qmd){.hero-btn}
 [Browse Functions](functions/index.qmd){.hero-btn .secondary}
@@ -16,8 +16,8 @@ Written for learners — plain language, tidyverse style, pharmacy examples.
 
 
 ::: {.callout-tip}
-## No installation required
-Most code blocks on this site are **interactive**. Click **Run Code** to execute them right here in your browser — no R or RStudio installation needed.
+## Run Code Online
+Many code blocks on this site are **interactive**. Click **Run Code** to execute them right here in your browser — no R or RStudio installation needed.
 :::
 
 ## Topics covered
