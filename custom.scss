@@ -18,8 +18,8 @@ $body-bg:                white;
 $body-color:             $charcoal;
 $headings-color:         $forest-green;
 
-$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
-$font-family-monospace:  'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+$font-family-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-family-monospace:  'Courier New', monospace;
 $font-size-root:         15px;
 
 // Navbar
@@ -43,8 +43,8 @@ $border-color:           #e8e8e8;
 
 // ── Design tokens (from reference example) ────────────────────────────────────
 // Scoped to page content; navbar / sidebar / footer keep CPDSE branding.
-$sans:      'Inter', system-ui, -apple-system, sans-serif;
-$mono:      'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+$sans:      system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$mono:      'Courier New', monospace;
 $c-bg:        #ffffff;
 $c-bg-sec:    #f7f7f5;
 $c-bg-ter:    #f0efe9;
