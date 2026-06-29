@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fbbad6c1ec35f15638aa5e4b19c54818.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c55984edb782a83728014181c3d66b5a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-45a72ba0feb9f9679e8c07a5078dad8b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -369,7 +369,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\n#library(dplyr)\n#library(tibble)\n\n# Load from mounted webR paths first; fallback to downloading from site URLs.\nload_capsules <- function() {\n  candidate_paths <- c(\n    \"/home/web_user/capsules.csv\",\n    \"capsules.csv\",\n    \"assets/data/capsules.csv\",\n    \"../assets/data/capsules.csv\",\n    \"/assets/data/capsules.csv\"\n  )\n\n  for (path in candidate_paths) {\n    out <- tryCatch(\n      read_csv(path, show_col_types = FALSE),\n      error = function(e) NULL\n    )\n    if (!is.null(out)) return(out)\n  }\n\n  candidate_urls <- c(\n    \"../assets/data/capsules.csv\",\n    \"/assets/data/capsules.csv\"\n  )\n\n  for (url in candidate_urls) {\n    out <- tryCatch({\n      tmp <- tempfile(fileext = \".csv\")\n      utils::download.file(url, destfile = tmp, mode = \"wb\", quiet = TRUE)\n      read_csv(tmp, show_col_types = FALSE)\n    }, error = function(e) NULL)\n    if (!is.null(out)) return(out)\n  }\n\n  stop(\n    \"Could not load capsules.csv from webR mounted paths or site asset URLs. \"\n  )\n}\n\ncapsules <- load_capsules()\n\ncapsules","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep only batch A capsules\ncapsules %>%\n  filter(batch == \"A\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep rows matching two conditions\ncapsules %>%\n  filter(batch == \"B\" & pct_label > 100)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  select(capsule_id, batch, pct_label)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Drop a column with -\ncapsules %>%\n  select(-fill_mass_mg)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  rename(id = capsule_id, pct = pct_label)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  arrange(desc(pct_label))","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"label_claim_mg <- 75.0\n\ncapsules %>%\n  mutate(ibu_mg = fill_mass_mg * 0.43) %>%\n  select(capsule_id, fill_mass_mg, ibu_mg, pct_label)","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  filter(batch == \"B\") %>%\n  arrange(pct_label) %>%\n  select(capsule_id, fill_mass_mg, pct_label)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(tidyverse)\n#library(dplyr)\n#library(tibble)\n\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep only batch A capsules\nlibrary(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  filter(batch == \"A\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Keep rows matching two conditions\nlibrary(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  filter(batch == \"A\" & pct_label > 100)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  select(capsule_id, batch, pct_label)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Drop a column with -\nlibrary(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  select(-fill_mass_mg)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  rename(id = capsule_id, pct = pct_label)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  arrange(pct_label)","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  arrange(desc(pct_label))","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  mutate(ibu_mg = fill_mass_mg * 0.43) #%>%\n  #select(capsule_id, fill_mass_mg, ibu_mg, pct_label)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ncapsules <- read_csv(\"/home/web_user/capsules.csv\")\n\ncapsules %>%\n  filter(batch == \"B\") %>%\n  arrange(pct_label) %>%\n  select(capsule_id, fill_mass_mg, pct_label)","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -2051,12 +2051,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <details class="topic-card" open="">
 <summary>
-Setup
+Load the Data
 </summary>
 <div class="topic-card-body">
-<p>Run this setup chunk first — it loads the dataset used in all examples below.</p>
+<p>First, you have to load the data.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Because webR cells run in separate scopes (meaning one cell does not know what the other cell knows), each example chunk below loads what it needs on its own.</p>
 </div>
 </details>
 <details class="topic-card">
@@ -2065,23 +2066,48 @@ filter( )
 </summary>
 <div class="topic-card-body">
 <p>Keep only rows where a condition is <code>TRUE</code>.</p>
+<section id="filter-based-on-one-condition" class="level2">
+<h2 class="anchored" data-anchor-id="filter-based-on-one-condition">Filter based on one condition</h2>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/filter_function.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of filtering batch A capsules</figcaption>
+</figure>
+</div>
+</section>
+<section id="filter-based-on-multiple-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="filter-based-on-multiple-conditions">Filter based on multiple conditions</h2>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/filter_function2.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of filtering batch A capsules with a pct_label value larger than 100</figcaption>
+</figure>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Comparison operators
+Available Operators
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>==</code> equal · <code>!=</code> not equal · <code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code> greater/less than · <code>&amp;</code> and · <code>|</code> or</p>
+<ul>
+<li><code>==</code> <strong>equal</strong> — is the value exactly this?</li>
+<li><code>!=</code> <strong>not equal</strong> — exclude this value</li>
+<li><code>&gt;</code> / <code>&lt;</code> <strong>greater / less than</strong> — strictly above or below</li>
+<li><code>&gt;=</code> / <code>&lt;=</code> <strong>greater / less than or equal</strong> — includes the boundary value</li>
+<li><code>&amp;</code> <strong>and</strong> — both conditions must be true</li>
+<li><code>|</code> <strong>or</strong> — at least one condition must be true</li>
+</ul>
 </div>
 </div>
+</section>
 </div>
 </details>
 <details class="topic-card">
@@ -2090,10 +2116,28 @@ select( )
 </summary>
 <div class="topic-card-body">
 <p>Keep only the columns you need.</p>
+<section id="select-columns-by-name" class="level2">
+<h2 class="anchored" data-anchor-id="select-columns-by-name">Select columns by name</h2>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/select_function.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of selecting columns</figcaption>
+</figure>
+</div>
+</section>
+<section id="drop-a-column-by-name" class="level2">
+<h2 class="anchored" data-anchor-id="drop-a-column-by-name">Drop a column by name</h2>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/select_function2.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of dropping a column</figcaption>
+</figure>
+</div>
+</section>
 </div>
 </details>
 <details class="topic-card">
@@ -2104,6 +2148,12 @@ rename( )
 <p>Rename a column: <code>rename(new_name = old_name)</code>.</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/rename_function.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of renaming a column</figcaption>
+</figure>
+</div>
 </div>
 </details>
 <details class="topic-card">
@@ -2111,9 +2161,29 @@ rename( )
 arrange( )
 </summary>
 <div class="topic-card-body">
-<p>Sort rows by a column. Wrap in <code>desc()</code> to sort highest-first.</p>
+<p>Sort rows by a column.</p>
+<section id="ascending-order" class="level2">
+<h2 class="anchored" data-anchor-id="ascending-order">Ascending order</h2>
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/arrange_function.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of arranging rows in ascending order</figcaption>
+</figure>
+</div>
+</section>
+<section id="descending-order" class="level2">
+<h2 class="anchored" data-anchor-id="descending-order">Descending order</h2>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/arrange_function2.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of arranging rows in descending order</figcaption>
+</figure>
+</div>
+</section>
 </div>
 </details>
 <details class="topic-card">
@@ -2122,8 +2192,14 @@ mutate( )
 </summary>
 <div class="topic-card-body">
 <p>Add or transform columns. See the full <a href="../functions/mutate.html"><code>mutate()</code> reference page</a> for details.</p>
-<div id="qwebr-insertion-location-8"></div>
+<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/mutate_function.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of adding a column with newly calculated values</figcaption>
+</figure>
+</div>
 </div>
 </details>
 <details class="topic-card">
@@ -2132,8 +2208,14 @@ Combining steps
 </summary>
 <div class="topic-card-body">
 <p>Chain any number of operations with the pipe — each result flows into the next.</p>
-<div id="qwebr-insertion-location-9"></div>
+<div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/data_handling_pipe.svg" class="img-fluid figure-img"></p>
+<figcaption>Illustration of combining steps with the pipe operator</figcaption>
+</figure>
+</div>
 </div>
 </details>
 

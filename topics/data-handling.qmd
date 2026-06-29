@@ -5,57 +5,22 @@ toc: false
 ---
 
 <details class="topic-card" open>
-<summary>Setup</summary>
+<summary>Load the Data</summary>
 <div class="topic-card-body">
 
-Run this setup chunk first — it loads the dataset used in all examples below.
+First, you have to load the data.
 
 ```{webr-r}
 library(tidyverse)
 #library(dplyr)
 #library(tibble)
 
-# Load from mounted webR paths first; fallback to downloading from site URLs.
-load_capsules <- function() {
-  candidate_paths <- c(
-    "/home/web_user/capsules.csv",
-    "capsules.csv",
-    "assets/data/capsules.csv",
-    "../assets/data/capsules.csv",
-    "/assets/data/capsules.csv"
-  )
-
-  for (path in candidate_paths) {
-    out <- tryCatch(
-      read_csv(path, show_col_types = FALSE),
-      error = function(e) NULL
-    )
-    if (!is.null(out)) return(out)
-  }
-
-  candidate_urls <- c(
-    "../assets/data/capsules.csv",
-    "/assets/data/capsules.csv"
-  )
-
-  for (url in candidate_urls) {
-    out <- tryCatch({
-      tmp <- tempfile(fileext = ".csv")
-      utils::download.file(url, destfile = tmp, mode = "wb", quiet = TRUE)
-      read_csv(tmp, show_col_types = FALSE)
-    }, error = function(e) NULL)
-    if (!is.null(out)) return(out)
-  }
-
-  stop(
-    "Could not load capsules.csv from webR mounted paths or site asset URLs. "
-  )
-}
-
-capsules <- load_capsules()
+capsules <- read_csv("/home/web_user/capsules.csv")
 
 capsules
 ```
+
+Because webR cells run in separate scopes (meaning one cell does not know what the other cell knows), each example chunk below loads what it needs on its own.
 
 </div>
 </details>
@@ -66,21 +31,41 @@ capsules
 
 Keep only rows where a condition is `TRUE`.
 
+## Filter based on one condition
+
 ```{webr-r}
 # Keep only batch A capsules
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
   filter(batch == "A")
 ```
 
+![Illustration of filtering batch A capsules](../assets/images/filter_function.svg)
+
+## Filter based on multiple conditions
+
 ```{webr-r}
 # Keep rows matching two conditions
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
-  filter(batch == "B" & pct_label > 100)
+  filter(batch == "A" & pct_label > 100)
 ```
 
+![Illustration of filtering batch A capsules with a pct_label value larger than 100](../assets/images/filter_function2.svg)
+
 ::: {.callout-tip}
-## Comparison operators
-`==` equal · `!=` not equal · `>` `<` `>=` `<=` greater/less than · `&` and · `|` or
+## Available Operators
+
+- `==` **equal** — is the value exactly this?
+- `!=` **not equal** — exclude this value
+- `>` / `<` **greater / less than** — strictly above or below
+- `>=` / `<=` **greater / less than or equal** — includes the boundary value
+- `&` **and** — both conditions must be true
+- `|` **or** — at least one condition must be true
 :::
 
 </div>
@@ -92,16 +77,30 @@ capsules %>%
 
 Keep only the columns you need.
 
+## Select columns by name
+
 ```{webr-r}
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
   select(capsule_id, batch, pct_label)
 ```
 
+![Illustration of selecting columns](../assets/images/select_function.svg)
+
+## Drop a column by name
+
 ```{webr-r}
 # Drop a column with -
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
   select(-fill_mass_mg)
 ```
+
+![Illustration of dropping a column](../assets/images/select_function2.svg)
 
 </div>
 </details>
@@ -113,9 +112,14 @@ capsules %>%
 Rename a column: `rename(new_name = old_name)`.
 
 ```{webr-r}
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
   rename(id = capsule_id, pct = pct_label)
 ```
+
+![Illustration of renaming a column](../assets/images/rename_function.svg)
 
 </div>
 </details>
@@ -124,12 +128,30 @@ capsules %>%
 <summary>arrange( )</summary>
 <div class="topic-card-body">
 
-Sort rows by a column. Wrap in `desc()` to sort highest-first.
+Sort rows by a column.
+
+##  Ascending order
+```{webr-r}
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
+capsules %>%
+  arrange(pct_label)
+```
+
+![Illustration of arranging rows in ascending order](../assets/images/arrange_function.svg)
+
+## Descending order
 
 ```{webr-r}
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
   arrange(desc(pct_label))
 ```
+
+![Illustration of arranging rows in descending order](../assets/images/arrange_function2.svg)
 
 </div>
 </details>
@@ -141,12 +163,15 @@ capsules %>%
 Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
 
 ```{webr-r}
-label_claim_mg <- 75.0
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
 
 capsules %>%
-  mutate(ibu_mg = fill_mass_mg * 0.43) %>%
-  select(capsule_id, fill_mass_mg, ibu_mg, pct_label)
+  mutate(ibu_mg = fill_mass_mg * 0.43) #%>%
+  #select(capsule_id, fill_mass_mg, ibu_mg, pct_label)
 ```
+
+![Illustration of adding a column with newly calculated values](../assets/images/mutate_function.svg)
 
 </div>
 </details>
@@ -158,11 +183,16 @@ capsules %>%
 Chain any number of operations with the pipe — each result flows into the next.
 
 ```{webr-r}
+library(tidyverse)
+capsules <- read_csv("/home/web_user/capsules.csv")
+
 capsules %>%
   filter(batch == "B") %>%
   arrange(pct_label) %>%
   select(capsule_id, fill_mass_mg, pct_label)
 ```
+
+![Illustration of combining steps with the pipe operator](../assets/images/data_handling_pipe.svg)
 
 </div>
 </details>

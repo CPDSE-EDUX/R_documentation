@@ -1,0 +1,125 @@
+<svg width="100%" viewBox="0 0 780 160" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>filter(batch == "A") diagram</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- ── LEFT TABLE ── col widths: 72,52,88,76 start x=20 -->
+
+  <rect x="20"  y="10" width="72" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="10" width="52" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="10" width="88" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="10" width="76" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">capsule_id</text>
+  <text x="118" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">batch</text>
+  <text x="188" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">fill_mass_mg</text>
+  <text x="270" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">pct_label</text>
+
+  <!-- Row 1 (A) -->
+  <rect x="20"  y="30" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="30" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="30" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="30" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">1</text>
+  <text x="118" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">A</text>
+  <text x="188" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.2</text>
+  <text x="270" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">99.8</text>
+
+  <!-- Row 2 (A) -->
+  <rect x="20"  y="48" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="48" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="48" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="48" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">2</text>
+  <text x="118" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">A</text>
+  <text x="188" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.4</text>
+  <text x="270" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.1</text>
+
+  <!-- Row 3 (A) -->
+  <rect x="20"  y="66" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="66" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="66" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="66" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">3</text>
+  <text x="118" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">A</text>
+  <text x="188" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.7</text>
+  <text x="270" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.3</text>
+
+  <!-- Row 4 (B) -->
+  <rect x="20"  y="84" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="84" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="84" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="84" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="93" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">4</text>
+  <text x="118" y="93" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">B</text>
+  <text x="188" y="93" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">175.1</text>
+  <text x="270" y="93" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.5</text>
+
+  <!-- Row 5 (B) -->
+  <rect x="20"  y="102" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="102" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="102" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="102" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="111" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">5</text>
+  <text x="118" y="111" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">B</text>
+  <text x="188" y="111" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.8</text>
+  <text x="270" y="111" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.2</text>
+
+  <!-- Row 6 (B) -->
+  <rect x="20"  y="120" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="92"  y="120" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="144" y="120" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="232" y="120" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="56"  y="129" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">6</text>
+  <text x="118" y="129" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">B</text>
+  <text x="188" y="129" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">175.3</text>
+  <text x="270" y="129" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.7</text>
+
+  <!-- ── ARROW + FILTER LABEL ── -->
+  <text x="385" y="68" text-anchor="middle" font-family="monospace" font-size="10" fill="#555">filter(batch == "A")</text>
+  <line x1="320" y1="80" x2="448" y2="80" stroke="#888" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <!-- ── RIGHT TABLE (batch A only, 3 rows) ── start x=458 -->
+
+  <rect x="458" y="10" width="72" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="530" y="10" width="52" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="582" y="10" width="88" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="670" y="10" width="76" height="20" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="494" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">capsule_id</text>
+  <text x="556" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">batch</text>
+  <text x="626" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">fill_mass_mg</text>
+  <text x="708" y="20" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#888">pct_label</text>
+
+  <!-- Row 1 (A) -->
+  <rect x="458" y="30" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="530" y="30" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="582" y="30" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="670" y="30" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="494" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">1</text>
+  <text x="556" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">A</text>
+  <text x="626" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.2</text>
+  <text x="708" y="39" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">99.8</text>
+
+  <!-- Row 2 (A) -->
+  <rect x="458" y="48" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="530" y="48" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="582" y="48" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="670" y="48" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="494" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">2</text>
+  <text x="556" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">A</text>
+  <text x="626" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.4</text>
+  <text x="708" y="57" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.1</text>
+
+  <!-- Row 3 (A) -->
+  <rect x="458" y="66" width="72" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="530" y="66" width="52" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="582" y="66" width="88" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <rect x="670" y="66" width="76" height="18" fill="#fff" stroke="#e0e0e0" stroke-width="0.5"/>
+  <text x="494" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">3</text>
+  <text x="556" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">A</text>
+  <text x="626" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">174.7</text>
+  <text x="708" y="75" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="10" fill="#555">100.3</text>
+
+</svg>

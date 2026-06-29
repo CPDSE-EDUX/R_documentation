@@ -33,6 +33,8 @@ When you open RStudio you will see four panes:
 
 ![RStudio Panels](assets/images/RStudio_Panels.png)
 
+[Watch: RStudio in 3 minutes (YouTube) ↗](https://www.youtube.com/watch?v=GEuuhg7NBko){target="_blank" rel="noopener"}
+
 </div>
 </details>
 

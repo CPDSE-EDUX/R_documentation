@@ -114,16 +114,22 @@ a:hover { text-decoration: underline; }
   }
 }
 
-// ── Page title — function name in monospace ───────────────────────────────────
+// ── Page title ────────────────────────────────────────────────────────────────
 
 .quarto-title h1.title {
-  font-family: $mono;
+  font-family: $sans;
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 700;
   color: $c-text;
   border-bottom: none;
   padding-bottom: 0;
   margin-bottom: 0.5rem;
+}
+
+// Function pages: title is a function name, shown in monospace
+body.function-page .quarto-title h1.title {
+  font-family: $mono;
+  font-weight: 500;
 }
 
 .quarto-title .description,
