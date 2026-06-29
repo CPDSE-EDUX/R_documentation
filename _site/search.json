@@ -18,7 +18,7 @@
     "href": "glossary.html",
     "title": "Glossary",
     "section": "",
-    "text": "Argument\nA value you pass into a function to control what it does. Most functions take one or more arguments, separated by commas.\n\nround(x = conc_ug_ml, digits = 3)\n#         ^^^^^^^^^^  ^^^^^^^^^\n#         argument 1  argument 2\n\nArguments can be named (like above) or positional (by order). Named is clearer.\n\n\nAssignment\nThe act of putting a value into a variable. In R, assignment uses &lt;-.\n\nconc_ug_ml &lt;- 31.4    # reads as: \"conc_ug_ml gets 31.4\"\n\nThe = sign works too, but &lt;- is the R convention and is preferred here.\n\n\nBug\nA mistake in your code that lets it run without error, but produces wrong results. Bugs are more dangerous than errors because R won’t tell you something is wrong.\nExample: Using read_csv2() on a comma-separated file instead of read_csv() — the code runs, but every row gets crammed into one column.\n\n\nCharacter (string)\nText enclosed in quotes. R calls this character; other languages call it a “string”. Used for labels, IDs, group names — anything that isn’t a number.\n\nbatch_id    &lt;- \"BT-2024-07\"\nformulation &lt;- \"immediate release\"\n\n\n\nComment\nA note in your code that R ignores when running. Comments start with #. Use them to explain why you wrote something, not just what it does.\n\nstd_slope &lt;- 0.01420    # AU per µg/mL — from the calibration curve fit\n\n\n\nConsole\nThe panel in RStudio where output appears after you run code. Use cat() to print labelled results to the console:\n\ncat(\"Concentration:\", conc_ug_ml, \"µg/mL\\n\")\n# prints: Concentration: 31.4 µg/mL\n\n\n\nData frame\nA table with rows and columns, where each column is a vector. All columns must be the same length. Columns can be different types (numeric, character, logical). In tidyverse style, always use a tibble instead of a base R data.frame.\n\nlibrary(tibble)\n\ncapsules &lt;- tibble(\n  capsule_id   = 1:6,\n  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5, 174.3),\n  formulation  = \"immediate release\"    # character — recycled to all 6 rows\n)\n\n\n\nDebugging\nThe process of finding and fixing a bug. Common strategies:\n\nPrint intermediate values with cat() to check what’s actually stored in each variable\nRun one line at a time and inspect the result\nRead the error or warning message carefully — R usually tells you the line number\n\n\n\nError\nA message that appears when R could not run your code at all. Common causes: typo in a function name, wrong number of arguments, using a variable that doesn’t exist yet.\nError in read_csv(\"data.csv\") : could not find function \"read_csv\"\n# Cause: library(readr) was not called before using read_csv()\nFix the problem described in the message, then try again.\n\n\nFunction\nA reusable piece of code that does a specific task. You call a function by writing its name followed by parentheses. Everything inside the parentheses is what you’re giving to the function.\n\nround(conc_ug_ml, 3)    # \"round\" is the function; conc_ug_ml and 3 are what you give it\n\n\n\nIDE\nShort for Integrated Development Environment — an application that combines everything you need to write and run code in one window: a code editor, a console, a file browser, and a plot viewer. RStudio is the IDE used in this course. Without one you’d write code in a plain text editor and switch to a separate terminal to run it.\n\n\nInput\nThe data or values you give to R — either typed directly, read from a file, or passed as arguments to a function.\n\n\nInteger\nA whole number with no decimal part. Counts and indices are typically integers. In R you rarely need to declare something as integer explicitly — numeric works fine.\n\n\nLogical\nA value that is either TRUE or FALSE. Produced by comparisons and used in filtering.\n\npct_label &lt;- 98.4\n\npct_label &gt; 85     # TRUE  — above lower acceptance limit\npct_label &gt; 115    # FALSE — not above upper limit\n\nLogicals are what filter() uses behind the scenes to select rows.\n\n\nNA\nR’s symbol for a missing value. Stands for “Not Available”. NA is not zero and not an empty string — it means the value is unknown. Many functions have an na.rm = TRUE argument to ignore NAs during calculation.\n\nfill_mass_mg &lt;- c(174.2, NA, 174.7, 174.0)\n\nmean(fill_mass_mg)                    # returns NA — one missing value poisons the result\nmean(fill_mass_mg, na.rm = TRUE)      # returns 174.3 — ignores the missing value\n\ncat(\"Mean fill mass:\", mean(fill_mass_mg, na.rm = TRUE), \"mg\\n\")\n\n\n\nNumeric\nA number with decimal places (R calls this double internally). The most common type in pharmacy data.\n\nfill_mass_mg &lt;- 174.3    # numeric\npct_label    &lt;- 98.41    # numeric\n\n\n\nOutput\nWhat R produces and shows in the console after running code. This could be a number, a table, a plot, or a message. Always use cat() with a label and unit when printing a single calculated result:\n\ncat(\"Acceptance value:\", round(AV_s1, 2), \"\\n\")\n\n\n\nPackage\nA collection of extra functions that extend what R can do. Base R comes with many useful functions, but packages like dplyr and readr add others.\n\ninstall.packages(\"tidyverse\")    # download and install once (per computer)\nlibrary(tidyverse)               # load all tidyverse packages for this session\n\n\n\nPipe (%&gt;%)\nPasses the output of one step directly into the next, left to right. Reads as “and then”.\n\nn_oos_capsules &lt;- capsules %&gt;%\n  filter(pct_label &lt; 85) %&gt;%\n  nrow()\n\ncat(\"Out-of-spec capsules:\", n_oos_capsules, \"\\n\")\n\nWithout the pipe you’d have to nest functions inside each other, which is harder to read.\n\n\nReturn value\nWhat a function gives back after it runs. You can store the return value in a variable and then print it with cat().\n\nconc_rounded_ug_ml &lt;- round(conc_ug_ml, 3)\ncat(\"Concentration:\", conc_rounded_ug_ml, \"µg/mL\\n\")\n\n\n\nScript\nA plain text file (.R or .qmd) where you save your code so you can re-run it later. Running code directly in the console is fine for quick tests, but use a script for any work you want to keep.\n\n\nSyntax\nThe grammar rules of a programming language — which words go where, what punctuation is needed, and in what order things must appear. Just as “the patient dose received” is ungrammatical English, 500 &lt;- dose_mg is a syntax error in R.\n\n\nTerminal\nA panel in RStudio (next to the Console tab) where you type operating system commands — not R code. Used for tasks like running git commands or navigating folders. For writing and running R code, use the Console instead. In RStudio, find it under the Terminal tab at the bottom of the screen.\n\n\nTibble\nA modern, tidyverse version of a data frame. Works the same way but with a few friendlier defaults:\n\nPrints only the first 10 rows instead of flooding the console\nShows column types below the column names\nNever silently converts text to factors\n\n\nlibrary(tibble)\nlibrary(readr)\n\n# Create manually\nstandards &lt;- tibble(\n  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),\n  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)\n)\n\n# Or read from a file — read_csv() always returns a tibble\ndissolution &lt;- read_csv(\"dissolution_data.csv\")\n\n\n\nVariable\nA named container that stores a value so you can use it later. Think of it like a labelled test tube: you give it a name and fill it with something.\n\ndose_mg    &lt;- 500          # stores the number 500 under the name \"dose_mg\"\npatient_id &lt;- \"P042\"       # stores text\n\n\n\nVector\nA sequence of values of the same type. The most basic data structure in R. A single number like 42 is actually a vector of length 1.\n\nconc_standards_ug_ml &lt;- c(0, 2.5, 5.0, 10.0, 20.0, 40.0)    # numeric vector, length 6\n\nOperations on a vector apply to every element at once (this is called vectorisation):\n\nconc_diluted_ug_ml &lt;- conc_standards_ug_ml / 2\ncat(\"Diluted standards:\", conc_diluted_ug_ml, \"µg/mL\\n\")\n\n\n\nWarning\nA message that appears when R did run your code but something looks suspicious. Warnings don’t always mean something went wrong — read them and decide if they matter."
+    "text": "Use this page to scan terms fast, grouped like a traditional glossary."
   },
   {
     "objectID": "functions/tibble.html",
@@ -308,7 +308,7 @@
     "href": "functions/index.html",
     "title": "Function Reference",
     "section": "",
-    "text": "A complete index of every function covered in this reference. Click any card to open the full documentation page."
+    "text": "A quick glossary of every function covered in this reference. Use this page to scan definitions fast, grouped like a traditional glossary."
   },
   {
     "objectID": "functions/index.html#import-create",
@@ -517,5 +517,159 @@
     "title": "Data Handling",
     "section": "Descending order",
     "text": "Descending order\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nIllustration of arranging rows in descending order"
+  },
+  {
+    "objectID": "functions/index.html#a-z-function-glossary",
+    "href": "functions/index.html#a-z-function-glossary",
+    "title": "Function Reference",
+    "section": "A-Z Function Glossary",
+    "text": "A-Z Function Glossary\n\ncat( ) (base R)\nPrint values to the console as readable text. Useful for labelled results and units.\nOpen full reference\n\n\nmutate( ) (dplyr)\nAdd new columns or modify existing columns in a data frame.\nOpen full reference\n\n\nread_csv( ) (readr)\nRead a comma-separated file into R as a tibble.\nOpen full reference\n\n\nround( ) (base R)\nRound numbers to a fixed number of decimal places.\nOpen full reference\n\n\nsignif( ) (base R)\nRound numbers to a chosen number of significant figures.\nOpen full reference\n\n\ntibble( ) (tibble)\nCreate a tidy table (tibble) from vectors or values.\nOpen full reference"
+  },
+  {
+    "objectID": "functions/index.html#c",
+    "href": "functions/index.html#c",
+    "title": "Function Reference",
+    "section": "C",
+    "text": "C\n\ncat( )\nPrint values to the console as readable text, useful for clear labelled output."
+  },
+  {
+    "objectID": "functions/index.html#m",
+    "href": "functions/index.html#m",
+    "title": "Function Reference",
+    "section": "M",
+    "text": "M\n\nmutate( )\nAdd new columns or transform existing columns in a data frame."
+  },
+  {
+    "objectID": "functions/index.html#r",
+    "href": "functions/index.html#r",
+    "title": "Function Reference",
+    "section": "R",
+    "text": "R\n\nread_csv( )\nImport a comma-separated file into R as a tibble.\n\n\nround( )\nRound numbers to a fixed number of decimal places."
+  },
+  {
+    "objectID": "functions/index.html#s",
+    "href": "functions/index.html#s",
+    "title": "Function Reference",
+    "section": "S",
+    "text": "S\n\nsignif( )\nRound numbers to a chosen number of significant figures."
+  },
+  {
+    "objectID": "functions/index.html#t",
+    "href": "functions/index.html#t",
+    "title": "Function Reference",
+    "section": "T",
+    "text": "T\n\ntibble( )\nCreate a tidy table from vectors or values."
+  },
+  {
+    "objectID": "glossary.html#a",
+    "href": "glossary.html#a",
+    "title": "Glossary",
+    "section": "A",
+    "text": "A\n\nArgument\nA value you pass into a function to control what it does.\n\n\nAssignment\nPutting a value into a variable, usually with &lt;- in R."
+  },
+  {
+    "objectID": "glossary.html#b",
+    "href": "glossary.html#b",
+    "title": "Glossary",
+    "section": "B",
+    "text": "B\n\nBug\nA mistake where code runs but gives the wrong result."
+  },
+  {
+    "objectID": "glossary.html#c",
+    "href": "glossary.html#c",
+    "title": "Glossary",
+    "section": "C",
+    "text": "C\n\nCharacter (string)\nText in quotes, used for labels, IDs, and names.\n\n\nComment\nA note starting with # that R ignores when code runs.\n\n\nConsole\nThe RStudio panel where command output appears."
+  },
+  {
+    "objectID": "glossary.html#d",
+    "href": "glossary.html#d",
+    "title": "Glossary",
+    "section": "D",
+    "text": "D\n\nData frame\nA table with rows and columns, where each column is a vector.\n\n\nDebugging\nThe process of finding and fixing mistakes in code."
+  },
+  {
+    "objectID": "glossary.html#e",
+    "href": "glossary.html#e",
+    "title": "Glossary",
+    "section": "E",
+    "text": "E\n\nError\nA message that means R could not run your code."
+  },
+  {
+    "objectID": "glossary.html#f",
+    "href": "glossary.html#f",
+    "title": "Glossary",
+    "section": "F",
+    "text": "F\n\nFunction\nA reusable block of code that does a specific task."
+  },
+  {
+    "objectID": "glossary.html#i",
+    "href": "glossary.html#i",
+    "title": "Glossary",
+    "section": "I",
+    "text": "I\n\nIDE\nAn app for coding and running code, such as RStudio.\n\n\nInput\nData or values you give to R.\n\n\nInteger\nA whole number with no decimal part."
+  },
+  {
+    "objectID": "glossary.html#l",
+    "href": "glossary.html#l",
+    "title": "Glossary",
+    "section": "L",
+    "text": "L\n\nLogical\nA value that is either TRUE or FALSE."
+  },
+  {
+    "objectID": "glossary.html#n",
+    "href": "glossary.html#n",
+    "title": "Glossary",
+    "section": "N",
+    "text": "N\n\nNA\nR’s marker for a missing value (“Not Available”).\n\n\nNumeric\nA number type that can include decimals."
+  },
+  {
+    "objectID": "glossary.html#o",
+    "href": "glossary.html#o",
+    "title": "Glossary",
+    "section": "O",
+    "text": "O\n\nOutput\nWhat R returns after running code, such as values, tables, plots, or messages."
+  },
+  {
+    "objectID": "glossary.html#p",
+    "href": "glossary.html#p",
+    "title": "Glossary",
+    "section": "P",
+    "text": "P\n\nPackage\nA collection of extra functions that extends base R.\n\n\nPipe (%&gt;%)\nPasses output from one step directly into the next step."
+  },
+  {
+    "objectID": "glossary.html#r",
+    "href": "glossary.html#r",
+    "title": "Glossary",
+    "section": "R",
+    "text": "R\n\nReturn value\nThe value a function gives back after it runs."
+  },
+  {
+    "objectID": "glossary.html#s",
+    "href": "glossary.html#s",
+    "title": "Glossary",
+    "section": "S",
+    "text": "S\n\nScript\nA saved code file (for example .R or .qmd) you can rerun later.\n\n\nSyntax\nThe grammar rules for writing valid code."
+  },
+  {
+    "objectID": "glossary.html#t",
+    "href": "glossary.html#t",
+    "title": "Glossary",
+    "section": "T",
+    "text": "T\n\nTerminal\nThe RStudio panel for operating system commands, not R commands.\n\n\nTibble\nA modern tidyverse version of a data frame."
+  },
+  {
+    "objectID": "glossary.html#v",
+    "href": "glossary.html#v",
+    "title": "Glossary",
+    "section": "V",
+    "text": "V\n\nVariable\nA named container that stores a value for reuse.\n\n\nVector\nA sequence of values of the same type."
+  },
+  {
+    "objectID": "glossary.html#w",
+    "href": "glossary.html#w",
+    "title": "Glossary",
+    "section": "W",
+    "text": "W\n\nWarning\nA message that code ran, but something may be suspicious."
   }
 ]

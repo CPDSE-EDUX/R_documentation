@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -72,10 +37,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-fbbad6c1ec35f15638aa5e4b19c54818.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2eae2e38c07e5cf6378c9f40a7d65bcf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,14 +69,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 
 
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed glossary-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -231,33 +193,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#argument" id="toc-argument" class="nav-link active" data-scroll-target="#argument">Argument</a></li>
+  <li><a href="#a" id="toc-a" class="nav-link active" data-scroll-target="#a">A</a>
+  <ul class="collapse">
+  <li><a href="#argument" id="toc-argument" class="nav-link" data-scroll-target="#argument">Argument</a></li>
   <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  </ul></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">B</a>
+  <ul class="collapse">
   <li><a href="#bug" id="toc-bug" class="nav-link" data-scroll-target="#bug">Bug</a></li>
+  </ul></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">C</a>
+  <ul class="collapse">
   <li><a href="#character-string" id="toc-character-string" class="nav-link" data-scroll-target="#character-string">Character (string)</a></li>
   <li><a href="#comment" id="toc-comment" class="nav-link" data-scroll-target="#comment">Comment</a></li>
   <li><a href="#console" id="toc-console" class="nav-link" data-scroll-target="#console">Console</a></li>
+  </ul></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">D</a>
+  <ul class="collapse">
   <li><a href="#data-frame" id="toc-data-frame" class="nav-link" data-scroll-target="#data-frame">Data frame</a></li>
   <li><a href="#debugging" id="toc-debugging" class="nav-link" data-scroll-target="#debugging">Debugging</a></li>
+  </ul></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">E</a>
+  <ul class="collapse">
   <li><a href="#error" id="toc-error" class="nav-link" data-scroll-target="#error">Error</a></li>
+  </ul></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">F</a>
+  <ul class="collapse">
   <li><a href="#function" id="toc-function" class="nav-link" data-scroll-target="#function">Function</a></li>
+  </ul></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i">I</a>
+  <ul class="collapse">
   <li><a href="#ide" id="toc-ide" class="nav-link" data-scroll-target="#ide">IDE</a></li>
   <li><a href="#input" id="toc-input" class="nav-link" data-scroll-target="#input">Input</a></li>
   <li><a href="#integer" id="toc-integer" class="nav-link" data-scroll-target="#integer">Integer</a></li>
+  </ul></li>
+  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">L</a>
+  <ul class="collapse">
   <li><a href="#logical" id="toc-logical" class="nav-link" data-scroll-target="#logical">Logical</a></li>
+  </ul></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n">N</a>
+  <ul class="collapse">
   <li><a href="#na" id="toc-na" class="nav-link" data-scroll-target="#na">NA</a></li>
   <li><a href="#numeric" id="toc-numeric" class="nav-link" data-scroll-target="#numeric">Numeric</a></li>
+  </ul></li>
+  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o">O</a>
+  <ul class="collapse">
   <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">Output</a></li>
+  </ul></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p">P</a>
+  <ul class="collapse">
   <li><a href="#package" id="toc-package" class="nav-link" data-scroll-target="#package">Package</a></li>
   <li><a href="#pipe" id="toc-pipe" class="nav-link" data-scroll-target="#pipe">Pipe (<code>%&gt;%</code>)</a></li>
+  </ul></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a>
+  <ul class="collapse">
   <li><a href="#return-value" id="toc-return-value" class="nav-link" data-scroll-target="#return-value">Return value</a></li>
+  </ul></li>
+  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s">S</a>
+  <ul class="collapse">
   <li><a href="#script" id="toc-script" class="nav-link" data-scroll-target="#script">Script</a></li>
   <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
+  </ul></li>
+  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t">T</a>
+  <ul class="collapse">
   <li><a href="#terminal" id="toc-terminal" class="nav-link" data-scroll-target="#terminal">Terminal</a></li>
   <li><a href="#tibble" id="toc-tibble" class="nav-link" data-scroll-target="#tibble">Tibble</a></li>
+  </ul></li>
+  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v">V</a>
+  <ul class="collapse">
   <li><a href="#variable" id="toc-variable" class="nav-link" data-scroll-target="#variable">Variable</a></li>
   <li><a href="#vector" id="toc-vector" class="nav-link" data-scroll-target="#vector">Vector</a></li>
+  </ul></li>
+  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w">W</a>
+  <ul class="collapse">
   <li><a href="#warning" id="toc-warning" class="nav-link" data-scroll-target="#warning">Warning</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -284,225 +294,164 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<hr>
+<section id="a" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="a">A</h2>
 <section id="argument" class="level3">
 <h3 class="anchored" data-anchor-id="argument">Argument</h3>
-<p>A value you pass into a function to control what it does. Most functions take one or more arguments, separated by commas.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">x =</span> conc_ug_ml, <span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#         ^^^^^^^^^^  ^^^^^^^^^</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#         argument 1  argument 2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Arguments can be named (like above) or positional (by order). Named is clearer.</p>
+<p>A value you pass into a function to control what it does.</p>
 </section>
 <section id="assignment" class="level3">
 <h3 class="anchored" data-anchor-id="assignment">Assignment</h3>
-<p>The act of putting a value into a variable. In R, assignment uses <code>&lt;-</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>conc_ug_ml <span class="ot">&lt;-</span> <span class="fl">31.4</span>    <span class="co"># reads as: "conc_ug_ml gets 31.4"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The <code>=</code> sign works too, but <code>&lt;-</code> is the R convention and is preferred here.</p>
+<p>Putting a value into a variable, usually with <code>&lt;-</code> in R.</p>
 </section>
+</section>
+<section id="b" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="b">B</h2>
 <section id="bug" class="level3">
 <h3 class="anchored" data-anchor-id="bug">Bug</h3>
-<p>A mistake in your code that lets it run without error, but produces <strong>wrong results</strong>. Bugs are more dangerous than errors because R won’t tell you something is wrong.</p>
-<p><strong>Example:</strong> Using <code>read_csv2()</code> on a comma-separated file instead of <code>read_csv()</code> — the code runs, but every row gets crammed into one column.</p>
+<p>A mistake where code runs but gives the wrong result.</p>
 </section>
+</section>
+<section id="c" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="c">C</h2>
 <section id="character-string" class="level3">
 <h3 class="anchored" data-anchor-id="character-string">Character (string)</h3>
-<p>Text enclosed in quotes. R calls this <code>character</code>; other languages call it a “string”. Used for labels, IDs, group names — anything that isn’t a number.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>batch_id    <span class="ot">&lt;-</span> <span class="st">"BT-2024-07"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>formulation <span class="ot">&lt;-</span> <span class="st">"immediate release"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>Text in quotes, used for labels, IDs, and names.</p>
 </section>
 <section id="comment" class="level3">
 <h3 class="anchored" data-anchor-id="comment">Comment</h3>
-<p>A note in your code that R ignores when running. Comments start with <code>#</code>. Use them to explain <em>why</em> you wrote something, not just what it does.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>std_slope <span class="ot">&lt;-</span> <span class="fl">0.01420</span>    <span class="co"># AU per µg/mL — from the calibration curve fit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A note starting with <code>#</code> that R ignores when code runs.</p>
 </section>
 <section id="console" class="level3">
 <h3 class="anchored" data-anchor-id="console">Console</h3>
-<p>The panel in RStudio where output appears after you run code. Use <code>cat()</code> to print labelled results to the console:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Concentration:"</span>, conc_ug_ml, <span class="st">"µg/mL</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># prints: Concentration: 31.4 µg/mL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>The RStudio panel where command output appears.</p>
 </section>
+</section>
+<section id="d" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="d">D</h2>
 <section id="data-frame" class="level3">
 <h3 class="anchored" data-anchor-id="data-frame">Data frame</h3>
-<p>A table with rows and columns, where each column is a vector. All columns must be the same length. Columns can be different types (numeric, character, logical). In tidyverse style, always use a <strong>tibble</strong> instead of a base R <code>data.frame</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>capsules <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">capsule_id   =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill_mass_mg =</span> <span class="fu">c</span>(<span class="fl">174.2</span>, <span class="fl">174.4</span>, <span class="fl">174.7</span>, <span class="fl">174.0</span>, <span class="fl">174.5</span>, <span class="fl">174.3</span>),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">formulation  =</span> <span class="st">"immediate release"</span>    <span class="co"># character — recycled to all 6 rows</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A table with rows and columns, where each column is a vector.</p>
 </section>
 <section id="debugging" class="level3">
 <h3 class="anchored" data-anchor-id="debugging">Debugging</h3>
-<p>The process of finding and fixing a bug. Common strategies:</p>
-<ul>
-<li>Print intermediate values with <code>cat()</code> to check what’s actually stored in each variable</li>
-<li>Run one line at a time and inspect the result</li>
-<li>Read the error or warning message carefully — R usually tells you the line number</li>
-</ul>
+<p>The process of finding and fixing mistakes in code.</p>
 </section>
+</section>
+<section id="e" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="e">E</h2>
 <section id="error" class="level3">
 <h3 class="anchored" data-anchor-id="error">Error</h3>
-<p>A message that appears when R <strong>could not run</strong> your code at all. Common causes: typo in a function name, wrong number of arguments, using a variable that doesn’t exist yet.</p>
-<pre><code>Error in read_csv("data.csv") : could not find function "read_csv"
-# Cause: library(readr) was not called before using read_csv()</code></pre>
-<p>Fix the problem described in the message, then try again.</p>
+<p>A message that means R could not run your code.</p>
 </section>
+</section>
+<section id="f" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="f">F</h2>
 <section id="function" class="level3">
 <h3 class="anchored" data-anchor-id="function">Function</h3>
-<p>A reusable piece of code that does a specific task. You call a function by writing its name followed by parentheses. Everything inside the parentheses is what you’re giving to the function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(conc_ug_ml, <span class="dv">3</span>)    <span class="co"># "round" is the function; conc_ug_ml and 3 are what you give it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A reusable block of code that does a specific task.</p>
 </section>
+</section>
+<section id="i" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="i">I</h2>
 <section id="ide" class="level3">
 <h3 class="anchored" data-anchor-id="ide">IDE</h3>
-<p>Short for <strong>Integrated Development Environment</strong> — an application that combines everything you need to write and run code in one window: a code editor, a console, a file browser, and a plot viewer. RStudio is the IDE used in this course. Without one you’d write code in a plain text editor and switch to a separate terminal to run it.</p>
+<p>An app for coding and running code, such as RStudio.</p>
 </section>
 <section id="input" class="level3">
 <h3 class="anchored" data-anchor-id="input">Input</h3>
-<p>The data or values you give to R — either typed directly, read from a file, or passed as arguments to a function.</p>
+<p>Data or values you give to R.</p>
 </section>
 <section id="integer" class="level3">
 <h3 class="anchored" data-anchor-id="integer">Integer</h3>
-<p>A whole number with no decimal part. Counts and indices are typically integers. In R you rarely need to declare something as integer explicitly — numeric works fine.</p>
+<p>A whole number with no decimal part.</p>
 </section>
+</section>
+<section id="l" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="l">L</h2>
 <section id="logical" class="level3">
 <h3 class="anchored" data-anchor-id="logical">Logical</h3>
-<p>A value that is either <code>TRUE</code> or <code>FALSE</code>. Produced by comparisons and used in filtering.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pct_label <span class="ot">&lt;-</span> <span class="fl">98.4</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pct_label <span class="sc">&gt;</span> <span class="dv">85</span>     <span class="co"># TRUE  — above lower acceptance limit</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>pct_label <span class="sc">&gt;</span> <span class="dv">115</span>    <span class="co"># FALSE — not above upper limit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Logicals are what <code>filter()</code> uses behind the scenes to select rows.</p>
+<p>A value that is either <code>TRUE</code> or <code>FALSE</code>.</p>
 </section>
+</section>
+<section id="n" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="n">N</h2>
 <section id="na" class="level3">
 <h3 class="anchored" data-anchor-id="na">NA</h3>
-<p>R’s symbol for a <strong>missing value</strong>. Stands for “Not Available”. <code>NA</code> is not zero and not an empty string — it means the value is unknown. Many functions have an <code>na.rm = TRUE</code> argument to ignore <code>NA</code>s during calculation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fill_mass_mg <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">174.2</span>, <span class="cn">NA</span>, <span class="fl">174.7</span>, <span class="fl">174.0</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fill_mass_mg)                    <span class="co"># returns NA — one missing value poisons the result</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fill_mass_mg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)      <span class="co"># returns 174.3 — ignores the missing value</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean fill mass:"</span>, <span class="fu">mean</span>(fill_mass_mg, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>R’s marker for a missing value (“Not Available”).</p>
 </section>
 <section id="numeric" class="level3">
 <h3 class="anchored" data-anchor-id="numeric">Numeric</h3>
-<p>A number with decimal places (R calls this <code>double</code> internally). The most common type in pharmacy data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fill_mass_mg <span class="ot">&lt;-</span> <span class="fl">174.3</span>    <span class="co"># numeric</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pct_label    <span class="ot">&lt;-</span> <span class="fl">98.41</span>    <span class="co"># numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A number type that can include decimals.</p>
 </section>
+</section>
+<section id="o" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="o">O</h2>
 <section id="output" class="level3">
 <h3 class="anchored" data-anchor-id="output">Output</h3>
-<p>What R produces and shows in the console after running code. This could be a number, a table, a plot, or a message. Always use <code>cat()</code> with a label and unit when printing a single calculated result:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Acceptance value:"</span>, <span class="fu">round</span>(AV_s1, <span class="dv">2</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>What R returns after running code, such as values, tables, plots, or messages.</p>
 </section>
+</section>
+<section id="p" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="p">P</h2>
 <section id="package" class="level3">
 <h3 class="anchored" data-anchor-id="package">Package</h3>
-<p>A collection of extra functions that extend what R can do. Base R comes with many useful functions, but packages like <code>dplyr</code> and <code>readr</code> add others.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)    <span class="co"># download and install once (per computer)</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)               <span class="co"># load all tidyverse packages for this session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A collection of extra functions that extends base R.</p>
 </section>
 <section id="pipe" class="level3">
 <h3 class="anchored" data-anchor-id="pipe">Pipe (<code>%&gt;%</code>)</h3>
-<p>Passes the output of one step directly into the next, left to right. Reads as “and then”.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>n_oos_capsules <span class="ot">&lt;-</span> capsules <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_label <span class="sc">&lt;</span> <span class="dv">85</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Out-of-spec capsules:"</span>, n_oos_capsules, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Without the pipe you’d have to nest functions inside each other, which is harder to read.</p>
+<p>Passes output from one step directly into the next step.</p>
 </section>
+</section>
+<section id="r" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="r">R</h2>
 <section id="return-value" class="level3">
 <h3 class="anchored" data-anchor-id="return-value">Return value</h3>
-<p>What a function gives back after it runs. You can store the return value in a variable and then print it with <code>cat()</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>conc_rounded_ug_ml <span class="ot">&lt;-</span> <span class="fu">round</span>(conc_ug_ml, <span class="dv">3</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Concentration:"</span>, conc_rounded_ug_ml, <span class="st">"µg/mL</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>The value a function gives back after it runs.</p>
 </section>
+</section>
+<section id="s" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="s">S</h2>
 <section id="script" class="level3">
 <h3 class="anchored" data-anchor-id="script">Script</h3>
-<p>A plain text file (<code>.R</code> or <code>.qmd</code>) where you save your code so you can re-run it later. Running code directly in the console is fine for quick tests, but use a script for any work you want to keep.</p>
+<p>A saved code file (for example <code>.R</code> or <code>.qmd</code>) you can rerun later.</p>
 </section>
 <section id="syntax" class="level3">
 <h3 class="anchored" data-anchor-id="syntax">Syntax</h3>
-<p>The grammar rules of a programming language — which words go where, what punctuation is needed, and in what order things must appear. Just as “the patient dose received” is ungrammatical English, <code>500 &lt;- dose_mg</code> is a syntax error in R.</p>
+<p>The grammar rules for writing valid code.</p>
 </section>
+</section>
+<section id="t" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="t">T</h2>
 <section id="terminal" class="level3">
 <h3 class="anchored" data-anchor-id="terminal">Terminal</h3>
-<p>A panel in RStudio (next to the Console tab) where you type operating system commands — not R code. Used for tasks like running git commands or navigating folders. For writing and running R code, use the <strong>Console</strong> instead. In RStudio, find it under the <strong>Terminal</strong> tab at the bottom of the screen.</p>
+<p>The RStudio panel for operating system commands, not R commands.</p>
 </section>
 <section id="tibble" class="level3">
 <h3 class="anchored" data-anchor-id="tibble">Tibble</h3>
-<p>A modern, tidyverse version of a data frame. Works the same way but with a few friendlier defaults:</p>
-<ul>
-<li>Prints only the first 10 rows instead of flooding the console</li>
-<li>Shows column types below the column names</li>
-<li>Never silently converts text to factors</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create manually</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>standards <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">conc_ug_ml =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="fl">5.0</span>, <span class="fl">10.0</span>, <span class="fl">20.0</span>, <span class="fl">40.0</span>),</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">absorbance  =</span> <span class="fu">c</span>(<span class="fl">0.001</span>, <span class="fl">0.112</span>, <span class="fl">0.224</span>, <span class="fl">0.445</span>, <span class="fl">0.891</span>, <span class="fl">1.782</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Or read from a file — read_csv() always returns a tibble</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>dissolution <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dissolution_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A modern tidyverse version of a data frame.</p>
 </section>
+</section>
+<section id="v" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="v">V</h2>
 <section id="variable" class="level3">
 <h3 class="anchored" data-anchor-id="variable">Variable</h3>
-<p>A named container that stores a value so you can use it later. Think of it like a labelled test tube: you give it a name and fill it with something.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dose_mg    <span class="ot">&lt;-</span> <span class="dv">500</span>          <span class="co"># stores the number 500 under the name "dose_mg"</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>patient_id <span class="ot">&lt;-</span> <span class="st">"P042"</span>       <span class="co"># stores text</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A named container that stores a value for reuse.</p>
 </section>
 <section id="vector" class="level3">
 <h3 class="anchored" data-anchor-id="vector">Vector</h3>
-<p>A sequence of values of the <strong>same type</strong>. The most basic data structure in R. A single number like <code>42</code> is actually a vector of length 1.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>conc_standards_ug_ml <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">2.5</span>, <span class="fl">5.0</span>, <span class="fl">10.0</span>, <span class="fl">20.0</span>, <span class="fl">40.0</span>)    <span class="co"># numeric vector, length 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Operations on a vector apply to every element at once (this is called <em>vectorisation</em>):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>conc_diluted_ug_ml <span class="ot">&lt;-</span> conc_standards_ug_ml <span class="sc">/</span> <span class="dv">2</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Diluted standards:"</span>, conc_diluted_ug_ml, <span class="st">"µg/mL</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>A sequence of values of the same type.</p>
 </section>
+</section>
+<section id="w" class="level2 glossary-letter">
+<h2 class="glossary-letter anchored" data-anchor-id="w">W</h2>
 <section id="warning" class="level3">
 <h3 class="anchored" data-anchor-id="warning">Warning</h3>
-<p>A message that appears when R <strong>did run</strong> your code but something looks suspicious. Warnings don’t always mean something went wrong — read them and decide if they matter.</p>
+<p>A message that code ran, but something may be suspicious.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

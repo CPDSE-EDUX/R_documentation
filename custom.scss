@@ -158,6 +158,11 @@ h2 {
   border-left: none;
 }
 
+h2.glossary-letter {
+  color: $c-text-ter;
+  border-bottom-color: $c-border;
+}
+
 h3 {
   font-family: $sans;
   font-size: 13px;
@@ -167,6 +172,24 @@ h3 {
   margin-bottom: 0.6rem;
   text-transform: none;
   letter-spacing: normal;
+}
+
+body.function-reference-page h3 a,
+body.function-reference-page h3 strong {
+  font-weight: 700;
+  color: $c-text;
+}
+
+body.function-reference-page h3 a:hover {
+  color: $c-text-sec;
+}
+
+body.glossary-page h3,
+body.function-reference-page h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: $c-text;
+  margin-top: 1.75rem;
 }
 
 // ── Inline code ───────────────────────────────────────────────────────────────

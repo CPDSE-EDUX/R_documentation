@@ -1,59 +1,37 @@
 ---
 title: "Function Reference"
-subtitle: "All documented R functions — alphabetical by name"
-toc: false
-sidebar: false
+subtitle: "A Glossary of every function covered on this site."
+toc: true
+toc-location: right
+body-classes: "function-reference-page"
 ---
-
-A complete index of every function covered in this reference. Click any card to open the full documentation page.
-
----
-
-## Import & Create
-
-<div class="fn-card-grid">
-<a href="read-csv.qmd" class="fn-card">
-<span class="fn-name">read_csv( )</span>
-<span class="fn-pkg">readr</span>
-<p>Import a CSV file as a tibble.</p>
-</a>
-<a href="tibble.qmd" class="fn-card">
-<span class="fn-name">tibble( )</span>
-<span class="fn-pkg">tibble</span>
-<p>Create a tidy data frame from column vectors.</p>
-</a>
-</div>
 
 ---
 
-## Transform
+## C {.glossary-letter}
 
-<div class="fn-card-grid">
-<a href="mutate.qmd" class="fn-card">
-<span class="fn-name">mutate( )</span>
-<span class="fn-pkg">dplyr</span>
-<p>Add or transform columns in a data frame.</p>
-</a>
-</div>
+### **[cat( )](cat.qmd)**
+Print values to the console as readable text, useful for clear labelled output.
 
----
+## M {.glossary-letter}
 
-## Report
+### **[mutate( )](mutate.qmd)**
+Add new columns or transform existing columns in a data frame.
 
-<div class="fn-card-grid">
-<a href="cat.qmd" class="fn-card">
-<span class="fn-name">cat( )</span>
-<span class="fn-pkg">base R</span>
-<p>Print labelled results with units to the console.</p>
-</a>
-<a href="round.qmd" class="fn-card">
-<span class="fn-name">round( )</span>
-<span class="fn-pkg">base R</span>
-<p>Round to a fixed number of decimal places.</p>
-</a>
-<a href="signif.qmd" class="fn-card">
-<span class="fn-name">signif( )</span>
-<span class="fn-pkg">base R</span>
-<p>Round to a given number of significant figures.</p>
-</a>
-</div>
+## R {.glossary-letter}
+
+### **[read_csv( )](read-csv.qmd)**
+Import a comma-separated file into R as a tibble.
+
+### **[round( )](round.qmd)**
+Round numbers to a fixed number of decimal places.
+
+## S {.glossary-letter}
+
+### **[signif( )](signif.qmd)**
+Round numbers to a chosen number of significant figures.
+
+## T {.glossary-letter}
+
+### **[tibble( )](tibble.qmd)**
+Create a tidy table from vectors or values.
