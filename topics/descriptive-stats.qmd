@@ -5,124 +5,189 @@ toc: false
 ---
 
 <details class="topic-card" open>
-<summary>Setup</summary>
+<summary>Basics (when to use cat(), signif(), round())</summary>
 <div class="topic-card-body">
 
-Run the setup chunk first — it creates the dataset used in all examples below.
+Use these three together when reporting results clearly:
+
+- `cat()` for readable text output
+- `signif()` for significant digits (good for scientific reporting)
+- `round()` for fixed decimal places (good for tables)
 
 ```{webr-r}
-library(dplyr)
-library(tibble)
+x <- c(99.83, 100.12, 100.29, 99.67, 100.41)
 
-capsules <- tibble(
-  capsule_id   = 1:20,
-  batch        = rep(c("A", "B"), each = 10),
-  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5,
-                   174.3, 174.6, 174.1, 174.8, 174.4,
-                   175.1, 174.8, 175.3, 174.6, 175.0,
-                   175.2, 174.9, 175.4, 175.0, 175.3),
-  pct_label    = c(99.8, 100.1, 100.3, 99.6, 100.0,
-                   100.2, 99.9,  100.4, 99.7, 100.1,
-                   100.5, 100.2, 100.7, 99.9, 100.4,
-                   101.0, 100.6, 100.9, 100.3, 100.8)
-)
-
-capsules
+cat("Raw mean:        ", mean(x), "\n")
+cat("Using signif(4): ", signif(mean(x), 4), "\n")
+cat("Using round(2):  ", round(mean(x), 2), "\n")
 ```
 
 </div>
 </details>
 
 <details class="topic-card">
-<summary>Basic statistics</summary>
+<summary>Frequency & Distribution</summary>
 <div class="topic-card-body">
 
-Single-value summaries of a numeric vector. Always print with `cat()`.
+## count()
+Use `count()` to build a quick frequency table.
+This is useful when you want exact counts for each category.
 
 ```{webr-r}
-cat("Mean % label claim:", signif(mean(capsules$pct_label), 5), "%\n")
-cat("SD:                ", signif(sd(capsules$pct_label),   3), "%\n")
-cat("Median:            ", signif(median(capsules$pct_label), 5), "%\n")
-cat("Min / Max:         ", min(capsules$pct_label), "/", max(capsules$pct_label), "%\n")
-cat("n:                 ", nrow(capsules), "capsules\n")
-```
+library(tidyverse)
 
-</div>
-</details>
+df_cat <- tibble::tibble(batch = c("A", "A", "A", "B", "B", "C"))
 
-<details class="topic-card">
-<summary>summarise( )</summary>
-<div class="topic-card-body">
-
-Compute multiple statistics at once and return them as a tibble.
-
-```{webr-r}
-capsules %>%
-  summarise(
-    n         = n(),
-    mean_pct  = mean(pct_label),
-    sd_pct    = sd(pct_label),
-    min_pct   = min(pct_label),
-    max_pct   = max(pct_label)
-  )
-```
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>group_by( ) + summarise( )</summary>
-<div class="topic-card-body">
-
-Repeat the summary for each level of a grouping variable.
-
-```{webr-r}
-capsules %>%
-  group_by(batch) %>%
-  summarise(
-    n        = n(),
-    mean_pct = mean(pct_label),
-    sd_pct   = sd(pct_label),
-    min_pct  = min(pct_label),
-    max_pct  = max(pct_label)
-  )
-```
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>count( )</summary>
-<div class="topic-card-body">
-
-Count the number of rows in each group — shorthand for `group_by() %>% summarise(n = n())`.
-
-```{webr-r}
-# How many capsules per batch?
-capsules %>%
+# Frequency table for categories
+df_cat %>%
   count(batch)
 ```
 
+## Barchart
+A bar chart visualizes categorical frequencies.
+Use it to compare how many observations belong to each group.
+
+```{webr-r}
+library(tidyverse)
+
+df_cat <- tibble::tibble(batch = c("A", "A", "A", "B", "B", "C"))
+
+# Bar chart (categorical frequencies)
+barplot(table(df_cat$batch),
+        main = "Batch frequencies",
+        xlab = "Batch",
+        ylab = "Count")
+```
+
+## Histogram
+A histogram visualizes the distribution of a numeric variable.
+Use it to see where values cluster and how spread out they are.
+
+```{webr-r}
+library(tidyverse)
+
+df_cat <- tibble::tibble(batch = c("A", "A", "A", "B", "B", "C"))
+
+# Histogram (numeric frequencies)
+x <- c(9.8, 10.2, 10.5, 10.1, 10.4, 10.0, 9.9, 10.3, 10.6, 10.2)
+hist(x,
+     main = "Histogram of values",
+     xlab = "Value",
+     col = "lightgray",
+     border = "white")
+```
+
 </div>
 </details>
 
 <details class="topic-card">
-<summary>IQR and quantiles</summary>
+<summary>Central Tendency</summary>
 <div class="topic-card-body">
 
-Useful for identifying spread and outliers in assay data.
+Central tendency describes the "typical" value in a dataset.
+The two most common measures are mean and median.
+
+- Mean: arithmetic average of all values
+- Median: middle value after sorting the data
+
+If the distribution is fairly symmetric, mean and median are often similar.
+  If there are outliers or strong skew, the median usually reflects the center better.
+
+## Mean
+
+Use the mean when you want to include all observations in the summary.
+Because every value contributes, extreme values can pull it up or down.
 
 ```{webr-r}
-cat("IQR:        ", IQR(capsules$pct_label), "%\n")
-cat("25th pctile:", quantile(capsules$pct_label, 0.25), "%\n")
-cat("75th pctile:", quantile(capsules$pct_label, 0.75), "%\n")
+x <- c(10, 11, 10, 12, 60)
+cat("Mean:  ", mean(x), "\n")
 ```
 
-::: {.callout-note}
-## Coding convention — store then print
-Compute statistics at full precision, then round only inside `cat()` when reporting.
-Never round inside `summarise()` if the values will be used in further calculations.
-:::
+## Median
+
+Use the median when you want a robust center that is less affected by outliers.
+It is often preferred for skewed data.
+
+```{webr-r}
+x <- c(10, 11, 10, 12, 60)
+cat("Median:", median(x), "\n")
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Variability</summary>
+<div class="topic-card-body">
+
+Variability describes how spread out values are around the center.
+Use these measures together to understand both total spread and typical spread.
+
+## Extrema
+Use `min()` and `max()` to report range endpoints.
+They are useful for quickly spotting the lowest and highest observed values.
+
+```{webr-r}
+x <- c(7.2, 6.8, 7.5, 6.9, 7.1)
+cat("Min:", min(x), "\n")
+cat("Max:", max(x), "\n")
+```
+
+## Standard deviation
+Standard deviation (`sd`) is the typical distance of values from the mean.
+A larger SD means values are more dispersed.
+
+```{webr-r}
+x <- c(101.2, 100.8, 101.5, 100.9, 101.1)
+cat("SD:      ", signif(sd(x), 4), "\n")
+```
+
+## Variance
+Variance (`var`) is the squared version of spread around the mean.
+It is less intuitive than SD but important in many statistical methods.
+
+```{webr-r}
+x <- c(101.2, 100.8, 101.5, 100.9, 101.1)
+cat("Variance:", signif(var(x), 4), "\n")
+```
+
+## Quantiles & Interquartile range (IQR)
+IQR shows the spread of the middle 50% of the data.
+Quantiles provide cut points (for example 25%, 50%, and 75%).
+These are robust to outliers compared with range-based measures.
+
+```{webr-r}
+x <- c(12, 14, 15, 16, 18, 19, 21)
+cat("IQR: ", IQR(x), "\n")
+quantile(x, probs = c(0.25, 0.5, 0.75))
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>summarize()</summary>
+<div class="topic-card-body">
+
+Use `summarize()` for whole-table summaries, and combine with `group_by()` for per-group summaries.
+
+```{webr-r}
+library(dplyr)
+
+df <- tibble::tibble(
+  batch = c("A", "A", "B", "B", "B"),
+  value = c(9.8, 10.2, 10.5, 10.1, 10.4)
+)
+
+# Overall summary
+df %>%
+  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))
+
+# By-group summary
+df %>%
+  group_by(batch) %>%
+  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))
+```
 
 </div>
 </details>

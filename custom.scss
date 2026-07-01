@@ -224,6 +224,27 @@ pre.sourceCode {
   code { font-family: $mono; }
 }
 
+// ── Topic illustrations ──────────────────────────────────────────────────────
+// Make instructional SVG figures align with full-width text/code blocks.
+details.topic-card .quarto-figure {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+details.topic-card .quarto-figure img[src$=".svg"] {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+details.topic-card .quarto-figure img.figure-img {
+  display: block;
+  width: 100% !important;
+  max-width: none;
+  height: auto;
+}
+
 // ── webR Monaco editor — token color overrides ─────────────────────────────
 
 .qwebr-editor .mtk7 { color: #E5C07B !important; }

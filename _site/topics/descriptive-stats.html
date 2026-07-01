@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fbbad6c1ec35f15638aa5e4b19c54818.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aea6bdfa94d84a87debd1b995c75e487.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,9 +69,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
@@ -372,7 +369,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"library(dplyr)\nlibrary(tibble)\n\ncapsules <- tibble(\n  capsule_id   = 1:20,\n  batch        = rep(c(\"A\", \"B\"), each = 10),\n  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5,\n                   174.3, 174.6, 174.1, 174.8, 174.4,\n                   175.1, 174.8, 175.3, 174.6, 175.0,\n                   175.2, 174.9, 175.4, 175.0, 175.3),\n  pct_label    = c(99.8, 100.1, 100.3, 99.6, 100.0,\n                   100.2, 99.9,  100.4, 99.7, 100.1,\n                   100.5, 100.2, 100.7, 99.9, 100.4,\n                   101.0, 100.6, 100.9, 100.3, 100.8)\n)\n\ncapsules","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"cat(\"Mean % label claim:\", signif(mean(capsules$pct_label), 5), \"%\\n\")\ncat(\"SD:                \", signif(sd(capsules$pct_label),   3), \"%\\n\")\ncat(\"Median:            \", signif(median(capsules$pct_label), 5), \"%\\n\")\ncat(\"Min / Max:         \", min(capsules$pct_label), \"/\", max(capsules$pct_label), \"%\\n\")\ncat(\"n:                 \", nrow(capsules), \"capsules\\n\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  summarise(\n    n         = n(),\n    mean_pct  = mean(pct_label),\n    sd_pct    = sd(pct_label),\n    min_pct   = min(pct_label),\n    max_pct   = max(pct_label)\n  )","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"capsules %>%\n  group_by(batch) %>%\n  summarise(\n    n        = n(),\n    mean_pct = mean(pct_label),\n    sd_pct   = sd(pct_label),\n    min_pct  = min(pct_label),\n    max_pct  = max(pct_label)\n  )","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# How many capsules per batch?\ncapsules %>%\n  count(batch)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"cat(\"IQR:        \", IQR(capsules$pct_label), \"%\\n\")\ncat(\"25th pctile:\", quantile(capsules$pct_label, 0.25), \"%\\n\")\ncat(\"75th pctile:\", quantile(capsules$pct_label, 0.75), \"%\\n\")","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"x <- c(99.83, 100.12, 100.29, 99.67, 100.41)\n\ncat(\"Raw mean:        \", mean(x), \"\\n\")\ncat(\"Using signif(4): \", signif(mean(x), 4), \"\\n\")\ncat(\"Using round(2):  \", round(mean(x), 2), \"\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Frequency table for categories\ndf_cat %>%\n  count(batch)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Bar chart (categorical frequencies)\nbarplot(table(df_cat$batch),\n        main = \"Batch frequencies\",\n        xlab = \"Batch\",\n        ylab = \"Count\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Histogram (numeric frequencies)\nx <- c(9.8, 10.2, 10.5, 10.1, 10.4, 10.0, 9.9, 10.3, 10.6, 10.2)\nhist(x,\n     main = \"Histogram of values\",\n     xlab = \"Value\",\n     col = \"lightgray\",\n     border = \"white\")","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(7.2, 6.8, 7.5, 6.9, 7.1)\ncat(\"Min:\", min(x), \"\\n\")\ncat(\"Max:\", max(x), \"\\n\")","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(10, 11, 10, 12, 60)\ncat(\"Mean:  \", mean(x), \"\\n\")\ncat(\"Median:\", median(x), \"\\n\")","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(101.2, 100.8, 101.5, 100.9, 101.1)\ncat(\"SD:      \", signif(sd(x), 4), \"\\n\")\ncat(\"Variance:\", signif(var(x), 4), \"\\n\")","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(12, 14, 15, 16, 18, 19, 21)\ncat(\"IQR: \", IQR(x), \"\\n\")\nquantile(x, probs = c(0.25, 0.5, 0.75))","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(dplyr)\n\ndf <- tibble::tibble(\n  batch = c(\"A\", \"A\", \"B\", \"B\", \"B\"),\n  value = c(9.8, 10.2, 10.5, 10.1, 10.4)\n)\n\n# Overall summary\ndf %>%\n  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))\n\n# By-group summary\ndf %>%\n  group_by(batch) %>%\n  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -2054,51 +2051,69 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <details class="topic-card" open="">
 <summary>
-Setup
+Basics (when to use cat(), signif(), round())
 </summary>
 <div class="topic-card-body">
-<p>Run the setup chunk first — it creates the dataset used in all examples below.</p>
+<p>Use these three together when reporting results clearly:</p>
+<ul>
+<li><code>cat()</code> for readable text output</li>
+<li><code>signif()</code> for significant digits (good for scientific reporting)</li>
+<li><code>round()</code> for fixed decimal places (good for tables)</li>
+</ul>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
 <details class="topic-card">
 <summary>
-Basic statistics
+Frequency
 </summary>
 <div class="topic-card-body">
-<p>Single-value summaries of a numeric vector. Always print with <code>cat()</code>.</p>
+<section id="count" class="level2">
+<h2 class="anchored" data-anchor-id="count">count()</h2>
+<p>Use <code>count()</code> for tabular frequencies, then visualize frequencies with bar charts for categorical data and histograms for numeric data.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="topic-card">
-<summary>
-summarise( )
-</summary>
-<div class="topic-card-body">
-<p>Compute multiple statistics at once and return them as a tibble.</p>
+</section>
+<section id="barchart" class="level2">
+<h2 class="anchored" data-anchor-id="barchart">Barchart</h2>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="histogram" class="level2">
+<h2 class="anchored" data-anchor-id="histogram">Histogram</h2>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
 </div>
 </details>
 <details class="topic-card">
 <summary>
-group_by( ) + summarise( )
+min &amp; max
 </summary>
 <div class="topic-card-body">
-<p>Repeat the summary for each level of a grouping variable.</p>
-<div id="qwebr-insertion-location-4"></div>
+<p>Use <code>min()</code> and <code>max()</code> to report range endpoints.</p>
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
 <details class="topic-card">
 <summary>
-count( )
+mean vs.&nbsp;median
 </summary>
 <div class="topic-card-body">
-<p>Count the number of rows in each group — shorthand for <code>group_by() %&gt;% summarise(n = n())</code>.</p>
-<div id="qwebr-insertion-location-5"></div>
+<p>The mean is sensitive to outliers; the median is robust.</p>
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+standard deviation/variance
+</summary>
+<div class="topic-card-body">
+<p><code>sd()</code> and <code>var()</code> describe spread around the mean.</p>
+<div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
@@ -2107,22 +2122,19 @@ count( )
 IQR and quantiles
 </summary>
 <div class="topic-card-body">
-<p>Useful for identifying spread and outliers in assay data.</p>
-<div id="qwebr-insertion-location-6"></div>
+<p>IQR shows middle-spread; quantiles provide cut points.</p>
+<div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Coding convention — store then print
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Compute statistics at full precision, then round only inside <code>cat()</code> when reporting. Never round inside <code>summarise()</code> if the values will be used in further calculations.</p>
-</div>
-</div>
+</details>
+<details class="topic-card">
+<summary>
+summarize() &amp; group_by() + summarize()
+</summary>
+<div class="topic-card-body">
+<p>Use <code>summarize()</code> for whole-table summaries, and combine with <code>group_by()</code> for per-group summaries.</p>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
 
