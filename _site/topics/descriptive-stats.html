@@ -369,7 +369,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"x <- c(99.83, 100.12, 100.29, 99.67, 100.41)\n\ncat(\"Raw mean:        \", mean(x), \"\\n\")\ncat(\"Using signif(4): \", signif(mean(x), 4), \"\\n\")\ncat(\"Using round(2):  \", round(mean(x), 2), \"\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Frequency table for categories\ndf_cat %>%\n  count(batch)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Bar chart (categorical frequencies)\nbarplot(table(df_cat$batch),\n        main = \"Batch frequencies\",\n        xlab = \"Batch\",\n        ylab = \"Count\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Histogram (numeric frequencies)\nx <- c(9.8, 10.2, 10.5, 10.1, 10.4, 10.0, 9.9, 10.3, 10.6, 10.2)\nhist(x,\n     main = \"Histogram of values\",\n     xlab = \"Value\",\n     col = \"lightgray\",\n     border = \"white\")","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(7.2, 6.8, 7.5, 6.9, 7.1)\ncat(\"Min:\", min(x), \"\\n\")\ncat(\"Max:\", max(x), \"\\n\")","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(10, 11, 10, 12, 60)\ncat(\"Mean:  \", mean(x), \"\\n\")\ncat(\"Median:\", median(x), \"\\n\")","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(101.2, 100.8, 101.5, 100.9, 101.1)\ncat(\"SD:      \", signif(sd(x), 4), \"\\n\")\ncat(\"Variance:\", signif(var(x), 4), \"\\n\")","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(12, 14, 15, 16, 18, 19, 21)\ncat(\"IQR: \", IQR(x), \"\\n\")\nquantile(x, probs = c(0.25, 0.5, 0.75))","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(dplyr)\n\ndf <- tibble::tibble(\n  batch = c(\"A\", \"A\", \"B\", \"B\", \"B\"),\n  value = c(9.8, 10.2, 10.5, 10.1, 10.4)\n)\n\n# Overall summary\ndf %>%\n  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))\n\n# By-group summary\ndf %>%\n  group_by(batch) %>%\n  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"x <- c(99.83, 100.12, 100.29, 99.67, 100.41)\n\ncat(\"Raw mean:        \", mean(x), \"\\n\")\ncat(\"Using signif(4): \", signif(mean(x), 4), \"\\n\")\ncat(\"Using round(2):  \", round(mean(x), 2), \"\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Frequency table for categories\ndf_cat %>%\n  count(batch)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Bar chart (categorical frequencies)\nbarplot(table(df_cat$batch),\n        main = \"Batch frequencies\",\n        xlab = \"Batch\",\n        ylab = \"Count\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n\ndf_cat <- tibble::tibble(batch = c(\"A\", \"A\", \"A\", \"B\", \"B\", \"C\"))\n\n# Histogram (numeric frequencies)\nx <- c(9.8, 10.2, 10.5, 10.1, 10.4, 10.0, 9.9, 10.3, 10.6, 10.2)\nhist(x,\n     main = \"Histogram of values\",\n     xlab = \"Value\",\n     col = \"lightgray\",\n     border = \"white\")","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(10, 11, 10, 12, 60)\ncat(\"Mean:  \", mean(x), \"\\n\")","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(10, 11, 10, 12, 60)\ncat(\"Median:\", median(x), \"\\n\")","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(7.2, 6.8, 7.5, 6.9, 7.1)\ncat(\"Min:\", min(x), \"\\n\")\ncat(\"Max:\", max(x), \"\\n\")","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(101.2, 100.8, 101.5, 100.9, 101.1)\ncat(\"SD:      \", signif(sd(x), 4), \"\\n\")","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(101.2, 100.8, 101.5, 100.9, 101.1)\ncat(\"Variance:\", signif(var(x), 4), \"\\n\")","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- c(12, 14, 15, 16, 18, 19, 21)\ncat(\"IQR: \", IQR(x), \"\\n\")\nquantile(x, probs = c(0.25, 0.5, 0.75))","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(dplyr)\n\ndf <- tibble::tibble(\n  batch = c(\"A\", \"A\", \"B\", \"B\", \"B\"),\n  value = c(9.8, 10.2, 10.5, 10.1, 10.4)\n)\n\n# Overall summary\ndf %>%\n  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))\n\n# By-group summary\ndf %>%\n  group_by(batch) %>%\n  summarize(n = n(), mean_value = mean(value), sd_value = sd(value))","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -2066,22 +2066,24 @@ Basics (when to use cat(), signif(), round())
 </details>
 <details class="topic-card">
 <summary>
-Frequency
+Frequency &amp; Distribution
 </summary>
 <div class="topic-card-body">
 <section id="count" class="level2">
 <h2 class="anchored" data-anchor-id="count">count()</h2>
-<p>Use <code>count()</code> for tabular frequencies, then visualize frequencies with bar charts for categorical data and histograms for numeric data.</p>
+<p>Use <code>count()</code> to build a quick frequency table. This is useful when you want exact counts for each category.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="barchart" class="level2">
 <h2 class="anchored" data-anchor-id="barchart">Barchart</h2>
+<p>A bar chart visualizes categorical frequencies. Use it to compare how many observations belong to each group.</p>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="histogram" class="level2">
 <h2 class="anchored" data-anchor-id="histogram">Histogram</h2>
+<p>A histogram visualizes the distribution of a numeric variable. Use it to see where values cluster and how spread out they are.</p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
@@ -2089,51 +2091,68 @@ Frequency
 </details>
 <details class="topic-card">
 <summary>
-min &amp; max
+Central Tendency
 </summary>
 <div class="topic-card-body">
-<p>Use <code>min()</code> and <code>max()</code> to report range endpoints.</p>
+<p>Central tendency describes the “typical” value in a dataset. The two most common measures are mean and median.</p>
+<ul>
+<li>Mean: arithmetic average of all values</li>
+<li>Median: middle value after sorting the data</li>
+</ul>
+<p>If the distribution is fairly symmetric, mean and median are often similar. If there are outliers or strong skew, the median usually reflects the center better.</p>
+<section id="mean" class="level2">
+<h2 class="anchored" data-anchor-id="mean">Mean</h2>
+<p>Use the mean when you want to include all observations in the summary. Because every value contributes, extreme values can pull it up or down.</p>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="topic-card">
-<summary>
-mean vs.&nbsp;median
-</summary>
-<div class="topic-card-body">
-<p>The mean is sensitive to outliers; the median is robust.</p>
+</section>
+<section id="median" class="level2">
+<h2 class="anchored" data-anchor-id="median">Median</h2>
+<p>Use the median when you want a robust center that is less affected by outliers. It is often preferred for skewed data.</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
 </div>
 </details>
 <details class="topic-card">
 <summary>
-standard deviation/variance
+Variability
 </summary>
 <div class="topic-card-body">
-<p><code>sd()</code> and <code>var()</code> describe spread around the mean.</p>
+<p>Variability describes how spread out values are around the center. Use these measures together to understand both total spread and typical spread.</p>
+<section id="extrema" class="level2">
+<h2 class="anchored" data-anchor-id="extrema">Extrema</h2>
+<p>Use <code>min()</code> and <code>max()</code> to report range endpoints. They are useful for quickly spotting the lowest and highest observed values.</p>
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="topic-card">
-<summary>
-IQR and quantiles
-</summary>
-<div class="topic-card-body">
-<p>IQR shows middle-spread; quantiles provide cut points.</p>
+</section>
+<section id="standard-deviation" class="level2">
+<h2 class="anchored" data-anchor-id="standard-deviation">Standard deviation</h2>
+<p>Standard deviation (<code>sd</code>) is the typical distance of values from the mean. A larger SD means values are more dispersed.</p>
 <div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="variance" class="level2">
+<h2 class="anchored" data-anchor-id="variance">Variance</h2>
+<p>Variance (<code>var</code>) is the squared version of spread around the mean. It is less intuitive than SD but important in many statistical methods.</p>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="quantiles-interquartile-range-iqr" class="level2">
+<h2 class="anchored" data-anchor-id="quantiles-interquartile-range-iqr">Quantiles &amp; Interquartile range (IQR)</h2>
+<p>IQR shows the spread of the middle 50% of the data. Quantiles provide cut points (for example 25%, 50%, and 75%). These are robust to outliers compared with range-based measures.</p>
+<div id="qwebr-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
 </div>
 </details>
 <details class="topic-card">
 <summary>
-summarize() &amp; group_by() + summarize()
+summarize()
 </summary>
 <div class="topic-card-body">
 <p>Use <code>summarize()</code> for whole-table summaries, and combine with <code>group_by()</code> for per-group summaries.</p>
-<div id="qwebr-insertion-location-9"></div>
+<div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>

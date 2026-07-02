@@ -677,20 +677,62 @@
     "href": "topics/descriptive-stats.html#count",
     "title": "Descriptive Statistics",
     "section": "count()",
-    "text": "count()\nUse count() for tabular frequencies, then visualize frequencies with bar charts for categorical data and histograms for numeric data.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "count()\nUse count() to build a quick frequency table. This is useful when you want exact counts for each category.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "topics/descriptive-stats.html#barchart",
     "href": "topics/descriptive-stats.html#barchart",
     "title": "Descriptive Statistics",
     "section": "Barchart",
-    "text": "Barchart\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Barchart\nA bar chart visualizes categorical frequencies. Use it to compare how many observations belong to each group.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "topics/descriptive-stats.html#histogram",
     "href": "topics/descriptive-stats.html#histogram",
     "title": "Descriptive Statistics",
     "section": "Histogram",
-    "text": "Histogram\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+    "text": "Histogram\nA histogram visualizes the distribution of a numeric variable. Use it to see where values cluster and how spread out they are.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/descriptive-stats.html#mean",
+    "href": "topics/descriptive-stats.html#mean",
+    "title": "Descriptive Statistics",
+    "section": "Mean",
+    "text": "Mean\nUse the mean when you want to include all observations in the summary. Because every value contributes, extreme values can pull it up or down.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/descriptive-stats.html#median",
+    "href": "topics/descriptive-stats.html#median",
+    "title": "Descriptive Statistics",
+    "section": "Median",
+    "text": "Median\nUse the median when you want a robust center that is less affected by outliers. It is often preferred for skewed data.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/descriptive-stats.html#extrema",
+    "href": "topics/descriptive-stats.html#extrema",
+    "title": "Descriptive Statistics",
+    "section": "Extrema",
+    "text": "Extrema\nUse min() and max() to report range endpoints. They are useful for quickly spotting the lowest and highest observed values.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/descriptive-stats.html#standard-deviation",
+    "href": "topics/descriptive-stats.html#standard-deviation",
+    "title": "Descriptive Statistics",
+    "section": "Standard deviation",
+    "text": "Standard deviation\nStandard deviation (sd) is the typical distance of values from the mean. A larger SD means values are more dispersed.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/descriptive-stats.html#variance",
+    "href": "topics/descriptive-stats.html#variance",
+    "title": "Descriptive Statistics",
+    "section": "Variance",
+    "text": "Variance\nVariance (var) is the squared version of spread around the mean. It is less intuitive than SD but important in many statistical methods.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/descriptive-stats.html#quantiles-interquartile-range-iqr",
+    "href": "topics/descriptive-stats.html#quantiles-interquartile-range-iqr",
+    "title": "Descriptive Statistics",
+    "section": "Quantiles & Interquartile range (IQR)",
+    "text": "Quantiles & Interquartile range (IQR)\nIQR shows the spread of the middle 50% of the data. Quantiles provide cut points (for example 25%, 50%, and 75%). These are robust to outliers compared with range-based measures.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
