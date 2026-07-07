@@ -5,6 +5,7 @@ subtitle: "Create a tidy data frame from column vectors. tibble() is from the ti
 
 <div class="source-links">
 <a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/tidyr.html" target="_blank" rel="noopener">tibble Cheatsheet ↗</a>
 </div>
 
 ## Required Library
@@ -23,31 +24,13 @@ tibble(col1 = values, col2 = values, ...)
 A tibble is the tidyverse version of a `data.frame` — it has the same structure but with safer defaults and cleaner printing.
 :::
 
+<hr>
+
 ```{r, eval=FALSE}
 as_tibble(x)
 ```
 ::: {.desc-item}
 `as_tibble(x)` converts an existing base R `data.frame` (or matrix) into a tibble.
-:::
-
-```{r, eval=FALSE}
-tibble(col1 = values, col2 = col1 * factor)
-```
-::: {.desc-item}
-`tibble(col1 = values, col2 = col1 * factor)` allows later columns to reference columns defined earlier in the same call.
-This is not possible with base R `data.frame()`.
-:::
-
-```{r, eval=FALSE}
-tibble(..., .rows = NULL, .name_repair = "check_unique")
-```
-::: {.desc-item}
-`tibble(..., .rows = NULL, .name_repair = "check_unique")` exposes the optional arguments: `.rows` fixes the number of rows (useful for an empty tibble), and `.name_repair` controls how duplicate or invalid column names are handled.
-:::
-
-::: {.callout-tip}
-## Why tibble instead of `data.frame()`?
-Tibbles never convert character columns to factors automatically, never recycle vectors of incompatible lengths silently, and print only the first 10 rows — they are designed to fail loudly and clearly, which makes bugs easier to find.
 :::
 
 ## Argument Overview
@@ -56,7 +39,7 @@ Tibbles never convert character columns to factors automatically, never recycle 
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
-<details class="arg-item">
+<details class="arg-item" open>
 <summary><code>...</code> — name–value pairs <span class="arg-types">name = vector</span> <span class="arg-badge required">Required</span></summary>
 <div class="arg-body">
 Each argument defines one column.
@@ -104,6 +87,20 @@ tibble(.rows = 10)   # empty tibble with 10 rows and no columns
 ```
 
 <p class="data-types"><strong>Data Types:</strong> <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.name_repair</code> — strategy for duplicate or invalid column names <span class="arg-types">character | function</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls how column names are validated and repaired.
+Use `"check_unique"` (default) to error on duplicates, or alternatives like `"minimal"`, `"unique"`, and `"universal"`.
+
+```r
+tibble(a = 1, a = 2, .name_repair = "unique")
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> | <code>function</code> · Default: <code>"check_unique"</code></p>
 </div>
 </details>
 :::

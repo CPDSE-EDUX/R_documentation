@@ -72,10 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fbbad6c1ec35f15638aa5e4b19c54818.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aea6bdfa94d84a87debd1b995c75e487.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,9 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
@@ -1664,7 +1661,7 @@ globalThis.qwebrExecuteCode = async function (
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed function-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -2185,7 +2182,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 
 <div class="source-links">
-<p><a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">Original Documentation ↗</a></p>
+<p><a class="source-link" href="https://tibble.tidyverse.org/reference/tibble.html" target="_blank" rel="noopener">Original Documentation ↗</a> <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/tidyr.html" target="_blank" rel="noopener">tibble Cheatsheet ↗</a></p>
 </div>
 <section id="required-library" class="level2">
 <h2 class="anchored" data-anchor-id="required-library">Required Library</h2>
@@ -2200,36 +2197,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="desc-item">
 <p><code>tibble(col1 = values, col2 = values, ...)</code> creates a data frame from named column vectors. A tibble is the tidyverse version of a <code>data.frame</code> — it has the same structure but with safer defaults and cleaner printing.</p>
 </div>
+<hr>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="desc-item">
 <p><code>as_tibble(x)</code> converts an existing base R <code>data.frame</code> (or matrix) into a tibble.</p>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">col1 =</span> values, <span class="at">col2 =</span> col1 <span class="sc">*</span> factor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="desc-item">
-<p><code>tibble(col1 = values, col2 = col1 * factor)</code> allows later columns to reference columns defined earlier in the same call. This is not possible with base R <code>data.frame()</code>.</p>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(..., <span class="at">.rows =</span> <span class="cn">NULL</span>, <span class="at">.name_repair =</span> <span class="st">"check_unique"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="desc-item">
-<p><code>tibble(..., .rows = NULL, .name_repair = "check_unique")</code> exposes the optional arguments: <code>.rows</code> fixes the number of rows (useful for an empty tibble), and <code>.name_repair</code> controls how duplicate or invalid column names are handled.</p>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Why tibble instead of <code>data.frame()</code>?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Tibbles never convert character columns to factors automatically, never recycle vectors of incompatible lengths silently, and print only the first 10 rows — they are designed to fail loudly and clearly, which makes bugs easier to find.</p>
-</div>
 </div>
 </section>
 <section id="argument-overview" class="level2">
@@ -2243,17 +2216,17 @@ Required arguments must be included when using a function while optional argumen
 Expand All
 </button>
 </div>
-<details class="arg-item">
+<details class="arg-item" open="">
 <summary>
 <code>…</code> — name–value pairs <span class="arg-types">name = vector</span> <span class="arg-badge required">Required</span>
 </summary>
 <div class="arg-body">
 <p>Each argument defines one column. The name becomes the column name; the value must be a vector (or single value, which is recycled to the length of the longest column).</p>
 <p>Key rules: - All vectors must be the same length, or length 1 (recycled) - Later arguments can reference earlier column names by name - Column names can contain spaces if wrapped in backticks: <code>`fill mass (mg)` = ...</code> (not recommended — use <code>snake_case</code> with units instead)</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_min   =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>),   <span class="co"># 5 values</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dose_mg    =</span> <span class="dv">200</span>                       <span class="co"># recycled to 5 rows</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_min   =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">60</span>),   <span class="co"># 5 values</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dose_mg    =</span> <span class="dv">200</span>                       <span class="co"># recycled to 5 rows</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> any vector type — <code>numeric</code>, <code>character</code>, <code>logical</code>, <code>integer</code>
 </p>
@@ -2265,8 +2238,8 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>The object to convert into a tibble. Typically used to convert a <code>data.frame</code> returned by base R functions like <code>read.csv()</code> into the tidyverse format.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data.csv"</span>)   <span class="co"># returns a data.frame</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)          <span class="co"># convert for use with dplyr / tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data.csv"</span>)   <span class="co"># returns a data.frame</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tbl <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(df)          <span class="co"># convert for use with dplyr / tidyr</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>data.frame</code> | <code>matrix</code> | <code>list</code>
 </p>
@@ -2278,9 +2251,21 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>The number of rows the tibble should have. Useful for creating an empty tibble with a known size:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">.rows =</span> <span class="dv">10</span>)   <span class="co"># empty tibble with 10 rows and no columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">.rows =</span> <span class="dv">10</span>)   <span class="co"># empty tibble with 10 rows and no columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>integer</code>
+</p>
+</div>
+</details>
+<details class="arg-item">
+<summary>
+<code>.name_repair</code> — strategy for duplicate or invalid column names <span class="arg-types">character | function</span> <span class="arg-badge optional">Optional</span>
+</summary>
+<div class="arg-body">
+<p>Controls how column names are validated and repaired. Use <code>"check_unique"</code> (default) to error on duplicates, or alternatives like <code>"minimal"</code>, <code>"unique"</code>, and <code>"universal"</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">.name_repair =</span> <span class="st">"unique"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p class="data-types">
+<strong>Data Types:</strong> <code>character</code> | <code>function</code> · Default: <code>“check_unique”</code>
 </p>
 </div>
 </details>

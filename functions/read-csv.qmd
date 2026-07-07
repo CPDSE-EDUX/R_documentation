@@ -1,6 +1,6 @@
 ---
 title: "read_csv( )"
-subtitle: "Import a CSV file as a [tibble](tibble.qmd). read_csv() and read_csv2() are from the readr package, which is part of the tidyverse."
+subtitle: "Import a CSV file as a [tibble](tibble.qmd) data frame. read_csv() and read_csv2() are from the readr package, which is part of the tidyverse."
 ---
 
 <div class="source-links">
@@ -20,7 +20,7 @@ library(tidyverse)
 read_csv(file)
 ```
 ::: {.desc-item}
-`read_csv("file_name.csv")` reads a comma-separated values (.csv) file and returns a [tibble](tibble.qmd). Use if your file uses commas as column separators and dots for decimals.
+`read_csv("file_name.csv")` reads a comma-separated values (.csv) file and returns a [tibble](tibble.qmd) data frame. Use if your file uses commas as column separators and dots for decimals.
 
 ![](../assets/images/csv_to_tibble.svg)
 :::
@@ -31,7 +31,7 @@ read_csv(file)
 read_csv2(file)
 ```
 ::: {.desc-item}
-`read_csv2("file_name.csv")` reads a .csv file that uses semicolons as column separators and commas for decimals. Note that the created tibble uses dots for decimals.
+`read_csv2("file_name.csv")` reads a .csv file that uses semicolons as column separators and commas for decimals. Note that the created tibble data frame uses dots for decimals.
 
 ![](../assets/images/csv2_to_tibble.svg)
 :::
