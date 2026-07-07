@@ -191,3 +191,40 @@ df %>%
 
 </div>
 </details>
+
+<details class="topic-card">
+<summary>Anscombe's Quartet (why plots matter)</summary>
+<div class="topic-card-body">
+
+Anscombe's quartet is a classic example showing that datasets can have almost identical descriptive statistics while looking very different when plotted.
+
+The four datasets have nearly the same:
+
+- mean of `x` and `y`
+- variance of `x` and `y`
+- correlation between `x` and `y`
+- linear regression line
+
+But each dataset has a different pattern (linear trend, curvature, outlier-driven relation, or vertical cluster).
+This is why descriptive statistics should be paired with visualization, not used alone.
+
+```{webr-r}
+# Built-in dataset: anscombe
+summary(anscombe)
+
+par(mfrow = c(2, 2))
+for (i in 1:4) {
+  x <- anscombe[[paste0("x", i)]]
+  y <- anscombe[[paste0("y", i)]]
+  plot(x, y,
+       main = paste("Dataset", i),
+       xlab = paste0("x", i),
+       ylab = paste0("y", i),
+       pch = 19,
+       col = "steelblue")
+  abline(lm(y ~ x), col = "firebrick", lwd = 2)
+}
+```
+
+</div>
+</details>
