@@ -6,39 +6,101 @@ engine: knitr
 ---
 
 <details class="topic-card" open>
-<summary>Setup</summary>
+<summary>Build a plot step by step</summary>
 <div class="topic-card-body">
 
-All plots in this course use `theme_classic()` and labelled axes via `labs()`.
-Run the setup chunk first — it loads ggplot2 and creates the datasets.
+::: {.callout-tip}
+## ggplot2 layer logic
+Every plot starts with `ggplot(data, aes(...))` — this sets the data and axes.
+Add layers with `+`: `geom_point()`, `geom_line()`, `labs()`, `theme_classic()`.
+Order doesn't matter for most layers, but `theme_classic()` always goes last.
+
+Need inspiration for chart types?
+<ul>
+  <li>General chart gallery: <a href="https://datavizproject.com/">The Data Visualization Catalogue</a></li>
+  <li>R-focused chart chooser: <a href="https://www.data-to-viz.com/">From Data to Viz</a></li>
+</ul>
+:::
+
+## Step 1: Start with an empty plot object
+This creates a blank ggplot canvas with no data or layers.
 
 ```{webr-r}
-library(ggplot2)
-library(dplyr)
-library(tibble)
+library(tidyverse)
 
-# UV calibration standards
+ggplot()
+```
+
+## Step 2: Add data and map variables to axes with `aes()`
+This connects the `standards` dataset and maps concentration to x and absorbance to y.
+
+```{webr-r}
+library(tidyverse)
+
+# Make a test data set about UV calibration standards
 standards <- tibble(
   conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
   absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
 )
 
-# Dissolution profile — two batches
-dissolution <- tibble(
-  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
-  batch         = rep(c("A", "B"), each = 6),
-  pct_dissolved = c(28, 52, 71, 85, 94, 98,
-                    22, 45, 65, 80, 91, 96)
+## Feed the data to ggplot and map the variables to the axes
+ggplot(standards, aes(x = conc_ug_ml, y = absorbance))
+```
+
+## Step 3: Add points so the data is visible
+This draws one point per observation using the x and y mappings.
+
+```{webr-r}
+library(tidyverse)
+
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
 )
 
-# Content uniformity — two batches
-capsules <- tibble(
-  batch     = rep(c("A", "B"), each = 10),
-  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
-                100.2, 99.9, 100.4, 99.7, 100.1,
-                100.5, 100.2, 100.7, 99.9, 100.4,
-                101.0, 100.6, 100.9, 100.3, 100.8)
+ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2)
+```
+
+## Step 4: Add labels
+This gives the plot a clear title and descriptive axis labels.
+
+```{webr-r}
+library(tidyverse)
+
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
 )
+
+ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  labs(
+    title = "UV Calibration Curve — Ibuprofen",
+    x     = "Concentration (µg/mL)",
+    y     = "Absorbance (AU)"
+  )
+```
+
+## Step 5: Apply a theme to finalize the plot
+This applies `theme_classic()` to set the clean visual style used in this course.
+
+```{webr-r}
+library(tidyverse)
+
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
+ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  labs(
+    title = "UV Calibration Curve — Ibuprofen",
+    x     = "Concentration (µg/mL)",
+    y     = "Absorbance (AU)"
+  ) +
+  theme_classic()
 ```
 
 </div>
@@ -51,6 +113,13 @@ capsules <- tibble(
 Use `geom_point()` to plot individual observations — ideal for calibration curves.
 
 ```{webr-r}
+library(tidyverse)
+
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
 ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
   geom_point(size = 2) +
   labs(
@@ -64,6 +133,13 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 Add a regression line with `geom_smooth()`:
 
 ```{webr-r}
+library(tidyverse)
+
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
 ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
   geom_point(size = 2) +
   geom_smooth(method = "lm", se = FALSE, colour = "#3C5E3E") +
@@ -86,6 +162,20 @@ Use `geom_line()` for data over time — ideal for dissolution profiles.
 Map `colour` to a grouping variable to show multiple batches.
 
 ```{webr-r}
+library(tidyverse)
+
+standards <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
+)
+
+dissolution <- tibble(
+  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 6),
+  pct_dissolved = c(28, 52, 71, 85, 94, 98,
+                    22, 45, 65, 80, 91, 96)
+)
+
 ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
   geom_line() +
   geom_point(size = 2) +
@@ -102,15 +192,100 @@ ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
 </details>
 
 <details class="topic-card">
+<summary>Bar chart vs. Histogram</summary>
+<div class="topic-card-body">
+
+## Bar chart
+Use a bar chart `geom_col()` to visualize summarized values (one value per category).
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 100.1,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 100.8)
+)
+
+mean_by_batch <- capsules %>%
+  group_by(batch) %>%
+  summarise(mean_pct = mean(pct_label), .groups = "drop")
+
+ggplot(mean_by_batch, aes(x = batch, y = mean_pct)) +
+  geom_col(fill = "#5F7D61") +
+  labs(
+    title = "Mean % Label Claim by Batch",
+    x     = "Batch",
+    y     = "Mean % Label Claim"
+  ) +
+  theme_classic()
+```
+
+## Histogram
+Use a histogram `geom_histogram()` to visualize the distribution of many raw numeric observations.
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 100.1,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 100.8)
+)
+
+ggplot(capsules, aes(x = pct_label)) +
+  geom_histogram(binwidth = 0.2, fill = "#5F7D61", colour = "white") +
+  labs(
+    title = "Distribution of % Label Claim",
+    x     = "% Label Claim",
+    y     = "Count"
+  ) +
+  theme_classic()
+```
+
+Difference:
+<ul>
+  <li>Bar chart: one bar per category, height is a known summary value.</li>
+  <li>Histogram: bars represent bins of a continuous variable, showing frequency.</li>
+</ul>
+
+</div>
+</details>
+
+<details class="topic-card">
 <summary>Box plot</summary>
 <div class="topic-card-body">
 
 Use `geom_boxplot()` to compare distributions across groups — ideal for batch comparisons.
 
+How to read a boxplot:
+<ul>
+  <li>Center line in the box: the median (50th percentile).</li>
+  <li>Bottom and top of the box: the 25th percentile (Q1) and 75th percentile (Q3).</li>
+  <li>Box height: the interquartile range (IQR = Q3 - Q1), which contains the middle 50% of values.</li>
+  <li>Whiskers: the most extreme values that are still within 1.5 x IQR from Q1 and Q3.</li>
+  <li>Points beyond whiskers: outliers.</li>
+</ul>
+
+The example below includes a low outlier in Batch A and a high outlier in Batch B so you can see how outliers are shown.
+
 ```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 97.2,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 103.4)
+)
+
 ggplot(capsules, aes(x = batch, y = pct_label)) +
   geom_boxplot() +
-  geom_jitter(width = 0.1, alpha = 0.5) +
   labs(
     title = "Content Uniformity by Batch",
     x     = "Batch",
@@ -123,32 +298,321 @@ ggplot(capsules, aes(x = batch, y = pct_label)) +
 </details>
 
 <details class="topic-card">
-<summary>Bar chart</summary>
+<summary>Color, Shape, and transparency</summary>
 <div class="topic-card-body">
 
-Use `geom_col()` when you already have the values to plot (e.g. means from `summarise()`).
+Color and shape can separate groups, and transparency can reveal density when points overlap.
+
+What is transparency (`alpha`)?
+<ul>
+  <li>`alpha` controls how see-through a geom is.</li>
+  <li>Range: `alpha = 1` means fully opaque; `alpha = 0` means fully transparent (invisible).</li>
+  <li>Lower alpha values help reveal where many points overlap, because darker regions indicate higher point density.</li>
+  <li>In practice, values around `0.2` to `0.5` are often useful for dense scatter or jitter plots.</li>
+</ul>
+
+Tip: If you write `geom_point(alpha = 0.3)`, all points get the same transparency.
+If you map alpha inside `aes(...)`, transparency can vary by a variable.
+
+## Use color to encode groups
+Map `colour` (points/lines) or `fill` (bars/boxes) to a variable when group identity matters. Try to use color with varying brightness (e.g. one darker and one lighter) or different hues (e.g. blue vs. orange) to make groups easy to distinguish. Varying brightness is often better for colorblind accessibility than varying hue.
 
 ```{webr-r}
-mean_by_batch <- capsules %>%
-  group_by(batch) %>%
-  summarise(mean_pct = mean(pct_label))
+library(tidyverse)
 
-ggplot(mean_by_batch, aes(x = batch, y = mean_pct)) +
-  geom_col(fill = "#5F7D61") +
+dissolution <- tibble(
+  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 6),
+  pct_dissolved = c(28, 52, 71, 85, 94, 98,
+                    22, 45, 65, 80, 91, 96)
+)
+
+ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.2) +
+  scale_colour_manual(values = c("A" = "#2F6B4F", "B" = "#D17B2D")) +
   labs(
-    title = "Mean % Label Claim by Batch",
-    x     = "Batch",
-    y     = "Mean % Label Claim"
+    title  = "Color separates groups",
+    x      = "Time (min)",
+    y      = "% Dissolved",
+    colour = "Batch"
   ) +
   theme_classic()
 ```
 
-::: {.callout-tip}
-## ggplot2 layer logic
-Every plot starts with `ggplot(data, aes(...))` — this sets the data and axes.
-Add layers with `+`: `geom_point()`, `geom_line()`, `labs()`, `theme_classic()`.
-Order doesn't matter for most layers, but `theme_classic()` always goes last.
-:::
+## Use color and shape to encode groups
+To make your chart accessible for people with colorblindness, you can also map `shape` to a grouping variable.
+
+```{webr-r}
+library(tidyverse)
+
+dissolution <- tibble(
+  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 6),
+  pct_dissolved = c(28, 52, 71, 85, 94, 98,
+                    22, 45, 65, 80, 91, 96)
+)
+
+ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch, shape = batch)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.2) +
+  scale_colour_manual(values = c("A" = "#2F6B4F", "B" = "#D17B2D")) +
+  labs(
+    title  = "Color separates groups",
+    x      = "Time (min)",
+    y      = "% Dissolved",
+    colour = "Batch"
+  ) +
+  theme_classic()
+```
+
+## Use transparency to reduce clutter
+Lower `alpha` makes dense regions visible without hiding sparse points.
+
+```{webr-r}
+library(tidyverse)
+
+set.seed(42)
+
+dense_capsules <- tibble(
+  batch = sample(c("A", "B"), size = 300, replace = TRUE),
+  pct_label = c(
+    rnorm(150, mean = 100.1, sd = 0.25),
+    rnorm(150, mean = 100.5, sd = 0.28)
+  )
+)
+
+ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
+  geom_jitter(width = 0.14, alpha = 0.35, size = 1.8, show.legend = FALSE) +
+  labs(
+    title = "Transparency reveals point density",
+    x     = "Batch",
+    y     = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+Quick guidelines:
+<ul>
+  <li>Use color only when it communicates information, not decoration.</li>
+  <li>Keep palettes simple and high-contrast.</li>
+  <li>Use transparency when many points overlap.</li>
+</ul>
 
 </div>
 </details>
+
+<details class="topic-card">
+<summary>Overplotting and how to fight it</summary>
+<div class="topic-card-body">
+
+Overplotting happens when many points overlap so heavily that patterns become hard to see.
+
+```{webr-r}
+library(tidyverse)
+
+set.seed(42)
+
+dense_capsules <- tibble(
+  batch = sample(c("A", "B"), size = 400, replace = TRUE),
+  pct_label = c(
+    rnorm(200, mean = 100.1, sd = 0.25),
+    rnorm(200, mean = 100.5, sd = 0.28)
+  )
+)
+
+ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
+  geom_point(size = 1.8, show.legend = FALSE) +
+  labs(
+    title = "Overplotting",
+    x = "Batch",
+    y = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+You can fight this in many ways:
+
+## 1) Use transparency (`alpha`)
+Lower opacity reveals where points pile up.
+
+```{webr-r}
+library(tidyverse)
+
+set.seed(42)
+
+dense_capsules <- tibble(
+  batch = sample(c("A", "B"), size = 400, replace = TRUE),
+  pct_label = c(
+    rnorm(200, mean = 100.1, sd = 0.25),
+    rnorm(200, mean = 100.5, sd = 0.28)
+  )
+)
+
+ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
+  geom_point(alpha = 0.25, size = 2, show.legend = FALSE) +
+  labs(
+    title = "Fight overplotting with transparency",
+    x = "Batch",
+    y = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+## 2) Add jitter
+Jitter spreads overlapping points so you can see repeated values.
+
+```{webr-r}
+library(tidyverse)
+
+set.seed(42)
+
+dense_capsules <- tibble(
+  batch = sample(c("A", "B"), size = 400, replace = TRUE),
+  pct_label = c(
+    rnorm(200, mean = 100.1, sd = 0.25),
+    rnorm(200, mean = 100.5, sd = 0.28)
+  )
+)
+
+ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
+  geom_jitter(width = 0.15, alpha = 0.45, size = 1.8, show.legend = FALSE) +
+  labs(
+    title = "Fight overplotting with jitter",
+    x = "Batch",
+    y = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+## 3) Use a 2D binning layer
+When point count is high, summarize density with bins.
+
+```{webr-r}
+library(tidyverse)
+
+set.seed(42)
+
+dense_capsules <- tibble(
+  batch_num = c(rep(1, 200), rep(2, 200)),
+  pct_label = c(
+    rnorm(200, mean = 100.1, sd = 0.25),
+    rnorm(200, mean = 100.5, sd = 0.28)
+  )
+)
+
+ggplot(dense_capsules, aes(x = batch_num, y = pct_label)) +
+  geom_bin2d(bins = 22) +
+  scale_x_continuous(breaks = c(1, 2), labels = c("A", "B")) +
+  labs(
+    title = "Fight overplotting with 2D bins",
+    x = "Batch",
+    y = "% Label Claim",
+    fill = "Count"
+  ) +
+  theme_classic()
+```
+
+## 4) Use visual abstraction
+Sometimes the best fix is to summarize the data (for example with violin or box plots).
+See the next collapsible section, **Visual abstraction: low to high**.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Visual abstraction</summary>
+<div class="topic-card-body">
+
+Visual abstraction means how much of the raw data you keep visible.
+Lower abstraction shows individual observations; higher abstraction summarizes them.
+
+## Low abstraction: points (raw observations)
+You can see every data point, which makes outliers and clusters easy to spot.
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 100.1,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 100.8)
+)
+
+ggplot(capsules, aes(x = batch, y = pct_label, colour = batch)) +
+  geom_jitter(width = 0.08, size = 2, alpha = 0.8, show.legend = FALSE) +
+  labs(
+    title = "Low abstraction: every capsule result",
+    x     = "Batch",
+    y     = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+## Medium abstraction: violin plot (distribution shape)
+You lose exact points but gain a quick view of distribution shape and spread.
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 100.1,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 100.8)
+)
+
+ggplot(capsules, aes(x = batch, y = pct_label, fill = batch)) +
+  geom_violin(alpha = 0.7, show.legend = FALSE, colour = NA) +
+  labs(
+    title = "Medium abstraction: distribution by batch",
+    x     = "Batch",
+    y     = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+## High abstraction: box plot (summary statistics)
+You mainly see median, quartiles, and whiskers; individual points are hidden.
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  batch     = rep(c("A", "B"), each = 10),
+  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
+                100.2, 99.9, 100.4, 99.7, 100.1,
+                100.5, 100.2, 100.7, 99.9, 100.4,
+                101.0, 100.6, 100.9, 100.3, 100.8)
+)
+
+ggplot(capsules, aes(x = batch, y = pct_label)) +
+  geom_boxplot(fill = "#5F7D61", alpha = 0.75) +
+  labs(
+    title = "High abstraction: summarized distribution",
+    x     = "Batch",
+    y     = "% Label Claim"
+  ) +
+  theme_classic()
+```
+
+Advantages of abstraction:
+<ul>
+  <li>Faster comparison across groups.</li>
+  <li>Less visual clutter in large datasets.</li>
+  <li>Highlights central patterns and spread.</li>
+</ul>
+
+Disadvantages of abstraction:
+<ul>
+  <li>Can hide outliers or multimodal patterns.</li>
+  <li>Can hide sample size differences.</li>
+  <li>Too much abstraction can hide important details.</li>
+</ul>
+
+</div>
+</details>
+

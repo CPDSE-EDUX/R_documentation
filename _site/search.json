@@ -4,7 +4,7 @@
     "href": "topics/visualization.html",
     "title": "Visualization",
     "section": "",
-    "text": "Setup\n\n\nAll plots in this course use theme_classic() and labelled axes via labs(). Run the setup chunk first — it loads ggplot2 and creates the datasets.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nScatter plot\n\n\nUse geom_point() to plot individual observations — ideal for calibration curves.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nAdd a regression line with geom_smooth():\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nLine plot\n\n\nUse geom_line() for data over time — ideal for dissolution profiles. Map colour to a grouping variable to show multiple batches.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nBox plot\n\n\nUse geom_boxplot() to compare distributions across groups — ideal for batch comparisons.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nBar chart\n\n\nUse geom_col() when you already have the values to plot (e.g. means from summarise()).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\nggplot2 layer logic\n\n\n\nEvery plot starts with ggplot(data, aes(...)) — this sets the data and axes. Add layers with +: geom_point(), geom_line(), labs(), theme_classic(). Order doesn’t matter for most layers, but theme_classic() always goes last."
+    "text": "Build a plot step by step\n\n\n\n\n\n\n\n\nggplot2 layer logic\n\n\n\nEvery plot starts with ggplot(data, aes(...)) — this sets the data and axes. Add layers with +: geom_point(), geom_line(), labs(), theme_classic(). Order doesn’t matter for most layers, but theme_classic() always goes last.\nNeed inspiration for chart types?\n\n\nGeneral chart gallery: The Data Visualization Catalogue\n\n\nR-focused chart chooser: From Data to Viz\n\n\n\n\n\n\nThis creates a blank ggplot canvas with no data or layers.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nThis connects the standards dataset and maps concentration to x and absorbance to y.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nThis draws one point per observation using the x and y mappings.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nThis gives the plot a clear title and descriptive axis labels.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\nThis applies theme_classic() to set the clean visual style used in this course.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   },
   {
     "objectID": "topics/data-handling.html",
@@ -734,5 +734,124 @@
     "title": "Descriptive Statistics",
     "section": "Quantiles & Interquartile range (IQR)",
     "text": "Quantiles & Interquartile range (IQR)\nIQR shows the spread of the middle 50% of the data. Quantiles provide cut points (for example 25%, 50%, and 75%). These are robust to outliers compared with range-based measures.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#step-1-start-with-an-empty-plot-object",
+    "href": "topics/visualization.html#step-1-start-with-an-empty-plot-object",
+    "title": "Visualization",
+    "section": "",
+    "text": "This creates a blank ggplot canvas with no data or layers.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#step-2-add-data-and-map-variables-to-axes-with-aes",
+    "href": "topics/visualization.html#step-2-add-data-and-map-variables-to-axes-with-aes",
+    "title": "Visualization",
+    "section": "",
+    "text": "This connects the standards dataset and maps concentration to x and absorbance to y.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#step-3-add-points-so-the-data-is-visible",
+    "href": "topics/visualization.html#step-3-add-points-so-the-data-is-visible",
+    "title": "Visualization",
+    "section": "",
+    "text": "This draws one point per observation using the x and y mappings.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#step-4-add-labels",
+    "href": "topics/visualization.html#step-4-add-labels",
+    "title": "Visualization",
+    "section": "",
+    "text": "This gives the plot a clear title and descriptive axis labels.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#step-5-apply-a-theme-to-finalize-the-plot",
+    "href": "topics/visualization.html#step-5-apply-a-theme-to-finalize-the-plot",
+    "title": "Visualization",
+    "section": "",
+    "text": "This applies theme_classic() to set the clean visual style used in this course.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#bar-chart",
+    "href": "topics/visualization.html#bar-chart",
+    "title": "Visualization",
+    "section": "Bar chart",
+    "text": "Bar chart\nUse a bar chart geom_col() to visualize summarized values (one value per category).\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#histogram",
+    "href": "topics/visualization.html#histogram",
+    "title": "Visualization",
+    "section": "Histogram",
+    "text": "Histogram\nUse a histogram geom_histogram() to visualize the distribution of many raw numeric observations.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nDifference:\n\n\nBar chart: one bar per category, height is a known summary value.\n\n\nHistogram: bars represent bins of a continuous variable, showing frequency."
+  },
+  {
+    "objectID": "topics/visualization.html#low-abstraction-points-raw-observations",
+    "href": "topics/visualization.html#low-abstraction-points-raw-observations",
+    "title": "Visualization",
+    "section": "Low abstraction: points (raw observations)",
+    "text": "Low abstraction: points (raw observations)\nYou can see every data point, which makes outliers and clusters easy to spot.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#medium-abstraction-violin-plot-distribution-shape",
+    "href": "topics/visualization.html#medium-abstraction-violin-plot-distribution-shape",
+    "title": "Visualization",
+    "section": "Medium abstraction: violin plot (distribution shape)",
+    "text": "Medium abstraction: violin plot (distribution shape)\nYou lose exact points but gain a quick view of distribution shape and spread.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#high-abstraction-box-plot-summary-statistics",
+    "href": "topics/visualization.html#high-abstraction-box-plot-summary-statistics",
+    "title": "Visualization",
+    "section": "High abstraction: box plot (summary statistics)",
+    "text": "High abstraction: box plot (summary statistics)\nYou mainly see median, quartiles, and whiskers; individual points are hidden.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nAdvantages of abstraction:\n\n\nFaster comparison across groups.\n\n\nLess visual clutter in large datasets.\n\n\nHighlights central patterns and spread.\n\n\nDisadvantages of abstraction:\n\n\nCan hide outliers or multimodal patterns.\n\n\nCan hide sample size differences.\n\n\nToo much abstraction can hide important details."
+  },
+  {
+    "objectID": "topics/visualization.html#use-transparency-alpha",
+    "href": "topics/visualization.html#use-transparency-alpha",
+    "title": "Visualization",
+    "section": "1) Use transparency (alpha)",
+    "text": "1) Use transparency (alpha)\nLower opacity reveals where points pile up.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#add-jitter",
+    "href": "topics/visualization.html#add-jitter",
+    "title": "Visualization",
+    "section": "2) Add jitter",
+    "text": "2) Add jitter\nJitter spreads overlapping points so you can see repeated values.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#use-a-2d-binning-layer",
+    "href": "topics/visualization.html#use-a-2d-binning-layer",
+    "title": "Visualization",
+    "section": "3) Use a 2D binning layer",
+    "text": "3) Use a 2D binning layer\nWhen point count is high, summarize density with bins.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#use-visual-abstraction",
+    "href": "topics/visualization.html#use-visual-abstraction",
+    "title": "Visualization",
+    "section": "4) Use visual abstraction",
+    "text": "4) Use visual abstraction\nSometimes the best fix is to summarize the data (for example with violin or box plots). See the next collapsible section, Visual abstraction: low to high."
+  },
+  {
+    "objectID": "topics/visualization.html#use-color-to-encode-groups",
+    "href": "topics/visualization.html#use-color-to-encode-groups",
+    "title": "Visualization",
+    "section": "Use color to encode groups",
+    "text": "Use color to encode groups\nMap colour (points/lines) or fill (bars/boxes) to a variable when group identity matters. Try to use color with varying brightness (e.g. one darker and one lighter) or different hues (e.g. blue vs. orange) to make groups easy to distinguish. Varying brightness is often better for colorblind accessibility than varying hue.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "topics/visualization.html#use-transparency-to-reduce-clutter",
+    "href": "topics/visualization.html#use-transparency-to-reduce-clutter",
+    "title": "Visualization",
+    "section": "Use transparency to reduce clutter",
+    "text": "Use transparency to reduce clutter\nLower alpha makes dense regions visible without hiding sparse points.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\nQuick guidelines:\n\n\nUse color only when it communicates information, not decoration.\n\n\nKeep palettes simple and high-contrast.\n\n\nUse transparency when many points overlap."
+  },
+  {
+    "objectID": "topics/visualization.html#use-color-and-shape-to-encode-groups",
+    "href": "topics/visualization.html#use-color-and-shape-to-encode-groups",
+    "title": "Visualization",
+    "section": "Use color and shape to encode groups",
+    "text": "Use color and shape to encode groups\nTo make your chart accessible for people with colorblindness, you can also map shape to a grouping variable.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
