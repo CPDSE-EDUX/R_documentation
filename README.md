@@ -106,11 +106,22 @@ Normal text. Make words **bold** or *italic*.
 `some_code()` in the middle of a sentence uses single backticks.
 ```
 
-R code that readers can run appears in a special block labelled `webr-r`:
+R code comes in two kinds of block. A block labelled `webr-r` is **runnable** —
+readers can run and edit it live in the browser:
 
 ````markdown
 ```{webr-r}
 round(3.14159, 2)   # this will be runnable on the website
+```
+````
+
+A block labelled plain `r` is **not runnable** — it's shown for reference only.
+Use it for install commands, `library()` calls, or snippets you don't want
+executed:
+
+````markdown
+```r
+install.packages("tidyverse")   # shown, but not runnable on the site
 ```
 ````
 
@@ -158,13 +169,6 @@ This extra explanation is hidden until the reader clicks to open it.
 ```
 
 Use `collapse="false"` to show a box that *can* be collapsed but starts open.
-
-#### Runnable vs. non-runnable code
-
-| Block | What it does |
-|---|---|
-| ```` ```{webr-r} ```` | R code the reader can **run and edit** live in the browser |
-| ```` ```r ```` | R code shown for reference only (not runnable) — use for install commands, `library()` calls, snippets you don't want executed |
 
 #### Collapsible cards (`<details>`)
 
@@ -217,6 +221,10 @@ copy its exact structure.
 3. Add it to the menus so people can find it: open `_quarto.yml` and add a line
    pointing to your new file under both the `navbar` **Functions** menu and the
    `sidebar`. Copy how `round.qmd` is listed there.
+
+The same applies to a new **topic page** — put the file in the `topics/` folder
+instead (e.g. copy `topics/data-handling.qmd`), and register it under the
+`navbar` **Topics covered** menu in `_quarto.yml`.
 
 ### Will my change break the website?
 
