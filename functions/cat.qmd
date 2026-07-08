@@ -27,21 +27,7 @@ cat("Label:", value, "unit\n")
 ```
 ::: {.desc-item}
 `cat("Label:", value, "unit\n")` is the standard pattern for reporting a named result with its unit.
-The `\n` at the end moves the cursor to a new line.
-:::
-
-```{r, eval=FALSE}
-cat("Label:", signif(value, digits), "unit\n")
-```
-::: {.desc-item}
-`cat("Label:", signif(value, digits), "unit\n")` rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
-:::
-
-```{r, eval=FALSE}
-cat(..., sep = " ", file = "", append = FALSE)
-```
-::: {.desc-item}
-`cat(..., sep = " ", file = "", append = FALSE)` exposes the optional arguments that control how and where output is written: `sep` sets the separator between items, while `file` and `append` redirect output to a file instead of the console.
+The `\n` at the end moves the cursor to a new line, creating line breaks. Useful for printing multiple results in a report.
 :::
 
 ::: {.callout-note}
@@ -121,6 +107,21 @@ If `FALSE` (default), the file is overwritten.
 
 <div class="example-section">
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Rounding at print-time with <code>signif()</code></summary>
+<div class="example-body">
+
+```{webr-r}
+value <- 12.345678
+
+# Keep full precision in the stored variable,
+# but round to reporting precision when printing.
+cat("Label:", signif(value, 4), "unit\n")
+```
+Rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
+</div>
+</details>
 
 <details class="example-item">
 <summary>Print a single analytical result with units</summary>

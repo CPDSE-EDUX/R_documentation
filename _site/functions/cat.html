@@ -72,10 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c2e1554ca3abda11abbe21798f05e232.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-fbbad6c1ec35f15638aa5e4b19c54818.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4ac40cd721c3ff81bf853b46dd442686.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aea6bdfa94d84a87debd1b995c75e487.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,9 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   
@@ -407,7 +404,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"# Full-precision intermediate — do NOT round here\nstd_intercept <- 0.003\nstd_slope     <- 0.01420   # AU per µg/mL\nabsorbance    <- 0.445     # measured absorbance of sample\n\nC2_ug_ml <- (absorbance - std_intercept) / std_slope   # Beer–Lambert\n\n# Only round at the point of printing\ncat(\"Sample concentration:\", signif(C2_ug_ml, 3), \"µg/mL\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(dplyr)\nlibrary(tibble)\n\nlabel_claim_mg    <- 75.0\nibu_per_mg_powder <- 0.43\n\ncapsules <- tibble(\n  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5, 174.3)\n) %>%\n  mutate(\n    ibu_mg    = fill_mass_mg * ibu_per_mg_powder,\n    pct_label = ibu_mg / label_claim_mg * 100\n  )\n\nX_bar_pct <- mean(capsules$pct_label)\ns_pct     <- sd(capsules$pct_label)\n\ncat(\"Mean content (X\\u0304):\", signif(X_bar_pct, 4), \"% of label claim\\n\")\ncat(\"Std deviation (s):\", signif(s_pct, 3),     \"%\\n\")\ncat(\"n:\", nrow(capsules), \"capsules\\n\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# EP 2.9.40 Stage 1: AV = |M - X̄| + k·s\nM    <- 100.0   # reference value (% label claim)\nk_s1 <- 2.4     # EP Table 2.9.40-1, Stage 1, n = 6\nL1   <- 15.0    # acceptance limit Stage 1 (%)\n\nX_bar_pct <- 98.4\ns_pct     <- 1.8\n\nAV_s1 <- abs(M - X_bar_pct) + k_s1 * s_pct\n\ncat(\"Acceptance value (AV):\", round(AV_s1, 2), \"\\n\")\ncat(\"Acceptance limit (L1):\", L1, \"\\n\")\ncat(\"Stage 1 result:\", ifelse(AV_s1 <= L1, \"PASS\", \"FAIL\"), \"\\n\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)\n\n# Default sep = \" \" (space between items)\ncat(\"Standards (µg/mL):\", conc_values_ug_ml, \"\\n\")\n\n# Comma-separated\ncat(\"Standards (µg/mL):\", conc_values_ug_ml, sep = \", \")\ncat(\"\\n\")","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"value <- 12.345678\n\n# Keep full precision in the stored variable,\n# but round to reporting precision when printing.\ncat(\"Label:\", signif(value, 4), \"unit\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Full-precision intermediate — do NOT round here\nstd_intercept <- 0.003\nstd_slope     <- 0.01420   # AU per µg/mL\nabsorbance    <- 0.445     # measured absorbance of sample\n\nC2_ug_ml <- (absorbance - std_intercept) / std_slope   # Beer–Lambert\n\n# Only round at the point of printing\ncat(\"Sample concentration:\", signif(C2_ug_ml, 3), \"µg/mL\\n\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(dplyr)\nlibrary(tibble)\n\nlabel_claim_mg    <- 75.0\nibu_per_mg_powder <- 0.43\n\ncapsules <- tibble(\n  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5, 174.3)\n) %>%\n  mutate(\n    ibu_mg    = fill_mass_mg * ibu_per_mg_powder,\n    pct_label = ibu_mg / label_claim_mg * 100\n  )\n\nX_bar_pct <- mean(capsules$pct_label)\ns_pct     <- sd(capsules$pct_label)\n\ncat(\"Mean content (X\\u0304):\", signif(X_bar_pct, 4), \"% of label claim\\n\")\ncat(\"Std deviation (s):\", signif(s_pct, 3),     \"%\\n\")\ncat(\"n:\", nrow(capsules), \"capsules\\n\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# EP 2.9.40 Stage 1: AV = |M - X̄| + k·s\nM    <- 100.0   # reference value (% label claim)\nk_s1 <- 2.4     # EP Table 2.9.40-1, Stage 1, n = 6\nL1   <- 15.0    # acceptance limit Stage 1 (%)\n\nX_bar_pct <- 98.4\ns_pct     <- 1.8\n\nAV_s1 <- abs(M - X_bar_pct) + k_s1 * s_pct\n\ncat(\"Acceptance value (AV):\", round(AV_s1, 2), \"\\n\")\ncat(\"Acceptance limit (L1):\", L1, \"\\n\")\ncat(\"Stage 1 result:\", ifelse(AV_s1 <= L1, \"PASS\", \"FAIL\"), \"\\n\")","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)\n\n# Default sep = \" \" (space between items)\ncat(\"Standards (µg/mL):\", conc_values_ug_ml, \"\\n\")\n\n# Comma-separated\ncat(\"Standards (µg/mL):\", conc_values_ug_ml, sep = \", \")\ncat(\"\\n\")","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1664,7 +1661,7 @@ globalThis.qwebrExecuteCode = async function (
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed quarto-light">
+<body class="nav-sidebar docked nav-fixed function-page quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -2205,18 +2202,6 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="desc-item">
 <p><code>cat("Label:", value, "unit\n")</code> is the standard pattern for reporting a named result with its unit. The <code>\n</code> at the end moves the cursor to a new line.</p>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label:"</span>, <span class="fu">signif</span>(value, digits), <span class="st">"unit</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="desc-item">
-<p><code>cat("Label:", signif(value, digits), "unit\n")</code> rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.</p>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(..., <span class="at">sep =</span> <span class="st">" "</span>, <span class="at">file =</span> <span class="st">""</span>, <span class="at">append =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="desc-item">
-<p><code>cat(..., sep = " ", file = "", append = FALSE)</code> exposes the optional arguments that control how and where output is written: <code>sep</code> sets the separator between items, while <code>file</code> and <code>append</code> redirect output to a file instead of the console.</p>
-</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2248,7 +2233,7 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>One or more values to print, separated by commas. Items are coerced to character before printing. Common usage combines a text label, a computed value (wrapped in <code>signif()</code> or <code>round()</code>), and a unit string:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean fill mass:"</span>, <span class="fu">signif</span>(X_bar, <span class="dv">4</span>), <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean fill mass:"</span>, <span class="fu">signif</span>(X_bar, <span class="dv">4</span>), <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Use <code>\n</code> (newline) as the last item so the next output starts on a fresh line.</p>
 <p class="data-types">
 <strong>Data Types:</strong> <code>character</code> | <code>numeric</code> | <code>logical</code> | <code>integer</code>
@@ -2261,8 +2246,8 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>A character string inserted between consecutive items. Default is a single space <code>" "</code>. Set <code>sep = ""</code> to print items with no gap, or <code>sep = ", "</code> for comma-separated lists.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, value, <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)          <span class="co"># default: space between each item</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="at">sep =</span> <span class="st">"-"</span>)          <span class="co"># prints: A-B-C</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, value, <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)          <span class="co"># default: space between each item</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="at">sep =</span> <span class="st">"-"</span>)          <span class="co"># prints: A-B-C</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>character</code> · Default: <code>” “</code>
 </p>
@@ -2274,7 +2259,7 @@ Expand All
 </summary>
 <div class="arg-body">
 <p>Where to send the output. Default <code>""</code> prints to the console. Pass a file path string (or an open connection) to write to a file instead.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, <span class="fu">signif</span>(AV_s1, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="st">"results.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, <span class="fu">signif</span>(AV_s1, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="st">"results.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p class="data-types">
 <strong>Data Types:</strong> <code>character</code> (file path) | <code>connection</code> · Default: <code>““</code> (console)
 </p>
@@ -2303,16 +2288,17 @@ Expand All
 </div>
 <details class="example-item">
 <summary>
-Print a single analytical result with units
+Rounding at print-time with <code>signif()</code>
 </summary>
 <div class="example-body">
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.</p>
 </div>
 </details>
 <details class="example-item">
 <summary>
-Print multiple results from a content uniformity assay
+Print a single analytical result with units
 </summary>
 <div class="example-body">
 <div id="qwebr-insertion-location-2"></div>
@@ -2321,7 +2307,7 @@ Print multiple results from a content uniformity assay
 </details>
 <details class="example-item">
 <summary>
-Print a pass/fail acceptance criterion
+Print multiple results from a content uniformity assay
 </summary>
 <div class="example-body">
 <div id="qwebr-insertion-location-3"></div>
@@ -2330,10 +2316,19 @@ Print a pass/fail acceptance criterion
 </details>
 <details class="example-item">
 <summary>
-<code>sep</code> — custom separator between items
+Print a pass/fail acceptance criterion
 </summary>
 <div class="example-body">
 <div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+</details>
+<details class="example-item">
+<summary>
+<code>sep</code> — custom separator between items
+</summary>
+<div class="example-body">
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
 </details>
