@@ -18,16 +18,7 @@ subtitle: "Round to a fixed number of decimal places. round() is a base R functi
 round(x)
 ```
 ::: {.desc-item}
-`round(x, digits)` rounds a number (or numeric vector) to `digits` decimal places.
-Positive values of `digits` round to the right of the decimal point; negative values round to the left (e.g. `digits = -1` rounds to the nearest 10).
-:::
-
-```{r, eval=FALSE}
-round(x, digits = 0)
-```
-::: {.desc-item}
-`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
-The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
+`round(x)` rounds a number (or numeric vector) to a user-specified number of decimal places. If nothing is specified, the default is 0, meaning that the result has no decimal places.
 :::
 
 ::: {.callout-note}
@@ -81,6 +72,13 @@ A single number or a numeric vector.
 Number of digits to the right of the decimal point.
 Default is `0`, which rounds to the nearest integer.
 Negative values round to the left of the decimal point.
+```{r, eval=FALSE}
+round(x, digits = 0)
+```
+::: {.desc-item}
+`round(x, digits = 0)` adds the optional `digits` argument that controls how many decimal places to keep.
+The default `0` rounds to the nearest integer; negative values round to the left of the decimal point.
+:::
 
 | `digits` | Meaning | Example: `round(1587.346, digits)` |
 |---|---|---|
