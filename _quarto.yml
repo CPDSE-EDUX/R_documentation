@@ -22,7 +22,7 @@ website:
       - text: "Topics covered"
         menu:
           - text: "Getting Started"
-            href: getting-started.qmd
+            href: topics/getting-started.qmd
           - text: "---"
           - text: "Data Handling"
             href: topics/data-handling.qmd

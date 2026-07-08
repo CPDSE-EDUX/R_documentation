@@ -10,14 +10,14 @@ toc: false
 R for pharmaceutical sciences practicals.
 Written for learners in plain language, tidyverse style, and with pharmacy examples.
 
-[Get Started](getting-started.qmd){.hero-btn}
+[Get Started](topics/getting-started.qmd){.hero-btn}
 [Browse Functions](functions/index.qmd){.hero-btn .secondary}
 :::
 
 
 ## Topics covered
 <div class="card-grid">
-<a href="getting-started.qmd" class="feature-card">
+<a href="topics/getting-started.qmd" class="feature-card">
 <div class="card-icon">🚀</div>
 <h3>Getting Started</h3>
 <p>Set up R and RStudio, and run your very first lines of code.</p>

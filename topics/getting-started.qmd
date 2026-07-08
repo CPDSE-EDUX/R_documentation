@@ -31,7 +31,7 @@ When you open RStudio you will see four panes:
 | **Environment** (top-right) | See all objects currently in memory |
 | **Files / Plots** (bottom-right) | Browse files, view plots, read help pages |
 
-![RStudio Panels](assets/images/RStudio_Panels.png)
+![RStudio Panels](../assets/images/RStudio_Panels.png)
 
 [Watch: RStudio in 3 minutes (YouTube) ↗](https://www.youtube.com/watch?v=GEuuhg7NBko){target="_blank" rel="noopener"}
 
@@ -120,7 +120,7 @@ weather <- tibble(
 Object names must not contain spaces. Use _ instead, e.g. air_temperature. Choose meaningful object names that describe what is stored and, where relevant, include the unit. E.g., `dose_mg` instead of `value`.
 :::
 
-Data is read into R from files using functions like [`read_csv()`](functions/read-csv.qmd).
+Data is read into R from files using functions like [`read_csv()`](../functions/read-csv.qmd).
 
 Within RStudio, you can inspect your data objects in the Environment panel, or using
 
@@ -211,9 +211,9 @@ weight_kg <- 70    # data
 weight_kg <- 80    # overwrites the previous value — weight_kg is now 80
 ```
 
-You can add or transform columns in a tibble using [`mutate()`](functions/mutate.qmd):
+You can add or transform columns in a tibble using [`mutate()`](../functions/mutate.qmd):
 
-A common application case for computing is when you calculate new values and add them as new columns in an existing tibble using [`mutate()`](functions/mutate.qmd). Assume `capsules` is a tibble you loaded before containing the column `fill_mass_mg`. You now add two columns `ibu_mg` and `pct_label` which store newly computed values.
+A common application case for computing is when you calculate new values and add them as new columns in an existing tibble using [`mutate()`](../functions/mutate.qmd). Assume `capsules` is a tibble you loaded before containing the column `fill_mass_mg`. You now add two columns `ibu_mg` and `pct_label` which store newly computed values.
 
 ```r
 library(tidyverse)
@@ -239,7 +239,7 @@ R produces output in three main ways: printing to the console, viewing objects, 
 
 ### Print to Console
 
-Use [`cat()`](functions/cat.qmd) to print labelled results with units to the console:
+Use [`cat()`](../functions/cat.qmd) to print labelled results with units to the console:
 
 ```{webr-r}
 dose_mg     <- 500
@@ -257,7 +257,7 @@ pct_label <- ibu_mg / label_claim_mg * 100       # full precision stored
 cat("Label claim:", round(pct_label, 2), "%\n")  # round only when printing
 ```
 
-Use [`signif()`](functions/signif.qmd) for concentrations and masses (significant figures), and [`round()`](functions/round.qmd) for percentages and fixed decimal places.
+Use [`signif()`](../functions/signif.qmd) for concentrations and masses (significant figures), and [`round()`](../functions/round.qmd) for percentages and fixed decimal places.
 
 ### View Objects
 
@@ -312,7 +312,7 @@ cat("Mean % label claim:", round(mean(capsules$pct_label), 2), "%\n")
 cat("SD:",                 round(sd(capsules$pct_label),   2), "%\n")
 ```
 
-Browse the [function reference](functions/index.qmd) to see all covered functions.
+Browse the [function reference](../functions/index.qmd) to see all covered functions.
 
 </div>
 </details>

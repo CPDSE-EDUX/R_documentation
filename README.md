@@ -33,9 +33,9 @@ never used GitHub or Git before.
 | Folder | What's in it |
 |---|---|
 | `functions/` | One page per R function (e.g. `round.qmd`, `mutate.qmd`) |
-| `topics/` | Broader topic pages (data handling, statistics, visualization) |
+| `topics/` | Broader topic pages: getting started, data handling, statistics, visualization |
 | `index.qmd` | The home page |
-| `getting-started.qmd`, `glossary.qmd`, `coding-conventions.qmd` | Standalone pages |
+| `glossary.qmd`, `coding-conventions.qmd` | Standalone pages |
 | `_quarto.yml` | Site settings and the navigation menus |
 | `assets/` | Images and example data files |
 
