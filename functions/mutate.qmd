@@ -17,31 +17,40 @@ library(tidyverse)
 ## Syntax
 
 ```{r, eval=FALSE}
+# Pipe style
 df %>% mutate(new_col = expression)
+
+# Non-pipe style
+mutate(df, new_col = expression)
 ```
 ::: {.desc-item}
-`df %>% mutate(new_col = expression)` adds a new column to a data frame.
+`df %>% mutate(new_col = expression)` and `mutate(df, new_col = expression)` add a new column to a data frame.
 The expression on the right can reference any existing column by name.
 :::
 
 ```{r, eval=FALSE}
+# Pipe style
 df %>% mutate(new_col = expression, another_col = expression)
+
+# Non-pipe style
+mutate(df, new_col = expression, another_col = expression)
 ```
 ::: {.desc-item}
-`df %>% mutate(col1 = ..., col2 = ...)` adds multiple columns in a single call.
+`df %>% mutate(col1 = ..., col2 = ...)` and `mutate(df, col1 = ..., col2 = ...)` add multiple columns in a single call.
 Later expressions can reference columns created earlier in the same `mutate()`.
 :::
 
-```{r, eval=FALSE}
-df %>% mutate(..., .keep = "all", .before = NULL, .after = NULL)
-```
-::: {.desc-item}
-`df %>% mutate(..., .keep = "all")` controls which columns are kept in the result.
-The default `"all"` retains every column, including unmodified ones.
-The optional `.before` / `.after` arguments control where new columns are inserted.
+::: {.callout-tip collapse="true"}
+## Why Are There Two Syntax Styles?
+Both versions do the same thing.
+With the pipe `%>%`, the data frame on the left is passed automatically as the first argument to `mutate()`.
+Without the pipe, you write that first argument explicitly as `mutate(df, ...)`.
+Use whichever style is clearer for your workflow.
 :::
 
-::: {.callout-note}
+
+
+::: {.callout-note collapse="true"}
 ## Coding convention — never round inside `mutate()`
 Store full-precision values in all columns.
 Apply `signif()` or `round()` only inside `cat()` when printing a final result.
@@ -83,36 +92,6 @@ mutate(
 ```
 
 <p class="data-types"><strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.keep</code> <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls which columns from `.data` appear in the output alongside the new/modified columns.
-
-| Value | Behaviour |
-|---|---|
-| `"all"` | Keep all original columns **(default)** |
-| `"used"` | Keep only columns referenced in the expressions |
-| `"unused"` | Keep only columns *not* referenced |
-| `"none"` | Drop all original columns (equivalent to `transmute()`) |
-
-<p class="data-types"><strong>Data Types:</strong> <code>character</code> — one of <code>"all"</code>, <code>"used"</code>, <code>"unused"</code>, <code>"none"</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.before</code> / <code>.after</code> <span class="arg-types">column name | integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls where the new columns are inserted.
-By default new columns are appended on the right.
-
-```r
-capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg, .after = mass_filled_mg)
-```
-
-<p class="data-types"><strong>Data Types:</strong> unquoted column name or integer position</p>
 </div>
 </details>
 :::

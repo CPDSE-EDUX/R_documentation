@@ -2257,18 +2257,6 @@ Expand All
 </p>
 </div>
 </details>
-<details class="arg-item">
-<summary>
-<code>.name_repair</code> — strategy for duplicate or invalid column names <span class="arg-types">character | function</span> <span class="arg-badge optional">Optional</span>
-</summary>
-<div class="arg-body">
-<p>Controls how column names are validated and repaired. Use <code>"check_unique"</code> (default) to error on duplicates, or alternatives like <code>"minimal"</code>, <code>"unique"</code>, and <code>"universal"</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">2</span>, <span class="at">.name_repair =</span> <span class="st">"unique"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p class="data-types">
-<strong>Data Types:</strong> <code>character</code> | <code>function</code> · Default: <code>“check_unique”</code>
-</p>
-</div>
-</details>
 </div>
 </section>
 <section id="examples" class="level2">
