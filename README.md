@@ -42,28 +42,54 @@ never used GitHub or Git before.
 If you just want to fix a typo or improve wording, you almost certainly want a
 file in `functions/` or `topics/`.
 
-### Editing a page (the easy way — in your browser)
+### How to edit the content
 
-1. Go to the repository on GitHub:
-   <https://github.com/CPDSE-EDUX/R_documentation>
-2. Open the file you want to change. For example, click `functions`, then
-   `round.qmd`.
+**Almost all of the content lives in the `.qmd` files** (Quarto files) in this
+repository — the pages under `functions/` and `topics/`, plus `index.qmd`,
+`glossary.qmd`, and `coding-conventions.qmd`. A `.qmd` file is a plain-text file
+that mixes ordinary writing with bits of R code. You do **not** edit the website
+(the HTML) directly: when a change is pushed to the repository, the `.qmd` files
+are automatically **rendered into HTML** and published to the live site.
+
+You can edit the content in two ways.
+
+**Option A — edit in your browser (no software to install)**
+
+1. Go to the repository: <https://github.com/CPDSE-EDUX/R_documentation>
+2. Open the `.qmd` file you want to change (e.g. click `functions`, then
+   `round.qmd`).
 3. Click the **pencil icon** (✏️ "Edit this file") near the top right.
-   - The first time, GitHub may ask you to make your own copy (a "fork"). Click
-     the green button to confirm — this is normal and safe.
-4. Make your changes in the text box. See the formatting tips below.
-5. Scroll down to the **"Commit changes"** box:
-   - Write a short note describing what you changed (e.g. *"Fix typo in round
-     example"*). This note is called a **commit message**.
-   - Leave the option to create a **pull request** selected if it's offered.
-6. Click the green **Commit changes** button.
+4. Make your changes in the text box (see the formatting tips below).
+5. Scroll down, write a short note describing your change (e.g. *"Fix typo in
+   round example"*), and click the green **Commit changes** button.
 
-A **pull request** is simply a request to add your changes to the main site. A
-maintainer reviews it and clicks "merge." Once merged, the website rebuilds
-automatically and your change goes live in a few minutes.
+**Option B — edit and preview locally (e.g. in RStudio)**
 
-> 💡 If you have permission to edit the repository directly, your change may go
-> live without a pull request. Either way, the steps above are the same.
+If you'd like to see exactly how your change looks *before* it goes online, you
+can edit the files on your own computer and render a preview. RStudio opens
+`.qmd` files directly and has a **Render** button that shows the page in a
+preview pane. See [For developers: building the site locally](#for-developers-building-the-site-locally)
+below for the setup and the `quarto preview` command, which live-reloads the
+site in your browser as you type.
+
+### Getting your changes online (commit, push, deploy)
+
+Editing a file is not enough on its own — you have to **save it back to the
+repository**. This is a two-step idea from Git:
+
+1. **Commit** — record your change with a short message describing it.
+2. **Push** — upload your commit to GitHub. (If you edit in the browser with
+   Option A, committing already does this for you; the "push" only applies when
+   you edit locally with Option B.)
+
+Once your change reaches the `main` branch, the site **rebuilds and deploys
+automatically**. This usually takes a few minutes. You can watch the progress
+(and see whether it succeeded) on the Actions page:
+
+**<https://github.com/CPDSE-EDUX/R_documentation/actions>**
+
+A green checkmark means your change is live; a red ✗ means the build failed and
+the previous version is still online.
 
 ### How the text is formatted
 
@@ -92,6 +118,97 @@ The safest way to learn the format is to **copy the style of an existing page**.
 Open `functions/round.qmd` alongside the page you're editing and mirror its
 structure.
 
+### Formatting reference
+
+Beyond plain Markdown, the pages use a handful of standard building blocks.
+Here are the ones you'll reach for most often.
+
+#### Callout boxes
+
+Callouts are the coloured, boxed notes used throughout the site. Five styles are
+available, each with its own colour and icon:
+
+| Syntax | Use it for |
+|---|---|
+| `::: {.callout-note}` | General information worth highlighting |
+| `::: {.callout-tip}` | Advice, best practice, a rule of thumb |
+| `::: {.callout-warning}` | Something the reader should be careful about |
+| `::: {.callout-important}` | A key rule that must not be missed |
+| `::: {.callout-caution}` | A milder "watch out" than warning |
+
+Write a callout with three colons to open and three colons to close. The line
+starting with `##` becomes its title (the title is optional):
+
+```markdown
+::: {.callout-tip}
+## Rule of thumb
+Store values at full precision and only round when printing.
+:::
+```
+
+**Making a callout collapsed (folded away by default).** Add
+`collapse="true"` so the box starts closed and the reader clicks the title to
+expand it — handy for optional detail:
+
+```markdown
+::: {.callout-note collapse="true"}
+## Why two different functions?
+This extra explanation is hidden until the reader clicks to open it.
+:::
+```
+
+Use `collapse="false"` to show a box that *can* be collapsed but starts open.
+
+#### Runnable vs. non-runnable code
+
+| Block | What it does |
+|---|---|
+| ```` ```{webr-r} ```` | R code the reader can **run and edit** live in the browser |
+| ```` ```r ```` | R code shown for reference only (not runnable) — use for install commands, `library()` calls, snippets you don't want executed |
+
+#### Collapsible cards (`<details>`)
+
+For longer content the pages use plain HTML `<details>` blocks, which render as a
+clickable heading that expands. Add the word `open` to the opening tag to have it
+start expanded. The site styles three named variants:
+
+- `topic-card` — the large expandable sections on topic pages
+- `arg-item` — one function argument in the "Argument Overview" list
+- `example-item` — one worked example in the "Examples" list
+
+```html
+<details class="topic-card" open>
+<summary>Section heading shown on the clickable bar</summary>
+<div class="topic-card-body">
+
+Normal Markdown content goes here.
+
+</div>
+</details>
+```
+
+> 💡 Leave a **blank line** after the opening `<div ...>` and before the closing
+> `</div>` — without it, the Markdown inside won't render.
+
+#### Other reusable pieces
+
+- **External source link** (the "Original Documentation ↗" button at the top of
+  each function page):
+
+  ```html
+  <div class="source-links">
+  <a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+  </div>
+  ```
+
+- **Tables** use standard Markdown pipes (`| col | col |`) — see any function
+  page for examples.
+- **Images** live in `assets/images/`. From a page inside `functions/` or
+  `topics/`, link them with a `../` prefix: `![Alt text](../assets/images/file.png)`.
+
+When in doubt, open an existing page that already has the element you want and
+copy its exact structure.
+
 ### Adding a brand-new function page
 
 1. Copy an existing file in `functions/` (e.g. `round.qmd`) and give it a new
@@ -103,11 +220,13 @@ structure.
 
 ### Will my change break the website?
 
-Don't worry — you can't break the live site by mistake:
+Don't worry — a mistake won't take the live site down:
 
-- Changes are reviewed before they go live (via the pull request).
-- If a file has a mistake that stops the site from building, the **old working
-  version stays online** until the problem is fixed. Nothing goes down.
+- If a file has an error that stops the site from building, the build simply
+  fails (a red ✗ on the [Actions page](https://github.com/CPDSE-EDUX/R_documentation/actions))
+  and the **old working version stays online** until the problem is fixed.
+- Previewing locally first (Option B above) lets you catch most mistakes before
+  they ever reach GitHub.
 
 ---
 
