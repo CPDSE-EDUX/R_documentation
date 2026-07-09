@@ -635,7 +635,7 @@
     "href": "glossary.html#p",
     "title": "Glossary",
     "section": "P",
-    "text": "P\n\nPackage\nA collection of extra functions that extends base R, such as tidyverse. Also called a library.\n\n\nPipe (%&gt;%)\nPasses output from one step directly into the next step. This is the tidyverse version of the pipe.\nA pipe lets R read the code from left to right:\nc(7.438, 1.256) %&gt;% round(1)\nfirst it makes the numbers 7.438 and 1.256, then it sends them into round(1) so both are rounded to 1 decimal place. The output is 7.4 and 1.3."
+    "text": "P\n\nPackage\nA collection of extra functions that extends base R, such as tidyverse. Also called a library.\n\n\nPipe (%&gt;%)\nPasses output from one step directly into the next step. This is the tidyverse version of the pipe.\nA pipe lets R read the code from left to right:\nc(7.438, 1.256) %&gt;% round(1)\nFirst it makes the numbers 7.438 and 1.256, then it sends them into round(1) so both are rounded to 1 decimal place. The output is 7.4 and 1.3."
   },
   {
     "objectID": "glossary.html#r",

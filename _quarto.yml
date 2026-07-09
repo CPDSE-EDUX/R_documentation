@@ -31,27 +31,7 @@ website:
           - text: "Visualization"
             href: topics/visualization.qmd
       - text: "Functions"
-        menu:
-          - text: "All Functions"
-            href: functions/index.qmd
-          - text: "---"
-          - text: "Import & Create"
-          - text: "read_csv( )"
-            href: functions/read-csv.qmd
-          - text: "tibble( )"
-            href: functions/tibble.qmd
-          - text: "---"
-          - text: "Transform"
-          - text: "mutate( )"
-            href: functions/mutate.qmd
-          - text: "---"
-          - text: "Report"
-          - text: "cat( )"
-            href: functions/cat.qmd
-          - text: "round( )"
-            href: functions/round.qmd
-          - text: "signif( )"
-            href: functions/signif.qmd
+        href: functions/index.qmd
       - text: Glossary
         href: glossary.qmd
       - text: Coding Conventions

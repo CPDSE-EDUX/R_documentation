@@ -177,11 +177,11 @@ h3 {
 body.function-reference-page h3 a,
 body.function-reference-page h3 strong {
   font-weight: 700;
-  color: $c-text;
+  color: $forest-green;
 }
 
 body.function-reference-page h3 a:hover {
-  color: $c-text-sec;
+  color: darken($forest-green, 10%);
 }
 
 body.glossary-page h3,
