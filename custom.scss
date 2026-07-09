@@ -571,6 +571,15 @@ details.arg-item {
 
 .quarto-code-links { display: none !important; }
 
+// ── Hidden data-loader cell ───────────────────────────────────────────────────
+// The shared `#| context: setup` chunk (see _data-setup.qmd) preloads CSVs into
+// webR's file system. Its code still runs — the JS evaluates setup cells eagerly,
+// independent of visibility — but we never want its "Loading package…" placeholder
+// box shown at the top of the page. Hide it outright.
+.qwebr-noninteractive-setup-area {
+  display: none !important;
+}
+
 // ── Interactive webR blocks — keep editor functional, match card framing ──────
 
 .qwebr-interactive-area {

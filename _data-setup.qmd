@@ -1,0 +1,14 @@
+```{webr-r}
+#| context: setup
+# Shared, hidden data loader.
+# Included at the top of any page that uses a dataset:  {{< include /_data-setup.qmd >}}
+# Runs once, silently, on page load and copies the site's CSVs into webR's
+# in-browser file system so chunks can open them by name, e.g. read_csv("capsules.csv").
+#
+# To add a new dataset: drop the CSV in assets/data/ and add its filename below.
+local({
+  base  <- "https://raw.githubusercontent.com/CPDSE-EDUX/R_documentation/refs/heads/main/assets/data/"
+  files <- c("capsules.csv", "dissolution_data_raw.csv")
+  for (f in files) download.file(paste0(base, f), f)
+})
+```

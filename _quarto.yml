@@ -88,8 +88,6 @@ webr:
   cell-options:
     warning: false
     message: false
-  files:
-    - assets/data/**
   show-startup-message: false
 
 format:
