@@ -49,7 +49,6 @@ po/*~
 rsconnect/
 
 /.quarto/
-.vscode/launch.json
-.vscode/settings.json
-.vscode/tasks.json
+.vscode/
 _site/
+.claude/
