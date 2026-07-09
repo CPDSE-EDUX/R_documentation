@@ -3,7 +3,7 @@
 An interactive R function reference for pharmaceutical sciences, produced by the
 **Center for Pharmaceutical Data Science Education (CPDSE)**.
 
-🌐 **Live website!: <https://cpdse-edux.github.io/R_documentation/>**
+🌐 **Website: <https://cpdse-edux.github.io/R_documentation/>**
 
 The site explains basic R functions (`read_csv()`, `mutate()`, `round()`, and
 more) with pharmacy-focused examples. Every example is runnable **directly in the
