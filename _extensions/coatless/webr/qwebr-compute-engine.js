@@ -181,12 +181,20 @@ globalThis.qwebrComputeEngine = async function(
             break processResultOutput;
         }
 
-        // Merge output streams of STDOUT and STDErr (messages and errors are combined.)
-        // Require both `warning` and `message` to be true to display `STDErr`.
+        // Merge output streams of STDOUT and STDErr.
+        // Keep startup/package chatter hidden when warning/message are false,
+        // but always surface actual errors from STDErr.
         const out = result.output
         .filter(
             evt => evt.type === "stdout" ||
-            ( evt.type === "stderr" && (options.warning === "true" && options.message === "true"))
+            (
+                evt.type === "stderr" &&
+                (
+                    options.warning === "true" ||
+                    options.message === "true" ||
+                    /^\s*Error\b/i.test(evt.data)
+                )
+            )
         )
         .map((evt, index) => {
             const className = `qwebr-output-code-${evt.type}`;
