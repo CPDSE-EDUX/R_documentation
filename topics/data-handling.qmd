@@ -12,8 +12,6 @@ First, you have to load the data.
 
 ```{webr-r}
 library(tidyverse)
-#library(dplyr)
-#library(tibble)
 
 capsules <- read_csv("/home/web_user/capsules.csv")
 
@@ -167,8 +165,7 @@ library(tidyverse)
 capsules <- read_csv("/home/web_user/capsules.csv")
 
 capsules %>%
-  mutate(ibu_mg = fill_mass_mg * 0.43) #%>%
-  #select(capsule_id, fill_mass_mg, ibu_mg, pct_label)
+  mutate(ibu_mg = fill_mass_mg * 0.43)
 ```
 
 ![Illustration of adding a column with newly calculated values](../assets/images/mutate_function.svg){width=100%}
