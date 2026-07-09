@@ -600,21 +600,21 @@
     "href": "glossary.html#f",
     "title": "Glossary",
     "section": "F",
-    "text": "F\n\nFunction\nA reusable block of code that does a specific task."
+    "text": "F\n\nFunction\nA reusable block of code that does a specific task.\n\n# A function to calculate the circumference of a circle\ncircumference &lt;- function(r) {\n 2 * pi * r\n}\n\n# Call the function with a radius of 5\ncircumference(5)"
   },
   {
     "objectID": "glossary.html#i",
     "href": "glossary.html#i",
     "title": "Glossary",
     "section": "I",
-    "text": "I\n\nIDE\nAn app for coding and running code, such as RStudio.\n\n\nInput\nData or values you give to R.\n\n\nInteger\nA whole number with no decimal part."
+    "text": "I\n\nIDE\nAn app for coding and running code, such as RStudio.\n\n\nImport\nBring data, functions, or packages into R so you can use them in your session. For example library(tidyverse) imports the tidyverse package, and read.csv(\"data.csv\") imports a CSV file into R.\n\n\nInput\nData or values you give to R.\n\n\nInstall\nAdd a package to your computer so you can load it into R later. For example, install.packages(\"tidyverse\") installs the tidyverse package. You only need to install a package once, but you must load it with library() in every new R session.\n\n\nInteger\nA whole number with no decimal part, such as 1 or 56."
   },
   {
     "objectID": "glossary.html#l",
     "href": "glossary.html#l",
     "title": "Glossary",
     "section": "L",
-    "text": "L\n\nLogical\nA value that is either TRUE or FALSE."
+    "text": "L\n\nLibrary\nIn R, another name for a package. In some contexts, it can also mean the folder where packages are installed.\n\n\nLogical\nA value that is either TRUE or FALSE."
   },
   {
     "objectID": "glossary.html#n",
@@ -628,14 +628,14 @@
     "href": "glossary.html#o",
     "title": "Glossary",
     "section": "O",
-    "text": "O\n\nOutput\nWhat R returns after running code, such as values, tables, plots, or messages."
+    "text": "O\n\nObject\nAnything you store in R, such as a vector, table, plot, or function result. Variables are objects with names.\n\n\nOutput\nWhat R returns after running code, such as values, tables, plots, or messages."
   },
   {
     "objectID": "glossary.html#p",
     "href": "glossary.html#p",
     "title": "Glossary",
     "section": "P",
-    "text": "P\n\nPackage\nA collection of extra functions that extends base R.\n\n\nPipe (%&gt;%)\nPasses output from one step directly into the next step."
+    "text": "P\n\nPackage\nA collection of extra functions that extends base R, such as tidyverse. Also called a library.\n\n\nPipe (%&gt;%)\nPasses output from one step directly into the next step. This is the tidyverse version of the pipe.\nA pipe lets R read the code from left to right:\nc(7.438, 1.256) %&gt;% round(1)\nfirst it makes the numbers 7.438 and 1.256, then it sends them into round(1) so both are rounded to 1 decimal place. The output is 7.4 and 1.3."
   },
   {
     "objectID": "glossary.html#r",
@@ -663,7 +663,7 @@
     "href": "glossary.html#v",
     "title": "Glossary",
     "section": "V",
-    "text": "V\n\nVariable\nA named container that stores a value for reuse.\n\n\nVector\nA sequence of values of the same type."
+    "text": "V\n\nVariable\nA named container that stores a value for reuse. Also called an object in R.\n\n\nVector\nA sequence of values of the same type. For example v &lt;- c(10, 20, 30) is a vector called v containing the integers 10, 20, and 30."
   },
   {
     "objectID": "glossary.html#w",

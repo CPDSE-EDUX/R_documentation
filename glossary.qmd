@@ -49,19 +49,38 @@ A message that means R could not run your code.
 
 ### Function
 A reusable block of code that does a specific task.
+```{r}
+#| output: false
+# A function to calculate the circumference of a circle
+circumference <- function(r) {
+ 2 * pi * r
+}
+
+# Call the function with a radius of 5
+circumference(5)
+```
 
 ## I {.glossary-letter}
 
 ### IDE
 An app for coding and running code, such as RStudio.
 
+### Import
+Bring data, functions, or packages into R so you can use them in your session. For example `library(tidyverse)` imports the tidyverse package, and `read.csv("data.csv")` imports a CSV file into R.
+
 ### Input
 Data or values you give to R.
 
+### Install
+Add a package to your computer so you can load it into R later. For example, `install.packages("tidyverse")` installs the tidyverse package. You only need to install a package once, but you must load it with `library()` in every new R session.
+
 ### Integer
-A whole number with no decimal part.
+A whole number with no decimal part, such as `1` or `56`.
 
 ## L {.glossary-letter}
+
+### Library
+In R, another name for a package. In some contexts, it can also mean the folder where packages are installed.
 
 ### Logical
 A value that is either `TRUE` or `FALSE`.
@@ -76,16 +95,28 @@ A number type that can include decimals.
 
 ## O {.glossary-letter}
 
+### Object
+Anything you store in R, such as a vector, table, plot, or function result. Variables are objects with names.
+
 ### Output
 What R returns after running code, such as values, tables, plots, or messages.
 
 ## P {.glossary-letter}
 
 ### Package
-A collection of extra functions that extends base R.
+A collection of extra functions that extends base R, such as `tidyverse`. Also called a library.
 
 ### Pipe (`%>%`)
-Passes output from one step directly into the next step.
+Passes output from one step directly into the next step. This is the tidyverse version of the pipe.
+
+
+A pipe lets R read the code from left to right:
+```
+c(7.438, 1.256) %>% round(1)
+```
+First it makes the numbers `7.438` and `1.256`, then it sends them into `round(1)` so both are rounded to 1 decimal place. The output is `7.4` and `1.3`.
+
+
 
 ## R {.glossary-letter}
 
@@ -111,10 +142,10 @@ A modern tidyverse version of a data frame.
 ## V {.glossary-letter}
 
 ### Variable
-A named container that stores a value for reuse.
+A named container that stores a value for reuse. Also called an object in R.
 
 ### Vector
-A sequence of values of the same type.
+A sequence of values of the same type. For example `v <- c(10, 20, 30)` is a vector called v containing the integers 10, 20, and 30.
 
 ## W {.glossary-letter}
 
