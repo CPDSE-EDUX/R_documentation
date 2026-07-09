@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cat( ) – Basic R for Pharmacy</title>
+<title>Getting Started – Basic R for Pharmacy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -404,7 +404,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"value <- 12.345678\n\n# Keep full precision in the stored variable,\n# but round to reporting precision when printing.\ncat(\"Label:\", signif(value, 4), \"unit\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Full-precision intermediate — do NOT round here\nstd_intercept <- 0.003\nstd_slope     <- 0.01420   # AU per µg/mL\nabsorbance    <- 0.445     # measured absorbance of sample\n\nC2_ug_ml <- (absorbance - std_intercept) / std_slope   # Beer–Lambert\n\n# Only round at the point of printing\ncat(\"Sample concentration:\", signif(C2_ug_ml, 3), \"µg/mL\\n\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(dplyr)\nlibrary(tibble)\n\nlabel_claim_mg    <- 75.0\nibu_per_mg_powder <- 0.43\n\ncapsules <- tibble(\n  fill_mass_mg = c(174.2, 174.4, 174.7, 174.0, 174.5, 174.3)\n) %>%\n  mutate(\n    ibu_mg    = fill_mass_mg * ibu_per_mg_powder,\n    pct_label = ibu_mg / label_claim_mg * 100\n  )\n\nX_bar_pct <- mean(capsules$pct_label)\ns_pct     <- sd(capsules$pct_label)\n\ncat(\"Mean content (X\\u0304):\", signif(X_bar_pct, 4), \"% of label claim\\n\")\ncat(\"Std deviation (s):\", signif(s_pct, 3),     \"%\\n\")\ncat(\"n:\", nrow(capsules), \"capsules\\n\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# EP 2.9.40 Stage 1: AV = |M - X̄| + k·s\nM    <- 100.0   # reference value (% label claim)\nk_s1 <- 2.4     # EP Table 2.9.40-1, Stage 1, n = 6\nL1   <- 15.0    # acceptance limit Stage 1 (%)\n\nX_bar_pct <- 98.4\ns_pct     <- 1.8\n\nAV_s1 <- abs(M - X_bar_pct) + k_s1 * s_pct\n\ncat(\"Acceptance value (AV):\", round(AV_s1, 2), \"\\n\")\ncat(\"Acceptance limit (L1):\", L1, \"\\n\")\ncat(\"Stage 1 result:\", ifelse(AV_s1 <= L1, \"PASS\", \"FAIL\"), \"\\n\")","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)\n\n# Default sep = \" \" (space between items)\ncat(\"Standards (µg/mL):\", conc_values_ug_ml, \"\\n\")\n\n# Comma-separated\ncat(\"Standards (µg/mL):\", conc_values_ug_ml, sep = \", \")\ncat(\"\\n\")","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"dose_mg     <- 500\nweight_kg   <- 70\ndose_per_kg <- dose_mg / weight_kg\n\ncat(\"Dose per kg:\", signif(dose_per_kg, 3), \"mg/kg\\n\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1661,7 +1661,7 @@ globalThis.qwebrExecuteCode = async function (
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed function-page quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1734,109 +1734,12 @@ globalThis.qwebrExecuteCode = async function (
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../functions/cat.html">Report</a></li><li class="breadcrumb-item"><a href="../functions/cat.html">cat( )</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
- <span class="menu-text">Import &amp; Create</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../functions/read-csv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">read_csv( )</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../functions/tibble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">tibble( )</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Transform</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../functions/mutate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">mutate( )</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Report</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../functions/cat.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">cat( )</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../functions/round.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">round( )</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../functions/signif.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">signif( )</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#required-library" id="toc-required-library" class="nav-link active" data-scroll-target="#required-library">Required Library</a></li>
-  <li><a href="#syntax" id="toc-syntax" class="nav-link" data-scroll-target="#syntax">Syntax</a></li>
-  <li><a href="#argument-overview" id="toc-argument-overview" class="nav-link" data-scroll-target="#argument-overview">Argument Overview</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
@@ -2124,10 +2027,10 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 }
 </script>
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../functions/cat.html">Report</a></li><li class="breadcrumb-item"><a href="../functions/cat.html">cat( )</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">cat( )</h1>
-<p class="subtitle lead">Print labelled results with units to the console. cat() is a base R function.</p>
+<h1 class="title">Getting Started</h1>
+<p class="subtitle lead">Set up R and RStudio, and run your first lines of code</p>
 </div>
 
 
@@ -2144,161 +2047,449 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<div class="source-links">
-<p><a class="source-link" href="https://rdrr.io/r/base/cat.html" target="_blank" rel="noopener">Original Documentation ↗</a></p>
+<details class="topic-card" open="">
+<summary>
+Installing the R Language and a Development Environment (IDE)
+</summary>
+<div class="topic-card-body">
+<p>To follow along locally you need two free pieces of software:</p>
+<ul>
+<li><strong>R</strong> — the language itself. Download from <a href="https://cran.r-project.org">cran.r-project.org</a>.</li>
+<li><strong>RStudio</strong> — the editor (IDE). Download from <a href="https://posit.co/download/rstudio-desktop">posit.co/download/rstudio-desktop</a>.</li>
+</ul>
+<p>Install R first, then RStudio.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<section id="required-library" class="level2">
-<h2 class="anchored" data-anchor-id="required-library">Required Library</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cat() is part of base R — no package installation needed</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-title-container flex-fill">
+No installation needed on this site
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Executable code blocks on this site run live in your browser via <a href="https://webr.r-wasm.org">webR</a>. Click <strong>Run Code</strong> to execute — no R or RStudio required.</p>
+</div>
+</div>
+<section id="the-rstudio-interface" class="level3">
+<h3 class="anchored" data-anchor-id="the-rstudio-interface">The RStudio interface</h3>
+<p>When you open RStudio you will see four panes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pane</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Source</strong> (top-left)</td>
+<td>Write and save R scripts (files you write your code in)</td>
+</tr>
+<tr class="even">
+<td><strong>Console</strong> (bottom-left)</td>
+<td>Run code and see output</td>
+</tr>
+<tr class="odd">
+<td><strong>Environment</strong> (top-right)</td>
+<td>See all objects currently in memory</td>
+</tr>
+<tr class="even">
+<td><strong>Files / Plots</strong> (bottom-right)</td>
+<td>Browse files, view plots, read help pages</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/images/RStudio_Panels.png" class="img-fluid figure-img"></p>
+<figcaption>RStudio Panels</figcaption>
+</figure>
+</div>
+<p><a href="https://www.youtube.com/watch?v=GEuuhg7NBko" target="_blank" rel="noopener">Watch: RStudio in 3 minutes (YouTube) ↗</a></p>
 </section>
-<section id="syntax" class="level2">
-<h2 class="anchored" data-anchor-id="syntax">Syntax</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="desc-item">
-<p><code>cat(...)</code> concatenates and prints its arguments to the console with no formatting. Unlike <code>print()</code>, it does not add quotes around character strings or display <code>[1]</code> index prefixes, making it ideal for producing clean, readable output.</p>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label:"</span>, value, <span class="st">"unit</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="desc-item">
-<p><code>cat("Label:", value, "unit\n")</code> is the standard pattern for reporting a named result with its unit. The <code>\n</code> at the end moves the cursor to a new line, creating line breaks. Useful for printing multiple results in a report.</p>
-</div>
+</details>
+<details class="topic-card">
+<summary>
+Libraries / Packages
+</summary>
+<div class="topic-card-body">
+<p><strong>Packages</strong> are bundles of extra functions that extend what R can do. You download them once from CRAN (R’s central repository) and they’re stored locally in your <strong>library</strong> folder. The packages used throughout this site are mostly part of the <a href="https://www.tidyverse.org">tidyverse</a>, a set of packages designed for data science.</p>
+<section id="installing-packages" class="level3">
+<h3 class="anchored" data-anchor-id="installing-packages">Installing packages</h3>
+<p>Install packages once from CRAN using <code>install.packages()</code>.</p>
+<p>You install a package when you need functions it provides. Most functions you will need in the beginning are included in the tidyverse, so you can usually just install the tidyverse:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You only need to do this once per computer. So instead of writing it in your script and run the install every time you run your script, you can also execute the install in the console.</p>
+</section>
+<section id="loading-packages" class="level3">
+<h3 class="anchored" data-anchor-id="loading-packages">Loading packages</h3>
+<p>At the top of every script, load the packages you need with <code>library()</code>. This tells R which installed packages to make available in the current session.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Coding convention — always label printed results
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Never print a bare variable name or call <code>print()</code> on a calculated value. Always use <code>cat()</code> with a descriptive label and the unit. A number without context is meaningless in a pharmaceutical report.</p>
+<p>Packages only need to be <strong>installed</strong> once, but must be <strong>loaded</strong> (<code>library()</code>) at the start of every new R session.</p>
 </div>
 </div>
 </section>
-<section id="argument-overview" class="level2">
-<h2 class="anchored" data-anchor-id="argument-overview">Argument Overview</h2>
-<p class="arg-intro">
-Required arguments must be included when using a function while optional arguments can be included on demand.
-</p>
-<div class="arg-section">
-<div class="collapse-toolbar">
-<button class="collapse-btn">
-Expand All
-</button>
-</div>
-<details class="arg-item">
-<summary>
-<code>…</code> — items to print <span class="arg-types">character | numeric | logical</span> <span class="arg-badge required">Required</span>
-</summary>
-<div class="arg-body">
-<p>One or more values to print, separated by commas. Items are coerced to character before printing. Common usage combines a text label, a computed value (wrapped in <code>signif()</code> or <code>round()</code>), and a unit string:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean fill mass:"</span>, <span class="fu">signif</span>(X_bar, <span class="dv">4</span>), <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Use <code>\n</code> (newline) as the last item so the next output starts on a fresh line.</p>
-<p class="data-types">
-<strong>Data Types:</strong> <code>character</code> | <code>numeric</code> | <code>logical</code> | <code>integer</code>
-</p>
 </div>
 </details>
-<details class="arg-item">
+<details class="topic-card">
 <summary>
-<code>sep</code> — separator between items <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span>
+Data
 </summary>
-<div class="arg-body">
-<p>A character string inserted between consecutive items. Default is a single space <code>" "</code>. Set <code>sep = ""</code> to print items with no gap, or <code>sep = ", "</code> for comma-separated lists.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, value, <span class="st">"mg</span><span class="sc">\n</span><span class="st">"</span>)          <span class="co"># default: space between each item</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="at">sep =</span> <span class="st">"-"</span>)          <span class="co"># prints: A-B-C</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p class="data-types">
-<strong>Data Types:</strong> <code>character</code> · Default: <code>” “</code>
-</p>
+<div class="topic-card-body">
+<p>Data is information that a computer can store and work with. It comes in different types — the most common ones you will encounter in R are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Example values</th>
+<th>R type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Numbers</td>
+<td><code>74.2</code>, <code>3.14</code></td>
+<td><code>numeric</code> / <code>double</code></td>
+</tr>
+<tr class="even">
+<td>Whole numbers</td>
+<td><code>1</code>, <code>6</code>, <code>100</code></td>
+<td><code>integer</code></td>
+</tr>
+<tr class="odd">
+<td>Text</td>
+<td><code>"PASS"</code>, <code>"batch_01"</code></td>
+<td><code>character</code></td>
+</tr>
+<tr class="even">
+<td>True/False</td>
+<td><code>TRUE</code>, <code>FALSE</code></td>
+<td><code>logical</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, decimal numbers use a <code>.</code> not a <code>,</code> — so three and a half is written <code>3.5</code>, not <code>3,5</code>.</p>
+</div>
+</div>
+<p>The type matters because it determines what you can do with a value. You can calculate the average of numbers, but not of text.</p>
+<p>In R, even a single value is stored as an object. When you have multiple values of the same type, they form a vector. And when you organize vectors into columns, you get a tibble — a modern version of a data frame with rows (observations) and columns (variables), similar to a table.</p>
+<p>You create an object by assigning a value to a name using <code>&lt;-</code>. On the left side of <code>&lt;-</code>you write the name of your object (any name you choose). On the right side you write the data you want to store in that object.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temperature <span class="ot">&lt;-</span> <span class="fl">22.5</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>capital_city <span class="ot">&lt;-</span> <span class="st">"Copenhagen"</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Multiple values of the same type form a vector:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cities <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Copenhagen"</span>, <span class="st">"Aarhus"</span>, <span class="st">"Odense"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>temperatures <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">22.5</span>, <span class="fl">19.3</span>, <span class="fl">21.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And when you organize vectors into columns, you get a tibble. Since a tibble is a function from the tidyverse, remember to load the library:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">city        =</span> cities,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature =</span> temperatures</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Object names must not contain spaces. Use _ instead, e.g.&nbsp;air_temperature. Choose meaningful object names that describe what is stored and, where relevant, include the unit. E.g., <code>dose_mg</code> instead of <code>value</code>.</p>
+</div>
+</div>
+<p>Data is read into R from files using functions like <a href="../functions/read-csv.html"><code>read_csv()</code></a>.</p>
+<p>Within RStudio, you can inspect your data objects in the Environment panel, or using</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(name_of_your_object)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </details>
-<details class="arg-item">
+<details class="topic-card">
 <summary>
-<code>file</code> — output destination <span class="arg-types">character | connection</span> <span class="arg-badge optional">Optional</span>
+Comments and Operations
 </summary>
-<div class="arg-body">
-<p>Where to send the output. Default <code>""</code> prints to the console. Pass a file path string (or an open connection) to write to a file instead.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Result:"</span>, <span class="fu">signif</span>(AV_s1, <span class="dv">4</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="st">"results.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p class="data-types">
-<strong>Data Types:</strong> <code>character</code> (file path) | <code>connection</code> · Default: <code>““</code> (console)
-</p>
-</div>
-</details>
-<details class="arg-item">
-<summary>
-<code>append</code> — append to file instead of overwriting <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span>
-</summary>
-<div class="arg-body">
-<p>Only relevant when <code>file</code> is a file path. If <code>TRUE</code>, new output is appended to the end of the file. If <code>FALSE</code> (default), the file is overwritten.</p>
-<p class="data-types">
-<strong>Data Types:</strong> <code>logical</code> · Default: <code>FALSE</code>
-</p>
-</div>
-</details>
-</div>
+<div class="topic-card-body">
+<section id="comments" class="level3">
+<h3 class="anchored" data-anchor-id="comments">Comments</h3>
+<p>Lines starting with <code>#</code> are comments — R ignores them when running code. Use comments to explain what your code does:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a comment — R will not execute this line</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dose_mg <span class="ot">&lt;-</span> <span class="dv">500</span>   <span class="co"># you can also add a comment after code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="examples" class="level2">
-<h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<div class="example-section">
-<div class="collapse-toolbar">
-<button class="collapse-btn">
-Expand All
-</button>
+<section id="operators" class="level3">
+<h3 class="anchored" data-anchor-id="operators">Operators</h3>
+<p>An operator is a symbol that performs an action on one or more values. They cover assignment (&lt;-), arithmetic (+, -, etc.), comparison (==, &gt;, etc.), and the pipe (%&gt;%).</p>
+</section>
+<section id="assignment-operator" class="level3">
+<h3 class="anchored" data-anchor-id="assignment-operator">Assignment operator</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;-</code></td>
+<td>Assign a value to a name</td>
+<td><code>x &lt;- 42</code></td>
+<td><code>x</code> now stores <code>42</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="arithmetic-operators" class="level3">
+<h3 class="anchored" data-anchor-id="arithmetic-operators">Arithmetic operators</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+<td><code>3 + 2</code></td>
+<td><code>5</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Subtraction</td>
+<td><code>10 - 4</code></td>
+<td><code>6</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplication</td>
+<td><code>5 * 3</code></td>
+<td><code>15</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+<td><code>20 / 4</code></td>
+<td><code>5</code></td>
+</tr>
+<tr class="odd">
+<td><code>^</code></td>
+<td>Exponentiation</td>
+<td><code>2 ^ 3</code></td>
+<td><code>8</code></td>
+</tr>
+<tr class="even">
+<td><code>%%</code></td>
+<td>Modulo (remainder)</td>
+<td><code>7 %% 3</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="comparison-operators" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-operators">Comparison operators</h3>
+<p>Used to test conditions — return <code>TRUE</code> or <code>FALSE</code>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>Equal to</td>
+<td><code>5 == 5</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>Not equal to</td>
+<td><code>5 != 3</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+<td><code>7 &gt; 3</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;</code></td>
+<td>Less than</td>
+<td><code>2 &lt; 1</code></td>
+<td><code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;=</code></td>
+<td>Greater or equal</td>
+<td><code>5 &gt;= 5</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td>Less or equal</td>
+<td><code>3 &lt;= 2</code></td>
+<td><code>FALSE</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pipe-operator" class="level3">
+<h3 class="anchored" data-anchor-id="pipe-operator">Pipe Operator</h3>
+<p>The pipe takes the output of one step and passes it as the input to the next — read it as “and then”. This allows you to chain multiple operations into a readable sequence without creating intermediate objects.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>%&gt;%</code></td>
+<td>Pass result to next function</td>
+<td><code>data %&gt;% filter(age &gt; 18)</code></td>
+<td>Filtered data frame containing entries where age is larger than 18</td>
+</tr>
+</tbody>
+</table>
+</section>
 </div>
-<details class="example-item">
+</details>
+<details class="topic-card">
 <summary>
-Rounding at print-time with <code>signif()</code>
+Computation
 </summary>
-<div class="example-body">
+<div class="topic-card-body">
+<p>In R, data and computation are kept separate. You first store your data in objects, and then write expressions that compute with those objects. This is different from working in Excel, where data and formulas are mixed together in the same cells. In R, your data stays fixed in its object — computation produces a new object, leaving the original unchanged.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dose_mg   <span class="ot">&lt;-</span> <span class="dv">500</span>      <span class="co"># data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">70</span>       <span class="co"># data</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dose_per_kg <span class="ot">&lt;-</span> dose_mg <span class="sc">/</span> weight_kg   <span class="co"># computation — dose_mg and weight_kg unchanged</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, it is possible to overwrite the content of objects if you assign a different value to an existing object.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">70</span>    <span class="co"># data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>weight_kg <span class="ot">&lt;-</span> <span class="dv">80</span>    <span class="co"># overwrites the previous value — weight_kg is now 80</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can add or transform columns in a tibble using <a href="../functions/mutate.html"><code>mutate()</code></a>:</p>
+<p>A common application case for computing is when you calculate new values and add them as new columns in an existing tibble using <a href="../functions/mutate.html"><code>mutate()</code></a>. Assume <code>capsules</code> is a tibble you loaded before containing the column <code>fill_mass_mg</code>. You now add two columns <code>ibu_mg</code> and <code>pct_label</code> which store newly computed values.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add computed columns to an existing tibble</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>capsules <span class="ot">&lt;-</span> capsules <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ibu_mg    =</span> fill_mass_mg <span class="sc">*</span> <span class="fl">0.43</span>,        <span class="co"># active ingredient</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_label =</span> ibu_mg <span class="sc">/</span> <span class="fl">75.0</span> <span class="sc">*</span> <span class="dv">100</span>         <span class="co"># % of label claim</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>R is <strong>vectorised</strong> — operations apply to entire columns at once, with no need for loops.</p>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Output
+</summary>
+<div class="topic-card-body">
+<p>R produces output in three main ways: printing to the console, viewing objects, and plotting.</p>
+<section id="print-to-console" class="level3">
+<h3 class="anchored" data-anchor-id="print-to-console">Print to Console</h3>
+<p>Use <a href="../functions/cat.html"><code>cat()</code></a> to print labelled results with units to the console:</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.</p>
-</div>
-</details>
-<details class="example-item">
-<summary>
-Print a single analytical result with units
-</summary>
-<div class="example-body">
-<div id="qwebr-insertion-location-2"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="example-item">
-<summary>
-Print multiple results from a content uniformity assay
-</summary>
-<div class="example-body">
-<div id="qwebr-insertion-location-3"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="example-item">
-<summary>
-Print a pass/fail acceptance criterion
-</summary>
-<div class="example-body">
-<div id="qwebr-insertion-location-4"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-<details class="example-item">
-<summary>
-<code>sep</code> — custom separator between items
-</summary>
-<div class="example-body">
-<div id="qwebr-insertion-location-5"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</div>
-</details>
-</div>
-
-
+<p>Always round at the point of printing — store intermediate values at full precision:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ✓ Correct</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pct_label <span class="ot">&lt;-</span> ibu_mg <span class="sc">/</span> label_claim_mg <span class="sc">*</span> <span class="dv">100</span>       <span class="co"># full precision stored</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Label claim:"</span>, <span class="fu">round</span>(pct_label, <span class="dv">2</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)  <span class="co"># round only when printing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use <a href="../functions/signif.html"><code>signif()</code></a> for concentrations and masses (significant figures), and <a href="../functions/round.html"><code>round()</code></a> for percentages and fixed decimal places.</p>
 </section>
+<section id="view-objects" class="level3">
+<h3 class="anchored" data-anchor-id="view-objects">View Objects</h3>
+<p>Inspect a data object in the RStudio <strong>Environment panel</strong>, or open it as a table:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(your_data_object)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="plotting" class="level3">
+<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
+<p>Visualize data using <code>ggplot2</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(your_data_object, <span class="fu">aes</span>(<span class="at">x =</span> fill_mass_mg, <span class="at">y =</span> pct_label)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Plots appear in the <strong>Plots panel</strong> in RStudio.</p>
+</section>
+</div>
+</details>
+<details class="topic-card">
+<summary>
+Workflow
+</summary>
+<div class="topic-card-body">
+<p>A typical R script follows this pattern:</p>
+<ol type="1">
+<li><strong>Load packages</strong> — <code>library()</code></li>
+<li><strong>Read data</strong> — <code>read_csv()</code></li>
+<li><strong>Compute</strong> — <code>mutate()</code>, <code>filter()</code>, <code>summarise()</code>, <code>mean()</code>, <code>sd()</code></li>
+<li><strong>Output</strong> — <code>cat()</code>, <code>View()</code>, <code>ggplot()</code></li>
+</ol>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Load packages</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Read data</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>capsules <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/capsule_weights.csv"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Compute</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>capsules <span class="ot">&lt;-</span> capsules <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill_mass_mg =</span> mass_filled_mg <span class="sc">-</span> mass_empty_mg,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ibu_mg       =</span> fill_mass_mg <span class="sc">*</span> ibu_per_mg_powder,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_label    =</span> ibu_mg <span class="sc">/</span> label_claim_mg <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Output</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean % label claim:"</span>, <span class="fu">round</span>(<span class="fu">mean</span>(capsules<span class="sc">$</span>pct_label), <span class="dv">2</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"SD:"</span>,                 <span class="fu">round</span>(<span class="fu">sd</span>(capsules<span class="sc">$</span>pct_label),   <span class="dv">2</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Browse the <a href="../functions/index.html">function reference</a> to see all covered functions.</p>
+</div>
+</details>
+
+
 
 </main> <!-- /main -->
 <script>

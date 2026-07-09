@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-fbbad6c1ec35f15638aa5e4b19c54818.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-da9444a6611785a297c0e52b0e4a3709.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-646ded02768cacc1516a74da045e15db.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1691,7 +1691,7 @@ globalThis.qwebrExecuteCode = async function (
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-topics-covered">    
         <li>
-    <a class="dropdown-item" href="../getting-started.html">
+    <a class="dropdown-item" href="../topics/getting-started.html">
  <span class="dropdown-text">Getting Started</span></a>
   </li>  
         <li><hr class="dropdown-divider"></li>
@@ -1709,47 +1709,10 @@ globalThis.qwebrExecuteCode = async function (
   </li>  
     </ul>
   </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-functions" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Functions</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-functions">    
-        <li>
-    <a class="dropdown-item" href="../functions/index.html">
- <span class="dropdown-text">All Functions</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../functions/index.html"> 
+<span class="menu-text">Functions</span></a>
   </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Import &amp; Create</li>
-        <li>
-    <a class="dropdown-item" href="../functions/read-csv.html">
- <span class="dropdown-text">read_csv( )</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../functions/tibble.html">
- <span class="dropdown-text">tibble( )</span></a>
-  </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Transform</li>
-        <li>
-    <a class="dropdown-item" href="../functions/mutate.html">
- <span class="dropdown-text">mutate( )</span></a>
-  </li>  
-        <li><hr class="dropdown-divider"></li>
-        <li class="dropdown-header">Report</li>
-        <li>
-    <a class="dropdown-item" href="../functions/cat.html">
- <span class="dropdown-text">cat( )</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../functions/round.html">
- <span class="dropdown-text">round( )</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../functions/signif.html">
- <span class="dropdown-text">signif( )</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
     <a class="nav-link" href="../glossary.html"> 
 <span class="menu-text">Glossary</span></a>
@@ -2164,7 +2127,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../functions/read-csv.html">Import &amp; Create</a></li><li class="breadcrumb-item"><a href="../functions/read-csv.html">read_csv( )</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">read_csv( )</h1>
-<p class="subtitle lead">Import a CSV file as a <a href="../functions/tibble.html">tibble</a>. read_csv() and read_csv2() are from the readr package, which is part of the tidyverse.</p>
+<p class="subtitle lead">Import a CSV file as a <a href="../functions/tibble.html">tibble</a> data frame. read_csv() and read_csv2() are from the readr package, which is part of the tidyverse.</p>
 </div>
 
 
@@ -2195,7 +2158,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="desc-item">
-<p><code>read_csv("file_name.csv")</code> reads a comma-separated values (.csv) file and returns a <a href="../functions/tibble.html">tibble</a>. Use if your file uses commas as column separators and dots for decimals.</p>
+<p><code>read_csv("file_name.csv")</code> reads a comma-separated values (.csv) file and returns a <a href="../functions/tibble.html">tibble</a> data frame. Use if your file uses commas as column separators and dots for decimals.</p>
 <p><img src="../assets/images/csv_to_tibble.svg" class="img-fluid"></p>
 </div>
 <hr>
@@ -2203,7 +2166,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv2</span>(file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="desc-item">
-<p><code>read_csv2("file_name.csv")</code> reads a .csv file that uses semicolons as column separators and commas for decimals. Note that the created tibble uses dots for decimals.</p>
+<p><code>read_csv2("file_name.csv")</code> reads a .csv file that uses semicolons as column separators and commas for decimals. Note that the created tibble data frame uses dots for decimals.</p>
 <p><img src="../assets/images/csv2_to_tibble.svg" class="img-fluid"></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -2489,6 +2452,1276 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+</script>
+
+<div id="cpdse-chatbot" class="cpdse-chatbot" data-open="false">
+
+  <button id="cpdse-chat-launcher" class="cpdse-chat-launcher" type="button" aria-controls="cpdse-chat-panel" aria-expanded="false">
+
+    <span class="cpdse-chat-launcher-dot" aria-hidden="true"></span>
+
+    Ask Chatbot
+
+  </button>
+
+
+
+  <section id="cpdse-chat-panel" class="cpdse-chat-panel" role="dialog" aria-modal="false" aria-label="R coding tutor chat" aria-hidden="true">
+
+    <header class="cpdse-chat-header">
+
+      <div>
+
+        <h2>R Tutor</h2>
+
+        <p>Help with basic R questions.</p>
+
+      </div>
+
+      <button id="cpdse-chat-close" class="cpdse-chat-close" type="button" aria-label="Close chat">×</button>
+
+    </header>
+
+
+
+    <p class="cpdse-chat-wakeup-note" id="cpdse-chat-wakeup-note">
+
+      I am a prototype. First reply may take up to a minute while the assistant wakes up.
+
+    </p>
+
+
+
+    <div id="cpdse-chat-messages" class="cpdse-chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+
+
+
+    <form id="cpdse-chat-form" class="cpdse-chat-form">
+
+      <label class="cpdse-visually-hidden" for="cpdse-chat-input">Type your R question</label>
+
+      <textarea id="cpdse-chat-input" class="cpdse-chat-input" rows="2" maxlength="1000" placeholder="Ask something like: How do I read a CSV in R?"></textarea>
+
+      <button id="cpdse-chat-send" class="cpdse-chat-send" type="submit">Send</button>
+
+    </form>
+
+
+
+    <p class="cpdse-chat-privacy">No login. Messages stay in your browser session.</p>
+
+  </section>
+
+</div>
+
+
+
+<style>
+
+  :root {
+
+    --cpdse-chat-forest: #3c5e3e;
+
+    --cpdse-chat-sage: #5f7d61;
+
+    --cpdse-chat-gold: #e4d7a1;
+
+    --cpdse-chat-ivory: #f6f1dc;
+
+    --cpdse-chat-ink: #1f2a21;
+
+    --cpdse-chat-soft: #f8f7f1;
+
+    --cpdse-chat-border: rgba(60, 94, 62, 0.2);
+
+    --cpdse-chat-shadow: 0 14px 40px rgba(15, 28, 18, 0.18);
+
+    --cpdse-chat-radius: 18px;
+
+  }
+
+
+
+  .cpdse-chatbot {
+
+    position: fixed;
+
+    right: 18px;
+
+    bottom: 18px;
+
+    z-index: 1100;
+
+    font-family: "Segoe UI", "Noto Sans", Arial, sans-serif;
+
+  }
+
+
+
+  .cpdse-chat-launcher {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border: 1px solid rgba(228, 215, 161, 0.5);
+
+    border-radius: 999px;
+
+    padding: 10px 16px;
+
+    background: linear-gradient(145deg, var(--cpdse-chat-forest), #2f4d31);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    box-shadow: var(--cpdse-chat-shadow);
+
+    cursor: pointer;
+
+    transition: transform 160ms ease, box-shadow 160ms ease;
+
+  }
+
+
+
+  .cpdse-chat-launcher:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 18px 34px rgba(15, 28, 18, 0.24);
+
+  }
+
+
+
+  .cpdse-chat-launcher-dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 999px;
+
+    background: var(--cpdse-chat-gold);
+
+    box-shadow: 0 0 0 4px rgba(228, 215, 161, 0.2);
+
+  }
+
+
+
+  .cpdse-chat-panel {
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 58px;
+
+    width: min(390px, calc(100vw - 24px));
+
+    height: min(560px, calc(100vh - 100px));
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: linear-gradient(180deg, #fffdf7 0%, #ffffff 42%);
+
+    border: 1px solid var(--cpdse-chat-border);
+
+    border-radius: var(--cpdse-chat-radius);
+
+    box-shadow: var(--cpdse-chat-shadow);
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(10px) scale(0.985);
+
+    transform-origin: bottom right;
+
+    transition: opacity 180ms ease, transform 180ms ease;
+
+  }
+
+
+
+  .cpdse-chatbot[data-open="true"] .cpdse-chat-panel {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: translateY(0) scale(1);
+
+  }
+
+
+
+  .cpdse-chat-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 14px 14px 10px;
+
+    background: linear-gradient(180deg, #f5f8f3 0%, #ffffff 100%);
+
+    border-bottom: 1px solid var(--cpdse-chat-border);
+
+  }
+
+
+
+  .cpdse-chat-header h2 {
+
+    margin: 0;
+
+    padding: 0;
+
+    border: 0;
+
+    color: var(--cpdse-chat-ink);
+
+    font-size: 16px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+
+  }
+
+
+
+  .cpdse-chat-header p {
+
+    margin: 4px 0 0;
+
+    color: #4f6652;
+
+    font-size: 12px;
+
+    line-height: 1.35;
+
+  }
+
+
+
+  .cpdse-chat-close {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #4f6652;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    padding: 0 8px;
+
+    cursor: pointer;
+
+  }
+
+
+
+  .cpdse-chat-wakeup-note {
+
+    margin: 10px 12px 0;
+
+    padding: 8px 10px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    color: #3f563f;
+
+    background: #f5f1dc;
+
+    border: 1px solid #e5dab2;
+
+  }
+
+
+
+  .cpdse-chat-messages {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 12px;
+
+    background:
+
+      radial-gradient(circle at 15% -20%, rgba(169, 187, 170, 0.2), transparent 36%),
+
+      radial-gradient(circle at 95% 0%, rgba(228, 215, 161, 0.3), transparent 30%),
+
+      #ffffff;
+
+  }
+
+
+
+  .cpdse-chat-message {
+
+    max-width: 92%;
+
+    margin-bottom: 10px;
+
+    padding: 10px 12px;
+
+    border-radius: 12px;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+
+    word-wrap: break-word;
+
+  }
+
+
+
+  .cpdse-chat-message-user {
+
+    margin-left: auto;
+
+    background: var(--cpdse-chat-forest);
+
+    color: #ffffff;
+
+    border-bottom-right-radius: 4px;
+
+  }
+
+
+
+  .cpdse-chat-message-assistant {
+
+    margin-right: auto;
+
+    background: var(--cpdse-chat-soft);
+
+    color: #1f2a21;
+
+    border: 1px solid rgba(60, 94, 62, 0.18);
+
+    border-bottom-left-radius: 4px;
+
+  }
+
+
+
+  .cpdse-chat-message pre {
+
+    margin: 8px 0 2px;
+
+    border-radius: 10px;
+
+    background: #f0f3eb;
+
+    border: 1px solid rgba(60, 94, 62, 0.2);
+
+    padding: 10px;
+
+    overflow-x: auto;
+
+    white-space: pre;
+
+  }
+
+
+
+  .cpdse-chat-message code {
+
+    font-family: "Consolas", "Menlo", "Courier New", monospace;
+
+    font-size: 12px;
+
+    color: #1c3b1f;
+
+  }
+
+
+
+  .cpdse-chat-message-thinking {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+  }
+
+
+
+  .cpdse-chat-spinner {
+
+    width: 13px;
+
+    height: 13px;
+
+    border: 2px solid rgba(60, 94, 62, 0.25);
+
+    border-top-color: var(--cpdse-chat-forest);
+
+    border-radius: 50%;
+
+    animation: cpdse-chat-spin 1s linear infinite;
+
+  }
+
+
+
+  .cpdse-chat-form {
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    border-top: 1px solid var(--cpdse-chat-border);
+
+    background: #fffefb;
+
+  }
+
+
+
+  .cpdse-chat-input {
+
+    resize: none;
+
+    min-height: 42px;
+
+    max-height: 120px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(60, 94, 62, 0.28);
+
+    padding: 9px 10px;
+
+    font: inherit;
+
+    color: #213025;
+
+    background: #ffffff;
+
+  }
+
+
+
+  .cpdse-chat-send {
+
+    align-self: end;
+
+    border: 1px solid #355436;
+
+    border-radius: 10px;
+
+    background: #3c5e3e;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    padding: 8px 12px;
+
+    cursor: pointer;
+
+  }
+
+
+
+  .cpdse-chat-privacy {
+
+    margin: 0;
+
+    padding: 0 12px 10px;
+
+    font-size: 11px;
+
+    color: #5e6f60;
+
+    background: #fffefb;
+
+  }
+
+
+
+  .cpdse-visually-hidden {
+
+    position: absolute;
+
+    width: 1px;
+
+    height: 1px;
+
+    padding: 0;
+
+    margin: -1px;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+  }
+
+
+
+  .cpdse-chatbot button:focus-visible,
+
+  .cpdse-chatbot textarea:focus-visible {
+
+    outline: 3px solid rgba(228, 215, 161, 0.9);
+
+    outline-offset: 2px;
+
+  }
+
+
+
+  @media (max-width: 700px) {
+
+    .cpdse-chatbot {
+
+      right: 10px;
+
+      left: 10px;
+
+      bottom: 10px;
+
+    }
+
+
+
+    .cpdse-chat-launcher {
+
+      margin-left: auto;
+
+    }
+
+
+
+    .cpdse-chat-panel {
+
+      right: 0;
+
+      left: 0;
+
+      width: auto;
+
+      height: min(74vh, 560px);
+
+      bottom: 58px;
+
+      transform-origin: bottom center;
+
+    }
+
+  }
+
+
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .cpdse-chat-panel,
+
+    .cpdse-chat-launcher {
+
+      transition: none;
+
+    }
+
+
+
+    .cpdse-chat-spinner {
+
+      animation: none;
+
+    }
+
+  }
+
+
+
+  @keyframes cpdse-chat-spin {
+
+    to {
+
+      transform: rotate(360deg);
+
+    }
+
+  }
+
+</style>
+
+
+
+<script>
+
+  (function () {
+
+    var API_URL = "https://sarahmit-r-docs-chatbot.hf.space/gradio_api/call/chat";
+
+    var API_MODE = "gradio_call";
+
+    var REQUEST_TIMEOUT_MS = 90000;
+
+    var MAX_HISTORY_TURNS = 6;
+
+
+
+    var root = document.getElementById("cpdse-chatbot");
+
+    if (!root) return;
+
+
+
+    var launcher = document.getElementById("cpdse-chat-launcher");
+
+    var panel = document.getElementById("cpdse-chat-panel");
+
+    var closeBtn = document.getElementById("cpdse-chat-close");
+
+    var form = document.getElementById("cpdse-chat-form");
+
+    var input = document.getElementById("cpdse-chat-input");
+
+    var sendBtn = document.getElementById("cpdse-chat-send");
+
+    var messagesEl = document.getElementById("cpdse-chat-messages");
+
+    var wakeNote = document.getElementById("cpdse-chat-wakeup-note");
+
+
+
+    var messages = [];
+
+    var hasRequestedOnce = false;
+
+
+
+    function setOpen(isOpen) {
+
+      root.setAttribute("data-open", String(isOpen));
+
+      launcher.setAttribute("aria-expanded", String(isOpen));
+
+      panel.setAttribute("aria-hidden", String(!isOpen));
+
+      if (isOpen) {
+
+        input.focus();
+
+      }
+
+    }
+
+
+
+    function escapeHtml(text) {
+
+      return String(text)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/\"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+
+    function formatAssistantText(text) {
+
+      var raw = String(text || "");
+
+      var parts = raw.split(/```[a-zA-Z]*\n?|```/g);
+
+      if (parts.length === 1) {
+
+        return "<p>" + escapeHtml(raw).replace(/\n/g, "<br>") + "</p>";
+
+      }
+
+
+
+      var html = "";
+
+      for (var i = 0; i < parts.length; i += 1) {
+
+        if (!parts[i]) continue;
+
+        if (i % 2 === 1) {
+
+          html += "<pre><code>" + escapeHtml(parts[i].trim()) + "</code></pre>";
+
+        } else {
+
+          html += "<p>" + escapeHtml(parts[i]).replace(/\n/g, "<br>") + "</p>";
+
+        }
+
+      }
+
+      return html;
+
+    }
+
+
+
+    function appendMessage(role, content, opts) {
+
+      var options = opts || {};
+
+      var wrap = document.createElement("div");
+
+      wrap.className = "cpdse-chat-message cpdse-chat-message-" + role;
+
+      if (options.id) wrap.id = options.id;
+
+
+
+      if (options.thinking) {
+
+        wrap.innerHTML = "<span class=\"cpdse-chat-message-thinking\"><span class=\"cpdse-chat-spinner\" aria-hidden=\"true\"></span><span>Thinking...</span></span>";
+
+      } else if (role === "assistant") {
+
+        wrap.innerHTML = formatAssistantText(content);
+
+      } else {
+
+        wrap.innerHTML = "<p>" + escapeHtml(content).replace(/\n/g, "<br>") + "</p>";
+
+      }
+
+
+
+      messagesEl.appendChild(wrap);
+
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    }
+
+
+
+    function removeById(id) {
+
+      var el = document.getElementById(id);
+
+      if (el && el.parentNode) {
+
+        el.parentNode.removeChild(el);
+
+      }
+
+    }
+
+
+
+    function collectStrings(value, out) {
+
+      if (typeof value === "string") {
+
+        out.push(value);
+
+        return;
+
+      }
+
+      if (Array.isArray(value)) {
+
+        for (var i = 0; i < value.length; i += 1) {
+
+          collectStrings(value[i], out);
+
+        }
+
+        return;
+
+      }
+
+      if (value && typeof value === "object") {
+
+        var keys = Object.keys(value);
+
+        for (var j = 0; j < keys.length; j += 1) {
+
+          collectStrings(value[keys[j]], out);
+
+        }
+
+      }
+
+    }
+
+
+
+    function extractReply(payload) {
+
+      if (typeof payload === "string") return payload;
+
+      if (!payload) return "";
+
+
+
+      if (payload.reply && typeof payload.reply === "string") return payload.reply;
+
+      if (payload.answer && typeof payload.answer === "string") return payload.answer;
+
+      if (payload.output && typeof payload.output === "string") return payload.output;
+
+
+
+      if (Array.isArray(payload) && payload.length > 0) {
+
+        var last = payload[payload.length - 1];
+
+        if (typeof last === "string") return last;
+
+      }
+
+
+
+      var found = [];
+
+      collectStrings(payload, found);
+
+      found = found.filter(function (x) {
+
+        return x && x.trim();
+
+      });
+
+      if (!found.length) return "";
+
+      found.sort(function (a, b) {
+
+        return b.length - a.length;
+
+      });
+
+      return found[0];
+
+    }
+
+
+
+    function buildShortHistory() {
+
+      var turns = [];
+
+      var currentUser = null;
+
+
+
+      for (var i = 0; i < messages.length; i += 1) {
+
+        var m = messages[i];
+
+        if (m.role === "user") {
+
+          currentUser = m.content;
+
+        } else if (m.role === "assistant" && currentUser) {
+
+          turns.push([currentUser, m.content]);
+
+          currentUser = null;
+
+        }
+
+      }
+
+
+
+      if (turns.length > MAX_HISTORY_TURNS) {
+
+        return turns.slice(turns.length - MAX_HISTORY_TURNS);
+
+      }
+
+      return turns;
+
+    }
+
+
+
+    async function fetchWithTimeout(url, options, timeoutMs) {
+
+      var controller = new AbortController();
+
+      var timer = setTimeout(function () {
+
+        controller.abort();
+
+      }, timeoutMs);
+
+
+
+      var merged = Object.assign({}, options || {}, { signal: controller.signal });
+
+      try {
+
+        return await fetch(url, merged);
+
+      } finally {
+
+        clearTimeout(timer);
+
+      }
+
+    }
+
+
+
+    async function requestViaJsonEndpoint(message, history) {
+
+      var response = await fetchWithTimeout(
+
+        API_URL,
+
+        {
+
+          method: "POST",
+
+          headers: { "Content-Type": "application/json" },
+
+          body: JSON.stringify({ message: message, history: history })
+
+        },
+
+        REQUEST_TIMEOUT_MS
+
+      );
+
+
+
+      if (!response.ok) {
+
+        throw new Error("Request failed with status " + response.status);
+
+      }
+
+
+
+      var payload = await response.json();
+
+      var reply = extractReply(payload);
+
+      if (!reply) {
+
+        throw new Error("No assistant reply in response.");
+
+      }
+
+      return reply;
+
+    }
+
+
+
+    async function requestViaGradioCall(message, history) {
+
+      var callResponse = await fetchWithTimeout(
+
+        API_URL,
+
+        {
+
+          method: "POST",
+
+          headers: { "Content-Type": "application/json" },
+
+          body: JSON.stringify({ data: [message, history] })
+
+        },
+
+        REQUEST_TIMEOUT_MS
+
+      );
+
+
+
+      if (!callResponse.ok) {
+
+        throw new Error("Call request failed with status " + callResponse.status);
+
+      }
+
+
+
+      var callPayload = await callResponse.json();
+
+      if (!callPayload.event_id) {
+
+        throw new Error("Missing event_id from Gradio call response.");
+
+      }
+
+
+
+      var resultUrl = API_URL + "/" + encodeURIComponent(callPayload.event_id);
+
+      var resultResponse = await fetchWithTimeout(resultUrl, { method: "GET" }, REQUEST_TIMEOUT_MS);
+
+      if (!resultResponse.ok) {
+
+        throw new Error("Result request failed with status " + resultResponse.status);
+
+      }
+
+
+
+      var streamText = await resultResponse.text();
+
+      var lines = streamText.split(/\r?\n/);
+
+      var reply = "";
+
+
+
+      for (var i = 0; i < lines.length; i += 1) {
+
+        var line = lines[i];
+
+        if (!line || line.indexOf("data:") !== 0) continue;
+
+        var jsonPart = line.slice(5).trim();
+
+        if (!jsonPart || jsonPart === "[DONE]") continue;
+
+
+
+        try {
+
+          var parsed = JSON.parse(jsonPart);
+
+          var candidate = extractReply(parsed);
+
+          if (candidate) reply = candidate;
+
+        } catch (err) {
+
+          // Skip lines that are not JSON payloads.
+
+        }
+
+      }
+
+
+
+      if (!reply) {
+
+        throw new Error("Could not parse a reply from Gradio result stream.");
+
+      }
+
+
+
+      return reply;
+
+    }
+
+
+
+    async function getAssistantReply(message) {
+
+      var history = buildShortHistory();
+
+      if (API_MODE === "json") {
+
+        return requestViaJsonEndpoint(message, history);
+
+      }
+
+      return requestViaGradioCall(message, history);
+
+    }
+
+
+
+    async function handleSend(text) {
+
+      var question = String(text || "").trim();
+
+      if (!question) return;
+
+
+
+      appendMessage("user", question);
+
+      messages.push({ role: "user", content: question });
+
+
+
+      input.value = "";
+
+      input.focus();
+
+      sendBtn.disabled = true;
+
+      var thinkingId = "cpdse-chat-thinking";
+
+      appendMessage("assistant", "", { thinking: true, id: thinkingId });
+
+
+
+      if (!hasRequestedOnce) {
+
+        hasRequestedOnce = true;
+
+      } else if (wakeNote) {
+
+        wakeNote.style.display = "none";
+
+      }
+
+
+
+      try {
+
+        var reply = await getAssistantReply(question);
+
+        removeById(thinkingId);
+
+        appendMessage("assistant", reply);
+
+        messages.push({ role: "assistant", content: reply });
+
+      } catch (error) {
+
+        removeById(thinkingId);
+
+        var errorText = "I could not reach the tutor just now. Please try again in a few seconds.";
+
+        if (String(error && error.name) === "AbortError") {
+
+          errorText = "The request timed out while waiting for the assistant. Please try again.";
+
+        }
+
+        appendMessage("assistant", errorText);
+
+        messages.push({ role: "assistant", content: errorText });
+
+      } finally {
+
+        sendBtn.disabled = false;
+
+      }
+
+    }
+
+
+
+    launcher.addEventListener("click", function () {
+
+      setOpen(root.getAttribute("data-open") !== "true");
+
+    });
+
+
+
+    closeBtn.addEventListener("click", function () {
+
+      setOpen(false);
+
+      launcher.focus();
+
+    });
+
+
+
+    form.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      handleSend(input.value);
+
+    });
+
+
+
+    input.addEventListener("keydown", function (event) {
+
+      if (event.key === "Enter" && !event.shiftKey) {
+
+        event.preventDefault();
+
+        handleSend(input.value);
+
+      }
+
+    });
+
+
+
+    document.addEventListener("keydown", function (event) {
+
+      if (event.key === "Escape" && root.getAttribute("data-open") === "true") {
+
+        setOpen(false);
+
+        launcher.focus();
+
+      }
+
+    });
+
+
+
+    appendMessage(
+
+      "assistant",
+
+      "Hi, I am your R Tutor. Ask me a small R coding question and I will explain with a simple example."
+
+    );
+
+  })();
 
 </script>
 

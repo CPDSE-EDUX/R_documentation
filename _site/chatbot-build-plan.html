@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Basic R for Pharmacy</title>
+<title>chatbot-build-plan – Basic R for Pharmacy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -148,135 +148,221 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#build-plan-free-ai-coding-help-chatbot-for-a-quarto-github-pages-site" id="toc-build-plan-free-ai-coding-help-chatbot-for-a-quarto-github-pages-site" class="nav-link active" data-scroll-target="#build-plan-free-ai-coding-help-chatbot-for-a-quarto-github-pages-site">Build Plan: Free AI Coding-Help Chatbot for a Quarto GitHub Pages Site</a>
+  <ul class="collapse">
+  <li><a href="#goal" id="toc-goal" class="nav-link" data-scroll-target="#goal">Goal</a></li>
+  <li><a href="#hard-constraints-do-not-violate" id="toc-hard-constraints-do-not-violate" class="nav-link" data-scroll-target="#hard-constraints-do-not-violate">Hard constraints (do not violate)</a></li>
+  <li><a href="#architecture-two-pieces" id="toc-architecture-two-pieces" class="nav-link" data-scroll-target="#architecture-two-pieces">Architecture (two pieces)</a></li>
+  <li><a href="#part-1-backend-hugging-face-space" id="toc-part-1-backend-hugging-face-space" class="nav-link" data-scroll-target="#part-1-backend-hugging-face-space">Part 1 — Backend: Hugging Face Space</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model">Model</a></li>
+  <li><a href="#system-prompt-bake-this-into-every-request" id="toc-system-prompt-bake-this-into-every-request" class="nav-link" data-scroll-target="#system-prompt-bake-this-into-every-request">System prompt (bake this into every request)</a></li>
+  <li><a href="#api-behavior" id="toc-api-behavior" class="nav-link" data-scroll-target="#api-behavior">API behavior</a></li>
+  <li><a href="#files-to-produce-for-the-space" id="toc-files-to-produce-for-the-space" class="nav-link" data-scroll-target="#files-to-produce-for-the-space">Files to produce for the Space</a></li>
+  <li><a href="#deliverables-for-part-1" id="toc-deliverables-for-part-1" class="nav-link" data-scroll-target="#deliverables-for-part-1">Deliverables for Part 1</a></li>
+  </ul></li>
+  <li><a href="#part-2-frontend-chat-widget-in-the-quarto-site" id="toc-part-2-frontend-chat-widget-in-the-quarto-site" class="nav-link" data-scroll-target="#part-2-frontend-chat-widget-in-the-quarto-site">Part 2 — Frontend: chat widget in the Quarto site</a>
+  <ul class="collapse">
+  <li><a href="#how-it-gets-onto-every-page" id="toc-how-it-gets-onto-every-page" class="nav-link" data-scroll-target="#how-it-gets-onto-every-page">How it gets onto every page</a></li>
+  <li><a href="#widget-uiux-requirements" id="toc-widget-uiux-requirements" class="nav-link" data-scroll-target="#widget-uiux-requirements">Widget UI/UX requirements</a></li>
+  <li><a href="#visual-design-direction" id="toc-visual-design-direction" class="nav-link" data-scroll-target="#visual-design-direction">Visual design direction</a></li>
+  <li><a href="#wiring-to-the-backend" id="toc-wiring-to-the-backend" class="nav-link" data-scroll-target="#wiring-to-the-backend">Wiring to the backend</a></li>
+  <li><a href="#files-to-produce-for-part-2" id="toc-files-to-produce-for-part-2" class="nav-link" data-scroll-target="#files-to-produce-for-part-2">Files to produce for Part 2</a></li>
+  <li><a href="#deliverables-for-part-2" id="toc-deliverables-for-part-2" class="nav-link" data-scroll-target="#deliverables-for-part-2">Deliverables for Part 2</a></li>
+  </ul></li>
+  <li><a href="#part-3-integration-deployment-steps-write-these-out-explicitly" id="toc-part-3-integration-deployment-steps-write-these-out-explicitly" class="nav-link" data-scroll-target="#part-3-integration-deployment-steps-write-these-out-explicitly">Part 3 — Integration &amp; deployment steps (write these out explicitly)</a></li>
+  <li><a href="#testing-checklist-the-other-ai-should-confirm-all-of-these" id="toc-testing-checklist-the-other-ai-should-confirm-all-of-these" class="nav-link" data-scroll-target="#testing-checklist-the-other-ai-should-confirm-all-of-these">Testing checklist (the other AI should confirm all of these)</a></li>
+  <li><a href="#known-tradeoffs-to-keep-in-mind-state-these-to-the-user-dont-hide-them" id="toc-known-tradeoffs-to-keep-in-mind-state-these-to-the-user-dont-hide-them" class="nav-link" data-scroll-target="#known-tradeoffs-to-keep-in-mind-state-these-to-the-user-dont-hide-them">Known tradeoffs to keep in mind (state these to the user, don’t hide them)</a></li>
+  <li><a href="#output-format-requested-from-the-building-ai" id="toc-output-format-requested-from-the-building-ai" class="nav-link" data-scroll-target="#output-format-requested-from-the-building-ai">Output format requested from the building AI</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
-<section id="basic-r-for-pharmacy" class="level1 hero-banner">
-<h1>Basic R for Pharmacy</h1>
-<p>R for pharmaceutical sciences practicals. Written for learners in plain language, tidyverse style, and with pharmacy examples.</p>
-<p><a href="./topics/getting-started.html" class="hero-btn">Get Started</a> <a href="./functions/index.html" class="hero-btn secondary">Browse Functions</a></p>
+<section id="build-plan-free-ai-coding-help-chatbot-for-a-quarto-github-pages-site" class="level1">
+<h1>Build Plan: Free AI Coding-Help Chatbot for a Quarto GitHub Pages Site</h1>
+<section id="goal" class="level2">
+<h2 class="anchored" data-anchor-id="goal">Goal</h2>
+<p>Add a collapsible/popup AI chat widget to an existing Quarto-built website hosted on GitHub Pages. The widget helps beginners (mostly pharmacy students) with simple R coding questions. The whole system must be <strong>completely free</strong> — no API costs, no paid hosting, no credit card required.</p>
 </section>
-<section id="topics-covered" class="level2">
-<h2 class="anchored" data-anchor-id="topics-covered">Topics covered</h2>
-<div class="card-grid">
-<a href="./topics/getting-started.html" class="feature-card">
-<div class="card-icon">
-🚀
-</div>
-<h3 class="anchored">
-Getting Started
-</h3>
-<p>
-Set up R and RStudio, and run your very first lines of code.
-</p>
-</a> <a href="./topics/data-handling.html" class="feature-card">
-<div class="card-icon">
-📂
-</div>
-<h3 class="anchored">
-Data Handling
-</h3>
-<p>
-Import spreadsheets, tidy messy data, and select the rows and columns you need.
-</p>
-</a> <a href="./topics/visualization.html" class="feature-card">
-<div class="card-icon">
-📈
-</div>
-<h3 class="anchored">
-Visualization
-</h3>
-<p>
-Create plots with ggplot2.
-</p>
-</a> <a href="./topics/descriptive-stats.html" class="feature-card">
-<div class="card-icon">
-📊
-</div>
-<h3 class="anchored">
-Descriptive Statistics
-</h3>
-<p>
-Summarise your data: means, medians, standard deviations, and more.
-</p>
-</a> <a href="#" class="feature-card" style="display:none">
-<div class="card-icon">
-🔬
-</div>
-<h3 class="anchored">
-Hypothesis Testing
-</h3>
-<p>
-t-tests, chi-square, and Mann–Whitney tests for clinical data.
-</p>
-</a> <a href="#" class="feature-card" style="display:none">
-<div class="card-icon">
-📐
-</div>
-<h3 class="anchored">
-Regression
-</h3>
-<p>
-Understand dose–response relationships with linear and logistic regression.
-</p>
-</a><p><a href="#" class="feature-card" style="display:none"></a></p>
-</div>
+<section id="hard-constraints-do-not-violate" class="level2">
+<h2 class="anchored" data-anchor-id="hard-constraints-do-not-violate">Hard constraints (do not violate)</h2>
+<ul>
+<li><strong>$0 total cost.</strong> No paid API keys, no paid tiers, no card-required signups.</li>
+<li><strong>GitHub Pages is static only.</strong> It serves HTML/CSS/JS. It cannot run a backend, so the model must be hosted elsewhere and called from the browser.</li>
+<li><strong>HTTPS everywhere.</strong> GitHub Pages is served over HTTPS, so the browser will block calls to any non-HTTPS (<code>http://</code>) backend (mixed-content error). The backend endpoint must be HTTPS.</li>
+<li><strong>Beginner-friendly output.</strong> The assistant targets people new to coding. Answers should be short, patient, use simple language, and give small runnable R examples. It should explain <em>why</em>, not just hand over code.</li>
+<li><strong>Low/occasional traffic.</strong> Built for a class of students asking occasional questions, not high concurrency.</li>
+</ul>
+</section>
+<section id="architecture-two-pieces" class="level2">
+<h2 class="anchored" data-anchor-id="architecture-two-pieces">Architecture (two pieces)</h2>
+<ol type="1">
+<li><strong>Backend</strong> — a Hugging Face Space (free CPU tier) that hosts a small open-weight instruction model and exposes it as an HTTPS API endpoint.</li>
+<li><strong>Frontend</strong> — a floating chat widget (plain HTML/CSS/JS) injected site-wide into the Quarto site, which calls the backend endpoint.</li>
+</ol>
+<p>Chosen backend: <strong>Hugging Face Spaces</strong>, because it is free, requires no server administration, and provides an HTTPS endpoint automatically. Accept its main tradeoff: free Spaces sleep after inactivity, so the first request after idle takes ~30–60s to “wake.” This is acceptable for occasional student use, but the widget UI must handle it gracefully (see UX requirements).</p>
 <hr>
 </section>
-<section id="how-to-read-a-function-page" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-read-a-function-page">How to read a function page</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Section</th>
-<th>What you’ll find</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Required Library</strong></td>
-<td>What library is needed to use the function</td>
-</tr>
-<tr class="even">
-<td><strong>Syntax</strong></td>
-<td>How to use the function</td>
-</tr>
-<tr class="odd">
-<td><strong>Argument Overview</strong></td>
-<td>Relevant arguments explained</td>
-</tr>
-<tr class="even">
-<td><strong>Examples</strong></td>
-<td>Examples for how to use the function with different arguments</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Run Code Online
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Many code blocks on this site are <strong>interactive</strong>. Click <strong>Run Code</strong> to execute them right here in your browser — no R or RStudio installation needed.</p>
-</div>
-</div>
+<section id="part-1-backend-hugging-face-space" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-backend-hugging-face-space">Part 1 — Backend: Hugging Face Space</h2>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<ul>
+<li>Create a free Hugging Face account and a new <strong>Space</strong>.</li>
+<li>SDK: <strong>Gradio</strong> (gives a built-in HTTPS API endpoint and a simple way to run the model on the free CPU tier).</li>
+<li>Hardware: <strong>free CPU basic tier</strong> (no GPU, ~16GB RAM). Do not select any paid hardware.</li>
+</ul>
+</section>
+<section id="model" class="level3">
+<h3 class="anchored" data-anchor-id="model">Model</h3>
+<ul>
+<li>Use a small instruction-tuned coding model that runs on CPU within the free tier’s memory, e.g.&nbsp;<strong><code>Qwen/Qwen2.5-Coder-1.5B-Instruct</code></strong> (good at basic R/Python, small enough for CPU).</li>
+<li>If it is too slow or too large in practice, fall back to an even smaller instruct model (e.g.&nbsp;a ~0.5B–1B instruct model). Keep the model swappable via a single variable.</li>
+<li>Load the model with the <code>transformers</code> library. Use the tokenizer’s chat template to format messages.</li>
+</ul>
+</section>
+<section id="system-prompt-bake-this-into-every-request" class="level3">
+<h3 class="anchored" data-anchor-id="system-prompt-bake-this-into-every-request">System prompt (bake this into every request)</h3>
+<p>The model must always be steered with a system prompt along these lines (reword as needed, keep the intent): &gt; You are a friendly tutor helping beginners — mostly pharmacy students — learn to code in R. Assume the user knows very little. Explain simply and patiently, avoid jargon (or define it when unavoidable), and keep answers short. When you show code, give small, complete, runnable R snippets and briefly explain what each part does and why. If a question is ambiguous, ask one short clarifying question. Prefer base R and common beginner packages. Do not overwhelm the user.</p>
+</section>
+<section id="api-behavior" class="level3">
+<h3 class="anchored" data-anchor-id="api-behavior">API behavior</h3>
+<ul>
+<li>Expose an endpoint that accepts the user’s message (and ideally short conversation history) and returns the assistant’s reply as text.</li>
+<li>Prepend the system prompt and format the full message list with the chat template before generation.</li>
+<li>Keep generation parameters modest (limited max new tokens, e.g.&nbsp;~256–512) to keep CPU responses reasonably fast.</li>
+<li><strong>Enable CORS</strong> so the browser on the GitHub Pages domain is allowed to call the Space. The response must permit the site’s origin (either <code>*</code> or the specific GitHub Pages origin). This is essential — without it the browser blocks the call.</li>
+<li>Handle concurrent/duplicate requests safely; it’s fine to keep it simple given low traffic.</li>
+</ul>
+</section>
+<section id="files-to-produce-for-the-space" class="level3">
+<h3 class="anchored" data-anchor-id="files-to-produce-for-the-space">Files to produce for the Space</h3>
+<ul>
+<li><code>app.py</code> — loads the model + tokenizer, defines the system prompt, defines a chat function, exposes it via Gradio with the API enabled and CORS allowed.</li>
+<li><code>requirements.txt</code> — pin the needed libraries (<code>transformers</code>, <code>torch</code> CPU build, <code>gradio</code>, and any tokenizer deps).</li>
+<li><code>README.md</code> — the Space metadata header (SDK, etc.) plus a one-line description.</li>
+</ul>
+</section>
+<section id="deliverables-for-part-1" class="level3">
+<h3 class="anchored" data-anchor-id="deliverables-for-part-1">Deliverables for Part 1</h3>
+<ul>
+<li>The three files above, ready to paste into a new Gradio Space.</li>
+<li>The exact <strong>API endpoint URL/format</strong> the frontend should call, with an example request and example response payload, so the frontend can be wired to it without guessing.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="part-2-frontend-chat-widget-in-the-quarto-site" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-frontend-chat-widget-in-the-quarto-site">Part 2 — Frontend: chat widget in the Quarto site</h2>
+<section id="how-it-gets-onto-every-page" class="level3">
+<h3 class="anchored" data-anchor-id="how-it-gets-onto-every-page">How it gets onto every page</h3>
+<ul>
+<li>Quarto supports injecting raw HTML site-wide. Use an <strong><code>include-after-body</code></strong> entry in <code>_quarto.yml</code> pointing to a small HTML partial (e.g.&nbsp;<code>chat-widget.html</code>). This puts the widget on every page without editing individual <code>.qmd</code> files.</li>
+<li>All CSS and JS can live inside that single injected HTML file (self-contained), or be split into a <code>.css</code>/<code>.js</code> pair also referenced site-wide — pick the simplest option and state which.</li>
+</ul>
+</section>
+<section id="widget-uiux-requirements" class="level3">
+<h3 class="anchored" data-anchor-id="widget-uiux-requirements">Widget UI/UX requirements</h3>
+<ul>
+<li>A small <strong>floating button</strong> fixed in a screen corner (bottom-right is conventional). Clicking it toggles a <strong>collapsible chat panel</strong> open/closed.</li>
+<li>The panel contains: a scrollable message history, a text input, and a send button (Enter should also send).</li>
+<li>Show a clear <strong>“waking up / thinking…” state.</strong> Because the free Space can cold-start (~30–60s), the very first request may be slow. The UI must:
+<ul>
+<li>immediately show the user’s message,</li>
+<li>show a visible loading indicator,</li>
+<li>not appear frozen or broken during a long first response,</li>
+<li>ideally show a one-time note like “First reply may take up to a minute while the assistant wakes up.”</li>
+</ul></li>
+<li>Handle errors gracefully: if the request fails or times out, show a friendly retry message rather than nothing.</li>
+<li>Keep a short <strong>client-side conversation history</strong> and send it with each request so the assistant has context (cap the length to avoid oversized requests).</li>
+<li>Mobile-friendly and responsive; the panel should be usable on a phone. Respect basic accessibility: keyboard focus, visible focus states, and reduced-motion friendliness.</li>
+<li><strong>Do not collect or store personal data.</strong> No logins, no analytics on message content.</li>
+</ul>
+</section>
+<section id="visual-design-direction" class="level3">
+<h3 class="anchored" data-anchor-id="visual-design-direction">Visual design direction</h3>
+<ul>
+<li>The site targets pharmacy students learning R. Keep the widget clean, calm, and unintimidating — this audience is nervous about coding, so the tone (visual and written) should be reassuring, not “hacker terminal.”</li>
+<li>Match or complement the existing Quarto theme rather than clashing with it. Use readable type, comfortable spacing, and a restrained accent color. Avoid the generic “AI chatbot” default look where reasonable; make one small, tasteful distinctive choice (e.g.&nbsp;a friendly greeting line, a subtle pill-shaped launcher) rather than a templated bubble.</li>
+<li>Render code in replies in a monospace block so R snippets are readable.</li>
+</ul>
+</section>
+<section id="wiring-to-the-backend" class="level3">
+<h3 class="anchored" data-anchor-id="wiring-to-the-backend">Wiring to the backend</h3>
+<ul>
+<li>The JS <code>fetch</code>es the Hugging Face Space endpoint (the exact URL/format from Part 1), sends the message + short history, and appends the returned reply to the chat.</li>
+<li>Use a generous client-side timeout to accommodate cold starts.</li>
+</ul>
+</section>
+<section id="files-to-produce-for-part-2" class="level3">
+<h3 class="anchored" data-anchor-id="files-to-produce-for-part-2">Files to produce for Part 2</h3>
+<ul>
+<li><code>chat-widget.html</code> — the self-contained widget (markup + CSS + JS), with the backend URL clearly marked as a placeholder to fill in.</li>
+<li>The exact snippet to add to <code>_quarto.yml</code> under <code>format</code> → <code>html</code> → <code>include-after-body</code> (show where it goes).</li>
+<li>Any separate <code>.css</code>/<code>.js</code> files if you chose to split them.</li>
+</ul>
+</section>
+<section id="deliverables-for-part-2" class="level3">
+<h3 class="anchored" data-anchor-id="deliverables-for-part-2">Deliverables for Part 2</h3>
+<ul>
+<li>All widget files above.</li>
+<li>Clear instructions on where to put each file in the Quarto project and what to change in <code>_quarto.yml</code>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="part-3-integration-deployment-steps-write-these-out-explicitly" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-integration-deployment-steps-write-these-out-explicitly">Part 3 — Integration &amp; deployment steps (write these out explicitly)</h2>
+<ol type="1">
+<li>Create the Hugging Face Space, add the three backend files, and wait for it to build/start.</li>
+<li>Confirm the Space’s API endpoint works (give a copy-paste test, e.g.&nbsp;a <code>curl</code> or browser-console <code>fetch</code> example).</li>
+<li>Paste the endpoint URL into the widget’s placeholder.</li>
+<li>Add <code>chat-widget.html</code> to the Quarto project and register it in <code>_quarto.yml</code> via <code>include-after-body</code>.</li>
+<li><code>quarto render</code>, then push to the GitHub Pages branch/repo.</li>
+<li>Load the live site, open the widget, and test a real R beginner question end-to-end (including the cold-start case).</li>
+</ol>
+</section>
+<section id="testing-checklist-the-other-ai-should-confirm-all-of-these" class="level2">
+<h2 class="anchored" data-anchor-id="testing-checklist-the-other-ai-should-confirm-all-of-these">Testing checklist (the other AI should confirm all of these)</h2>
+<ul>
+<li>Widget appears on every page and toggles open/closed.</li>
+<li>A question round-trips to the model and a reply appears.</li>
+<li>Cold-start (first request after idle) is handled with a visible loading state, not a frozen UI.</li>
+<li>CORS is correctly configured (no browser console CORS/mixed-content errors).</li>
+<li>Works on mobile and via keyboard.</li>
+<li>Answers are beginner-appropriate, short, and R-focused (system prompt is doing its job).</li>
+<li>Nothing in the stack requires payment or a credit card.</li>
+</ul>
+</section>
+<section id="known-tradeoffs-to-keep-in-mind-state-these-to-the-user-dont-hide-them" class="level2">
+<h2 class="anchored" data-anchor-id="known-tradeoffs-to-keep-in-mind-state-these-to-the-user-dont-hide-them">Known tradeoffs to keep in mind (state these to the user, don’t hide them)</h2>
+<ul>
+<li>Free CPU inference is <strong>slow</strong> compared to hosted APIs; expect several seconds per reply even when warm, and up to ~a minute on cold start.</li>
+<li>A 1.5B model is <strong>noticeably weaker</strong> than a frontier model. It’s fine for basic R syntax, common errors, and simple examples, but will struggle with complex or subtle questions. That’s an acceptable tradeoff for $0 and this audience; note it so expectations are set.</li>
+<li>If usage grows or speed becomes a problem, the migration path is: move the backend to an always-on free VM (e.g.&nbsp;Oracle Cloud free tier) running Ollama, keeping the exact same frontend widget — only the endpoint URL changes.</li>
+</ul>
+</section>
+<section id="output-format-requested-from-the-building-ai" class="level2">
+<h2 class="anchored" data-anchor-id="output-format-requested-from-the-building-ai">Output format requested from the building AI</h2>
+<p>Provide, in order: (1) the backend files with brief explanations, (2) the exact API endpoint details, (3) the frontend widget file(s), (4) the <code>_quarto.yml</code> change, (5) step-by-step deployment instructions, (6) confirmation against the testing checklist. Keep code complete and copy-pasteable, with placeholders clearly marked.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
