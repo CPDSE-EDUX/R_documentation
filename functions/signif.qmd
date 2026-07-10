@@ -3,20 +3,23 @@ title: "signif( )"
 subtitle: "Round to a given number of significant figures. signif() is a base R function."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://rdrr.io/r/base/Round.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 </div>
+
+## Required Library
+```r
+# signif() is part of base R — no package installation needed
+```
 
 ::: {.callout-tip collapse="true"}
 ## When to use round() vs. signif()
 Use `round()` when a **fixed number of decimal places** is required — percentages reported to 2 d.p., pH to 2 d.p., temperatures to 1 d.p.
 Use `signif()` for analytical concentrations and masses where **significant figures** reflect instrument precision.
 :::
-
-## Required Library
-```r
-# signif() is part of base R — no package installation needed
-```
 
 ## Syntax
 
@@ -99,7 +102,7 @@ A significant figure is any digit from the first non-zero digit onward.
 <summary>Reporting an analytical concentration</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 # UV–Vis: calculate ibuprofen concentration from absorbance
 std_intercept <- 0.003     # y-intercept of calibration curve
 std_slope     <- 0.01420   # slope (AU per µg/mL)
@@ -117,7 +120,7 @@ cat("Sample concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
 <summary>Comparing <code>signif()</code> to the raw value</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 x <- 31.18765
 
 signif(x, 1)   # 1 sig fig: 30
@@ -133,7 +136,7 @@ signif(x, 5)   # 5 sig figs: 31.188
 <summary>Works the same for very small and very large numbers</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 # Sig figs count from the first non-zero digit
 signif(0.0004512, 2)    # 0.00045 — first sig fig is the 4
 signif(158400, 3)       # 158000
@@ -148,7 +151,7 @@ signif(0.10002, 3)      # 0.100
 When used inside `cat()` with a vector, `signif()` applies to every element.
 For adding a rounded column to a tibble, use `mutate()` — but only if the rounded value itself is the final deliverable (e.g., a formatted report column), not if it will be used in further calculations.
 
-```{webr-r}
+```{webr}
 library(tibble)
 
 conc_values_ug_ml <- c(2.4837, 5.0124, 9.9841, 20.0152, 39.8760)
@@ -163,7 +166,7 @@ cat("Concentrations (µg/mL):", signif(conc_values_ug_ml, 3), "\n")
 <summary><code>signif()</code> vs <code>round()</code> — which to use?</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 x <- 0.003418
 
 # signif — 3 sig figs regardless of decimal position

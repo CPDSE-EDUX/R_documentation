@@ -1,0 +1,14 @@
+```{webr}
+#| include: false
+#| autorun: true
+# Site-wide webR session defaults. This hidden cell runs automatically on page
+# load (autorun) and renders nothing (include: false). It is pulled in via an
+# include shortcode on every page with interactive cells, right after the
+# quarto-live _knitr.qmd include. (Do not write the include shortcode literally
+# in this file - Quarto expands include shortcodes even inside code blocks,
+# which makes this file include itself recursively.)
+options(
+  readr.show_col_types = FALSE,   # quiet read_csv() column-spec message
+  dplyr.summarise.inform = FALSE  # quiet summarise() grouping message
+)
+```

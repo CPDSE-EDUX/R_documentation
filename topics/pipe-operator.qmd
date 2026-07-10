@@ -4,6 +4,9 @@ subtitle: "Read and write data workflows from left to right with clear, step-by-
 toc: false
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <details class="topic-card" open>
 <summary>What the pipe means</summary>
 <div class="topic-card-body">
@@ -51,7 +54,7 @@ Start with a very small example so the pattern is clear.
 
 ### No pipe
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 x <- c(3.14159, 2.71828, 1.41421)
@@ -61,7 +64,7 @@ round(signif(x, 3), 2)
 
 ### With pipe
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 x <- c(3.14159, 2.71828, 1.41421)
@@ -84,7 +87,7 @@ Now compare a realistic multi-step data workflow.
 
 ### No pipe (nested calls)
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -104,7 +107,7 @@ arrange(
 
 ### With pipe (step-by-step flow)
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(

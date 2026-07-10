@@ -3,6 +3,9 @@ title: "coef( )"
 subtitle: "Extract model coefficients. coef() is a generic function in base R (stats package)."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/coef.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://www.rdocumentation.org/packages/stats/topics/coef" target="_blank" rel="noopener">R Documentation ↗</a>
@@ -81,7 +84,7 @@ For many everyday `lm()` uses, you do not need to set any extra arguments.
 <summary>Extract intercept and slope from an lm() model</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -105,7 +108,7 @@ cat("Slope:    ", signif(slope, 4), "\n")
 <summary>Access coefficients by name</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -131,7 +134,7 @@ cat("Slope (named):    ", signif(slope, 4), "\n")
 <summary>Use coef() values to draw a regression line in ggplot</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -164,7 +167,7 @@ ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
 <summary>Compare coef() with summary() coefficient table</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(

@@ -47,14 +47,14 @@ Round numbers to a fixed number of decimal places.
 
 ## S {.glossary-letter}
 
+### **[signif( )](signif.qmd)**
+Round numbers to a chosen number of significant figures.
+
 ### **[summarise( )](summarise.qmd)**
 Create compact summary tables from a data frame or grouped data frame.
 
 ### **[summary( )](summary.qmd)**
 Produce a compact summary of vectors, data frames, and model objects.
-
-### **[signif( )](signif.qmd)**
-Round numbers to a chosen number of significant figures.
 
 ## T {.glossary-letter}
 

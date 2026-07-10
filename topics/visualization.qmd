@@ -5,6 +5,9 @@ toc: false
 engine: knitr
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <details class="topic-card" open>
 <summary>Build a plot step by step</summary>
 <div class="topic-card-body">
@@ -26,7 +29,7 @@ Need inspiration for chart types?
 ## Step 1: Start with an empty plot object
 This creates a blank ggplot canvas with no data or layers.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 ggplot()
@@ -35,7 +38,7 @@ ggplot()
 ## Step 2: Add data and map variables to axes with `aes()`
 This connects the `standards` dataset and maps concentration to x and absorbance to y.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 # Make a test data set about UV calibration standards
@@ -51,7 +54,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance))
 ## Step 3: Add points so the data is visible
 This draws one point per observation using the x and y mappings.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 standards <- tibble(
@@ -66,7 +69,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 ## Step 4: Add labels
 This gives the plot a clear title and descriptive axis labels.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 standards <- tibble(
@@ -86,7 +89,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 ## Step 5: Apply a theme to finalize the plot
 This applies `theme_classic()` to set a clean visual style.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 standards <- tibble(
@@ -113,7 +116,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 
 Use `geom_point()` to plot individual observations as points.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 standards <- tibble(
@@ -133,7 +136,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 
 Add a regression line with `geom_smooth()`:
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 standards <- tibble(
@@ -162,7 +165,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 Use `geom_line()` for data over time.
 Map `colour` to a grouping variable to show multiple batches.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 dissolution <- tibble(
@@ -194,7 +197,7 @@ ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
 ## Bar chart
 Use a bar chart `geom_col()` and `geom_errorbar()` to visualize summarized values (one value per category).
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -228,7 +231,7 @@ ggplot(mean_by_batch, aes(x = batch, y = mean_pct)) +
 ## Histogram
 Use a histogram `geom_histogram()` to visualize the distribution of many raw numeric observations.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -274,7 +277,7 @@ How to read a boxplot:
 
 The example below includes a low outlier in Batch A and a high outlier in Batch B so you can see how outliers are shown.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -318,7 +321,7 @@ If you map alpha inside `aes(...)`, transparency can vary by a variable.
 ## Use color to encode groups
 Map `colour` (points/lines) or `fill` (bars/boxes) to a variable when group identity matters. Try to use color with varying brightness (e.g. one darker and one lighter) or different hues (e.g. blue vs. orange) to make groups easy to distinguish. Varying brightness is often better for colorblind accessibility than varying hue.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 dissolution <- tibble(
@@ -344,7 +347,7 @@ ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
 ## Use color and shape to encode groups
 To make your chart accessible for people with colorblindness, you can also map `shape` to a grouping variable.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 dissolution <- tibble(
@@ -371,7 +374,7 @@ labs(
 ## Use transparency to reduce clutter
 Lower `alpha` makes dense regions visible without hiding sparse points.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)
@@ -410,7 +413,7 @@ Quick guidelines:
 
 Overplotting happens when many points overlap so heavily that patterns become hard to see.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)
@@ -438,7 +441,7 @@ You can fight this in many ways:
 ## 1) Use transparency (`alpha`)
 Lower opacity reveals where points pile up.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)
@@ -464,7 +467,7 @@ ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
 ## 2) Add jitter
 Jitter spreads overlapping points so you can see repeated values.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)
@@ -504,7 +507,7 @@ Lower abstraction shows individual observations; higher abstraction summarizes t
 ## Low abstraction: points (raw observations)
 You can see every data point, which makes outliers and clusters easy to spot.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)
@@ -530,7 +533,7 @@ ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
 ## Medium abstraction: violin plot (distribution shape)
 You lose exact points but gain a quick view of distribution shape and spread.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)
@@ -556,7 +559,7 @@ ggplot(dense_capsules, aes(x = batch, y = pct_label, fill = batch)) +
 ## High abstraction: box plot (summary statistics)
 You mainly see median, quartiles, and whiskers; individual points are hidden.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 set.seed(42)

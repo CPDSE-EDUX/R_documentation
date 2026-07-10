@@ -4,6 +4,9 @@ subtitle: "Simple linear regression with lm(): coefficients, R-squared, predicti
 toc: false
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <details class="topic-card" open>
 <summary>Fit a simple linear regression with lm()</summary>
 <div class="topic-card-body">
@@ -27,7 +30,7 @@ In R, that same model is written as `y ~ x` inside `lm()`.
 So `lm(absorbance ~ conc_ug_ml, data = calibration)` means:
 "Model absorbance as a linear function of concentration."
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -65,7 +68,7 @@ For a simple model `y ~ x`, indexing works like this:
 Here we use `[[ ]]` because we want the plain number for calculations and `cat()` output.
 :::
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -97,7 +100,7 @@ cat("Slope:    ", signif(slope, 4), "\n")
 
 R^2^, used to interpret goodness of fit, can be assessed from `summary(model)` and extracted as `$r.squared`.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -123,7 +126,7 @@ If you run `summary(model)` and scroll through the output, you also get:
 
 For full output, run:
 
-```{webr-r}
+```{webr}
 # Optional: print the full regression report
 summary(model)
 ```
@@ -142,7 +145,7 @@ Equivalent formulas:
 - `y ~ 0 + x`
 - `y ~ x - 1`
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -180,7 +183,7 @@ If your model is `absorbance ~ conc_ug_ml`, that means:
 - input: new concentration values
 - output: predicted absorbance values
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -210,7 +213,7 @@ $$
 
 where `a` is slope and `b` is intercept.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -242,7 +245,7 @@ sample_abs %>%
 
 `geom_smooth(method = "lm")` fits and draws the line directly.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -263,7 +266,7 @@ ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
 
 Use `geom_abline()` if you want to draw a line from known coefficients.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -296,7 +299,7 @@ ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
 
 You can extract slope/intercept and $R^2$, print them with `cat()`, and also place them on the plot.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -368,7 +371,7 @@ This plot is not a "pass/fail" test by itself. Use it as a quick visual check be
 
 Starter diagnostic example:
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(

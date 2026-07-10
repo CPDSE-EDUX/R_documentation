@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: _site
   resources:
-    - assets/data/**
+    - data/**
 
 website:
   title: "Basic R for Pharmacy"
@@ -10,6 +10,7 @@ website:
   favicon: assets/images/favicon.ico
 
   navbar:
+    # NOTE: these colors are also defined in custom.scss ($forest-green / $warm-sand) — keep in sync
     background: "#3C5E3E"
     foreground: "#E4D7A1"
     title: "CPDSE"
@@ -55,6 +56,8 @@ website:
           contents:
             - text: "read_csv( )"
               href: functions/read-csv.qmd
+            - text: "read_excel( )"
+              href: functions/read-excel.qmd
             - text: "tibble( )"
               href: functions/tibble.qmd
         - section: "Transform"
@@ -73,6 +76,10 @@ website:
               href: functions/lm.qmd
             - text: "summary( )"
               href: functions/summary.qmd
+        - section: "Visualize"
+          contents:
+            - text: "ggplot( )"
+              href: functions/ggplot.qmd
         - section: "Report"
           contents:
             - text: "cat( )"
@@ -91,23 +98,26 @@ website:
 
   search: true
 
-filters:
-  - webr
-
+# NOTE: keep all webr config here at project level. Quarto does NOT deep-merge
+# this custom key, so a `webr:` block in a page's front matter would silently
+# replace everything below for that page.
 webr:
   packages:
-    - curl
-    - dplyr
-    - ggplot2
-    - readr
-    - tibble
+    # tidyverse (metapackage) covers dplyr, ggplot2, readr, tibble, etc.
+    # Pre-installing it makes `library(tidyverse)` in cells a fast no-op,
+    # so no "Downloading webR package" noise appears in cell output.
+    - tidyverse
+  resources:
+    # Copied into the webR virtual filesystem on every interactive page, so
+    # cells can call read_csv("data/..."). Paths are relative to the page;
+    # all pages with webr cells live one directory deep (topics/, functions/).
+    - ../data/capsules.csv
+    - ../data/dissolution_data_raw.csv
   cell-options:
     warning: false
-    message: false
-  show-startup-message: false
 
 format:
-  html:
+  live-html:
     theme: [cosmo, custom.scss]
     code-copy: true
     code-overflow: wrap

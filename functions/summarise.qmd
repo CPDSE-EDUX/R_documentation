@@ -3,6 +3,9 @@ title: "summarise( )"
 subtitle: "Create one-row summaries from a data frame. summarise() is from the dplyr package, which is part of the tidyverse."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://dplyr.tidyverse.org/reference/summarise.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
@@ -123,7 +126,7 @@ summarise(capsules, mean_weight_mg = mean(weight_mg), .groups = "drop")
 <div class="example-body">
 Use `summarise()` by itself when you want a single summary row for the whole table.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -148,7 +151,7 @@ capsule_summary
 <div class="example-body">
 Combine `group_by()` and `summarise()` to compare batches side by side.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -175,7 +178,7 @@ batch_summary
 <div class="example-body">
 If you only need grouping for one operation, `.by` can be a compact alternative to `group_by()`.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(

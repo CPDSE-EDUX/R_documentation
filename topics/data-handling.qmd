@@ -4,7 +4,8 @@ subtitle: "Filter rows, pick columns, sort, and reshape your data with dplyr."
 toc: false
 ---
 
-{{< include /_data-setup.qmd >}}
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
 
 <details class="topic-card" open>
 <summary>Load the Data</summary>
@@ -12,10 +13,10 @@ toc: false
 
 First, you have to load the data.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules
 ```
@@ -33,10 +34,10 @@ Keep only rows where a condition is `TRUE`.
 
 ## Filter based on one condition
 
-```{webr-r}
+```{webr}
 # Keep only batch A capsules
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   filter(batch == "A")
@@ -46,10 +47,10 @@ capsules %>%
 
 ## Filter based on multiple conditions
 
-```{webr-r}
+```{webr}
 # Keep rows matching two conditions
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   filter(batch == "A" & pct_label > 100)
@@ -79,9 +80,9 @@ Keep only the columns you need.
 
 ## Select columns by name
 
-```{webr-r}
+```{webr}
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   select(capsule_id, batch, pct_label)
@@ -91,10 +92,10 @@ capsules %>%
 
 ## Drop a column by name
 
-```{webr-r}
+```{webr}
 # Drop a column with -
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   select(-fill_mass_mg)
@@ -111,9 +112,9 @@ capsules %>%
 
 Rename a column: `rename(new_name = old_name)`.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   rename(id = capsule_id, pct = pct_label)
@@ -131,9 +132,9 @@ capsules %>%
 Sort rows by a column.
 
 ##  Ascending order
-```{webr-r}
+```{webr}
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   arrange(pct_label)
@@ -143,9 +144,9 @@ capsules %>%
 
 ## Descending order
 
-```{webr-r}
+```{webr}
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   arrange(desc(pct_label))
@@ -162,9 +163,9 @@ capsules %>%
 
 Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   mutate(ibu_mg = fill_mass_mg * 0.43)
@@ -181,9 +182,9 @@ capsules %>%
 
 Chain any number of operations with the pipe — each result flows into the next.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
-capsules <- read_csv("capsules.csv")
+capsules <- read_csv("data/capsules.csv")
 
 capsules %>%
   filter(batch == "B") %>%

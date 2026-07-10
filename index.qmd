@@ -42,11 +42,6 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <h3>Descriptive Statistics</h3>
 <p>Summarise your data: means, medians, standard deviations, and more.</p>
 </a>
-<a href="#" class="feature-card" style="display:none">
-<div class="card-icon">🔬</div>
-<h3>Hypothesis Testing</h3>
-<p>t-tests, chi-square, and Mann–Whitney tests for clinical data.</p>
-</a>
 <a href="topics/linear-regression.qmd" class="feature-card">
 <div class="card-icon">📐</div>
 <h3>Linear Regression</h3>

@@ -3,6 +3,9 @@ title: "lm( )"
 subtitle: "Fit linear regression models. lm() is part of base R (stats package)."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://www.rdocumentation.org/packages/stats/topics/lm" target="_blank" rel="noopener">R Documentation ↗</a>
@@ -133,7 +136,7 @@ lm(absorbance ~ conc_ug_ml, data = calibration, na.action = na.exclude)
 <summary>Fit a calibration line and extract slope/intercept</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -157,7 +160,7 @@ cat("Slope:    ", signif(slope, 4), "\n")
 <summary>Extract R-squared and inspect model summary</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -181,7 +184,7 @@ model_summary
 <summary>Predict absorbance at new concentration values</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -204,7 +207,7 @@ bind_cols(new_conc, tibble(pred_absorbance = pred_abs))
 <summary>Add the fitted lm() line to a ggplot with geom_abline()</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -235,7 +238,7 @@ ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
 <summary>Compare free-intercept and zero-intercept models</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(

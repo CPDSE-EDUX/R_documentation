@@ -8,8 +8,6 @@ subtitle: "Import Excel worksheets as a tibble. read_excel(), read_xls(), and re
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-import.html" target="_blank" rel="noopener">readxl Cheatsheet ↗</a>
 </div>
 
-{{< include /_data-setup.qmd >}}
-
 ## Required Library
 ```r
 install.packages("readxl")
@@ -59,7 +57,7 @@ Use `read_xls()` or `read_xlsx()` only when you want to force one file type.
 ::: {.arg-section}
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
-<details class="arg-item" open>
+<details class="arg-item">
 <summary><code>path</code> — path to the Excel file <span class="arg-types">character</span> <span class="arg-badge required">Required</span></summary>
 <div class="arg-body">
 A string giving the path to the Excel workbook.

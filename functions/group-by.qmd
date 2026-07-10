@@ -3,6 +3,9 @@ title: "group_by( )"
 subtitle: "Group rows by one or more columns. group_by() is from the dplyr package, which is part of the tidyverse."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://dplyr.tidyverse.org/reference/group_by.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
@@ -119,7 +122,7 @@ group_by(capsules, batch, .drop = FALSE)
 <div class="example-body">
 Use `group_by()` before `summarise()` to calculate statistics separately for each group.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -146,7 +149,7 @@ batch_summary
 <div class="example-body">
 After grouping, you can do grouped calculations and then remove the grouping with `ungroup()` when you no longer need it.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 capsules <- tibble(
@@ -174,7 +177,7 @@ capsules_ungrouped
 <div class="example-body">
 Use multiple grouping columns when summaries need to be split by a combination of categories.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 results <- tibble(

@@ -66,7 +66,7 @@ circumference(5)
 An app for coding and running code, such as RStudio.
 
 ### Import
-Bring data, functions, or packages into R so you can use them in your session. For example `library(tidyverse)` imports the tidyverse package, and `read.csv("data.csv")` imports a CSV file into R.
+Bring data, functions, or packages into R so you can use them in your session. For example `library(tidyverse)` imports the tidyverse package, and `read_csv("data.csv")` imports a CSV file into R.
 
 ### Input
 Data or values you give to R.

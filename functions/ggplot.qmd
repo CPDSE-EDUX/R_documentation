@@ -3,6 +3,9 @@ title: "ggplot( )"
 subtitle: "Create a plot by mapping data variables to visual aesthetics. ggplot() is from the ggplot2 package, which is part of the tidyverse."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://ggplot2.tidyverse.org/reference/ggplot.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-visualization.html" target="_blank" rel="noopener">ggplot2 Cheatsheet ↗</a>
@@ -132,7 +135,7 @@ ggplot(capsules, aes(time_min, pct_release)) +
 <summary>Scatter plot of tablet hardness vs. disintegration time</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 tablets <- tibble(
@@ -156,7 +159,7 @@ ggplot(tablets, aes(x = hardness_n, y = disintegration_min)) +
 <summary>Line plot of dissolution profile over time</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 dissolution <- tibble(
@@ -180,7 +183,7 @@ ggplot(dissolution, aes(x = time_min, y = pct_release)) +
 <summary>Grouped boxplot by batch</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 content <- tibble(

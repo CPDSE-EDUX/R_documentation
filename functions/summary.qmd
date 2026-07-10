@@ -3,6 +3,9 @@ title: "summary( )"
 subtitle: "Summarize an object. summary() is a generic function in base R."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/summary.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://www.rdocumentation.org/packages/base/topics/summary" target="_blank" rel="noopener">R Documentation ↗</a>
@@ -73,7 +76,7 @@ Most common beginner use is simply `summary(object)` with no extra arguments.
 <summary>Summarize a numeric vector</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 x <- c(98.4, 99.1, 100.3, 101.0, 99.8, 100.2)
 
 summary(x)
@@ -85,7 +88,7 @@ summary(x)
 <summary>Summarize each column in a data frame</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -102,7 +105,7 @@ summary(calibration)
 <summary>Summarize an lm() model and extract R-squared</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(
@@ -125,7 +128,7 @@ cat("R-squared:", signif(r2, 4), "\n")
 <summary>Compare summary() and coef() for a model</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 calibration <- tibble(

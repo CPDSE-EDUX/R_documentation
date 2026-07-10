@@ -3,6 +3,9 @@ title: "mutate( )"
 subtitle: "Add or transform columns in a data frame. mutate() is from the dplyr package, which is part of the tidyverse."
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <div class="source-links">
 <a class="source-link" href="https://dplyr.tidyverse.org/reference/mutate.html" target="_blank" rel="noopener">Original Documentation ↗</a>
 <a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
@@ -105,7 +108,7 @@ mutate(
 <summary>Capsule content uniformity — computing fill mass and % label claim</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(dplyr)
 library(tibble)
 
@@ -137,7 +140,7 @@ capsules
 <div class="example-body">
 Use `mutate()` with `ifelse()` to add a pass/fail column based on a criterion.
 
-```{webr-r}
+```{webr}
 library(dplyr)
 
 # EP 2.9.40 Stage 1: each unit must be within ±25 % of label claim (M ± 25)
@@ -156,7 +159,7 @@ capsules[, c("capsule_id", "pct_label", "oos")]
 <summary>Concentration units conversion</summary>
 <div class="example-body">
 
-```{webr-r}
+```{webr}
 library(dplyr)
 library(tibble)
 

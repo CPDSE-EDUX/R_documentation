@@ -7,6 +7,10 @@ on:
       - '**/*.yaml'
       - '**/*.scss'
       - 'assets/**'
+      - 'data/**'
+      # site-wide includes injected via include-after-body
+      - 'scripts.html'
+      - 'chat-widget.html'
   workflow_dispatch:
 
 name: Publish to GitHub Pages
@@ -62,9 +66,9 @@ jobs:
             any::readr
             any::tibble
 
-      - name: Install quarto-webr extension
-        run: quarto add coatless/quarto-webr --no-prompt
-
+      # NOTE: do NOT `quarto add` extensions here — the quarto-live extension is
+      # vendored in _extensions/ and tracked in git. Re-installing at build time
+      # would overwrite the pinned version with upstream.
       - name: Render Quarto project
         uses: quarto-dev/quarto-actions/render@v2
 

@@ -4,6 +4,9 @@ subtitle: "Set up R and RStudio, and run your first lines of code"
 toc: false
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <details class="topic-card" open>
 <summary>Installing the R Language and a Development Environment (IDE)</summary>
 <div class="topic-card-body">
@@ -152,7 +155,7 @@ Data is read into R from files using functions like [`read_csv()`](../functions/
 Within RStudio, you can inspect your data objects in the Environment panel, or using
 
 ```r
-View(name_of_your_object)
+view(name_of_your_object)
 ```
 
 </div>
@@ -276,7 +279,7 @@ R will print the current value in the Console. This is useful when you just want
 
 When you want clear labels and units in your output, use [`cat()`](../functions/cat.qmd):
 
-```{webr-r}
+```{webr}
 dose_mg     <- 500
 weight_kg   <- 70
 dose_per_kg <- dose_mg / weight_kg
@@ -307,7 +310,7 @@ glimpse(your_data_object)
 If you want a spreadsheet-like view, open it as a table:
 
 ```r
-View(your_data_object)
+view(your_data_object)
 ```
 
 ### Plotting
@@ -333,7 +336,7 @@ A typical R script follows this pattern:
 1. **Load packages** — `library()`
 2. **Read data** — `read_csv()`
 3. **Compute** — `mutate()`, `filter()`, `summarise()`, `mean()`, `sd()`
-4. **Output** — `cat()`, `View()`, `ggplot()`
+4. **Output** — `cat()`, `view()`, `ggplot()`
 
 ```r
 # 1. Load packages

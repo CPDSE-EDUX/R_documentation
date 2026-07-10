@@ -4,6 +4,9 @@ subtitle: "Summarise your data with means, standard deviations, and grouped summ
 toc: false
 ---
 
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
 <details class="topic-card" open>
 <summary>Basics (when to use cat(), signif(), round())</summary>
 <div class="topic-card-body">
@@ -14,7 +17,7 @@ Use these three together when reporting results clearly:
 - `signif()` for significant digits (good for scientific reporting)
 - `round()` for fixed decimal places (good for tables)
 
-```{webr-r}
+```{webr}
 x <- c(99.83, 100.12, 100.29, 99.67, 100.41)
 
 cat("Raw mean:        ", mean(x), "\n")
@@ -33,7 +36,7 @@ cat("Using round(2):  ", round(mean(x), 2), "\n")
 Use `count()` to build a quick frequency table.
 This is useful when you want exact counts for each category.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 df_cat <- tibble(batch = c("A", "A", "A", "B", "B", "C"))
@@ -47,7 +50,7 @@ df_cat %>%
 A bar chart visualizes categorical frequencies.
 Use it to compare how many observations belong to each group.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 df_cat <- tibble(batch = c("A", "A", "A", "B", "B", "C"))
@@ -63,7 +66,7 @@ ggplot(df_cat, aes(x = batch)) +
 A histogram visualizes the distribution of a numeric variable.
 Use it to see where values cluster and how spread out they are.
 
-```{webr-r}
+```{webr}
 library(tidyverse)
 
 # Histogram (numeric frequencies)
@@ -96,7 +99,7 @@ If the distribution is fairly symmetric, mean and median are often similar.
 Use the mean when you want to include all observations in the summary.
 Because every value contributes, extreme values can pull it up or down.
 
-```{webr-r}
+```{webr}
 x <- c(10, 11, 10, 12, 60)
 cat("Mean:  ", mean(x), "\n")
 ```
@@ -106,7 +109,7 @@ cat("Mean:  ", mean(x), "\n")
 Use the median when you want a robust center that is less affected by outliers.
 It is often preferred for skewed data.
 
-```{webr-r}
+```{webr}
 x <- c(10, 11, 10, 12, 60)
 cat("Median:", median(x), "\n")
 ```
@@ -125,7 +128,7 @@ Use these measures together to understand both total spread and typical spread.
 Use `min()` and `max()` to report range endpoints.
 They are useful for quickly spotting the lowest and highest observed values.
 
-```{webr-r}
+```{webr}
 x <- c(7.2, 6.8, 7.5, 6.9, 7.1)
 cat("Min:", min(x), "\n")
 cat("Max:", max(x), "\n")
@@ -135,7 +138,7 @@ cat("Max:", max(x), "\n")
 Standard deviation (`sd`) is the typical distance of values from the mean.
 A larger SD means values are more dispersed.
 
-```{webr-r}
+```{webr}
 x <- c(101.2, 100.8, 101.5, 100.9, 101.1)
 cat("SD:      ", signif(sd(x), 4), "\n")
 ```
@@ -144,7 +147,7 @@ cat("SD:      ", signif(sd(x), 4), "\n")
 Variance (`var`) is the squared version of spread around the mean.
 It is less intuitive than SD but important in many statistical methods.
 
-```{webr-r}
+```{webr}
 x <- c(101.2, 100.8, 101.5, 100.9, 101.1)
 cat("Variance:", signif(var(x), 4), "\n")
 ```
@@ -154,7 +157,7 @@ IQR shows the spread of the middle 50% of the data.
 Quantiles provide cut points (for example 25%, 50%, and 75%).
 These are robust to outliers compared with range-based measures.
 
-```{webr-r}
+```{webr}
 x <- c(12, 14, 15, 16, 18, 19, 21)
 cat("IQR: ", IQR(x), "\n")
 quantile(x, probs = c(0.25, 0.5, 0.75))
@@ -169,7 +172,7 @@ quantile(x, probs = c(0.25, 0.5, 0.75))
 
 Use `summarize()` for whole-table summaries, and combine with `group_by()` for per-group summaries.
 
-```{webr-r}
+```{webr}
 library(dplyr)
 
 df <- tibble(
@@ -206,7 +209,7 @@ The four datasets have nearly the same:
 But each dataset has a different pattern (linear trend, curvature, outlier-driven relation, or vertical cluster).
 This is why descriptive statistics should be paired with visualization, not used alone.
 
-```{webr-r}
+```{webr}
 # Built-in dataset: anscombe
 library(tidyverse)
 

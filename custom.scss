@@ -245,10 +245,6 @@ details.topic-card .quarto-figure img.figure-img {
   height: auto;
 }
 
-// ── webR Monaco editor — token color overrides ─────────────────────────────
-
-.qwebr-editor .mtk7 { color: #E5C07B !important; }
-
 // ── Content tables → "param table" look ───────────────────────────────────────
 
 #quarto-document-content table,
@@ -571,33 +567,32 @@ details.arg-item {
 
 .quarto-code-links { display: none !important; }
 
-// ── Hidden data-loader cell ───────────────────────────────────────────────────
-// The shared `#| context: setup` chunk (see _data-setup.qmd) preloads CSVs into
-// webR's file system. Its code still runs — the JS evaluates setup cells eagerly,
-// independent of visibility — but we never want its "Loading package…" placeholder
-// box shown at the top of the page. Hide it outright.
-.qwebr-noninteractive-setup-area {
-  display: none !important;
-}
+// ── Interactive webR blocks (quarto-live) — match card framing ────────────────
+// quarto-live renders each ```{webr} block client-side into a `.exercise-cell`:
+// a Bootstrap card (editor toolbar + CodeMirror) followed by `.cell-output-container`.
 
-// ── Interactive webR blocks — keep editor functional, match card framing ──────
-
-.qwebr-interactive-area {
-  border: 0.5px solid $c-border;
-  border-radius: $radius-lg;
-  overflow: hidden;
+.exercise-cell {
   margin-bottom: 1.25rem;
+
+  .card {
+    border: 0.5px solid $c-border;
+    border-radius: $radius-lg;
+    overflow: hidden;
+  }
 }
 
-.qwebr-editor { font-family: $mono; }
+.exercise-cell .cm-editor,
+.exercise-cell .cm-content {
+  font-family: $mono;
+}
 
-.qwebr-output-code-area pre {
+.cell-output-container pre {
   font-family: $mono;
   font-size: 13px;
   background: $c-bg-sec;
 }
 
-.qwebr-button {
+.btn-exercise-editor {
   font-family: $sans;
   font-size: 13px;
 }
@@ -807,10 +802,11 @@ details.example-item {
     > p:first-child { margin-top: 0; }
 
     // editor and static code sit flush — no double border
-    .qwebr-interactive-area {
-      border: 0.5px solid $c-border;
+    .exercise-cell {
       margin-top: 0.75rem;
       margin-bottom: 0;
+
+      .card { border: 0.5px solid $c-border; }
     }
 
     div.sourceCode {
