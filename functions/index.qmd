@@ -18,6 +18,9 @@ Extract estimated coefficients from fitted model objects.
 
 ## G {.glossary-letter}
 
+### **[ggplot( )](ggplot.qmd)**
+Create plots by mapping variables to visual aesthetics and adding layers.
+
 ### **[group_by( )](group-by.qmd)**
 Group rows by one or more columns so dplyr verbs can work within each group.
 

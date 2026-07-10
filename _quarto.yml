@@ -26,6 +26,8 @@ website:
           - text: "---"
           - text: "Data Handling"
             href: topics/data-handling.qmd
+          - text: "Pipe Operator (%>%)"
+            href: topics/pipe-operator.qmd
           - text: "Descriptive Statistics"
             href: topics/descriptive-stats.qmd
           - text: "Linear Regression"

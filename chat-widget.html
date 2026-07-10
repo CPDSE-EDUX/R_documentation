@@ -1,8 +1,10 @@
 <div id="cpdse-chatbot" class="cpdse-chatbot" data-open="false">
+  <!-- Temporarily hidden; this chatbot button will be included again at a later point in time. -->
   <button
     id="cpdse-chat-launcher"
     class="cpdse-chat-launcher"
     type="button"
+    hidden
     aria-controls="cpdse-chat-panel"
     aria-expanded="false"
   >
@@ -70,7 +72,7 @@
   }
 
   .cpdse-chat-launcher {
-    display: inline-flex;
+    display: none;
     align-items: center;
     gap: 10px;
     border: 1px solid rgba(228, 215, 161, 0.5);
