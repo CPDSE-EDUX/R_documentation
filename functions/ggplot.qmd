@@ -1,0 +1,176 @@
+---
+title: "ggplot( )"
+subtitle: "Create a plot by mapping data variables to visual aesthetics. ggplot() is from the ggplot2 package, which is part of the tidyverse."
+---
+
+<div class="source-links">
+<a class="source-link" href="https://ggplot2.tidyverse.org/reference/ggplot.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-visualization.html" target="_blank" rel="noopener">ggplot2 Cheatsheet ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+# Minimal pattern
+ggplot(data = df, aes(x = x_var, y = y_var)) +
+  geom_point()
+```
+::: {.desc-item}
+`ggplot(data = ..., aes(...))` initializes a plot object.
+You then add one or more `geom_*()` layers with `+` to draw points, lines, bars, and other marks.
+:::
+
+```{r, eval=FALSE}
+# Pipe style
+df %>%
+  ggplot(aes(x = x_var, y = y_var, color = group_var)) +
+  geom_line()
+```
+::: {.desc-item}
+You can pass a data frame to `ggplot()` through a pipe.
+Inside `aes()`, map variables to aesthetics such as position (`x`, `y`), color, shape, or size.
+:::
+
+::: {.callout-tip collapse="true"}
+## Why `+` and not `%>%` between layers?
+`ggplot()` builds plots by adding layers to a plot object, so each `+` appends a new component.
+Use `%>%` (or `|>`) to prepare data before plotting, then use `+` for plot layers.
+:::
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>data</code> — data frame used for plotting <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+The data frame that contains variables used in the plot.
+If omitted, data can be supplied in a later layer (for example inside `geom_point(data = ...)`).
+
+```r
+ggplot(data = capsules, aes(x = time_min, y = pct_release))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code> · Default: <code>NULL</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>mapping</code> — aesthetic mappings made with <code>aes()</code> <span class="arg-types">uneval mapping</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Defines how variables map to visual properties like `x`, `y`, `color`, `shape`, `linetype`, or `size`.
+Aesthetic mappings can be set globally in `ggplot()` and/or locally inside each layer.
+
+```r
+ggplot(capsules, aes(x = batch, y = pct_label, color = batch))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>aes()</code> mapping object · Default: <code>aes()</code> (empty mapping)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — additional parameters <span class="arg-types">varies</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Additional options forwarded internally. Most day-to-day plot control is usually done in layers and helper functions (for example `geom_*()`, `labs()`, `theme_*()`, and `scale_*()`).
+
+```r
+ggplot(capsules, aes(time_min, pct_release)) +
+  geom_line(linewidth = 1)
+```
+
+<p class="data-types"><strong>Data Types:</strong> varies by use case</p>
+</div>
+</details>
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Scatter plot of tablet hardness vs. disintegration time</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+tablets <- tibble(
+  tablet_id = 1:8,
+  hardness_n = c(62, 59, 67, 64, 61, 66, 63, 68),
+  disintegration_min = c(8.9, 9.4, 7.8, 8.2, 9.0, 7.6, 8.5, 7.2)
+)
+
+ggplot(tablets, aes(x = hardness_n, y = disintegration_min)) +
+  geom_point(size = 2.8, alpha = 0.9) +
+  labs(
+    title = "Tablet hardness vs disintegration time",
+    x = "Hardness (N)",
+    y = "Disintegration time (min)"
+  )
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Line plot of dissolution profile over time</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+dissolution <- tibble(
+  time_min = c(5, 10, 15, 20, 30, 45, 60),
+  pct_release = c(22, 39, 55, 66, 79, 90, 96)
+)
+
+ggplot(dissolution, aes(x = time_min, y = pct_release)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "Dissolution profile",
+    x = "Time (min)",
+    y = "% released"
+  )
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Grouped boxplot by batch</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+content <- tibble(
+  batch = rep(c("A", "B", "C"), each = 8),
+  pct_label = c(
+    99.2, 101.3, 98.7, 100.1, 102.0, 99.5, 100.8, 98.9,
+    96.1, 97.4, 98.2, 95.8, 97.0, 96.9, 98.0, 97.2,
+    101.5, 103.2, 102.1, 100.9, 101.8, 103.0, 102.7, 101.2
+  )
+)
+
+ggplot(content, aes(x = batch, y = pct_label, fill = batch)) +
+  geom_boxplot(alpha = 0.8, width = 0.65, outlier.shape = 16, outlier.size = 2) +
+  guides(fill = "none") +
+  labs(
+    title = "Content uniformity by batch",
+    x = "Batch",
+    y = "% of label claim"
+  )
+```
+</div>
+</details>
+
+</div>
