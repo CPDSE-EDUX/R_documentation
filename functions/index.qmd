@@ -31,6 +31,9 @@ Add new columns or transform existing columns in a data frame.
 ### **[read_csv( )](read-csv.qmd)**
 Import a comma-separated file into R as a tibble.
 
+### **[read_excel( )](read-excel.qmd)**
+Import an Excel worksheet into R as a tibble.
+
 ### **[round( )](round.qmd)**
 Round numbers to a fixed number of decimal places.
 

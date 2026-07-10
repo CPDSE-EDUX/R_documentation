@@ -1,0 +1,236 @@
+---
+title: "read_excel( )"
+subtitle: "Import Excel worksheets as a tibble. read_excel(), read_xls(), and read_xlsx() are from the readxl package."
+---
+
+<div class="source-links">
+<a class="source-link" href="https://readxl.tidyverse.org/reference/read_excel.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-import.html" target="_blank" rel="noopener">readxl Cheatsheet ↗</a>
+</div>
+
+{{< include /_data-setup.qmd >}}
+
+## Required Library
+```r
+install.packages("readxl")
+library(readxl)
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+read_excel(path)
+```
+::: {.desc-item}
+`read_excel("file_name.xlsx")` reads an Excel file (`.xls` or `.xlsx`) and returns a tibble data frame.
+Use this as the general-purpose Excel import function.
+:::
+
+<hr>
+
+```{r, eval=FALSE}
+read_xls(path)
+```
+::: {.desc-item}
+`read_xls("file_name.xls")` reads legacy Excel 97-2003 `.xls` files.
+Use this when the file extension is `.xls` or the workbook was saved in the older binary format.
+:::
+
+<hr>
+
+```{r, eval=FALSE}
+read_xlsx(path)
+```
+::: {.desc-item}
+`read_xlsx("file_name.xlsx")` reads modern Excel `.xlsx` files.
+Use this when the workbook is in Office Open XML format (`.xlsx`).
+:::
+
+::: {.callout-tip collapse="true"}
+## Which function should I use?
+If you are not sure, use `read_excel()`.
+It auto-detects whether your file is `.xls` or `.xlsx` from the extension.
+Use `read_xls()` or `read_xlsx()` only when you want to force one file type.
+:::
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item" open>
+<summary><code>path</code> — path to the Excel file <span class="arg-types">character</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A string giving the path to the Excel workbook.
+Use forward slashes (`/`) in file paths, even on Windows.
+
+```r
+read_excel("data/results.xlsx")
+read_excel("C:/Users/Morten/Documents/results.xlsx")
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> (file path)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>sheet</code> — worksheet to import <span class="arg-types">character | integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Choose which worksheet to read by name or by position.
+Default is the first sheet.
+
+```r
+read_excel("results.xlsx", sheet = "Dissolution")
+read_excel("results.xlsx", sheet = 2)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> | <code>integer</code> · Default: first sheet</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>range</code> — cell range to read <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Read a specific rectangular cell range using Excel notation.
+Useful when the worksheet contains extra notes or multiple tables.
+
+```r
+read_excel("results.xlsx", range = "A1:D20")
+read_excel("results.xlsx", range = "B3:F15")
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> (Excel-style range)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>col_names</code> — use first row as column names <span class="arg-types">logical | character</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+If `TRUE` (default), first row becomes column names.
+Set to `FALSE` to auto-generate names, or pass a character vector to define names manually.
+
+```r
+read_excel("results.xlsx", col_names = FALSE)
+read_excel("results.xlsx", col_names = c("tablet", "time_min", "absorbance"))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code> | <code>character</code> vector · Default: <code>TRUE</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>na</code> — strings treated as missing values <span class="arg-types">character vector</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Defines which strings should be converted to `NA` while importing.
+Useful when data entry used placeholders like `"N/A"` or `"-"`.
+
+```r
+read_excel("results.xlsx", na = c("", "N/A", "-", "Missing"))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> vector · Default: <code>""</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>skip</code> — number of rows to skip <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Skips rows from the top before reading data.
+Useful for spreadsheets with titles or metadata above the header row.
+
+```r
+read_excel("results.xlsx", skip = 2)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> · Default: <code>0</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>n_max</code> — maximum rows to read <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Limits how many rows are imported.
+Useful for previewing large workbooks.
+
+```r
+read_excel("results.xlsx", n_max = 100)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> · Default: <code>Inf</code></p>
+</div>
+</details>
+
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Read the first worksheet from an Excel file</summary>
+<div class="example-body">
+
+```r
+library(readxl)
+
+df <- read_excel("data/dissolution_results.xlsx")
+head(df)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Read a named worksheet and skip metadata rows</summary>
+<div class="example-body">
+
+```r
+library(readxl)
+
+df <- read_excel(
+  "data/dissolution_results.xlsx",
+  sheet = "Run_01",
+  skip = 2
+)
+
+df
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Import only a selected cell range</summary>
+<div class="example-body">
+
+```r
+library(readxl)
+
+subset_df <- read_excel(
+  "data/dissolution_results.xlsx",
+  range = "A1:E25"
+)
+
+subset_df
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Handle custom missing value codes during import</summary>
+<div class="example-body">
+
+```r
+library(readxl)
+
+df <- read_excel(
+  "data/dissolution_results.xlsx",
+  na = c("", "N/A", "-", "ND")
+)
+
+df
+```
+</div>
+</details>
+
+</div>
