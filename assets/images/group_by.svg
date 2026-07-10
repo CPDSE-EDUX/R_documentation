@@ -1,0 +1,101 @@
+<svg width="100%" viewBox="0 0 700 165" role="img" style="" xmlns="http://www.w3.org/2000/svg">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">group_by transformation diagram</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">An ungrouped tibble on the left labelled TIBBLE, with an arrow labelled group_by(batch) pointing to a grouped tibble on the right, where rows are marked with colored strips indicating group membership and a caption shows the resulting group metadata.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  
+  <text x="135" y="14" text-anchor="middle" dominant-baseline="central" font-size="12" fill="var(--color-text-tertiary)" letter-spacing="0.5" style="fill:rgb(61, 61, 58);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">TIBBLE</text>
+
+  
+  <rect x="20" y="22" width="60" height="22" fill="var(--color-background-secondary)" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(245, 244, 237);stroke:rgba(31, 30, 29, 0.3);stroke-width:0.5px;"/>
+  <rect x="80" y="22" width="80" height="22" fill="var(--color-background-secondary)" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(245, 244, 237);stroke:rgba(31, 30, 29, 0.3);stroke-width:0.5px;"/>
+  <rect x="160" y="22" width="90" height="22" fill="var(--color-background-secondary)" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(245, 244, 237);stroke:rgba(31, 30, 29, 0.3);stroke-width:0.5px;"/>
+  <text x="50" y="33" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--color-text-secondary)" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">batch</text>
+  <text x="120" y="33" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--color-text-secondary)" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">weight_mg</text>
+  <text x="205" y="33" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--color-text-secondary)" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">absorbance</text>
+
+  
+  <rect x="20" y="44" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="80" y="44" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="160" y="44" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="50" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">A</text>
+  <text x="120" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">498.2</text>
+  <text x="205" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.149</text>
+
+  <rect x="20" y="66" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="80" y="66" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="160" y="66" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="50" y="77" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">A</text>
+  <text x="120" y="77" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">501.0</text>
+  <text x="205" y="77" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.153</text>
+
+  <rect x="20" y="88" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="80" y="88" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="160" y="88" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="50" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">B</text>
+  <text x="120" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">475.5</text>
+  <text x="205" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.142</text>
+
+  <rect x="20" y="110" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="80" y="110" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="160" y="110" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="50" y="121" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">B</text>
+  <text x="120" y="121" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">480.2</text>
+  <text x="205" y="121" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.145</text>
+
+  <text x="20" y="145" font-family="var(--font-mono)" font-size="8" fill="var(--color-text-tertiary)" dominant-baseline="central" style="stroke:none;font-family:ui-monospace, monospace;font-size:8px;text-anchor:start;dominant-baseline:central"># A tibble: 4 x 3</text>
+
+  
+  <line x1="260" y1="77" x2="322" y2="77" stroke="var(--color-border-primary)" marker-end="url(#arrow)" style="fill:none;stroke:rgb(115, 114, 108);stroke-width:1.5px;"/>
+  <text x="291" y="64" text-anchor="middle" dominant-baseline="central" font-family="var(--font-mono)" font-size="8" fill="var(--color-text-tertiary)" style="stroke:none;font-family:ui-monospace, monospace;font-size:8px;text-anchor:middle;dominant-baseline:central">group_by(batch)</text>
+
+  
+  <text x="473" y="14" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--color-text-tertiary)" letter-spacing="0.3" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:10px;font-weight:400;text-anchor:middle;dominant-baseline:central">GROUPED TIBBLE</text>
+
+  
+  <rect x="324" y="44" width="6" height="44" rx="2" fill="#5DCAA5" style="stroke:none;"/>
+  <rect x="324" y="88" width="6" height="44" rx="2" fill="#F0997B" style="stroke:none;"/>
+
+  
+  <rect x="330" y="22" width="60" height="22" fill="var(--color-background-secondary)" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(245, 244, 237);stroke:rgba(31, 30, 29, 0.3);stroke-width:0.5px;"/>
+  <rect x="390" y="22" width="80" height="22" fill="var(--color-background-secondary)" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(245, 244, 237);stroke:rgba(31, 30, 29, 0.3);stroke-width:0.5px;"/>
+  <rect x="470" y="22" width="90" height="22" fill="var(--color-background-secondary)" stroke="var(--color-border-secondary)" stroke-width="0.5" style="fill:rgb(245, 244, 237);stroke:rgba(31, 30, 29, 0.3);stroke-width:0.5px;"/>
+  <text x="360" y="33" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--color-text-secondary)" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">batch</text>
+  <text x="430" y="33" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--color-text-secondary)" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">weight_mg</text>
+  <text x="515" y="33" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--color-text-secondary)" style="fill:rgb(61, 61, 58);stroke:none;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:middle;dominant-baseline:central">absorbance</text>
+
+  <rect x="330" y="44" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="390" y="44" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="470" y="44" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="360" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">A</text>
+  <text x="430" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">498.2</text>
+  <text x="515" y="55" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.149</text>
+
+  <rect x="330" y="66" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="390" y="66" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="470" y="66" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="360" y="77" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">A</text>
+  <text x="430" y="77" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">501.0</text>
+  <text x="515" y="77" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.153</text>
+
+  <rect x="330" y="88" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="390" y="88" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="470" y="88" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="360" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">B</text>
+  <text x="430" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">475.5</text>
+  <text x="515" y="99" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.142</text>
+
+  <rect x="330" y="110" width="60" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="390" y="110" width="80" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <rect x="470" y="110" width="90" height="22" fill="var(--color-background-primary)" stroke="var(--color-border-tertiary)" stroke-width="0.5" style="fill:rgb(255, 255, 255);stroke:rgba(31, 30, 29, 0.15);stroke-width:0.5px;"/>
+  <text x="360" y="121" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#E05C3A" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">B</text>
+  <text x="430" y="121" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#C68000" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">480.2</text>
+  <text x="515" y="121" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#2E86C1" style="stroke:none;font-family:&quot;Anthropic Sans&quot;, sans-serif;font-size:12px;text-anchor:middle;dominant-baseline:central">0.145</text>
+
+  <text x="330" y="145" font-family="var(--font-mono)" font-size="8" fill="var(--color-text-tertiary)" dominant-baseline="central" style="stroke:none;font-family:ui-monospace, monospace;font-size:8px;text-anchor:start;dominant-baseline:central"># A tibble: 4 x 3</text>
+  <text x="330" y="156" font-family="var(--font-mono)" font-size="8" fill="var(--color-text-tertiary)" dominant-baseline="central" style="stroke:none;font-family:ui-monospace, monospace;font-size:8px;text-anchor:start;dominant-baseline:central"># Groups: batch [2]</text>
+</svg>

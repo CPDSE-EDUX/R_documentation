@@ -13,6 +13,11 @@ body-classes: "function-reference-page"
 ### **[cat( )](cat.qmd)**
 Print values to the console as readable text, useful for clear labelled output.
 
+## G {.glossary-letter}
+
+### **[group_by( )](group-by.qmd)**
+Group rows by one or more columns so dplyr verbs can work within each group.
+
 ## M {.glossary-letter}
 
 ### **[mutate( )](mutate.qmd)**

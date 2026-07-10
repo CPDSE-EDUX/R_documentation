@@ -52,3 +52,5 @@ rsconnect/
 .vscode/
 _site/
 .claude/
+
+**/*.quarto_ipynb

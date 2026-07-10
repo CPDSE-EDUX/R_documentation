@@ -55,6 +55,8 @@ website:
               href: functions/tibble.qmd
         - section: "Transform"
           contents:
+            - text: "group_by( )"
+              href: functions/group-by.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
         - section: "Report"
