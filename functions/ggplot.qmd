@@ -17,30 +17,24 @@ library(tidyverse)
 ## Syntax
 
 ```{r, eval=FALSE}
-# Minimal pattern
-ggplot(data = df, aes(x = x_var, y = y_var)) +
-  geom_point()
+ggplot(data, aes(x = x_var, y = y_var)) +
+    geom_*() # replace with a geom function like geom_point(), geom_line(), geom_bar(), etc.
 ```
 ::: {.desc-item}
-`ggplot(data = ..., aes(...))` initializes a plot object.
-You then add one or more `geom_*()` layers with `+` to draw points, lines, bars, and other marks.
+`ggplot()` builds a plot object from a data set (often a tibble data frame), a coordinate system, and geoms.
+The data set is specified in the `data` argument, and the coordinate system is defined by the `aes()` function, where aes stands for aesthetics.
+You can add one or more `geom_*()` layers with `+` to draw points, lines, bars, and other marks. Widely used geoms include `geom_point()`, `geom_line()`, `geom_bar()`, and `geom_boxplot()`.
 :::
 
+### Pipe Operator Style
 ```{r, eval=FALSE}
-# Pipe style
 df %>%
-  ggplot(aes(x = x_var, y = y_var, color = group_var)) +
+  ggplot(aes(x = x_var, y = y_var)) +
   geom_line()
 ```
 ::: {.desc-item}
 You can pass a data frame to `ggplot()` through a pipe.
 Inside `aes()`, map variables to aesthetics such as position (`x`, `y`), color, shape, or size.
-:::
-
-::: {.callout-tip collapse="true"}
-## Why `+` and not `%>%` between layers?
-`ggplot()` builds plots by adding layers to a plot object, so each `+` appends a new component.
-Use `%>%` (or `|>`) to prepare data before plotting, then use `+` for plot layers.
 :::
 
 ## Argument Overview
@@ -52,7 +46,7 @@ Use `%>%` (or `|>`) to prepare data before plotting, then use `+` for plot layer
 <details class="arg-item">
 <summary><code>data</code> — data frame used for plotting <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
 <div class="arg-body">
-The data frame that contains variables used in the plot.
+The data frame that contains variables used in the plot. Inside `aes()`, you can refer to variables in the data frame by name.
 If omitted, data can be supplied in a later layer (for example inside `geom_point(data = ...)`).
 
 ```r
@@ -67,10 +61,46 @@ ggplot(data = capsules, aes(x = time_min, y = pct_release))
 <summary><code>mapping</code> — aesthetic mappings made with <code>aes()</code> <span class="arg-types">uneval mapping</span> <span class="arg-badge optional">Optional</span></summary>
 <div class="arg-body">
 Defines how variables map to visual properties like `x`, `y`, `color`, `shape`, `linetype`, or `size`.
-Aesthetic mappings can be set globally in `ggplot()` and/or locally inside each layer.
+Aesthetic mappings connect data variables to visual properties so the appearance changes automatically with the data.
+
+This example maps `x` and `y`, which place the data on the horizontal and vertical axes.
+These two mappings are the foundation of most ggplot charts.
 
 ```r
-ggplot(capsules, aes(x = batch, y = pct_label, color = batch))
+ggplot(capsules, aes(x = batch, y = pct_label)) +
+  geom_col()
+```
+
+This example maps `color` so each batch is drawn in a different color.
+Use this when you want to visually separate groups in the same plot.
+
+```r
+ggplot(capsules, aes(x = time_min, y = pct_release, color = batch)) +
+  geom_line()
+```
+
+This example maps `shape`, which gives each group a different point symbol.
+Shape is most useful in point-based plots where categories need to stay distinct.
+
+```r
+ggplot(capsules, aes(x = batch, y = pct_label, shape = batch)) +
+  geom_point()
+```
+
+This example maps `linetype`, which changes the pattern of the line for each group.
+It is useful when colors are limited or when a plot may be printed in grayscale.
+
+```r
+ggplot(capsules, aes(x = time_min, y = pct_release, linetype = batch)) +
+  geom_line()
+```
+
+This example maps `size`, so larger values are shown with larger points.
+Use size mapping when you want the magnitude of a numeric variable to be part of the visual encoding.
+
+```r
+ggplot(capsules, aes(x = batch, y = pct_label, size = pct_label)) +
+  geom_point()
 ```
 
 <p class="data-types"><strong>Data Types:</strong> <code>aes()</code> mapping object · Default: <code>aes()</code> (empty mapping)</p>
@@ -78,13 +108,14 @@ ggplot(capsules, aes(x = batch, y = pct_label, color = batch))
 </details>
 
 <details class="arg-item">
-<summary><code>...</code> — additional parameters <span class="arg-types">varies</span> <span class="arg-badge optional">Optional</span></summary>
+<summary><code>...</code> — additional parameters in geoms <span class="arg-types">varies</span> <span class="arg-badge optional">Optional</span></summary>
 <div class="arg-body">
-Additional options forwarded internally. Most day-to-day plot control is usually done in layers and helper functions (for example `geom_*()`, `labs()`, `theme_*()`, and `scale_*()`).
+Additional options are usually set inside the `geom_*()` layers you add after `ggplot()`. This is where you style the marks in the plot, for example by changing line width, point size, transparency, fill, or border color. Use styling within geoms to override global aesthetics set in `ggplot()` for specific layers.
 
 ```r
 ggplot(capsules, aes(time_min, pct_release)) +
-  geom_line(linewidth = 1)
+  geom_line(linewidth = 1.2, color = "steelblue") +
+  geom_point(size = 2.5, color = "steelblue", alpha = 0.8)
 ```
 
 <p class="data-types"><strong>Data Types:</strong> varies by use case</p>
