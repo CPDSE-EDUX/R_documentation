@@ -15,4 +15,74 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+// Copy button for quarto-live editors. The editors are rendered client-side
+// (CodeMirror inside a .exercise-editor card), so watch for them appearing and
+// add a Copy button next to Start Over that copies the editor's CURRENT code.
+(function () {
+  var COPY_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/></svg>';
+
+  function editorCode(card) {
+    // CodeMirror renders one .cm-line per line; teaching snippets are short,
+    // so every line is in the DOM (no virtualization at this size).
+    return Array.from(card.querySelectorAll('.cm-line'))
+      .map(function (l) { return l.textContent; })
+      .join('\n');
+  }
+
+  function addCopyButton(card) {
+    if (card.querySelector('.btn-copy-code')) return;
+    var group = card.querySelector('.btn-group-exercise-editor');
+    if (!group) return;
+
+    var btn = document.createElement('a');
+    btn.className = 'd-flex align-items-center gap-1 btn btn-exercise-editor btn-outline-dark text-nowrap btn-copy-code';
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('tabindex', '0');
+    btn.setAttribute('aria-label', 'Copy Code');
+    btn.innerHTML = COPY_SVG + '<span class="btn-label-exercise-editor">Copy</span>';
+
+    btn.addEventListener('click', function () {
+      var code = editorCode(card);
+      var label = btn.querySelector('.btn-label-exercise-editor');
+      function flash(text) {
+        label.textContent = text;
+        setTimeout(function () { label.textContent = 'Copy'; }, 1500);
+      }
+      // Fallback for older browsers, non-secure contexts, or when the async
+      // Clipboard API rejects (e.g. document not focused).
+      function legacyCopy() {
+        var ta = document.createElement('textarea');
+        ta.value = code;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { /* noop */ }
+        document.body.removeChild(ta);
+        flash(ok ? 'Copied!' : 'Copy failed');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(
+          function () { flash('Copied!'); },
+          legacyCopy
+        );
+      } else {
+        legacyCopy();
+      }
+    });
+
+    group.appendChild(btn);
+  }
+
+  var observer = new MutationObserver(function () {
+    document.querySelectorAll('.exercise-editor').forEach(addCopyButton);
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.exercise-editor').forEach(addCopyButton);
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
+})();
 </script>

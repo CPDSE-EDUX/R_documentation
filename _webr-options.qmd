@@ -11,4 +11,22 @@ options(
   readr.show_col_types = FALSE,   # quiet read_csv() column-spec message
   dplyr.summarise.inform = FALSE  # quiet summarise() grouping message
 )
+
+# Make library() quiet: hide package startup messages ("Attaching core tidyverse
+# packages", masking notices) but let real errors through untouched.
+# `library` on the next line resolves to webR's shim (installed during page init),
+# so auto-downloading of packages not pre-installed via _quarto.yml keeps working.
+.webr_shim_library <- library
+library <- function(...) {
+  invisible(suppressMessages(withCallingHandlers(
+    .webr_shim_library(...),
+    warning = function(w) {
+      # webR's shim only *warns* when a package doesn't exist in the wasm repo,
+      # and the site hides warnings (cell-options warning: false) — so a typo'd
+      # library() call would fail silently. Surface it as a real error instead.
+      if (grepl("not found in webR binary repo", conditionMessage(w), fixed = TRUE))
+        stop(conditionMessage(w), call. = FALSE)
+    }
+  )))
+}
 ```
