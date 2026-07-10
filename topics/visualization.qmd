@@ -19,6 +19,7 @@ Need inspiration for chart types?
 <ul>
   <li>General chart gallery: <a href="https://datavizproject.com/">The Data Visualization Catalogue</a></li>
   <li>R-focused chart chooser: <a href="https://www.data-to-viz.com/">From Data to Viz</a></li>
+  <li>ggplot2 cheatsheet: <a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">Data visualization with ggplot2 - Cheat Sheet</a></li>
 </ul>
 :::
 
@@ -83,7 +84,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 ```
 
 ## Step 5: Apply a theme to finalize the plot
-This applies `theme_classic()` to set the clean visual style used in this course.
+This applies `theme_classic()` to set a clean visual style.
 
 ```{webr-r}
 library(tidyverse)
@@ -110,7 +111,7 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 <summary>Scatter plot</summary>
 <div class="topic-card-body">
 
-Use `geom_point()` to plot individual observations — ideal for calibration curves.
+Use `geom_point()` to plot individual observations as points.
 
 ```{webr-r}
 library(tidyverse)
@@ -158,22 +159,17 @@ ggplot(standards, aes(x = conc_ug_ml, y = absorbance)) +
 <summary>Line plot</summary>
 <div class="topic-card-body">
 
-Use `geom_line()` for data over time — ideal for dissolution profiles.
+Use `geom_line()` for data over time.
 Map `colour` to a grouping variable to show multiple batches.
 
 ```{webr-r}
 library(tidyverse)
 
-standards <- tibble(
-  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
-  absorbance  = c(0.001, 0.112, 0.224, 0.445, 0.891, 1.782)
-)
-
 dissolution <- tibble(
-  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
-  batch         = rep(c("A", "B"), each = 6),
-  pct_dissolved = c(28, 52, 71, 85, 94, 98,
-                    22, 45, 65, 80, 91, 96)
+  time_min      = rep(c(0, 15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 7),
+  pct_dissolved = c(0, 28, 52, 71, 85, 94, 98,
+                    0, 22, 42, 60, 76, 89, 94)
 )
 
 ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
@@ -196,30 +192,36 @@ ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
 <div class="topic-card-body">
 
 ## Bar chart
-Use a bar chart `geom_col()` to visualize summarized values (one value per category).
+Use a bar chart `geom_col()` and `geom_errorbar()` to visualize summarized values (one value per category).
 
 ```{webr-r}
 library(tidyverse)
 
 capsules <- tibble(
   batch     = rep(c("A", "B"), each = 10),
-  pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
-                100.2, 99.9, 100.4, 99.7, 100.1,
-                100.5, 100.2, 100.7, 99.9, 100.4,
-                101.0, 100.6, 100.9, 100.3, 100.8)
+  pct_label = c(102.8, 98.1, 101.9, 96.7, 103.5,
+                99.4, 100.8, 97.3, 104.1, 101.2,
+                81.7, 78.4, 83.2, 76.9, 80.5,
+                79.1, 82.6, 77.8, 84.0, 80.9)
 )
 
 mean_by_batch <- capsules %>%
   group_by(batch) %>%
-  summarise(mean_pct = mean(pct_label), .groups = "drop")
+  summarise(
+    mean_pct = mean(pct_label),
+    sd_pct = sd(pct_label)
+    ) %>%
+  ungroup()
 
 ggplot(mean_by_batch, aes(x = batch, y = mean_pct)) +
   geom_col(fill = "#5F7D61") +
+  geom_errorbar(aes(ymin = mean_pct - sd_pct, ymax = mean_pct + sd_pct), width = 0.2) +
   labs(
     title = "Mean % Label Claim by Batch",
     x     = "Batch",
     y     = "Mean % Label Claim"
   ) +
+  scale_y_continuous(expand = c(0, 0)) +
   theme_classic()
 ```
 
@@ -230,7 +232,6 @@ Use a histogram `geom_histogram()` to visualize the distribution of many raw num
 library(tidyverse)
 
 capsules <- tibble(
-  batch     = rep(c("A", "B"), each = 10),
   pct_label = c(99.8, 100.1, 100.3, 99.6, 100.0,
                 100.2, 99.9, 100.4, 99.7, 100.1,
                 100.5, 100.2, 100.7, 99.9, 100.4,
@@ -321,10 +322,10 @@ Map `colour` (points/lines) or `fill` (bars/boxes) to a variable when group iden
 library(tidyverse)
 
 dissolution <- tibble(
-  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
-  batch         = rep(c("A", "B"), each = 6),
-  pct_dissolved = c(28, 52, 71, 85, 94, 98,
-                    22, 45, 65, 80, 91, 96)
+  time_min      = rep(c(0, 15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 7),
+  pct_dissolved = c(0, 28, 52, 71, 85, 94, 98,
+                    0, 22, 42, 60, 76, 89, 94)
 )
 
 ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch)) +
@@ -347,22 +348,23 @@ To make your chart accessible for people with colorblindness, you can also map `
 library(tidyverse)
 
 dissolution <- tibble(
-  time_min      = rep(c(15, 30, 45, 60, 90, 120), 2),
-  batch         = rep(c("A", "B"), each = 6),
-  pct_dissolved = c(28, 52, 71, 85, 94, 98,
-                    22, 45, 65, 80, 91, 96)
+  time_min      = rep(c(0, 15, 30, 45, 60, 90, 120), 2),
+  batch         = rep(c("A", "B"), each = 7),
+  pct_dissolved = c(0, 28, 52, 71, 85, 94, 98,
+                    0, 22, 42, 60, 76, 89, 94)
 )
 
 ggplot(dissolution, aes(x = time_min, y = pct_dissolved, colour = batch, shape = batch)) +
   geom_line(linewidth = 1) +
-  geom_point(size = 2.2) +
+  geom_point(size = 3) +
   scale_colour_manual(values = c("A" = "#2F6B4F", "B" = "#D17B2D")) +
-  labs(
-    title  = "Color separates groups",
-    x      = "Time (min)",
-    y      = "% Dissolved",
-    colour = "Batch"
-  ) +
+labs(
+  title = "Color + shape separates groups",
+  x = "Time (min)",
+  y = "% Dissolved",
+  colour = "Batch",
+  shape = "Batch"
+) +
   theme_classic()
 ```
 
@@ -485,35 +487,7 @@ ggplot(dense_capsules, aes(x = batch, y = pct_label, colour = batch)) +
   theme_classic()
 ```
 
-## 3) Use a 2D binning layer
-When point count is high, summarize density with bins.
-
-```{webr-r}
-library(tidyverse)
-
-set.seed(42)
-
-dense_capsules <- tibble(
-  batch_num = c(rep(1, 200), rep(2, 200)),
-  pct_label = c(
-    rnorm(200, mean = 100.1, sd = 0.25),
-    rnorm(200, mean = 100.5, sd = 0.28)
-  )
-)
-
-ggplot(dense_capsules, aes(x = batch_num, y = pct_label)) +
-  geom_bin2d(bins = 22) +
-  scale_x_continuous(breaks = c(1, 2), labels = c("A", "B")) +
-  labs(
-    title = "Fight overplotting with 2D bins",
-    x = "Batch",
-    y = "% Label Claim",
-    fill = "Count"
-  ) +
-  theme_classic()
-```
-
-## 4) Use visual abstraction
+## 3) Use visual abstraction
 Sometimes the best fix is to summarize the data (for example with violin or box plots).
 See the next collapsible section, **Visual abstraction: low to high**.
 
