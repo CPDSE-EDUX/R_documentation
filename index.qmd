@@ -47,10 +47,10 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <h3>Hypothesis Testing</h3>
 <p>t-tests, chi-square, and Mann–Whitney tests for clinical data.</p>
 </a>
-<a href="#" class="feature-card" style="display:none">
+<a href="topics/linear-regression.qmd" class="feature-card">
 <div class="card-icon">📐</div>
-<h3>Regression</h3>
-<p>Understand dose–response relationships with linear and logistic regression.</p>
+<h3>Linear Regression</h3>
+<p>Fit straight-line models with lm(), interpret coefficients, and visualize model fits.</p>
 </a>
 </div>
 

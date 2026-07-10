@@ -1,0 +1,186 @@
+---
+title: "coef( )"
+subtitle: "Extract model coefficients. coef() is a generic function in base R (stats package)."
+---
+
+<div class="source-links">
+<a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/coef.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://www.rdocumentation.org/packages/stats/topics/coef" target="_blank" rel="noopener">R Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# coef() is in base R (stats), loaded by default — no package installation needed
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+coef(object)
+```
+::: {.desc-item}
+`coef(object)` extracts estimated coefficients from a fitted model object.
+For a simple linear model, this usually returns intercept and slope.
+:::
+
+```{r, eval=FALSE}
+coefs <- coef(model)
+
+intercept <- coefs[[1]]
+slope <- coefs[[2]]
+```
+::: {.desc-item}
+Use indexing when you need individual coefficient values for calculations, plotting, or formatted output.
+:::
+
+::: {.callout-tip collapse="true"}
+## `coef()` vs `summary(model)$coefficients`
+Use `coef(model)` when you only need the coefficient estimates.
+Use `summary(model)$coefficients` when you also need standard errors, t-values, and p-values.
+:::
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>object</code> — fitted model object <span class="arg-types">model object</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The fitted object from which coefficients should be extracted.
+Commonly produced by `lm()`, but `coef()` also works for many other model classes.
+
+```r
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+coef(model)
+```
+
+<p class="data-types"><strong>Data Types:</strong> model object (for example <code>lm</code>, <code>glm</code>, <code>nls</code>)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — method-specific options <span class="arg-types">various</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Additional arguments passed to class-specific methods.
+For many everyday `lm()` uses, you do not need to set any extra arguments.
+
+
+<p class="data-types"><strong>Data Types:</strong> depends on model class</p>
+</div>
+</details>
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Extract intercept and slope from an lm() model</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+coefs <- coef(model)
+intercept <- coefs[[1]]
+slope <- coefs[[2]]
+
+cat("Intercept:", signif(intercept, 4), "\n")
+cat("Slope:    ", signif(slope, 4), "\n")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Access coefficients by name</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+coefs <- coef(model)
+
+coefs
+
+intercept <- coefs["(Intercept)"]
+slope <- coefs["conc_ug_ml"]
+
+cat("Intercept (named):", signif(intercept, 4), "\n")
+cat("Slope (named):    ", signif(slope, 4), "\n")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Use coef() values to draw a regression line in ggplot</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+coefs <- coef(model)
+
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  geom_abline(
+    intercept = coefs[[1]],
+    slope = coefs[[2]],
+    colour = "#3C5E3E",
+    linewidth = 1
+  ) +
+  labs(
+    title = "Regression Line from coef()",
+    x = "Concentration (ug/mL)",
+    y = "Absorbance"
+  ) +
+  theme_classic()
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Compare coef() with summary() coefficient table</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+cat("coef(model):\n")
+print(coef(model))
+
+cat("\nsummary(model)$coefficients:\n")
+print(summary(model)$coefficients)
+```
+</div>
+</details>
+
+</div>

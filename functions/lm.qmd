@@ -1,0 +1,258 @@
+---
+title: "lm( )"
+subtitle: "Fit linear regression models. lm() is part of base R (stats package)."
+---
+
+<div class="source-links">
+<a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lm.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://www.rdocumentation.org/packages/stats/topics/lm" target="_blank" rel="noopener">R Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# lm() is in base R (stats), loaded by default — no package installation needed
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+lm(y ~ x, data = df)
+
+# Pipe style (common in tidyverse workflows)
+df %>% lm(y ~ x, data = .)
+
+```
+::: {.desc-item}
+`lm(y ~ x, data = df)` fits a straight-line model in the form `y = ax + b`, where `a` is slope and `b` is intercept.
+In formula syntax, the left side is the response and the right side is the predictor(s).
+:::
+
+```{r, eval=FALSE}
+lm(y ~ 0 + x, data = df)
+lm(y ~ x - 1, data = df)
+```
+::: {.desc-item}
+The above variants fit a zero-intercept model (forced through the origin).
+Use this only when the scientific model justifies it.
+:::
+
+::: {.callout-tip collapse="true"}
+## Use helper functions on objects created by `lm()`?
+`lm()` returns a model object. Use helper functions to extract what you need:
+
+- `coef(model)` for intercept and slope
+- `summary(model)$r.squared` for goodness of fit
+- `predict(model, newdata = ...)` for predictions
+:::
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>formula</code> — model formula <span class="arg-types">formula</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Specifies the model structure, usually `y ~ x` for simple linear regression.
+Left side is the response variable; right side is the predictor.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration)
+lm(absorbance ~ 0 + conc_ug_ml, data = calibration)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>formula</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>data</code> — data frame containing variables <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Data source used to evaluate variables in the formula.
+
+This argument can be omitted, but then the variables in the formula (for example `y` and `x`) must already exist as objects in your environment.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Also valid if absorbance and conc_ug_ml already exist as standalone vectors:
+lm(absorbance ~ conc_ug_ml)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>subset</code> — rows to include in fit <span class="arg-types">logical | integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Fits the model on a selected subset of rows.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration, subset = conc_ug_ml <= 20)
+```
+
+<p class="data-types"><strong>Data Types:</strong> logical or integer row index · Default: all rows</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>weights</code> — observation weights <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Relative weights for weighted least squares (WLS).
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration, weights = wt)
+```
+
+<p class="data-types"><strong>Data Types:</strong> numeric vector (same length as observations) · Default: <code>NULL</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>na.action</code> — missing-value handling <span class="arg-types">function</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls how missing values are handled during model fitting.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration, na.action = na.exclude)
+```
+
+<p class="data-types"><strong>Data Types:</strong> function (for example <code>na.omit</code>, <code>na.exclude</code>) · Default: session option</p>
+</div>
+</details>
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Fit a calibration line and extract slope/intercept</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+coefs <- coef(model)
+intercept <- coefs[[1]]
+slope <- coefs[[2]]
+
+cat("Intercept:", signif(intercept, 4), "\n")
+cat("Slope:    ", signif(slope, 4), "\n")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Extract R-squared and inspect model summary</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+model_summary <- summary(model)
+
+r2 <- model_summary$r.squared
+cat("R-squared:", signif(r2, 4), "\n")
+
+# Optional: full printed report
+model_summary
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Predict absorbance at new concentration values</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+new_conc <- tibble(conc_ug_ml = c(7.5, 15, 30))
+pred_abs <- predict(model, newdata = new_conc)
+
+# Combine predictions with new concentration values
+bind_cols(new_conc, tibble(pred_absorbance = pred_abs))
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Add the fitted lm() line to a ggplot with geom_abline()</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+coefs <- coef(model)
+intercept <- coefs[[1]]
+slope <- coefs[[2]]
+
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  geom_abline(intercept = intercept, slope = slope, colour = "#3C5E3E", linewidth = 1) +
+  labs(
+    title = "Calibration Data with lm() Fit",
+    x = "Concentration (ug/mL)",
+    y = "Absorbance"
+  ) +
+  theme_classic()
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Compare free-intercept and zero-intercept models</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model_free <- lm(absorbance ~ conc_ug_ml, data = calibration)
+model_zero <- lm(absorbance ~ 0 + conc_ug_ml, data = calibration)
+
+cat("Free intercept model:\n")
+print(coef(model_free))
+
+cat("\nZero-intercept model:\n")
+print(coef(model_zero))
+```
+</div>
+</details>
+
+</div>

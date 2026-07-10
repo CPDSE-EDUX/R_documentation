@@ -1,0 +1,147 @@
+---
+title: "summary( )"
+subtitle: "Summarize an object. summary() is a generic function in base R."
+---
+
+<div class="source-links">
+<a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/summary.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://www.rdocumentation.org/packages/base/topics/summary" target="_blank" rel="noopener">R Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# summary() is in base R, loaded by default — no package installation needed
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+summary(object, ...)
+```
+::: {.desc-item}
+`summary(object)` returns a compact summary of an object.
+Because `summary()` is generic, output depends on the class of the object.
+:::
+
+::: {.callout-tip collapse="true"}
+## Why does summary() look different each time?
+`summary()` dispatches different methods based on object type.
+
+- Numeric vector: min, quartiles, median, mean, max
+- Data frame: summary for each column
+- Linear model (`lm`): residuals, coefficients, residual standard error, R-squared, F-statistic
+:::
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>object</code> — object to summarize <span class="arg-types">any R object</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The object for which summary information should be produced.
+
+```r
+summary(x)
+summary(df)
+summary(model)
+```
+
+<p class="data-types"><strong>Data Types:</strong> numeric, factor, data frame, model object, and many others</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — method-specific options <span class="arg-types">various</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Additional arguments passed to class-specific summary methods.
+Most common beginner use is simply `summary(object)` with no extra arguments.
+
+<p class="data-types"><strong>Data Types:</strong> depends on object class</p>
+</div>
+</details>
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Summarize a numeric vector</summary>
+<div class="example-body">
+
+```{webr-r}
+x <- c(98.4, 99.1, 100.3, 101.0, 99.8, 100.2)
+
+summary(x)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Summarize each column in a data frame</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+summary(calibration)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Summarize an lm() model and extract R-squared</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+model_summary <- summary(model)
+
+model_summary
+
+r2 <- model_summary$r.squared
+cat("R-squared:", signif(r2, 4), "\n")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Compare summary() and coef() for a model</summary>
+<div class="example-body">
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+cat("coef(model):\n")
+print(coef(model))
+
+cat("\nsummary(model)$coefficients:\n")
+print(summary(model)$coefficients)
+```
+</div>
+</details>
+
+</div>
