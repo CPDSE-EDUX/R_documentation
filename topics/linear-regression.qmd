@@ -1,0 +1,386 @@
+---
+title: "Linear Regression"
+subtitle: "Simple linear regression with lm(): coefficients, R-squared, prediction, and plotting."
+toc: false
+---
+
+<details class="topic-card" open>
+<summary>Fit a simple linear regression with lm()</summary>
+<div class="topic-card-body">
+
+Use `lm()` to model a linear relationship between predictor values (`x`) and response values (`y`).
+
+Model form:
+
+$$
+y = ax + b
+$$
+
+- $a$: slope (how much `y` changes when `x` increases by 1)
+- $b$: intercept (predicted `y` when `x = 0`)
+
+In R, that same model is written as `y ~ x` inside `lm()`.
+
+- Left side of `~`: response variable (`y`)
+- Right side of `~`: predictor variable (`x`)
+
+So `lm(absorbance ~ conc_ug_ml, data = calibration)` means:
+"Model absorbance as a linear function of concentration."
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Print a short model summary (coefficients)
+coef(model)
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Extract slope and intercept with coef()</summary>
+<div class="topic-card-body">
+
+`coef(model)` returns the estimated coefficients as a small vector.
+
+For a simple model `y ~ x`, indexing works like this:
+
+- `coefs[[1]]`: intercept (`b` in `y = ax + b`)
+- `coefs[[2]]`: slope (`a` in `y = ax + b`)
+
+::: {.callout-tip collapse="true"}
+## Why use `[[ ]]` here?
+`coef(model)` returns a named vector (for example with names like `(Intercept)` and `conc_ug_ml`).
+
+- `coefs[1]` returns a vector of length 1 (still a vector, with its name attached)
+- `coefs[[1]]` returns the single numeric value only
+
+Here we use `[[ ]]` because we want the plain number for calculations and `cat()` output.
+:::
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Store the coefficient vector once
+coefs <- coef(model)
+
+# Index 1 = intercept (b), index 2 = slope (a)
+intercept <- coefs[[1]]
+slope <- coefs[[2]]
+
+cat("Intercept:", signif(intercept, 4), "\n")
+cat("Slope:    ", signif(slope, 4), "\n")
+```
+
+
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Use summary() and extract R-squared</summary>
+<div class="topic-card-body">
+
+R^2^, used to interpret goodness of fit, can be assessed from `summary(model)` and extracted as `$r.squared`.
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+model_summary <- summary(model)
+
+# Extract R-squared directly
+r2 <- model_summary$r.squared
+cat("R-squared:", signif(r2, 4), "\n")
+```
+
+If you run `summary(model)` and scroll through the output, you also get:
+
+- Residuals (differences between observed and predicted values)
+- Coefficients table (estimate, standard error, t value, p-value)
+- Residual standard error
+- Adjusted R-squared
+- F-statistic
+
+For full output, run:
+
+```{webr-r}
+# Optional: print the full regression report
+summary(model)
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Force the regression through (0,0)</summary>
+<div class="topic-card-body">
+
+If your scientific model requires zero intercept, fit without an intercept term.
+
+Equivalent formulas:
+
+- `y ~ 0 + x`
+- `y ~ x - 1`
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model_free <- lm(absorbance ~ conc_ug_ml, data = calibration)
+model_zero <- lm(absorbance ~ 0 + conc_ug_ml, data = calibration)
+
+cat("Free intercept model coefficients:\n")
+print(coef(model_free))
+
+cat("\nZero-intercept model coefficient:\n")
+print(coef(model_zero))
+```
+
+::: {.callout-note}
+Use a forced-zero model only when it is scientifically justified. Otherwise, it can bias slope estimates.
+:::
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Predict new values with the regression model</summary>
+<div class="topic-card-body">
+
+## Standard approach: use `predict()` directly
+
+In general, if you have new predictor values (`x`) and want predicted response values (`y`), use `predict()` directly.
+
+If your model is `absorbance ~ conc_ug_ml`, that means:
+
+- input: new concentration values
+- output: predicted absorbance values
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+new_conc <- tibble(conc_ug_ml = c(7.5, 15, 30))
+pred_abs <- predict(model, newdata = new_conc)
+
+bind_cols(new_conc, tibble(pred_absorbance = pred_abs))
+```
+
+## Calibration workflow: estimate concentration from absorbance
+
+The opposite direction can also be useful: if you have new response values (`y`) and want the corresponding predictor values (`x`).
+
+In calibration work, this is common: you measure absorbance (response, `y`) and want concentration (predictor, `x`).
+
+Because the fitted model is still `absorbance ~ concentration`, estimate concentration by rearranging the fitted line:
+
+$$
+  concentration = \frac{\text{absorbance} - b}{a}
+$$
+
+where `a` is slope and `b` is intercept.
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Extract slope (a) and intercept (b)
+coefs <- coef(model)
+b <- coefs[[1]]
+a <- coefs[[2]]
+
+# New absorbance readings from samples
+sample_abs <- tibble(absorbance = c(0.180, 0.320, 0.750))
+
+# Estimate concentrations from absorbance
+sample_abs %>%
+  mutate(pred_conc_ug_ml = (absorbance - b) / a)
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Plot the regression with geom_smooth() and geom_abline()</summary>
+<div class="topic-card-body">
+
+`geom_smooth(method = "lm")` fits and draws the line directly.
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, colour = "#3C5E3E") +
+  labs(
+    title = "Calibration Data with Linear Fit",
+    x = "Concentration (ug/mL)",
+    y = "Absorbance"
+  ) +
+  theme_classic()
+```
+
+Use `geom_abline()` if you want to draw a line from known coefficients.
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+intercept <- coef(model)[[1]]
+slope <- coef(model)[[2]]
+
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  geom_abline(intercept = intercept, slope = slope, colour = "#8B3A3A", linewidth = 1) +
+  labs(
+    title = "Calibration Data with geom_abline()",
+    x = "Concentration (ug/mL)",
+    y = "Absorbance"
+  ) +
+  theme_classic()
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Annotate equation and R2 on the plot</summary>
+<div class="topic-card-body">
+
+You can extract slope/intercept and $R^2$, print them with `cat()`, and also place them on the plot.
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Pull out fitted line parameters and goodness-of-fit
+intercept <- coef(model)[[1]]
+slope <- coef(model)[[2]]
+r2 <- summary(model)$r.squared
+
+# Build text strings that will be shown on the plot
+eq_label <- paste("y =", signif(intercept, 4), "+", signif(slope, 4), "x")
+r2_label <- paste("R2 =", signif(r2, 4))
+
+# Also print equation and R2 in the console
+cat("Equation:", eq_label, "\n")
+cat("R2:", signif(r2, 4), "\n")
+
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2) +
+  geom_abline(intercept = intercept, slope = slope, colour = "#3C5E3E", linewidth = 1) +
+  # Add equation and R2 text labels onto the figure
+  annotate("text", x = 26, y = 0.35, label = eq_label, hjust = 0, size = 4) +
+  annotate("text", x = 26, y = 0.27, label = r2_label, hjust = 0, size = 4) +
+  labs(
+    title = "Linear Regression with Equation and R2",
+    x = "Concentration (ug/mL)",
+    y = "Absorbance"
+  ) +
+  theme_classic()
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Quick quality checks and common pitfalls</summary>
+<div class="topic-card-body">
+
+Simple linear regression works best when:
+
+- The relationship is approximately linear
+- Residual spread is reasonably constant
+- Outliers are checked and justified
+- Predictions are mainly within the measured range
+
+How to use the diagnostic plot (`plot(model, which = 1)`):
+
+- X-axis: fitted values (predicted absorbance)
+- Y-axis: residuals (`observed - predicted`)
+
+What you want to see:
+
+- A random cloud of points around 0
+- No clear curve pattern
+- Similar vertical spread across the full x-range
+
+What can indicate a problem:
+
+- Curved pattern: the relationship may not be linear
+- Funnel shape (narrow on one side, wide on the other): non-constant variance
+- A few points far away from the rest: possible influential outliers to investigate
+
+This plot is not a "pass/fail" test by itself. Use it as a quick visual check before interpreting slope, intercept, and predictions.
+
+Starter diagnostic example:
+
+```{webr-r}
+library(tidyverse)
+
+calibration <- tibble(
+  conc_ug_ml = c(0, 2.5, 5.0, 10.0, 20.0, 40.0),
+  absorbance = c(0.003, 0.057, 0.110, 0.226, 0.441, 0.889)
+)
+
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Residuals vs fitted values (first diagnostic view)
+plot(model, which = 1)
+```
+
+</div>
+</details>

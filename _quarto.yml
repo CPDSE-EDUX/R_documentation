@@ -28,6 +28,8 @@ website:
             href: topics/data-handling.qmd
           - text: "Descriptive Statistics"
             href: topics/descriptive-stats.qmd
+          - text: "Linear Regression"
+            href: topics/linear-regression.qmd
           - text: "Visualization"
             href: topics/visualization.qmd
       - text: "Functions"
@@ -61,6 +63,14 @@ website:
               href: functions/mutate.qmd
             - text: "summarise( )"
               href: functions/summarise.qmd
+        - section: "Model"
+          contents:
+            - text: "coef( )"
+              href: functions/coef.qmd
+            - text: "lm( )"
+              href: functions/lm.qmd
+            - text: "summary( )"
+              href: functions/summary.qmd
         - section: "Report"
           contents:
             - text: "cat( )"

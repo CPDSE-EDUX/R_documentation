@@ -13,10 +13,18 @@ body-classes: "function-reference-page"
 ### **[cat( )](cat.qmd)**
 Print values to the console as readable text, useful for clear labelled output.
 
+### **[coef( )](coef.qmd)**
+Extract estimated coefficients from fitted model objects.
+
 ## G {.glossary-letter}
 
 ### **[group_by( )](group-by.qmd)**
 Group rows by one or more columns so dplyr verbs can work within each group.
+
+## L {.glossary-letter}
+
+### **[lm( )](lm.qmd)**
+Fit linear regression models and extract slope, intercept, and model fit statistics.
 
 ## M {.glossary-letter}
 
@@ -35,6 +43,9 @@ Round numbers to a fixed number of decimal places.
 
 ### **[summarise( )](summarise.qmd)**
 Create compact summary tables from a data frame or grouped data frame.
+
+### **[summary( )](summary.qmd)**
+Produce a compact summary of vectors, data frames, and model objects.
 
 ### **[signif( )](signif.qmd)**
 Round numbers to a chosen number of significant figures.
