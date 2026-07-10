@@ -58,7 +58,7 @@ ggplot(data = capsules, aes(x = time_min, y = pct_release))
 </details>
 
 <details class="arg-item">
-<summary><code>mapping</code> — aesthetic mappings made with <code>aes()</code> <span class="arg-types">uneval mapping</span> <span class="arg-badge optional">Optional</span></summary>
+<summary><code>aes() mapping</code> — aesthetic mappings <span class="arg-types">uneval mapping</span> <span class="arg-badge optional">Optional</span></summary>
 <div class="arg-body">
 Defines how variables map to visual properties like `x`, `y`, `color`, `shape`, `linetype`, or `size`.
 Aesthetic mappings connect data variables to visual properties so the appearance changes automatically with the data.
