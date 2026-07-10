@@ -33,6 +33,9 @@ Round numbers to a fixed number of decimal places.
 
 ## S {.glossary-letter}
 
+### **[summarise( )](summarise.qmd)**
+Create compact summary tables from a data frame or grouped data frame.
+
 ### **[signif( )](signif.qmd)**
 Round numbers to a chosen number of significant figures.
 

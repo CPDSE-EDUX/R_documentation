@@ -59,6 +59,8 @@ website:
               href: functions/group-by.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
+            - text: "summarise( )"
+              href: functions/summarise.qmd
         - section: "Report"
           contents:
             - text: "cat( )"
