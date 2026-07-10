@@ -36,7 +36,7 @@ This is useful when you want exact counts for each category.
 ```{webr-r}
 library(tidyverse)
 
-df_cat <- tibble::tibble(batch = c("A", "A", "A", "B", "B", "C"))
+df_cat <- tibble(batch = c("A", "A", "A", "B", "B", "C"))
 
 # Frequency table for categories
 df_cat %>%
@@ -50,13 +50,13 @@ Use it to compare how many observations belong to each group.
 ```{webr-r}
 library(tidyverse)
 
-df_cat <- tibble::tibble(batch = c("A", "A", "A", "B", "B", "C"))
+df_cat <- tibble(batch = c("A", "A", "A", "B", "B", "C"))
 
 # Bar chart (categorical frequencies)
-barplot(table(df_cat$batch),
-        main = "Batch frequencies",
-        xlab = "Batch",
-        ylab = "Count")
+ggplot(df_cat, aes(x = batch)) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Batch frequencies", x = "Batch", y = "Count") +
+  theme_classic()
 ```
 
 ## Histogram
@@ -66,15 +66,13 @@ Use it to see where values cluster and how spread out they are.
 ```{webr-r}
 library(tidyverse)
 
-df_cat <- tibble::tibble(batch = c("A", "A", "A", "B", "B", "C"))
-
 # Histogram (numeric frequencies)
-x <- c(9.8, 10.2, 10.5, 10.1, 10.4, 10.0, 9.9, 10.3, 10.6, 10.2)
-hist(x,
-     main = "Histogram of values",
-     xlab = "Value",
-     col = "lightgray",
-     border = "white")
+df <- tibble(x = c(9.8, 10.2, 10.5, 10.1, 10.4, 10.0, 9.9, 10.3, 10.6, 10.2))
+
+ggplot(df, aes(x = x)) +
+  geom_histogram(binwidth = 0.2, fill = "lightgray", color = "white") +
+  labs(title = "Histogram of values", x = "Value", y = "Count") +
+  theme_classic()
 ```
 
 </div>
@@ -174,7 +172,7 @@ Use `summarize()` for whole-table summaries, and combine with `group_by()` for p
 ```{webr-r}
 library(dplyr)
 
-df <- tibble::tibble(
+df <- tibble(
   batch = c("A", "A", "B", "B", "B"),
   value = c(9.8, 10.2, 10.5, 10.1, 10.4)
 )
@@ -210,20 +208,23 @@ This is why descriptive statistics should be paired with visualization, not used
 
 ```{webr-r}
 # Built-in dataset: anscombe
+library(tidyverse)
+
 summary(anscombe)
 
-par(mfrow = c(2, 2))
-for (i in 1:4) {
-  x <- anscombe[[paste0("x", i)]]
-  y <- anscombe[[paste0("y", i)]]
-  plot(x, y,
-       main = paste("Dataset", i),
-       xlab = paste0("x", i),
-       ylab = paste0("y", i),
-       pch = 19,
-       col = "steelblue")
-  abline(lm(y ~ x), col = "firebrick", lwd = 2)
-}
+anscombe_long <- bind_rows(
+  tibble(dataset = "1", x = anscombe$x1, y = anscombe$y1),
+  tibble(dataset = "2", x = anscombe$x2, y = anscombe$y2),
+  tibble(dataset = "3", x = anscombe$x3, y = anscombe$y3),
+  tibble(dataset = "4", x = anscombe$x4, y = anscombe$y4)
+)
+
+ggplot(anscombe_long, aes(x = x, y = y)) +
+  geom_point(color = "steelblue", size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "firebrick") +
+  facet_wrap(~dataset, ncol = 2) +
+  labs(title = "Anscombe's Quartet", x = "x", y = "y") +
+  theme_minimal()
 ```
 
 </div>
