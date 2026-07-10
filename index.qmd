@@ -27,6 +27,11 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <h3>Data Handling</h3>
 <p>Import spreadsheets, tidy messy data, and select the rows and columns you need.</p>
 </a>
+<a href="topics/pipe-operator.qmd" class="feature-card">
+<div class="card-icon">➡️</div>
+<h3>Pipe Operator (%&gt;%)</h3>
+<p>Learn how to read and write `%&gt;%` pipelines, from simple chains to multi-step data workflows.</p>
+</a>
 <a href="topics/visualization.qmd" class="feature-card">
 <div class="card-icon">📈</div>
 <h3>Visualization</h3>

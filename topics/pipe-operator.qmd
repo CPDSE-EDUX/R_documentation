@@ -1,0 +1,178 @@
+---
+title: "Pipe Operator (%>%)"
+subtitle: "Read and write data workflows from left to right with clear, step-by-step pipelines."
+toc: false
+---
+
+<details class="topic-card" open>
+<summary>What the pipe means</summary>
+<div class="topic-card-body">
+
+The tidyverse pipe `%>%` takes the result on the left and passes it into the first argument of the function on the right.
+
+Read this:
+
+```r
+data %>% filter(batch == "A")
+```
+
+as:
+
+"Take `data`, and then filter rows where batch is A."
+
+This left-to-right reading is the main reason pipes are easier to understand when workflows become longer.
+
+::: {.callout-note}
+`%>%` is provided by `magrittr` (loaded automatically by `library(tidyverse)`).
+:::
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Keyboard shortcut for `%>%`</summary>
+<div class="topic-card-body">
+
+In RStudio, you can insert `%>%` with:
+
+- **Windows / Linux**: `Ctrl + Shift + M`
+- **Mac**: `Cmd + Shift + M`
+
+This is the fastest way to build pipelines while coding.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Simple comparison: no pipe vs pipe</summary>
+<div class="topic-card-body">
+
+Start with a very small example so the pattern is clear.
+
+### No pipe
+
+```{webr-r}
+library(tidyverse)
+
+x <- c(3.14159, 2.71828, 1.41421)
+
+round(signif(x, 3), 2)
+```
+
+### With pipe
+
+```{webr-r}
+library(tidyverse)
+
+x <- c(3.14159, 2.71828, 1.41421)
+
+x %>%
+  signif(3) %>%
+  round(2)
+```
+
+Both versions return the same result. The piped version is often easier to read because each step is on its own line.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>More complex comparison: why pipes help</summary>
+<div class="topic-card-body">
+
+Now compare a realistic multi-step data workflow.
+
+### No pipe (nested calls)
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  capsule_id = 1:8,
+  batch = c("A", "A", "A", "B", "B", "B", "B", "A"),
+  fill_mass_mg = c(173, 176, 170, 160, 158, 161, 159, 175)
+)
+
+arrange(
+  mutate(
+    filter(capsules, batch == "B"),
+    pct_target = fill_mass_mg / 160 * 100
+  ),
+  desc(pct_target)
+)
+```
+
+### With pipe (step-by-step flow)
+
+```{webr-r}
+library(tidyverse)
+
+capsules <- tibble(
+  capsule_id = 1:8,
+  batch = c("A", "A", "A", "B", "B", "B", "B", "A"),
+  fill_mass_mg = c(173, 176, 170, 160, 158, 161, 159, 175)
+)
+
+capsules %>%
+  filter(batch == "B") %>%
+  mutate(pct_target = fill_mass_mg / 160 * 100) %>%
+  arrange(desc(pct_target))
+```
+
+Both versions are equivalent, but the piped version makes intent much clearer:
+
+1. Start from `capsules`
+2. Keep only batch B
+3. Add `%` of target column
+4. Sort from highest to lowest
+
+That readability is the main motivation for using pipes in tidyverse workflows.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>How to read a pipeline line by line</summary>
+<div class="topic-card-body">
+
+Use this template mentally:
+
+```r
+object %>%
+  step_1(...) %>%
+  step_2(...) %>%
+  step_3(...)
+```
+
+Read it as:
+
+- "Take `object`"
+- "and then do `step_1`"
+- "and then do `step_2`"
+- "and then do `step_3`"
+
+If a pipeline feels hard to read, add line breaks so each transformation has its own line.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>When to avoid piping</summary>
+<div class="topic-card-body">
+
+Pipes are great for transformations, but you can skip them for very short one-step calls.
+
+```r
+mean(x)
+```
+
+is often clearer than
+
+```r
+x %>% mean()
+```
+
+Rule of thumb: use pipes when they improve readability across multiple steps.
+
+</div>
+</details>
