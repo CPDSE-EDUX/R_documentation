@@ -31,6 +31,20 @@ When you open RStudio you will see four panes:
 | **Environment** (top-right) | See all objects currently in memory |
 | **Files / Plots** (bottom-right) | Browse files, view plots, read help pages |
 
+At first, the **Source** pane may be empty or not visible yet. That is normal: the Source pane shows script files, so you need to create or open one before it appears.
+
+To create your first script, go to **File -> New File -> R Script**. Save it with a meaningful name (for example `my_first_script.R`).
+
+Good beginner habit: write code in the Source pane and run it from there, rather than typing everything directly in the Console. This gives you a saved, reusable record of your work.
+
+To run code from a script:
+
+- Place the cursor on a line (or select multiple lines)
+- Press **Ctrl+Enter** (Windows) / **Cmd+Enter** (Mac)
+- Read output in the **Console**
+
+As you run code, created objects appear in the **Environment** pane, and plots appear in the **Plots** tab.
+
 ![RStudio Panels](../assets/images/RStudio_Panels.png)
 
 [Watch: RStudio in 3 minutes (YouTube) ↗](https://www.youtube.com/watch?v=GEuuhg7NBko){target="_blank" rel="noopener"}
@@ -91,14 +105,27 @@ The type matters because it determines what you can do with a value. You can cal
 
 In R, even a single value is stored as an object. When you have multiple values of the same type, they form a vector. And when you organize vectors into columns, you get a tibble — a modern version of a data frame with rows (observations) and columns (variables), similar to a table.
 
-You create an object by assigning a value to a name using `<-`. On the left side of `<-`you write the name of your object (any name you choose). On the right side you write the data you want to store in that object.
+You create an object by assigning a value to a name using `<-`. On the left side of `<-` you write the object name. On the right side you write the value you want to store.
+
+Before writing your first objects, use these naming rules:
+
+- Start names with a letter
+- Use only letters, numbers, and `_`
+- Do not use spaces or special characters like `-`, `/`, `?`, `!`
+- Names are case-sensitive (`dose_mg` and `Dose_mg` are different)
+- Use descriptive names, ideally with units when relevant (for example `weight_kg`)
+
+Examples:
+
+- Good: `dose_mg`, `patient_id`, `reaction_time_s`
+- Avoid: `dose mg` (space), `2dose` (starts with number), `x` (too vague)
 
 ```r
 temperature <- 22.5 
 capital_city <- "Copenhagen"  
 ```
 
-Multiple values of the same type form a vector:
+Multiple values of the same type can be combined using the `c()` function to form a vector:
 
 ```r
 cities <- c("Copenhagen", "Aarhus", "Odense")
@@ -117,7 +144,7 @@ weather <- tibble(
 ```
 
 ::: {.callout-note}
-Object names must not contain spaces. Use _ instead, e.g. air_temperature. Choose meaningful object names that describe what is stored and, where relevant, include the unit. E.g., `dose_mg` instead of `value`.
+Use clear, consistent naming from the beginning. Prefer `snake_case` (lowercase with `_`) such as `air_temperature` and `dose_mg`.
 :::
 
 Data is read into R from files using functions like [`read_csv()`](../functions/read-csv.qmd).
@@ -239,7 +266,15 @@ R produces output in three main ways: printing to the console, viewing objects, 
 
 ### Print to Console
 
-Use [`cat()`](../functions/cat.qmd) to print labelled results with units to the console:
+For a quick check, run a line that contains only an object name:
+
+```r
+dose_per_kg
+```
+
+R will print the current value in the Console. This is useful when you just want to inspect a result quickly.
+
+When you want clear labels and units in your output, use [`cat()`](../functions/cat.qmd):
 
 ```{webr-r}
 dose_mg     <- 500
@@ -261,7 +296,15 @@ Use [`signif()`](../functions/signif.qmd) for concentrations and masses (signifi
 
 ### View Objects
 
-Inspect a data object in the RStudio **Environment panel**, or open it as a table:
+Inspect a data object in the RStudio **Environment panel**.
+
+For tibbles/data frames, start with `glimpse()` to quickly see column names, data types, and example values:
+
+```r
+glimpse(your_data_object)
+```
+
+If you want a spreadsheet-like view, open it as a table:
 
 ```r
 View(your_data_object)
