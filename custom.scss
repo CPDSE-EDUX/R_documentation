@@ -571,6 +571,13 @@ details.arg-item {
 // quarto-live renders each ```{webr} block client-side into a `.exercise-cell`:
 // a Bootstrap card (editor toolbar + CodeMirror) followed by `.cell-output-container`.
 
+// Hide the fixed bottom-right startup popup ("Downloading webR", "Downloading
+// package: …"). The extension has no option to disable it, so hide it with CSS.
+// Per-cell run spinners in the editor toolbar are unaffected.
+.exercise-loading-indicator {
+  display: none !important;
+}
+
 .exercise-cell {
   margin-bottom: 1.25rem;
 
