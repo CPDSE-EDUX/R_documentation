@@ -16,6 +16,11 @@ Print values to the console as readable text, useful for clear labelled output.
 ### **[coef( )](coef.qmd)**
 Extract estimated coefficients from fitted model objects.
 
+## F {.glossary-letter}
+
+### **[filter( )](filter.qmd)**
+Keep rows that match one or more logical conditions.
+
 ## G {.glossary-letter}
 
 ### **[ggplot( )](ggplot.qmd)**

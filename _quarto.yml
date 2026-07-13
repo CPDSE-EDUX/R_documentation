@@ -24,6 +24,8 @@ website:
         menu:
           - text: "Getting Started"
             href: topics/getting-started.qmd
+          - text: "Error Handling and Debugging"
+            href: topics/error-handling-and-debugging.qmd
           - text: "Math Operations"
             href: topics/math-operations.qmd
           - text: "---"
@@ -66,6 +68,8 @@ website:
           contents:
             - text: "group_by( )"
               href: functions/group-by.qmd
+            - text: "filter( )"
+              href: functions/filter.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
             - text: "summarise( )"

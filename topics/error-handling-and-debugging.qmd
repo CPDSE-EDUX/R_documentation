@@ -1,0 +1,119 @@
+---
+title: "Error Handling and Debugging"
+subtitle: "Understand common R errors and fix them quickly with a simple debugging workflow."
+toc: false
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<details class="topic-card" open>
+<summary>Syntax / typing</summary>
+<div class="topic-card-body">
+
+- Typos in names — R is case-sensitive (`Data` != `data`)
+- `=` vs `==` in conditions
+- Unbalanced parentheses/quotes -> console stuck on `+`
+- Missing commas in function args
+- spacing bugs like `x < -3` vs `x <- 3`
+
+```{webr}
+# 1) Case sensitivity: Data and data are different names
+data <- 10
+# Data   # would fail: object 'Data' not found
+
+# 2) Assignment vs comparison
+x <- 3
+x == 3
+
+# 3) Spacing pitfall
+x <- 3
+y <- -3
+
+cat("x:", x, "\n")
+cat("y:", y, "\n")
+cat("x < -3:", x < -3, "\n")
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Object and data errors</summary>
+<div class="topic-card-body">
+
+Common messages include:
+
+- `object 'name' not found`
+- `subscript out of bounds`
+- `NAs introduced by coercion`
+
+These usually mean one of three things: the object was never created, a column name is wrong, or a conversion (for example text to numeric) failed.
+
+```{webr}
+library(tidyverse)
+
+df <- tibble(
+  id = 1:3,
+  conc_text = c("4.1", "5.0", "bad")
+)
+
+df %>%
+  mutate(conc_num = as.numeric(conc_text))
+```
+
+Tip: use `names(df)`, `glimpse(df)`, and `head(df)` before complex transformations.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Function, package, and argument errors</summary>
+<div class="topic-card-body">
+
+If R says it "could not find function", check that the package is installed and loaded.
+
+```r
+install.packages("tidyverse")  # once per computer
+library(tidyverse)              # every new session
+```
+
+If a function call fails:
+
+- Read the first error line first
+- Verify argument names in `?function_name`
+- Check data types expected by the function
+
+Example: [`filter()`](../functions/filter.qmd) expects logical conditions, while [`mutate()`](../functions/mutate.qmd) expects name-expression pairs.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>A simple debugging workflow</summary>
+<div class="topic-card-body">
+
+Use this sequence when code fails:
+
+1. Re-run only the failing line or chunk.
+2. Print intermediate objects (`head()`, `glimpse()`, `summary()`).
+3. Simplify to a minimal reproducible example.
+4. Check types (`class()`, `typeof()`, `is.na()`).
+5. Add one step back at a time until the error returns.
+
+For pipelines, break them into named steps temporarily:
+
+```{webr}
+library(tidyverse)
+
+step1 <- read_csv("data/capsules.csv")
+step2 <- step1 %>% filter(batch == "A")
+step3 <- step2 %>% mutate(adj_pct = pct_label - 100)
+
+glimpse(step3)
+```
+
+This helps isolate where the problem starts.
+
+</div>
+</details>
