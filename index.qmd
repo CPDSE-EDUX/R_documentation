@@ -34,7 +34,7 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <p>Import spreadsheets, tidy messy data, and select the rows and columns you need.</p>
 </a>
 <a href="topics/visualization.qmd" class="feature-card">
-<div class="card-icon">📈</div>
+<div class="card-icon">📊</div>
 <h3>Visualization</h3>
 <p>Create plots with ggplot2.</p>
 </a>
@@ -49,7 +49,7 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <p>Learn how to read and write `%&gt;%` pipelines, from simple chains to multi-step data workflows.</p>
 </a>
 <a href="topics/descriptive-stats.qmd" class="feature-card">
-<div class="card-icon">📊</div>
+<div class="card-icon">📋</div>
 <h3>Descriptive Statistics</h3>
 <p>Summarise your data: means, medians, standard deviations, and more.</p>
 </a>
