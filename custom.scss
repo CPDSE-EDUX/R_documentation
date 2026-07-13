@@ -581,6 +581,13 @@ details.arg-item {
 .exercise-cell {
   margin-bottom: 1.25rem;
 
+  // Match the background used by static ```r blocks (div.sourceCode),
+  // since these vars otherwise default to plain white (body bg).
+  --exercise-main-bg: #{$c-bg-sec};
+  --exercise-code-block-bg: #{$c-bg-sec};
+  --exercise-code-block-color: #{$c-text};
+  --exercise-cap-bg: #{$c-bg-sec};
+
   .card {
     border: 0.5px solid $c-border;
     border-radius: $radius-lg;
