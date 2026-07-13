@@ -16,11 +16,17 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 
 
 ## Topics covered
+```{=html}
 <div class="card-grid">
 <a href="topics/getting-started.qmd" class="feature-card">
 <div class="card-icon">🚀</div>
 <h3>Getting Started</h3>
 <p>Set up R and RStudio, and run your very first lines of code.</p>
+</a>
+<a href="topics/math-operations.qmd" class="feature-card">
+<div class="card-icon">➗</div>
+<h3>Math Operations</h3>
+<p>Use R's arithmetic operators and math functions for doses, kinetics, sequences, and more.</p>
 </a>
 <a href="topics/data-handling.qmd" class="feature-card">
 <div class="card-icon">📂</div>
@@ -48,6 +54,7 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <p>Fit straight-line models with lm(), interpret coefficients, and visualize model fits.</p>
 </a>
 </div>
+```
 
 ---
 
