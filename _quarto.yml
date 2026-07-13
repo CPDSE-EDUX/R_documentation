@@ -24,6 +24,8 @@ website:
         menu:
           - text: "Getting Started"
             href: topics/getting-started.qmd
+          - text: "Math Operations"
+            href: topics/math-operations.qmd
           - text: "---"
           - text: "Data Handling"
             href: topics/data-handling.qmd
