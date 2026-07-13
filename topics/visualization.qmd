@@ -18,6 +18,8 @@ Every plot starts with `ggplot(data, aes(...))` — this sets the data and axes.
 Add layers with `+`: `geom_point()`, `geom_line()`, `labs()`, `theme_classic()`.
 Order doesn't matter for most layers, but `theme_classic()` always goes last.
 
+![](../assets/images/ggplot2_layers.svg)
+
 Need inspiration for chart types?
 <ul>
   <li>General chart gallery: <a href="https://datavizproject.com/">The Data Visualization Catalogue</a></li>
