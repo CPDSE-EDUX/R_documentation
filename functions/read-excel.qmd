@@ -20,35 +20,9 @@ library(readxl)
 read_excel(path)
 ```
 ::: {.desc-item}
-`read_excel("file_name.xlsx")` reads an Excel file (`.xls` or `.xlsx`) and returns a tibble data frame.
-Use this as the general-purpose Excel import function.
-:::
+`read_excel("file_name.xlsx")` reads an Excel file (`.xls` or `.xlsx`) and returns a tibble data frame. By default, the first sheet of the Excel file is read, but you can specify a different sheet by name or position (see arguments below).
 
-<hr>
-
-```{r, eval=FALSE}
-read_xls(path)
-```
-::: {.desc-item}
-`read_xls("file_name.xls")` reads legacy Excel 97-2003 `.xls` files.
-Use this when the file extension is `.xls` or the workbook was saved in the older binary format.
-:::
-
-<hr>
-
-```{r, eval=FALSE}
-read_xlsx(path)
-```
-::: {.desc-item}
-`read_xlsx("file_name.xlsx")` reads modern Excel `.xlsx` files.
-Use this when the workbook is in Office Open XML format (`.xlsx`).
-:::
-
-::: {.callout-tip collapse="true"}
-## Which function should I use?
-If you are not sure, use `read_excel()`.
-It auto-detects whether your file is `.xls` or `.xlsx` from the extension.
-Use `read_xls()` or `read_xlsx()` only when you want to force one file type.
+![](../assets/images/excel_to_tibble.svg)
 :::
 
 ## Argument Overview
@@ -165,6 +139,38 @@ read_excel("results.xlsx", n_max = 100)
 
 <div class="example-section">
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+
+<details class="example-item">
+<summary>read_xls() and read_xlsx()</summary>
+<div class="example-body">
+```{r, eval=FALSE}
+read_xls(path)
+```
+::: {.desc-item}
+`read_xls("file_name.xls")` reads legacy Excel 97-2003 `.xls` files.
+Use this when the file extension is `.xls` or the workbook was saved in the older binary format.
+:::
+
+<hr>
+
+```{r, eval=FALSE}
+read_xlsx(path)
+```
+::: {.desc-item}
+`read_xlsx("file_name.xlsx")` reads modern Excel `.xlsx` files.
+Use this when the workbook is in Office Open XML format (`.xlsx`).
+:::
+
+::: {.callout-tip collapse="true"}
+## Which function should I use?
+If you are not sure, use `read_excel()`.
+It auto-detects whether your file is `.xls` or `.xlsx` from the extension.
+Use `read_xls()` or `read_xlsx()` only when you want to force one file type.
+:::
+
+</div>
+</details>
 
 <details class="example-item">
 <summary>Read the first worksheet from an Excel file</summary>
