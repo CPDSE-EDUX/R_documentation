@@ -16,6 +16,7 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 
 
 ## Topics covered
+```{=html}
 <div class="card-grid">
 <a href="topics/getting-started.qmd" class="feature-card">
 <div class="card-icon">🚀</div>
@@ -48,6 +49,7 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 <p>Fit straight-line models with lm(), interpret coefficients, and visualize model fits.</p>
 </a>
 </div>
+```
 
 ---
 
