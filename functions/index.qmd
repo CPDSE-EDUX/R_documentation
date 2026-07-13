@@ -6,40 +6,7 @@ toc-location: right
 body-classes: "function-reference-page"
 ---
 
----
-
-## C {.glossary-letter}
-
-### **[cat( )](cat.qmd)**
-Print values to the console as readable text, useful for clear labelled output.
-
-### **[coef( )](coef.qmd)**
-Extract estimated coefficients from fitted model objects.
-
-## F {.glossary-letter}
-
-### **[filter( )](filter.qmd)**
-Keep rows that match one or more logical conditions.
-
-## G {.glossary-letter}
-
-### **[ggplot( )](ggplot.qmd)**
-Create plots by mapping variables to visual aesthetics and adding layers.
-
-### **[group_by( )](group-by.qmd)**
-Group rows by one or more columns so dplyr verbs can work within each group.
-
-## L {.glossary-letter}
-
-### **[lm( )](lm.qmd)**
-Fit linear regression models and extract slope, intercept, and model fit statistics.
-
-## M {.glossary-letter}
-
-### **[mutate( )](mutate.qmd)**
-Add new columns or transform existing columns in a data frame.
-
-## R {.glossary-letter}
+## Import & Create {.glossary-letter}
 
 ### **[read_csv( )](read-csv.qmd)**
 Import a comma-separated file into R as a tibble.
@@ -47,21 +14,46 @@ Import a comma-separated file into R as a tibble.
 ### **[read_excel( )](read-excel.qmd)**
 Import an Excel worksheet into R as a tibble.
 
-### **[round( )](round.qmd)**
-Round numbers to a fixed number of decimal places.
+### **[tibble( )](tibble.qmd)**
+Create a tidy table from vectors or values.
 
-## S {.glossary-letter}
+## Transform {.glossary-letter}
 
-### **[signif( )](signif.qmd)**
-Round numbers to a chosen number of significant figures.
+### **[group_by( )](group-by.qmd)**
+Group rows by one or more columns so dplyr verbs can work within each group.
+
+### **[filter( )](filter.qmd)**
+Keep rows that match one or more logical conditions.
+
+### **[mutate( )](mutate.qmd)**
+Add new columns or transform existing columns in a data frame.
 
 ### **[summarise( )](summarise.qmd)**
 Create compact summary tables from a data frame or grouped data frame.
 
+## Model {.glossary-letter}
+
+### **[coef( )](coef.qmd)**
+Extract estimated coefficients from fitted model objects.
+
 ### **[summary( )](summary.qmd)**
 Produce a compact summary of vectors, data frames, and model objects.
 
-## T {.glossary-letter}
+### **[lm( )](lm.qmd)**
+Fit linear regression models and extract slope, intercept, and model fit statistics.
 
-### **[tibble( )](tibble.qmd)**
-Create a tidy table from vectors or values.
+## Visualize {.glossary-letter}
+
+### **[ggplot( )](ggplot.qmd)**
+Create plots by mapping variables to visual aesthetics and adding layers.
+
+## Report {.glossary-letter}
+
+### **[cat( )](cat.qmd)**
+Print values to the console as readable text, useful for clear labelled output.
+
+### **[round( )](round.qmd)**
+Round numbers to a fixed number of decimal places.
+
+### **[signif( )](signif.qmd)**
+Round numbers to a chosen number of significant figures.
