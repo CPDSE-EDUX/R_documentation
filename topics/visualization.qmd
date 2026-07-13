@@ -9,11 +9,9 @@ engine: knitr
 {{< include /_webr-options.qmd >}}
 
 <details class="topic-card" open>
-<summary>Build a plot step by step</summary>
+<summary>ggplot layer logic</summary>
 <div class="topic-card-body">
 
-::: {.callout-tip}
-## ggplot2 layer logic
 Every plot starts with `ggplot(data, aes(...))` — this sets the data and axes.
 Add layers with `+`: `geom_point()`, `geom_line()`, `labs()`, `theme_classic()`.
 Order doesn't matter for most layers, but `theme_classic()` always goes last.
@@ -26,7 +24,14 @@ Need inspiration for chart types?
   <li>R-focused chart chooser: <a href="https://www.data-to-viz.com/">From Data to Viz</a></li>
   <li>ggplot2 cheatsheet: <a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">Data visualization with ggplot2 - Cheat Sheet</a></li>
 </ul>
-:::
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Build a plot step by step</summary>
+<div class="topic-card-body">
+
 
 ## Step 1: Start with an empty plot object
 This creates a blank ggplot canvas with no data or layers.
