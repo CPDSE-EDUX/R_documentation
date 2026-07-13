@@ -11,29 +11,230 @@ toc: false
 <summary>Syntax / typing</summary>
 <div class="topic-card-body">
 
-- Typos in names — R is case-sensitive (`Data` != `data`)
-- `=` vs `==` in conditions
-- Unbalanced parentheses/quotes -> console stuck on `+`
-- Missing commas in function args
-- spacing bugs like `x < -3` vs `x <- 3`
+Work through one bug at a time. In each code block: run it, fix it, and re-run.
+
+## 1) Typos in names
 
 ```{webr}
-# 1) Case sensitivity: Data and data are different names
+# Challenge: fix the object-name typo
 data <- 10
-# Data   # would fail: object 'Data' not found
-
-# 2) Assignment vs comparison
-x <- 3
-x == 3
-
-# 3) Spacing pitfall
-x <- 3
-y <- -3
-
-cat("x:", x, "\n")
-cat("y:", y, "\n")
-cat("x < -3:", x < -3, "\n")
+Data + 5
 ```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+data <- 10
+data + 5
+```
+
+</details>
+
+<hr>
+
+## 2) `=` vs `==` in conditions
+
+```{webr}
+# Challenge: this should test equality, not assign
+x <- 3
+if (x = 3) {
+  "x is three"
+}
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+x <- 3
+if (x == 3) {
+  "x is three"
+}
+```
+
+</details>
+
+<hr>
+
+## 3) Unbalanced parentheses or quotes
+
+```r
+# Challenge (run in your R console):
+cat("Dose is", 75
+```
+
+If your console prompt changes from `>` to `+`, R is waiting for the missing closing character.
+
+<details>
+<summary>Show solution</summary>
+
+```r
+cat("Dose is", 75)
+```
+
+</details>
+
+<hr>
+
+## 4) Missing commas in function arguments
+
+```{webr}
+# Challenge: add the missing comma
+paste("Batch" "A")
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+paste("Batch", "A")
+```
+
+</details>
+
+<hr>
+
+## 5) Spacing bug: `x < -3` vs `x <- 3`
+
+```{webr}
+# Challenge: assign 3 to x (do not compare)
+x < -3
+x
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+x <- 3
+x
+```
+
+</details>
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Common R pitfalls</summary>
+<div class="topic-card-body">
+
+### 1) `[ ]` vs `[[ ]]` on lists
+
+```{webr}
+# Challenge: make this return 80 (not an error)
+my_list <- list(batch = "A", dose_mg = 75)
+dose <- my_list["dose_mg"]
+dose + 5
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+my_list <- list(batch = "A", dose_mg = 75)
+dose <- my_list[["dose_mg"]]
+dose + 5
+```
+
+</details>
+
+### 2) `NA` handling
+
+```{webr}
+# Challenge: compute the mean and find missing values correctly
+x <- c(10, 12, NA, 9)
+mean(x)
+x == NA
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+x <- c(10, 12, NA, 9)
+mean(x, na.rm = TRUE)
+is.na(x)
+```
+
+</details>
+
+### 3) Floating-point comparisons
+
+```{webr}
+# Challenge: this prints FALSE. Use a safer check.
+0.1 + 0.2 == 0.3
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+all.equal(0.1 + 0.2, 0.3)
+abs((0.1 + 0.2) - 0.3) < 1e-12
+```
+
+</details>
+
+### 4) Not assigning results
+
+```{webr}
+# Challenge: sort x and keep the sorted result in x
+x <- c(3, 1, 2)
+sort(x)
+x
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+x <- c(3, 1, 2)
+x <- sort(x)
+x
+```
+
+</details>
+
+### 5) `library()` vs `install.packages()`
+
+```r
+# Challenge:
+# 1) Install once on your computer
+# 2) Load every new R session
+
+install.packages("tidyverse")  # run once (not every script run)
+library(tidyverse)              # run each session
+```
+
+After restarting R, run `library(tidyverse)` again before using tidyverse functions.
+
+### 6) Reading error messages
+
+```{webr}
+# Challenge: find and fix the typo based on the first error line
+library(tidyverse)
+
+df <- tibble(weight_mg = c(100, 101, 99))
+df %>%
+  mutate(weight_g = wieght_mg / 1000)
+```
+
+<details>
+<summary>Show solution</summary>
+
+```{webr}
+library(tidyverse)
+
+df <- tibble(weight_mg = c(100, 101, 99))
+df %>%
+  mutate(weight_g = weight_mg / 1000)
+```
+
+</details>
+
+Tip: read errors top to bottom. Start with the first line that names the missing object, function, or argument.
 
 </div>
 </details>
