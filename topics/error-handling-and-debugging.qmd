@@ -1,6 +1,6 @@
 ---
 title: "Error Handling and Debugging"
-subtitle: "Understand common R errors and fix them quickly with a simple debugging workflow."
+subtitle: "Learn to read R's error messages and fix the most common beginner mistakes."
 toc: false
 ---
 
@@ -8,15 +8,69 @@ toc: false
 {{< include /_webr-options.qmd >}}
 
 <details class="topic-card" open>
-<summary>Syntax / typing</summary>
+<summary>Start here: how to read an error</summary>
 <div class="topic-card-body">
 
-Work through one bug at a time. In each code block: run it, fix it, and re-run.
+Getting errors is normal — every R user, beginner or expert, sees them constantly. An error is not a sign you did something wrong; it is R telling you exactly where it got stuck. The skill worth learning is not *avoiding* errors, but *reading* them.
+
+When something goes wrong, R stops and prints a message that starts with `Error`. Run the chunk below and look at the message it produces:
+
+```{webr}
+library(tidyverse)
+
+df <- tibble(weight_mg = c(100, 101, 99))
+df %>%
+  mutate(weight_g = wieght_mg / 1000)
+```
+
+You will see something like:
+
+```
+Error in `mutate()`:
+ℹ In argument: `weight_g = wieght_mg/1000`
+Caused by error:
+! object 'wieght_mg' not found
+```
+
+Read it from the top down:
+
+- **Which function failed** — `mutate()`.
+- **Which part** — the argument `weight_g = wieght_mg/1000`.
+- **The actual cause** — the last line: `object 'wieght_mg' not found`.
+
+The last line is usually the most useful: `wieght_mg` is a typo for `weight_mg`. Fix the spelling and the error disappears:
+
+```{webr}
+library(tidyverse)
+
+df <- tibble(weight_mg = c(100, 101, 99))
+df %>%
+  mutate(weight_g = weight_mg / 1000)
+```
+
+::: {.callout-tip}
+## The one habit that fixes most errors
+Read the message top to bottom, then focus on the line that names a missing **object**, **function**, or **argument**. That line almost always points straight at the fix.
+:::
+
+**How to use this page.** Each card below gives you a small broken program. Run it, read the error, and try to fix it yourself. Then open **Show solution** to check your fix and see *why* it works. Work through one bug at a time — run it, fix it, re-run.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Syntax and typing errors</summary>
+<div class="topic-card-body">
+
+These are the mechanical mistakes: a wrong name, a missing comma, a stray space. They are the most common errors and the quickest to fix once you recognise them.
 
 ## 1) Typos in names
 
+R is **case-sensitive**: `data` and `Data` are two different names.
+
 ```{webr}
 # Challenge: fix the object-name typo
+# You'll see: Error: object 'Data' not found
 data <- 10
 Data + 5
 ```
@@ -29,14 +83,19 @@ data <- 10
 data + 5
 ```
 
+**Why:** You created `data` (lowercase), but asked for `Data` (capital D). R never created `Data`, so it reports `object 'Data' not found`. Match the name exactly.
+
 </details>
 
 <hr>
 
 ## 2) `=` vs `==` in conditions
 
+A single `=` **assigns** a value; a double `==` **tests** for equality. Conditions need `==`.
+
 ```{webr}
 # Challenge: this should test equality, not assign
+# You'll see: Error: unexpected '=' in "if (x ="
 x <- 3
 if (x = 3) {
   "x is three"
@@ -53,18 +112,22 @@ if (x == 3) {
 }
 ```
 
+**Why:** Inside `if (...)` R expects a question ("is x equal to 3?"), which is `==`. A single `=` tries to *assign* and is not allowed there, so R stops at the `=`.
+
 </details>
 
 <hr>
 
 ## 3) Unbalanced parentheses or quotes
 
+Every `(` needs a matching `)`, and every `"` needs a closing `"`.
+
 ```r
 # Challenge (run in your R console):
 cat("Dose is", 75
 ```
 
-If your console prompt changes from `>` to `+`, R is waiting for the missing closing character.
+If your console prompt changes from `>` to `+`, R is not broken — it is waiting for the missing closing character. Press **Esc** to cancel, then fix the line.
 
 <details>
 <summary>Show solution</summary>
@@ -73,14 +136,19 @@ If your console prompt changes from `>` to `+`, R is waiting for the missing clo
 cat("Dose is", 75)
 ```
 
+**Why:** The opening `(` was never closed, so R keeps waiting for more input (the `+` prompt) instead of running the line. Add the closing `)`.
+
 </details>
 
 <hr>
 
-## 4) Missing commas in function arguments
+## 4) Missing commas between arguments
+
+Arguments passed to a function must be separated by commas.
 
 ```{webr}
 # Challenge: add the missing comma
+# You'll see: Error: unexpected string constant in "paste("Batch" "A""
 paste("Batch" "A")
 ```
 
@@ -91,14 +159,19 @@ paste("Batch" "A")
 paste("Batch", "A")
 ```
 
+**Why:** Without the comma, R reads `"Batch"` and `"A"` as two values jammed together with nothing joining them, and cannot tell where one argument ends and the next begins.
+
 </details>
 
 <hr>
 
-## 5) Spacing bug: `x < -3` vs `x <- 3`
+## 5) A stray space: `x < -3` vs `x <- 3`
+
+The assignment arrow `<-` is two characters with **no space** between them. Add a space and it becomes a comparison, `<` (less than) followed by `-3`.
 
 ```{webr}
 # Challenge: assign 3 to x (do not compare)
+# You'll see: Error: object 'x' not found
 x < -3
 x
 ```
@@ -111,6 +184,8 @@ x <- 3
 x
 ```
 
+**Why:** `x < -3` asks "is x less than -3?" — but `x` was never assigned, so R reports `object 'x' not found`. Removing the space restores the assignment arrow `<-`, which stores `3` in `x`.
+
 </details>
 
 </div>
@@ -120,30 +195,15 @@ x
 <summary>Common R pitfalls</summary>
 <div class="topic-card-body">
 
-### 1) `[ ]` vs `[[ ]]` on lists
+These run without a syntax error but give a surprising result — the trickier kind of bug, because R does not always warn you.
+
+## 1) `NA` means "unknown", so it spreads
+
+`NA` marks a missing value. Any calculation involving `NA` returns `NA`, and you cannot test for it with `==`.
 
 ```{webr}
-# Challenge: make this return 80 (not an error)
-my_list <- list(batch = "A", dose_mg = 75)
-dose <- my_list["dose_mg"]
-dose + 5
-```
-
-<details>
-<summary>Show solution</summary>
-
-```{webr}
-my_list <- list(batch = "A", dose_mg = 75)
-dose <- my_list[["dose_mg"]]
-dose + 5
-```
-
-</details>
-
-### 2) `NA` handling
-
-```{webr}
-# Challenge: compute the mean and find missing values correctly
+# Challenge: compute the mean and find the missing values correctly
+# mean() returns NA, and x == NA returns all NA — neither is what you want
 x <- c(10, 12, NA, 9)
 mean(x)
 x == NA
@@ -158,29 +218,17 @@ mean(x, na.rm = TRUE)
 is.na(x)
 ```
 
-</details>
-
-### 3) Floating-point comparisons
-
-```{webr}
-# Challenge: this prints FALSE. Use a safer check.
-0.1 + 0.2 == 0.3
-```
-
-<details>
-<summary>Show solution</summary>
-
-```{webr}
-all.equal(0.1 + 0.2, 0.3)
-abs((0.1 + 0.2) - 0.3) < 1e-12
-```
+**Why:** `mean()` returns `NA` because one value is unknown — add `na.rm = TRUE` to ignore missing values. And `x == NA` cannot work ("is this equal to *unknown*?" is itself unknown), so use `is.na(x)` to find missing values.
 
 </details>
 
-### 4) Not assigning results
+## 2) Forgetting to assign the result
+
+Most R functions return a *new* value and leave the original untouched. If you do not store the result, it is lost.
 
 ```{webr}
 # Challenge: sort x and keep the sorted result in x
+# sort(x) prints a sorted vector, but x itself is unchanged afterwards
 x <- c(3, 1, 2)
 sort(x)
 x
@@ -195,126 +243,28 @@ x <- sort(x)
 x
 ```
 
+**Why:** `sort(x)` computes a sorted copy and prints it, but does not change `x`. Assign the result back with `x <- sort(x)` to keep it.
+
 </details>
 
-### 5) `library()` vs `install.packages()`
+## 3) `library()` vs `install.packages()`
+
+These are easy to confuse, and mixing them up produces a `could not find function` error.
 
 ```r
-# Challenge:
-# 1) Install once on your computer
-# 2) Load every new R session
+# Install ONCE per computer:
+install.packages("tidyverse")
 
-install.packages("tidyverse")  # run once (not every script run)
-library(tidyverse)              # run each session
-```
-
-After restarting R, run `library(tidyverse)` again before using tidyverse functions.
-
-### 6) Reading error messages
-
-```{webr}
-# Challenge: find and fix the typo based on the first error line
+# Load EVERY new R session:
 library(tidyverse)
-
-df <- tibble(weight_mg = c(100, 101, 99))
-df %>%
-  mutate(weight_g = wieght_mg / 1000)
 ```
 
 <details>
 <summary>Show solution</summary>
 
-```{webr}
-library(tidyverse)
-
-df <- tibble(weight_mg = c(100, 101, 99))
-df %>%
-  mutate(weight_g = weight_mg / 1000)
-```
+**Why:** `install.packages()` downloads a package to your computer — you only do it once. `library()` loads an installed package into your current session, and R forgets it when you restart, so you must run `library(tidyverse)` again at the top of every script. If R says it *"could not find function"*, the usual cause is a missing `library()` call.
 
 </details>
-
-Tip: read errors top to bottom. Start with the first line that names the missing object, function, or argument.
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Object and data errors</summary>
-<div class="topic-card-body">
-
-Common messages include:
-
-- `object 'name' not found`
-- `subscript out of bounds`
-- `NAs introduced by coercion`
-
-These usually mean one of three things: the object was never created, a column name is wrong, or a conversion (for example text to numeric) failed.
-
-```{webr}
-library(tidyverse)
-
-df <- tibble(
-  id = 1:3,
-  conc_text = c("4.1", "5.0", "bad")
-)
-
-df %>%
-  mutate(conc_num = as.numeric(conc_text))
-```
-
-Tip: use `names(df)`, `glimpse(df)`, and `head(df)` before complex transformations.
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Function, package, and argument errors</summary>
-<div class="topic-card-body">
-
-If R says it "could not find function", check that the package is installed and loaded.
-
-```r
-install.packages("tidyverse")  # once per computer
-library(tidyverse)              # every new session
-```
-
-If a function call fails:
-
-- Read the first error line first
-- Verify argument names in `?function_name`
-- Check data types expected by the function
-
-Example: [`filter()`](../functions/filter.qmd) expects logical conditions, while [`mutate()`](../functions/mutate.qmd) expects name-expression pairs.
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>A simple debugging workflow</summary>
-<div class="topic-card-body">
-
-Use this sequence when code fails:
-
-1. Re-run only the failing line or chunk.
-2. Print intermediate objects (`head()`, `glimpse()`, `summary()`).
-3. Simplify to a minimal reproducible example.
-4. Check types (`class()`, `typeof()`, `is.na()`).
-5. Add one step back at a time until the error returns.
-
-For pipelines, break them into named steps temporarily:
-
-```{webr}
-library(tidyverse)
-
-step1 <- read_csv("data/capsules.csv")
-step2 <- step1 %>% filter(batch == "A")
-step3 <- step2 %>% mutate(adj_pct = pct_label - 100)
-
-glimpse(step3)
-```
-
-This helps isolate where the problem starts.
 
 </div>
 </details>
