@@ -26,19 +26,18 @@ website:
             href: topics/getting-started.qmd
           - text: "Error Handling and Debugging"
             href: topics/error-handling-and-debugging.qmd
-          - text: "Math Operations"
-            href: topics/math-operations.qmd
-          - text: "---"
           - text: "Data Handling"
             href: topics/data-handling.qmd
+          - text: "Visualization"
+            href: topics/visualization.qmd
+          - text: "Math Operations"
+            href: topics/math-operations.qmd
           - text: "Pipe Operator (%>%)"
             href: topics/pipe-operator.qmd
           - text: "Descriptive Statistics"
             href: topics/descriptive-stats.qmd
           - text: "Linear Regression"
             href: topics/linear-regression.qmd
-          - text: "Visualization"
-            href: topics/visualization.qmd
       - text: "Functions"
         href: functions/index.qmd
       - text: Glossary
