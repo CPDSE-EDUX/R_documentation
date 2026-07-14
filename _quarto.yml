@@ -7,7 +7,7 @@ project:
 website:
   title: "Basic R for Pharmacy"
   description: "R function reference for pharmaceutical sciences — Center for Pharmaceutical Data Science Education (CPDSE)"
-  favicon: assets/images/favicon.ico
+  favicon: assets/layout/favicon.ico
 
   navbar:
     # NOTE: these colors are also defined in custom.scss ($forest-green / $warm-sand) — keep in sync
@@ -15,7 +15,7 @@ website:
     foreground: "#E4D7A1"
     title: "CPDSE"
     title-href: "https://cpdse.dk"
-    logo: /assets/images/logo_snake_gold.png
+    logo: /assets/layout/logo_snake_gold.png
     logo-alt: "CPDSE"
     left:
       - text: "Home"
