@@ -579,8 +579,8 @@ dense_capsules <- tibble(
   )
 )
 
-ggplot(dense_capsules, aes(x = batch, y = pct_label)) +
-  geom_boxplot(fill = "#5F7D61", alpha = 0.75) +
+ggplot(dense_capsules, aes(x = batch, y = pct_label, fill = batch)) +
+  geom_boxplot(alpha = 0.75) +
   labs(
     title = "High abstraction: summarized distribution",
     x     = "Batch",

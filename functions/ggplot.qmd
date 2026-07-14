@@ -31,6 +31,78 @@ You can add one or more `geom_*()` layers with `+` to draw points, lines, bars, 
 ![](../assets/images/ggplot2_layers.svg)
 :::
 
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Scatter plot</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+calibration <- read_csv("data/calibration.csv")
+
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
+  geom_point(size = 2.8, alpha = 0.9) +
+  labs(
+    title = "Ibuprofen UV calibration",
+    x = "Concentration (µg/mL)",
+    y = "Absorbance (AU)"
+  ) +
+  theme_minimal()
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Line plot</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+dissolution <- read_csv("data/dissolution.csv")
+
+ggplot(dissolution, aes(x = time_min, y = pct_dissolved, group = tablet_id)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "Dissolution profiles",
+    x = "Time (min)",
+    y = "% released"
+  ) +
+  theme_minimal()
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Boxplot</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+ggplot(tablet_weights, aes(x = batch, y = weight_mg, fill = batch)) +
+  geom_boxplot(alpha = 0.8, width = 0.65, outlier.shape = 16, outlier.size = 2) +
+  guides(fill = "none") +
+  labs(
+    title = "Tablet weight by batch",
+    x = "Batch",
+    y = "Weight (mg)"
+  ) +
+  theme_minimal()
+```
+</div>
+</details>
+
+</div>
+
 ## Argument Overview
 <p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
@@ -116,75 +188,3 @@ ggplot(capsules, aes(time_min, pct_release)) +
 </div>
 </details>
 :::
-
-## Examples
-
-<div class="example-section">
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="example-item">
-<summary>Scatter plot</summary>
-<div class="example-body">
-
-```{webr}
-library(tidyverse)
-
-calibration <- read_csv("data/calibration.csv")
-
-ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
-  geom_point(size = 2.8, alpha = 0.9) +
-  labs(
-    title = "Ibuprofen UV calibration",
-    x = "Concentration (µg/mL)",
-    y = "Absorbance (AU)"
-  ) +
-  theme_minimal()
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Line plot</summary>
-<div class="example-body">
-
-```{webr}
-library(tidyverse)
-
-dissolution <- read_csv("data/dissolution.csv")
-
-ggplot(dissolution, aes(x = time_min, y = pct_dissolved, group = tablet_id)) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 2) +
-  labs(
-    title = "Dissolution profiles",
-    x = "Time (min)",
-    y = "% released"
-  ) +
-  theme_minimal()
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Boxplot</summary>
-<div class="example-body">
-
-```{webr}
-library(tidyverse)
-
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-ggplot(tablet_weights, aes(x = batch, y = weight_mg, fill = batch)) +
-  geom_boxplot(alpha = 0.8, width = 0.65, outlier.shape = 16, outlier.size = 2) +
-  guides(fill = "none") +
-  labs(
-    title = "Tablet weight by batch",
-    x = "Batch",
-    y = "Weight (mg)"
-  ) +
-  theme_minimal()
-```
-</div>
-</details>
-
-</div>

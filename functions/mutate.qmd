@@ -60,45 +60,6 @@ Apply `signif()` or `round()` only inside `cat()` when printing a final result.
 Rounding a column that feeds into later calculations accumulates error.
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The data frame to modify. In a pipe (`%>%` or `%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
-
-```r
-# .data is passed automatically by the pipe:
-capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-One or more expressions of the form `new_column_name = expression`.
-The right-hand side can reference any column in `.data` by name, and can also reference columns created earlier in the same `mutate()` call.
-Separate multiple expressions with commas.
-
-```r
-mutate(
-  fill_mass_mg = mass_filled_mg - mass_empty_mg,   # uses two existing columns
-  ibu_mg       = fill_mass_mg * ibu_per_mg_powder  # references the column just created above
-)
-```
-
-<p class="data-types"><strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)</p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -189,3 +150,42 @@ tablet_weights %>%
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to modify. In a pipe (`%>%` or `%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
+
+```r
+# .data is passed automatically by the pipe:
+capsules %>% mutate(fill_mass_mg = mass_filled_mg - mass_empty_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more expressions of the form `new_column_name = expression`.
+The right-hand side can reference any column in `.data` by name, and can also reference columns created earlier in the same `mutate()` call.
+Separate multiple expressions with commas.
+
+```r
+mutate(
+  fill_mass_mg = mass_filled_mg - mass_empty_mg,   # uses two existing columns
+  ibu_mg       = fill_mass_mg * ibu_per_mg_powder  # references the column just created above
+)
+```
+
+<p class="data-types"><strong>Data Types:</strong> any expression that returns a vector the same length as the data frame, or a single value (recycled to all rows)</p>
+</div>
+</details>
+:::

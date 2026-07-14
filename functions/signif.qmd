@@ -49,50 +49,6 @@ C2_ug_ml <- signif((absorbance - std_intercept) / std_slope, 3)
 :::
 
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-A single number or a numeric vector.
-`signif()` is vectorised — it applies element-wise to every value in the vector.
-
-<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>digits</code> — number of significant figures <span class="arg-types">integer</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The number of significant figures to keep.
-Must be a positive integer.
-
-```{r, eval=FALSE}
-signif(x, digits = 6)
-```
-::: {.desc-item}
-`signif(x, digits = 6)` shows the default value of `digits`.
-If you omit `digits`, R keeps 6 significant figures.
-In practice you should always state `digits` explicitly to match the precision of your method.
-:::
-
-A significant figure is any digit from the first non-zero digit onward.
-
-| `x` | `digits` | Result | Explanation |
-|---|---|---|---|
-| `31.187` | `3` | `31.2` | Digits: 3, 1, 2 |
-| `0.004512` | `2` | `0.0045` | Digits: 4, 5 |
-| `158400` | `3` | `158000` | Digits: 1, 5, 8 |
-
-<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Must be ≥ 1</p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -146,3 +102,47 @@ round(x, 5)    # 0.00342  (to get 3 sig figs you'd need to know the position)
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — number(s) to round <span class="arg-types">numeric | integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A single number or a numeric vector.
+`signif()` is vectorised — it applies element-wise to every value in the vector.
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> | <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>digits</code> — number of significant figures <span class="arg-types">integer</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The number of significant figures to keep.
+Must be a positive integer.
+
+```{r, eval=FALSE}
+signif(x, digits = 6)
+```
+::: {.desc-item}
+`signif(x, digits = 6)` shows the default value of `digits`.
+If you omit `digits`, R keeps 6 significant figures.
+In practice you should always state `digits` explicitly to match the precision of your method.
+:::
+
+A significant figure is any digit from the first non-zero digit onward.
+
+| `x` | `digits` | Result | Explanation |
+|---|---|---|---|
+| `31.187` | `3` | `31.2` | Digits: 3, 1, 2 |
+| `0.004512` | `2` | `0.0045` | Digits: 4, 5 |
+| `158400` | `3` | `158000` | Digits: 1, 5, 8 |
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Must be ≥ 1</p>
+</div>
+</details>
+:::

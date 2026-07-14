@@ -40,6 +40,68 @@ Always use `cat()` with a descriptive label and the unit.
 A number without context is meaningless in a pharmaceutical report.
 :::
 
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Combine text and values</summary>
+<div class="example-body">
+
+```{webr}
+value <- 12.345678
+
+cat("Result: ", value, "mg")
+```
+Rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
+</div>
+</details>
+
+<details class="example-item">
+<summary>Print multiple results from a content uniformity assay</summary>
+<div class="example-body">
+`"\n"` creates a line break so each result is printed on its own line. 
+```{webr}
+library(tidyverse)
+
+capsules <- tibble(
+  sample_id = paste0("C", 1:12),
+  measured_ibu_mg = c(75.2, 74.8, 75.5, 74.9, 75.1, 74.7, 75.3, 75.0, 74.6, 75.2, 75.1, 74.8)
+)
+
+X_bar_pct <- mean(capsules$measured_ibu_mg / 75 * 100)
+s_pct <- sd(capsules$measured_ibu_mg / 75 * 100)
+
+cat("Mean content (X̄):", X_bar_pct, "%\n")
+cat("Std deviation (s):", s_pct, "%\n")
+cat("n:", nrow(capsules), "capsules\n")
+```
+</div>
+</details>
+
+
+<details class="example-item">
+<summary>Custom separator between items</summary>
+<div class="example-body">
+
+```{webr}
+conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)
+
+# Default sep = " " (space between items)
+cat("Standards (µg/mL):", conc_values_ug_ml, "\n")
+
+# Comma-separated
+cat("Standards (µg/mL):", conc_values_ug_ml, sep = ", ")
+
+# Enforce line break at the end if you want to print more results after this
+cat("\n")
+```
+</div>
+</details>
+
+</div>
+
 ## Argument Overview
 <p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
@@ -105,65 +167,3 @@ If `FALSE` (default), the file is overwritten.
 </div>
 </details>
 :::
-
-## Examples
-
-<div class="example-section">
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="example-item">
-<summary>Combine text and values</summary>
-<div class="example-body">
-
-```{webr}
-value <- 12.345678
-
-cat("Result: ", value, "mg")
-```
-Rounds the value to the appropriate number of significant figures at the point of printing, while keeping the stored variable at full precision.
-</div>
-</details>
-
-<details class="example-item">
-<summary>Print multiple results from a content uniformity assay</summary>
-<div class="example-body">
-`"\n"` creates a line break so each result is printed on its own line. 
-```{webr}
-library(tidyverse)
-
-capsules <- tibble(
-  sample_id = paste0("C", 1:12),
-  measured_ibu_mg = c(75.2, 74.8, 75.5, 74.9, 75.1, 74.7, 75.3, 75.0, 74.6, 75.2, 75.1, 74.8)
-)
-
-X_bar_pct <- mean(capsules$measured_ibu_mg / 75 * 100)
-s_pct <- sd(capsules$measured_ibu_mg / 75 * 100)
-
-cat("Mean content (X̄):", X_bar_pct, "%\n")
-cat("Std deviation (s):", s_pct, "%\n")
-cat("n:", nrow(capsules), "capsules\n")
-```
-</div>
-</details>
-
-
-<details class="example-item">
-<summary>Custom separator between items</summary>
-<div class="example-body">
-
-```{webr}
-conc_values_ug_ml <- c(2.5, 5.0, 10.0, 20.0)
-
-# Default sep = " " (space between items)
-cat("Standards (µg/mL):", conc_values_ug_ml, "\n")
-
-# Comma-separated
-cat("Standards (µg/mL):", conc_values_ug_ml, sep = ", ")
-
-# Enforce line break at the end if you want to print more results after this
-cat("\n")
-```
-</div>
-</details>
-
-</div>

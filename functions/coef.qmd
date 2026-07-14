@@ -42,39 +42,6 @@ Use `coef(model)` when you only need the coefficient estimates.
 Use `summary(model)$coefficients` when you also need standard errors, t-values, and p-values.
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>object</code> — fitted model object <span class="arg-types">model object</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The fitted object from which coefficients should be extracted.
-Commonly produced by `lm()`, but `coef()` also works for many other model classes.
-
-```r
-model <- lm(absorbance ~ conc_ug_ml, data = calibration)
-coef(model)
-```
-
-<p class="data-types"><strong>Data Types:</strong> model object (for example <code>lm</code>, <code>glm</code>, <code>nls</code>)</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>...</code> — method-specific options <span class="arg-types">various</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Additional arguments passed to class-specific methods.
-For many everyday `lm()` uses, you do not need to set any extra arguments.
-
-
-<p class="data-types"><strong>Data Types:</strong> depends on model class</p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -187,3 +154,36 @@ print(summary(model)$coefficients)
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>object</code> — fitted model object <span class="arg-types">model object</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The fitted object from which coefficients should be extracted.
+Commonly produced by `lm()`, but `coef()` also works for many other model classes.
+
+```r
+model <- lm(absorbance ~ conc_ug_ml, data = calibration)
+coef(model)
+```
+
+<p class="data-types"><strong>Data Types:</strong> model object (for example <code>lm</code>, <code>glm</code>, <code>nls</code>)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — method-specific options <span class="arg-types">various</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Additional arguments passed to class-specific methods.
+For many everyday `lm()` uses, you do not need to set any extra arguments.
+
+
+<p class="data-types"><strong>Data Types:</strong> depends on model class</p>
+</div>
+</details>
+:::

@@ -36,64 +36,6 @@ as_tibble(x)
 `as_tibble(x)` converts an existing base R `data.frame` (or matrix) into a tibble.
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>...</code> — name–value pairs <span class="arg-types">name = vector</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-Each argument defines one column.
-The name becomes the column name; the value must be a vector (or single value, which is recycled to the length of the longest column).
-
-Key rules:
-- All vectors must be the same length, or length 1 (recycled)
-- Later arguments can reference earlier column names by name
-- Column names can contain spaces if wrapped in backticks: `` `fill mass (mg)` = ... `` (not recommended — use `snake_case` with units instead)
-
-```r
-tibble(
-  time_min   = c(0, 15, 30, 45, 60),   # 5 values
-  dose_mg    = 200                       # recycled to 5 rows
-)
-```
-
-<p class="data-types"><strong>Data Types:</strong> any vector type — <code>numeric</code>, <code>character</code>, <code>logical</code>, <code>integer</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>x</code> — object to convert (<code>as_tibble</code> only) <span class="arg-types">data.frame | matrix | list</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The object to convert into a tibble.
-Typically used to convert a `data.frame` returned by base R functions like `read.csv()` into the tidyverse format.
-
-```r
-df <- read.csv("data.csv")   # returns a data.frame
-tbl <- as_tibble(df)          # convert for use with dplyr / tidyr
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>matrix</code> | <code>list</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.rows</code> — number of rows <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-The number of rows the tibble should have.
-Useful for creating an empty tibble with a known size:
-
-```r
-tibble(.rows = 10)   # empty tibble with 10 rows and no columns
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>integer</code></p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -236,3 +178,61 @@ titration
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>...</code> — name–value pairs <span class="arg-types">name = vector</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Each argument defines one column.
+The name becomes the column name; the value must be a vector (or single value, which is recycled to the length of the longest column).
+
+Key rules:
+- All vectors must be the same length, or length 1 (recycled)
+- Later arguments can reference earlier column names by name
+- Column names can contain spaces if wrapped in backticks: `` `fill mass (mg)` = ... `` (not recommended — use `snake_case` with units instead)
+
+```r
+tibble(
+  time_min   = c(0, 15, 30, 45, 60),   # 5 values
+  dose_mg    = 200                       # recycled to 5 rows
+)
+```
+
+<p class="data-types"><strong>Data Types:</strong> any vector type — <code>numeric</code>, <code>character</code>, <code>logical</code>, <code>integer</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>x</code> — object to convert (<code>as_tibble</code> only) <span class="arg-types">data.frame | matrix | list</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The object to convert into a tibble.
+Typically used to convert a `data.frame` returned by base R functions like `read.csv()` into the tidyverse format.
+
+```r
+df <- read.csv("data.csv")   # returns a data.frame
+tbl <- as_tibble(df)          # convert for use with dplyr / tidyr
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>matrix</code> | <code>list</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.rows</code> — number of rows <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+The number of rows the tibble should have.
+Useful for creating an empty tibble with a known size:
+
+```r
+tibble(.rows = 10)   # empty tibble with 10 rows and no columns
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code></p>
+</div>
+</details>
+:::

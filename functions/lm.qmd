@@ -48,85 +48,6 @@ Use this only when the scientific model justifies it.
 - `predict(model, newdata = ...)` for predictions
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>formula</code> — model formula <span class="arg-types">formula</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-Specifies the model structure, usually `y ~ x` for simple linear regression.
-Left side is the response variable; right side is the predictor.
-
-```r
-lm(absorbance ~ conc_ug_ml, data = calibration)
-lm(absorbance ~ 0 + conc_ug_ml, data = calibration)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>formula</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>data</code> — data frame containing variables <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Data source used to evaluate variables in the formula.
-
-This argument can be omitted, but then the variables in the formula (for example `y` and `x`) must already exist as objects in your environment.
-
-```r
-lm(absorbance ~ conc_ug_ml, data = calibration)
-
-# Also valid if absorbance and conc_ug_ml already exist as standalone vectors:
-lm(absorbance ~ conc_ug_ml)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>subset</code> — rows to include in fit <span class="arg-types">logical | integer</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Fits the model on a selected subset of rows.
-
-```r
-lm(absorbance ~ conc_ug_ml, data = calibration, subset = conc_ug_ml <= 20)
-```
-
-<p class="data-types"><strong>Data Types:</strong> logical or integer row index · Default: all rows</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>weights</code> — observation weights <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Relative weights for weighted least squares (WLS).
-
-```r
-lm(absorbance ~ conc_ug_ml, data = calibration, weights = wt)
-```
-
-<p class="data-types"><strong>Data Types:</strong> numeric vector (same length as observations) · Default: <code>NULL</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>na.action</code> — missing-value handling <span class="arg-types">function</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls how missing values are handled during model fitting.
-
-```r
-lm(absorbance ~ conc_ug_ml, data = calibration, na.action = na.exclude)
-```
-
-<p class="data-types"><strong>Data Types:</strong> function (for example <code>na.omit</code>, <code>na.exclude</code>) · Default: session option</p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -259,3 +180,82 @@ print(coef(model_zero))
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>formula</code> — model formula <span class="arg-types">formula</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Specifies the model structure, usually `y ~ x` for simple linear regression.
+Left side is the response variable; right side is the predictor.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration)
+lm(absorbance ~ 0 + conc_ug_ml, data = calibration)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>formula</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>data</code> — data frame containing variables <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Data source used to evaluate variables in the formula.
+
+This argument can be omitted, but then the variables in the formula (for example `y` and `x`) must already exist as objects in your environment.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration)
+
+# Also valid if absorbance and conc_ug_ml already exist as standalone vectors:
+lm(absorbance ~ conc_ug_ml)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>subset</code> — rows to include in fit <span class="arg-types">logical | integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Fits the model on a selected subset of rows.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration, subset = conc_ug_ml <= 20)
+```
+
+<p class="data-types"><strong>Data Types:</strong> logical or integer row index · Default: all rows</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>weights</code> — observation weights <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Relative weights for weighted least squares (WLS).
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration, weights = wt)
+```
+
+<p class="data-types"><strong>Data Types:</strong> numeric vector (same length as observations) · Default: <code>NULL</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>na.action</code> — missing-value handling <span class="arg-types">function</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls how missing values are handled during model fitting.
+
+```r
+lm(absorbance ~ conc_ug_ml, data = calibration, na.action = na.exclude)
+```
+
+<p class="data-types"><strong>Data Types:</strong> function (for example <code>na.omit</code>, <code>na.exclude</code>) · Default: session option</p>
+</div>
+</details>
+:::

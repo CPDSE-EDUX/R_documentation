@@ -21,8 +21,6 @@ capsules <- read_csv("data/capsules.csv")
 capsules
 ```
 
-Because webR cells run in separate scopes (meaning one cell does not know what the other cell knows), each example chunk below loads what it needs on its own.
-
 </div>
 </details>
 

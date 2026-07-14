@@ -54,6 +54,142 @@ read_lines("data/dissolution_dk.csv", n_max = 3)
 ```
 :::
 
+## Examples
+<a class="source-link" href="../data/dissolution_data_raw.csv" target="_blank" rel="noopener">Example File (.csv) ↗</a>
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Read a CSV file from your computer</summary>
+<div class="example-body">
+
+## English CSV standard
+```{webr}
+library(tidyverse)
+
+data <- read_csv("data/dissolution.csv")
+
+head(data)
+```
+
+## Danish CSV standard
+```{webr}
+library(tidyverse)
+
+data <- read_csv2("data/dissolution_dk.csv")
+
+head(data)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Select Columns</summary>
+<div class="example-body">
+
+## Read one column selected by name
+```{webr}
+library(tidyverse)
+
+data <- read_csv("data/dissolution.csv", col_select = pct_dissolved)
+
+head(data)
+```
+
+## Read multiple columns selected by name
+```{webr}
+library(tidyverse)
+
+data <- read_csv("data/dissolution.csv", col_select = c(tablet_id,pct_dissolved))
+
+head(data)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Limit the number of rows read</summary>
+<div class="example-body">
+Useful for previewing a large dataset without loading the whole thing.
+
+
+```{webr}
+library(tidyverse)
+
+data <- read_csv("data/dissolution.csv", n_max = 5)
+
+head(data)
+```
+
+</div>
+</details>
+
+<details class="example-item">
+<summary>Skip lines from the top</summary>
+<div class="example-body">
+Useful if the file has metadata rows above the header row. The example will skip the first 2 lines.
+
+```{webr}
+library(tidyverse)
+
+data <- read_csv("data/weights_export.csv", skip = 3)
+
+head(data)
+```
+
+</div>
+</details>
+
+<details class="example-item">
+<summary>Handle Missing Values</summary>
+<div class="example-body">
+ Missing values that were entered in the spreadsheet as `"N/A"`, `"-"`, and `"ND"` can be converted to `NA` during import by specifying them in the `na` argument:
+
+```{webr}
+library(tidyverse)
+
+data <- read_csv("data/weights_export.csv", na = c("", "NA", "N/A", "-"))
+
+head(data)
+```
+
+</div>
+</details>
+
+<details class="example-item">
+<summary>Set your own column names</summary>
+<div class="example-body">
+If a file has no header row, or you want clearer column names than the original file provides, supply a character vector to `col_names`. Make sure the order matches the columns in the file, and use `skip` to skip over the original header row, so they aren't read as data.
+
+## Original column names: `tablet_id`, `time_min`, `pct_dissolved`
+```{webr}
+library(tidyverse)
+
+df_named <- read_csv(
+  "data/dissolution.csv"
+)
+
+head(df_named)
+```
+
+## Set your own column names and skip the original header row:
+```{webr}
+library(tidyverse)
+
+df_named <- read_csv(
+  "data/dissolution.csv",
+  col_names = c("id", "time", "dilution_factor"),
+  skip = 1
+)
+
+head(df_named)
+```
+</div>
+</details>
+
+</div>
+
 ## Argument Overview
 <p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
 
@@ -202,139 +338,3 @@ read_csv("data.csv", skip_empty_rows = FALSE)
 </details>
 
 :::
-
-## Examples
-<a class="source-link" href="../data/dissolution_data_raw.csv" target="_blank" rel="noopener">Example File (.csv) ↗</a>
-
-<div class="example-section">
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="example-item">
-<summary>Read a CSV file from your computer</summary>
-<div class="example-body">
-
-## English CSV standard
-```{webr}
-library(tidyverse)
-
-data <- read_csv("data/dissolution.csv")
-
-head(data)
-```
-
-## Danish CSV standard
-```{webr}
-library(tidyverse)
-
-data <- read_csv2("data/dissolution_dk.csv")
-
-head(data)
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Select Columns</summary>
-<div class="example-body">
-
-## Read one column selected by name
-```{webr}
-library(tidyverse)
-
-data <- read_csv("data/dissolution.csv", col_select = pct_dissolved)
-
-head(data)
-```
-
-## Read multiple columns selected by name
-```{webr}
-library(tidyverse)
-
-data <- read_csv("data/dissolution.csv", col_select = c(tablet_id,pct_dissolved))
-
-head(data)
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Limit the number of rows read</summary>
-<div class="example-body">
-Useful for previewing a large dataset without loading the whole thing.
-
-
-```{webr}
-library(tidyverse)
-
-data <- read_csv("data/dissolution.csv", n_max = 5)
-
-head(data)
-```
-
-</div>
-</details>
-
-<details class="example-item">
-<summary>Skip lines from the top</summary>
-<div class="example-body">
-Useful if the file has metadata rows above the header row. The example will skip the first 2 lines.
-
-```{webr}
-library(tidyverse)
-
-data <- read_csv("data/weights_export.csv", skip = 3)
-
-head(data)
-```
-
-</div>
-</details>
-
-<details class="example-item">
-<summary>Handle Missing Values</summary>
-<div class="example-body">
- Missing values that were entered in the spreadsheet as `"N/A"`, `"-"`, and `"ND"` can be converted to `NA` during import by specifying them in the `na` argument:
-
-```{webr}
-library(tidyverse)
-
-data <- read_csv("data/weights_export.csv", na = c("", "NA", "N/A", "-"))
-
-head(data)
-```
-
-</div>
-</details>
-
-<details class="example-item">
-<summary>Set your own column names</summary>
-<div class="example-body">
-If a file has no header row, or you want clearer column names than the original file provides, supply a character vector to `col_names`. Make sure the order matches the columns in the file, and use `skip` to skip over the original header row, so they aren't read as data.
-
-## Original column names: `tablet_id`, `time_min`, `pct_dissolved`
-```{webr}
-library(tidyverse)
-
-df_named <- read_csv(
-  "data/dissolution.csv"
-)
-
-head(df_named)
-```
-
-## Set your own column names and skip the original header row:
-```{webr}
-library(tidyverse)
-
-df_named <- read_csv(
-  "data/dissolution.csv",
-  col_names = c("id", "time", "dilution_factor"),
-  skip = 1
-)
-
-head(df_named)
-```
-</div>
-</details>
-
-</div>

@@ -53,69 +53,6 @@ Use `group_by()` first when you want separate summaries for each category.
 By default, grouped summaries may stay grouped depending on the result structure. If you want an ungrouped result immediately, set `.groups = "drop"` inside `summarise()`. You can also use `ungroup()` after the summary step if you need to remove grouping later.
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The data frame to summarise. In a pipe, this is passed automatically from the left-hand side — you do not write it explicitly.
-
-```r
-capsules %>% summarise(mean_weight_mg = mean(weight_mg))
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-One or more summary expressions of the form `new_name = expression`. Each expression should produce a single value per group, or a single value for the whole data frame.
-
-```r
-summarise(
-  mean_weight_mg = mean(weight_mg),
-  sd_weight_mg = sd(weight_mg),
-  n = n()
-)
-```
-
-<p class="data-types"><strong>Data Types:</strong> summary expressions that return one value per group</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.by</code> — group temporarily for this call <span class="arg-types">tidy-select</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Group by selected columns just for this `summarise()` call, without creating a permanently grouped data frame first.
-
-```r
-summarise(capsules, mean_weight_mg = mean(weight_mg), .by = batch)
-```
-
-<p class="data-types"><strong>Data Types:</strong> column names or tidy-select grouping expression · Default: <code>NULL</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.groups</code> — control grouping in the result <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls how grouping is handled after summarising. Common values are `"drop"` to return an ungrouped result and `"keep"` to preserve grouping.
-
-```r
-summarise(capsules, mean_weight_mg = mean(weight_mg), .groups = "drop")
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>character</code> · Default: chosen automatically by dplyr</p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -196,3 +133,66 @@ summarise(
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to summarise. In a pipe, this is passed automatically from the left-hand side — you do not write it explicitly.
+
+```r
+capsules %>% summarise(mean_weight_mg = mean(weight_mg))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — name–expression pairs <span class="arg-types">name = expr</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more summary expressions of the form `new_name = expression`. Each expression should produce a single value per group, or a single value for the whole data frame.
+
+```r
+summarise(
+  mean_weight_mg = mean(weight_mg),
+  sd_weight_mg = sd(weight_mg),
+  n = n()
+)
+```
+
+<p class="data-types"><strong>Data Types:</strong> summary expressions that return one value per group</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.by</code> — group temporarily for this call <span class="arg-types">tidy-select</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Group by selected columns just for this `summarise()` call, without creating a permanently grouped data frame first.
+
+```r
+summarise(capsules, mean_weight_mg = mean(weight_mg), .by = batch)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column names or tidy-select grouping expression · Default: <code>NULL</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.groups</code> — control grouping in the result <span class="arg-types">character</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls how grouping is handled after summarising. Common values are `"drop"` to return an ungrouped result and `"keep"` to preserve grouping.
+
+```r
+summarise(capsules, mean_weight_mg = mean(weight_mg), .groups = "drop")
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>character</code> · Default: chosen automatically by dplyr</p>
+</div>
+</details>
+:::

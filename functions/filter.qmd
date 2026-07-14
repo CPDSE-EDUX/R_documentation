@@ -39,84 +39,6 @@ Use `==` to test equality and `%in%` to match several allowed values.
 When checking for missing values, use `is.na(x)` instead of `x == NA`.
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The data frame to filter. In a pipe (`%>%`), this is passed automatically from the left-hand side.
-
-```r
-capsules %>% filter(pct_label >= 85)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>...</code> — filtering expressions <span class="arg-types">logical expression(s)</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-One or more logical conditions. Keep rows where every condition is `TRUE`.
-Multiple conditions separated by commas behave like `AND`.
-
-```r
-filter(capsules, pct_label >= 85, pct_label <= 115)
-```
-
-
-```r
-# Keep rows that satisfy multiple conditions
-# (all conditions must be TRUE)
-df %>% filter(condition1, condition2)
-
-# Keep rows that satisfy at least one of several conditions
-# (any condition must be TRUE)
-df %>% filter(condition1 | condition2)
-```
-::: {.desc-item}
-Use commas to combine multiple conditions with implicit `AND` logic.
-For `OR` logic, combine conditions with `|` inside a single expression.
-
-![](../assets/images/filter_function2.svg)
-:::
-
-<p class="data-types"><strong>Data Types:</strong> logical expressions that return <code>TRUE</code>/<code>FALSE</code>/<code>NA</code> per row</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.by</code> — group temporarily for this call <span class="arg-types">tidy-select</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Group by selected columns only for this `filter()` call, without creating a permanently grouped data frame.
-
-```r
-filter(capsules, weight_mg > mean(weight_mg), .by = batch)
-```
-
-<p class="data-types"><strong>Data Types:</strong> column names or tidy-select grouping expression · Default: <code>NULL</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.preserve</code> — keep original grouping metadata <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-When filtering an already grouped data frame, controls whether grouping structure is recalculated based on remaining rows.
-Most users can keep the default.
-
-```r
-filter(grouped_data, value > 0, .preserve = TRUE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>FALSE</code></p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -240,3 +162,81 @@ complete_readings
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to filter. In a pipe (`%>%`), this is passed automatically from the left-hand side.
+
+```r
+capsules %>% filter(pct_label >= 85)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — filtering expressions <span class="arg-types">logical expression(s)</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more logical conditions. Keep rows where every condition is `TRUE`.
+Multiple conditions separated by commas behave like `AND`.
+
+```r
+filter(capsules, pct_label >= 85, pct_label <= 115)
+```
+
+
+```r
+# Keep rows that satisfy multiple conditions
+# (all conditions must be TRUE)
+df %>% filter(condition1, condition2)
+
+# Keep rows that satisfy at least one of several conditions
+# (any condition must be TRUE)
+df %>% filter(condition1 | condition2)
+```
+::: {.desc-item}
+Use commas to combine multiple conditions with implicit `AND` logic.
+For `OR` logic, combine conditions with `|` inside a single expression.
+
+![](../assets/images/filter_function2.svg)
+:::
+
+<p class="data-types"><strong>Data Types:</strong> logical expressions that return <code>TRUE</code>/<code>FALSE</code>/<code>NA</code> per row</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.by</code> — group temporarily for this call <span class="arg-types">tidy-select</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Group by selected columns only for this `filter()` call, without creating a permanently grouped data frame.
+
+```r
+filter(capsules, weight_mg > mean(weight_mg), .by = batch)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column names or tidy-select grouping expression · Default: <code>NULL</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.preserve</code> — keep original grouping metadata <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+When filtering an already grouped data frame, controls whether grouping structure is recalculated based on remaining rows.
+Most users can keep the default.
+
+```r
+filter(grouped_data, value > 0, .preserve = TRUE)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>FALSE</code></p>
+</div>
+</details>
+:::

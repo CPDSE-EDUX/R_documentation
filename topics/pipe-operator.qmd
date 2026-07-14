@@ -26,7 +26,7 @@ as:
 This left-to-right reading is the main reason pipes are easier to understand when workflows become longer.
 
 ::: {.callout-note}
-`%>%` is provided by `magrittr` (loaded automatically by `library(tidyverse)`).
+`%>%` is the tidyverse pipe. Make sure to load the tidyverse with `library(tidyverse)`.
 :::
 
 </div>
@@ -47,7 +47,7 @@ This is the fastest way to build pipelines while coding.
 </details>
 
 <details class="topic-card">
-<summary>Simple comparison: no pipe vs pipe</summary>
+<summary>No pipe vs pipe</summary>
 <div class="topic-card-body">
 
 Start with a very small example so the pattern is clear.
@@ -90,16 +90,12 @@ Now compare a realistic multi-step data workflow.
 ```{webr}
 library(tidyverse)
 
-capsules <- tibble(
-  capsule_id = 1:8,
-  batch = c("A", "A", "A", "B", "B", "B", "B", "A"),
-  fill_mass_mg = c(173, 176, 170, 160, 158, 161, 159, 175)
-)
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
 arrange(
   mutate(
-    filter(capsules, batch == "B"),
-    pct_target = fill_mass_mg / 160 * 100
+    filter(tablet_weights, batch == "B"),
+    pct_target = weight_mg / 500 * 100
   ),
   desc(pct_target)
 )
@@ -110,15 +106,11 @@ arrange(
 ```{webr}
 library(tidyverse)
 
-capsules <- tibble(
-  capsule_id = 1:8,
-  batch = c("A", "A", "A", "B", "B", "B", "B", "A"),
-  fill_mass_mg = c(173, 176, 170, 160, 158, 161, 159, 175)
-)
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
+tablet_weights %>%
   filter(batch == "B") %>%
-  mutate(pct_target = fill_mass_mg / 160 * 100) %>%
+  mutate(pct_target = weight_mg / 500 * 100) %>%
   arrange(desc(pct_target))
 ```
 

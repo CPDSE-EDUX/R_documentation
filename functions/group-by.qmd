@@ -52,66 +52,6 @@ Use `ungroup()` when you want to remove grouping from a data frame and return to
 Why this matters: once a data frame is grouped, later dplyr verbs keep working within each group until you remove the grouping. Ungrouping helps prevent unexpected grouped calculations and makes it easier to pass the result into plotting, exporting, or later analysis steps.
 :::
 
-## Argument Overview
-<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
-
-::: {.arg-section}
-<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
-
-<details class="arg-item">
-<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-The data frame to group. In a pipe (`%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
-
-```r
-capsules %>% group_by(batch)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>...</code> — grouping columns <span class="arg-types">name(s)</span> <span class="arg-badge required">Required</span></summary>
-<div class="arg-body">
-One or more columns to group by. These are usually column names, but you can also use expressions that evaluate to grouping variables.
-
-```r
-group_by(capsules, batch)
-group_by(capsules, batch, dose_mg)
-```
-
-<p class="data-types"><strong>Data Types:</strong> column names or tidy-select style grouping expressions</p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.add</code> — add to existing groups <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-If `FALSE` (default), the new grouping columns replace any existing grouping. If `TRUE`, the new grouping columns are added to the current groups.
-
-```r
-group_by(capsules, batch, .add = TRUE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>FALSE</code></p>
-</div>
-</details>
-
-<details class="arg-item">
-<summary><code>.drop</code> — drop empty groups <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
-<div class="arg-body">
-Controls whether factor levels with no rows are kept in the grouping structure. The default is usually `TRUE`.
-
-```r
-group_by(capsules, batch, .drop = FALSE)
-```
-
-<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>TRUE</code> for most data</p>
-</div>
-</details>
-:::
-
 ## Examples
 
 <div class="example-section">
@@ -196,3 +136,63 @@ results_summary
 </details>
 
 </div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to group. In a pipe (`%>%`), this is passed automatically from the left-hand side — you do not write it explicitly.
+
+```r
+capsules %>% group_by(batch)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — grouping columns <span class="arg-types">name(s)</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more columns to group by. These are usually column names, but you can also use expressions that evaluate to grouping variables.
+
+```r
+group_by(capsules, batch)
+group_by(capsules, batch, dose_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column names or tidy-select style grouping expressions</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.add</code> — add to existing groups <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+If `FALSE` (default), the new grouping columns replace any existing grouping. If `TRUE`, the new grouping columns are added to the current groups.
+
+```r
+group_by(capsules, batch, .add = TRUE)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>FALSE</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.drop</code> — drop empty groups <span class="arg-types">logical</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls whether factor levels with no rows are kept in the grouping structure. The default is usually `TRUE`.
+
+```r
+group_by(capsules, batch, .drop = FALSE)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code> · Default: <code>TRUE</code> for most data</p>
+</div>
+</details>
+:::
