@@ -29,10 +29,15 @@ matched to the function it's meant to teach.
 | `weights_units.csv` | weights | numbers stored as text (`"506.3 mg"`) | `parse_number()`, type coercion |
 | `weights_duplicates.csv` | weights | 2 whole rows logged twice (tablets 5 and 18) | `distinct()` |
 | `batches_messy.csv` | weights | inconsistent batch labels (`A` / `a` / `Batch A` / ` A`) | `str_trim()`, `str_to_upper()`, factors |
+| `weights_export.csv` | weights | **two** defects: 4 metadata lines on top **and** mixed NA codes (`""`, `NA`, `N/A`, `-`) | `read_csv(skip = 4, na = ...)` |
 
 > Note on `batches_messy.csv`: `str_trim()` + `str_to_upper()` fix the
 > case/whitespace variants, but `"Batch A"` still needs a `str_remove()` /
 > prefix step to fully collapse to `A`. That's intentional messiness.
+>
+> Note on `weights_export.csv`: this is the deliberate exception to the
+> one-defect rule — it stacks a metadata block and missing values so you can
+> show `skip =` and `na =` together in one read.
 
 ## Excel workbooks
 

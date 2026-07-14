@@ -282,7 +282,7 @@ Useful if the file has metadata rows above the header row. The example will skip
 ```{webr}
 library(tidyverse)
 
-data <- read_csv("data/dissolution.csv", skip = 2)
+data <- read_csv("data/weights_export.csv", skip = 3)
 
 head(data)
 ```
@@ -298,7 +298,7 @@ head(data)
 ```{webr}
 library(tidyverse)
 
-data <- read_csv("data/dissolution.csv", na = c("", "NA", "N/A", "-"))
+data <- read_csv("data/weights_export.csv", na = c("", "NA", "N/A", "-"))
 
 head(data)
 ```

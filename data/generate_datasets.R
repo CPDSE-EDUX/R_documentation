@@ -176,6 +176,22 @@ writeLines(
   file.path(out, "batches_messy.csv")
 )
 
+# 10. weights_export.csv  -> metadata block on top AND mixed NA codes
+#     Straight off the balance: four header lines, then the table with some
+#     readings missing. Needs read_csv(skip = 4, na = c("","NA","N/A","-")).
+meta <- c("Balance export - ibuprofen 400 mg tablets",
+          "Instrument: Mettler XPR205",
+          "Operator: L. Sorensen",
+          "Exported: 2026-07-14")
+miss2 <- wfmt
+miss2[c(4, 9, 15, 22)] <- c("", "NA", "N/A", "-")   # four missing styles
+writeLines(
+  c(meta,
+    "tablet_id,batch,weight_mg",
+    paste(weights$tablet_id, weights$batch, miss2, sep = ",")),
+  file.path(out, "weights_export.csv")
+)
+
 cat("Wrote CSVs to", normalizePath(out), "\n")
 cat("Titration equivalence points (mL):",
     paste(names(Ca_sample), round(Ca_sample * Va / Cb, 2), sep = "="), "\n")
