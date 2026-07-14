@@ -55,7 +55,6 @@ read_lines("data/dissolution_dk.csv", n_max = 3)
 :::
 
 ## Examples
-<a class="source-link" href="../data/dissolution_data_raw.csv" target="_blank" rel="noopener">Example File (.csv) ↗</a>
 
 <div class="example-section">
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
