@@ -99,24 +99,6 @@ A significant figure is any digit from the first non-zero digit onward.
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
-<summary>Reporting an analytical concentration</summary>
-<div class="example-body">
-
-```{webr}
-# UV–Vis: calculate ibuprofen concentration from absorbance
-std_intercept <- 0.003     # y-intercept of calibration curve
-std_slope     <- 0.01420   # slope (AU per µg/mL)
-absorbance    <- 0.445     # measured absorbance
-
-C2_ug_ml <- (absorbance - std_intercept) / std_slope   # full precision
-
-# Report to 3 significant figures
-cat("Sample concentration:", signif(C2_ug_ml, 3), "µg/mL\n")
-```
-</div>
-</details>
-
-<details class="example-item">
 <summary>Comparing <code>signif()</code> to the raw value</summary>
 <div class="example-body">
 
@@ -133,31 +115,15 @@ signif(x, 5)   # 5 sig figs: 31.188
 </details>
 
 <details class="example-item">
-<summary>Works the same for very small and very large numbers</summary>
-<div class="example-body">
-
-```{webr}
-# Sig figs count from the first non-zero digit
-signif(0.0004512, 2)    # 0.00045 — first sig fig is the 4
-signif(158400, 3)       # 158000
-signif(0.10002, 3)      # 0.100
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Applying to a whole column</summary>
+<summary>Applying to a whole column or vector</summary>
 <div class="example-body">
 When used inside `cat()` with a vector, `signif()` applies to every element.
 For adding a rounded column to a tibble, use `mutate()` — but only if the rounded value itself is the final deliverable (e.g., a formatted report column), not if it will be used in further calculations.
 
 ```{webr}
-library(tibble)
-
 conc_values_ug_ml <- c(2.4837, 5.0124, 9.9841, 20.0152, 39.8760)
 
-# Print to 3 sig figs
-cat("Concentrations (µg/mL):", signif(conc_values_ug_ml, 3), "\n")
+signif(conc_values_ug_ml, 3)
 ```
 </div>
 </details>

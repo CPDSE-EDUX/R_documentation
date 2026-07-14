@@ -27,17 +27,8 @@ ggplot(data, aes(x = x_var, y = y_var)) +
 `ggplot()` builds a plot object from a data set (often a tibble data frame), a coordinate system, and geoms.
 The data set is specified in the `data` argument, and the coordinate system is defined by the `aes()` function, where aes stands for aesthetics.
 You can add one or more `geom_*()` layers with `+` to draw points, lines, bars, and other marks. Widely used geoms include `geom_point()`, `geom_line()`, `geom_bar()`, and `geom_boxplot()`.
-:::
 
-### Pipe Operator Style
-```{r, eval=FALSE}
-df %>%
-  ggplot(aes(x = x_var, y = y_var)) +
-  geom_line()
-```
-::: {.desc-item}
-You can pass a data frame to `ggplot()` through a pipe.
-Inside `aes()`, map variables to aesthetics such as position (`x`, `y`), color, shape, or size.
+![](../assets/images/ggplot2_layers.svg)
 :::
 
 ## Argument Overview
@@ -132,77 +123,66 @@ ggplot(capsules, aes(time_min, pct_release)) +
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
-<summary>Scatter plot of tablet hardness vs. disintegration time</summary>
+<summary>Scatter plot</summary>
 <div class="example-body">
 
 ```{webr}
 library(tidyverse)
 
-tablets <- tibble(
-  tablet_id = 1:8,
-  hardness_n = c(62, 59, 67, 64, 61, 66, 63, 68),
-  disintegration_min = c(8.9, 9.4, 7.8, 8.2, 9.0, 7.6, 8.5, 7.2)
-)
+calibration <- read_csv("data/calibration.csv")
 
-ggplot(tablets, aes(x = hardness_n, y = disintegration_min)) +
+ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
   geom_point(size = 2.8, alpha = 0.9) +
   labs(
-    title = "Tablet hardness vs disintegration time",
-    x = "Hardness (N)",
-    y = "Disintegration time (min)"
-  )
+    title = "Ibuprofen UV calibration",
+    x = "Concentration (µg/mL)",
+    y = "Absorbance (AU)"
+  ) +
+  theme_minimal()
 ```
 </div>
 </details>
 
 <details class="example-item">
-<summary>Line plot of dissolution profile over time</summary>
+<summary>Line plot</summary>
 <div class="example-body">
 
 ```{webr}
 library(tidyverse)
 
-dissolution <- tibble(
-  time_min = c(5, 10, 15, 20, 30, 45, 60),
-  pct_release = c(22, 39, 55, 66, 79, 90, 96)
-)
+dissolution <- read_csv("data/dissolution.csv")
 
-ggplot(dissolution, aes(x = time_min, y = pct_release)) +
+ggplot(dissolution, aes(x = time_min, y = pct_dissolved, group = tablet_id)) +
   geom_line(linewidth = 1) +
   geom_point(size = 2) +
   labs(
-    title = "Dissolution profile",
+    title = "Dissolution profiles",
     x = "Time (min)",
     y = "% released"
-  )
+  ) +
+  theme_minimal()
 ```
 </div>
 </details>
 
 <details class="example-item">
-<summary>Grouped boxplot by batch</summary>
+<summary>Boxplot</summary>
 <div class="example-body">
 
 ```{webr}
 library(tidyverse)
 
-content <- tibble(
-  batch = rep(c("A", "B", "C"), each = 8),
-  pct_label = c(
-    99.2, 101.3, 98.7, 100.1, 102.0, 99.5, 100.8, 98.9,
-    96.1, 97.4, 98.2, 95.8, 97.0, 96.9, 98.0, 97.2,
-    101.5, 103.2, 102.1, 100.9, 101.8, 103.0, 102.7, 101.2
-  )
-)
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-ggplot(content, aes(x = batch, y = pct_label, fill = batch)) +
+ggplot(tablet_weights, aes(x = batch, y = weight_mg, fill = batch)) +
   geom_boxplot(alpha = 0.8, width = 0.65, outlier.shape = 16, outlier.size = 2) +
   guides(fill = "none") +
   labs(
-    title = "Content uniformity by batch",
+    title = "Tablet weight by batch",
     x = "Batch",
-    y = "% of label claim"
-  )
+    y = "Weight (mg)"
+  ) +
+  theme_minimal()
 ```
 </div>
 </details>

@@ -99,44 +99,25 @@ The default `0` rounds to the nearest integer; negative values round to the left
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
-<summary>Reporting percentage label claim to two decimal places</summary>
+<summary>Comparing <code>round()</code> to the raw value</summary>
 <div class="example-body">
 
 ```{webr}
-label_claim_mg <- 75.0
-ibu_mg         <- 74.21   # ibuprofen content from assay (full precision)
+x <- 31.18765
 
-pct_label <- ibu_mg / label_claim_mg * 100   # stored at full precision
-
-# Two decimal places is conventional for % label claim
-cat("Label claim:", round(pct_label, 2), "%\n")
+round(x, 0)  # 0 decimals: 31
+round(x, 1)  # 1 decimal: 31.2
+round(x, 2)  # 2 decimals: 31.19
+round(x, 3)  # 3 decimals: 31.188
+round(x, 4)  # 4 decimals: 31.1876
+round(x, -1) # round to tens: 30
+round(x, -2) # round to hundreds: 0
 ```
 </div>
 </details>
 
 <details class="example-item">
-<summary>Reporting the acceptance value (AV) for EP 2.9.40</summary>
-<div class="example-body">
-
-```{webr}
-M    <- 100.0   # reference value (% label claim)
-k_s1 <- 2.4     # EP Table 2.9.40-1, Stage 1, n = 6
-L1   <- 15.0    # acceptance limit, Stage 1 (%)
-
-X_bar_pct <- 98.4   # mean of 6 capsules
-s_pct     <- 1.8    # standard deviation
-
-AV_s1 <- abs(M - X_bar_pct) + k_s1 * s_pct  # full precision calculation
-
-cat("Acceptance value AV:", round(AV_s1, 2), "\n")
-cat("Limit L1:           ", L1, "\n")
-cat("Decision:           ", ifelse(AV_s1 <= L1, "PASS ✓", "FAIL ✗"), "\n")
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Positive vs. negative <code>digits</code></summary>
+<summary>Positive vs. negative digits</summary>
 <div class="example-body">
 
 ```{webr}
@@ -152,38 +133,30 @@ round(x, digits = -3)    # 2000      — nearest 1000
 </details>
 
 <details class="example-item">
-<summary>Applying to a vector of results</summary>
+<summary>Applying to a column or vector</summary>
 <div class="example-body">
 
 ```{webr}
-pct_label_values <- c(97.832, 102.144, 99.017, 101.566, 98.253, 100.801)
+conc_values_ug_ml <- c(2.4837, 5.0124, 9.9841, 20.0152, 39.8760)
 
-# Print all values rounded to 2 decimal places
-cat("% label claim:", round(pct_label_values, 2), "\n")
-
-# Or print one per line
-for (val in pct_label_values) {
-  cat(" ", round(val, 2), "%\n")
-}
+round(conc_values_ug_ml, 3)
 ```
 </div>
 </details>
 
 <details class="example-item">
-<summary><code>round()</code> vs <code>signif()</code> — which to use?</summary>
+<summary><code>signif()</code> vs <code>round()</code> — which to use?</summary>
 <div class="example-body">
 
 ```{webr}
-# round() fixes decimal places — useful for percentages, pH, temperatures
-round(7.438, 2)    # 7.44   — always 2 decimal places
+x <- 0.003418
 
-# signif() fixes significant figures — useful for concentrations, masses
-signif(7.438, 2)   # 7.4    — always 2 sig figs
+# signif — 3 sig figs regardless of decimal position
+signif(x, 3)   # 0.00342  (counts from the first non-zero digit: 3, 4, 1)
 
-# They differ most when values span orders of magnitude
-values <- c(0.00412, 7.438, 1284.7)
-round(values,  2)    # 0.00, 7.44, 1284.70  — many sig figs lost for small values
-signif(values, 2)    # 0.0041, 7.4, 1300    — consistent precision
+# round  — fixed decimal places
+round(x, 3)    # 0.003    (only 3 decimal places — loses all sig figs here!)
+round(x, 5)    # 0.00342  (to get 3 sig figs you'd need to know the position)
 ```
 </div>
 </details>

@@ -123,64 +123,37 @@ filter(grouped_data, value > 0, .preserve = TRUE)
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
-<summary>Filter within groups using group_by()</summary>
+<summary>Filter condition on one column</summary>
 <div class="example-body">
-When data is grouped first, `filter()` evaluates each condition inside each group.
 
+## Filter rows where weight is outside the 190–210 mg range
 ```{webr}
 library(tidyverse)
 
-capsules <- tibble(
-  batch = c("A", "A", "A", "B", "B", "B"),
-  weight_mg = c(498, 501, 499, 503, 502, 500)
+# Create a tibble of tablet weights
+tablet_weights <- tibble(
+  tablet_id = c("T01", "T02", "T03", "T04"),
+  weight_mg = c(198.4, 201.2, 185.0, 199.8)
 )
 
-above_group_mean <- capsules %>%
-  group_by(batch) %>%
-  filter(weight_mg > mean(weight_mg)) %>%
-  ungroup()
+# Filter rows where weight is outside the 190–210 mg range
+out_of_range <- filter(tablet_weights, weight_mg < 190 | weight_mg > 210)
 
-above_group_mean
+out_of_range
 ```
-</div>
-</details>
 
-<details class="example-item">
-<summary>Keep capsules inside an acceptance window</summary>
-<div class="example-body">
-Use two conditions to keep only rows where `% label claim` is between 85 and 115.
-
+## Filter rows where batch is B01, B03, or B05
 ```{webr}
 library(tidyverse)
 
-capsules <- tibble(
-  capsule_id = 1:8,
-  pct_label = c(82.4, 88.1, 93.6, 101.2, 109.8, 116.3, 112.0, 84.9)
+# Create a tibble of QC results
+qc_results <- tibble(
+  batch_id = c("B01", "B01", "B02", "B02"),
+  assay_pct = c(99.2, 94.8, 101.1, 97.5)
 )
 
-within_spec <- capsules %>%
-  filter(pct_label >= 85, pct_label <= 115)
-
-within_spec
-```
-</div>
-</details>
-
-<details class="example-item">
-<summary>Keep rows that match one of several batches</summary>
-<div class="example-body">
-Use `%in%` when the allowed values are a set of categories.
-
-```{webr}
-library(tidyverse)
-
-results <- tibble(
-  batch = c("A", "A", "B", "B", "C", "C"),
-  absorbance = c(0.141, 0.146, 0.158, 0.162, 0.177, 0.180)
-)
-
-selected_batches <- results %>%
-  filter(batch %in% c("A", "C"))
+# Filter rows where batch is B01, B03, or B05
+selected_batches <- filter(qc_results, batch_id %in% c("B01", "B03", "B05"))
 
 selected_batches
 ```
@@ -188,22 +161,80 @@ selected_batches
 </details>
 
 <details class="example-item">
-<summary>Keep values above each batch mean using `.by`</summary>
+<summary>Filter condition on multiple columns</summary>
 <div class="example-body">
-Use `.by` for one-off grouped filtering without calling `group_by()` first.
 
 ```{webr}
 library(tidyverse)
 
-capsules <- tibble(
-  batch = c("A", "A", "A", "B", "B", "B"),
-  weight_mg = c(498, 501, 499, 503, 502, 500)
+# Create a tibble of QC results
+qc_results <- tibble(
+  batch_id = c("B01", "B01", "B02", "B02"),
+  assay_pct = c(99.2, 94.8, 101.1, 97.5)
 )
 
-above_batch_mean <- capsules %>%
-  filter(weight_mg > mean(weight_mg), .by = batch)
+# Filter rows where batch is B01 and assay is within 95–105%
+passing_b01 <- filter(qc_results, batch_id == "B01", assay_pct >= 95, assay_pct <= 105)
 
-above_batch_mean
+passing_b01
+```
+</div>
+</details>
+
+
+<details class="example-item">
+<summary>Filtering with a negated condition</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+# Create a tibble of HPLC log results
+hplc_log <- tibble(
+  sample_id = c("S1", "S2", "S3", "S4"),
+  pass_fail = c("pass", "fail", "pass", "fail")
+)
+
+# Filter rows where pass_fail is not "fail"
+passed_only <- filter(hplc_log, pass_fail != "fail")
+
+passed_only
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Filtering on missing values</summary>
+<div class="example-body">
+
+## Keep rows with missing dissolution readings
+```{webr}
+library(tidyverse)
+
+# Create a tibble of tablet dissolution results
+dissolution <- tibble(
+  tablet_id = c("T01", "T02", "T03"),
+  pct_dissolved = c(85.2, NA, 91.4)
+)
+
+missing_readings <- filter(dissolution, is.na(pct_dissolved))
+
+missing_readings
+```
+
+## Keep rows with complete dissolution readings
+```{webr}
+library(tidyverse)
+
+# Create a tibble of tablet dissolution results
+dissolution <- tibble(
+  tablet_id = c("T01", "T02", "T03"),
+  pct_dissolved = c(85.2, NA, 91.4)
+)
+
+complete_readings <- filter(dissolution, !is.na(pct_dissolved))
+
+complete_readings
 ```
 </div>
 </details>
