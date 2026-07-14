@@ -27,10 +27,18 @@ def add_sheet(wb, title, header, rows, first=False):
     for r in rows:
         ws.append(r)
 
-add_sheet(wb, "Weights",     weights_h, weights, first=True)
-add_sheet(wb, "Dissolution", diss_h,    diss)
-add_sheet(wb, "Titration",   titr_h,    titr)
-add_sheet(wb, "Calibration", calib_h,   calib)
+# same weights, but some balance readings never made it in -> mixed NA codes.
+# One column now holds numbers AND text codes, which is the whole point of na=.
+missing_codes = {2: "N/A", 7: "-", 13: "ND", 19: None}  # row index -> code
+weights_missing = [list(r) for r in weights]
+for idx, code in missing_codes.items():
+    weights_missing[idx][2] = code
+
+add_sheet(wb, "Weights",           weights_h, weights, first=True)
+add_sheet(wb, "Dissolution",       diss_h,    diss)
+add_sheet(wb, "Titration",         titr_h,    titr)
+add_sheet(wb, "Calibration",       calib_h,   calib)
+add_sheet(wb, "Weights (missing)", weights_h, weights_missing)
 wb.save(os.path.join(DATA, "lab_results.xlsx"))
 
 # ---- lab_results_titled.xlsx : 3 title rows above the header --------------
@@ -45,5 +53,6 @@ for r in weights:
     ws.append(r)
 wb2.save(os.path.join(DATA, "lab_results_titled.xlsx"))
 
-print("Wrote lab_results.xlsx (sheets: Weights, Dissolution, Titration, Calibration)")
+print("Wrote lab_results.xlsx (sheets: Weights, Dissolution, Titration, "
+      "Calibration, Weights (missing))")
 print("Wrote lab_results_titled.xlsx (3 title rows, header on row 4)")

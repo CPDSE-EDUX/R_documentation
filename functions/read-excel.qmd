@@ -9,6 +9,7 @@ subtitle: "Import Excel worksheets as a tibble. read_excel(), read_xls(), and re
 </div>
 
 ## Required Library
+read_excel() is part of the tidyverse ecosystem, but it is not included in the core tidyverse package. Install and load the readxl package before using read_excel():
 ```r
 install.packages("readxl")
 library(readxl)
@@ -176,30 +177,37 @@ Use `read_xls()` or `read_xlsx()` only when you want to force one file type.
 <summary>Read the first worksheet from an Excel file</summary>
 <div class="example-body">
 
-```r
+```{webr}
 library(readxl)
 
-df <- read_excel("data/dissolution_results.xlsx")
+df <- read_excel("data/lab_results.xlsx")
 head(df)
 ```
 </div>
 </details>
 
 <details class="example-item">
-<summary>Read a named worksheet and skip metadata rows</summary>
+<summary>Read a specific worksheet</summary>
 <div class="example-body">
 
-```r
+## Select a worksheet by name.
+
+```{webr}
 library(readxl)
 
-df <- read_excel(
-  "data/dissolution_results.xlsx",
-  sheet = "Run_01",
-  skip = 2
-)
-
-df
+df <- read_excel("data/lab_results.xlsx", sheet = "Dissolution")
+head(df)
 ```
+
+## Select a worksheet by position (e.g., second sheet).
+
+```{webr}
+library(readxl)
+
+df <- read_excel("data/lab_results.xlsx", sheet = 2)
+head(df)
+```
+
 </div>
 </details>
 
@@ -207,16 +215,47 @@ df
 <summary>Import only a selected cell range</summary>
 <div class="example-body">
 
-```r
+```{webr}
 library(readxl)
 
-subset_df <- read_excel(
-  "data/dissolution_results.xlsx",
-  range = "A1:E25"
-)
-
-subset_df
+df <- read_excel("data/lab_results.xlsx", range = "A1:E25")
+head(df)
 ```
+
+## You can also combine sheet and range:
+
+```{webr}
+library(readxl)
+
+df <- read_excel("data/lab_results.xlsx", sheet = "Dissolution", range = "A1:E25")
+head(df)
+```
+
+</div>
+</details>
+
+
+<details class="example-item">
+<summary>Skip rows</summary>
+<div class="example-body">
+
+This dataset has 3 title rows above the header:
+
+```{webr}
+library(readxl)
+df <- read_excel("data/lab_results_titled.xlsx")
+head(df)
+```
+
+Use `skip = 3` to ignore them:
+
+```{webr}
+library(readxl)
+df <- read_excel("data/lab_results_titled.xlsx", skip = 3)
+head(df)
+```
+
+
 </div>
 </details>
 
@@ -224,15 +263,18 @@ subset_df
 <summary>Handle custom missing value codes during import</summary>
 <div class="example-body">
 
-```r
+The sheet `Weights (missing)` contains missing values that were entered in the spreadsheet as `"N/A"`, `"-"`, and `"ND"`. They can be converted to `NA` during import by specifying them in the `na` argument:
+
+```{webr}
 library(readxl)
 
 df <- read_excel(
-  "data/dissolution_results.xlsx",
+  "data/lab_results.xlsx",
+  sheet = "Weights (missing)",
   na = c("", "N/A", "-", "ND")
 )
 
-df
+head(df)
 ```
 </div>
 </details>

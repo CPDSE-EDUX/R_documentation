@@ -116,8 +116,10 @@ webr:
     # Copied into the webR virtual filesystem on every interactive page, so
     # cells can call read_csv("data/..."). Paths are relative to the page;
     # all pages with webr cells live one directory deep (topics/, functions/).
-    - ../data/capsules.csv
-    - ../data/dissolution_data_raw.csv
+    # A directory entry is expanded recursively by the live extension (tree()
+    # in live.lua), so mounting ../data covers every dataset — current and
+    # future — without maintaining a per-file list.
+    - ../data
   cell-options:
     warning: false
 

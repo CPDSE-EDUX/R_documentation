@@ -38,8 +38,18 @@ matched to the function it's meant to teach.
 
 | File | Shape | Teaches |
 |------|-------|---------|
-| `lab_results.xlsx` | 4 sheets: `Weights`, `Dissolution`, `Titration`, `Calibration` (all clean) | `read_excel(sheet = ...)` |
+| `lab_results.xlsx` | 5 sheets: `Weights`, `Dissolution`, `Titration`, `Calibration` (all clean) + `Weights (missing)` | `read_excel(sheet = ...)`; the last sheet also demos `read_excel(na = ...)` |
 | `lab_results_titled.xlsx` | 1 sheet: the Weights data with a 3-row title block above the header (header on row 4) | `read_excel(skip = 3)` |
+
+The `Weights (missing)` sheet is the `Weights` data with four balance readings
+gone, written with mixed NA codes (`N/A`, `-`, `ND`, and a blank cell), so
+`weight_mg` comes in as text until you clear them:
+
+```r
+read_excel("data/lab_results.xlsx",
+           sheet = "Weights (missing)",
+           na = c("", "N/A", "-", "ND"))
+```
 
 ## Regenerating
 
