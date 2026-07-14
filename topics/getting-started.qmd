@@ -48,9 +48,9 @@ To run code from a script:
 
 As you run code, created objects appear in the **Environment** pane, and plots appear in the **Plots** tab.
 
-![RStudio Panels](../assets/images/RStudio_Panels.png)
+[For a detailed explanation watch: RStudio in 3 minutes (YouTube) ↗](https://www.youtube.com/watch?v=GEuuhg7NBko){target="_blank" rel="noopener"}
 
-[Watch: RStudio in 3 minutes (YouTube) ↗](https://www.youtube.com/watch?v=GEuuhg7NBko){target="_blank" rel="noopener"}
+![RStudio Panels](../assets/images/RStudio_Panels.png)
 
 </div>
 </details>
@@ -98,7 +98,7 @@ Data is information that a computer can store and work with. It comes in differe
 | Numbers | `74.2`, `3.14` | `numeric` / `double` |
 | Whole numbers | `1`, `6`, `100` | `integer` |
 | Text | `"PASS"`, `"batch_01"` | `character` |
-| True/False | `TRUE`, `FALSE` | `logical` |
+| True/False | `TRUE`, `FALSE` | `logical or boolean` |
 
 ::: {.callout-note}
 In R, decimal numbers use a `.` not a `,` — so three and a half is written `3.5`, not `3,5`.
@@ -110,7 +110,7 @@ In R, even a single value is stored as an object. When you have multiple values 
 
 You create an object by assigning a value to a name using `<-`. On the left side of `<-` you write the object name. On the right side you write the value you want to store.
 
-Before writing your first objects, use these naming rules:
+## Naming rules:
 
 - Start names with a letter
 - Use only letters, numbers, and `_`
@@ -118,7 +118,7 @@ Before writing your first objects, use these naming rules:
 - Names are case-sensitive (`dose_mg` and `Dose_mg` are different)
 - Use descriptive names, ideally with units when relevant (for example `weight_kg`)
 
-Examples:
+## Examples:
 
 - Good: `dose_mg`, `patient_id`, `reaction_time_s`
 - Avoid: `dose mg` (space), `2dose` (starts with number), `x` (too vague)
@@ -162,10 +162,8 @@ view(name_of_your_object)
 </details>
 
 <details class="topic-card">
-<summary>Comments and Operations</summary>
+<summary>Comments</summary>
 <div class="topic-card-body">
-
-### Comments
 
 Lines starting with `#` are comments — R ignores them when running code. Use comments to explain what your code does:
 
@@ -174,7 +172,12 @@ Lines starting with `#` are comments — R ignores them when running code. Use c
 dose_mg <- 500   # you can also add a comment after code
 ```
 
-### Operators
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Operations</summary>
+<div class="topic-card-body">
 
 An operator is a symbol that performs an action on one or more values. They cover assignment (<-), arithmetic (+, -, etc.), comparison (==, >, etc.), and the pipe (%>%).
 
