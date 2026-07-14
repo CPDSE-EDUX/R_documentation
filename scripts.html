@@ -76,12 +76,29 @@ document.addEventListener('DOMContentLoaded', function () {
     group.appendChild(btn);
   }
 
+  // Relabel the extension's "Start Over" button to "Reset". The label is baked
+  // into the vendored minified runtime, so we rewrite it after render. Updates
+  // both the visible text and aria-label; idempotent (the aria-label selector
+  // stops matching once renamed), so re-runs from the observer are safe.
+  function renameResetButton(card) {
+    var btn = card.querySelector('.btn-exercise-editor[aria-label="Start Over"]');
+    if (!btn) return;
+    var label = btn.querySelector('.btn-label-exercise-editor');
+    if (label) label.textContent = 'Reset';
+    btn.setAttribute('aria-label', 'Reset');
+  }
+
+  function enhance(card) {
+    addCopyButton(card);
+    renameResetButton(card);
+  }
+
   var observer = new MutationObserver(function () {
-    document.querySelectorAll('.exercise-editor').forEach(addCopyButton);
+    document.querySelectorAll('.exercise-editor').forEach(enhance);
   });
 
   document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.exercise-editor').forEach(addCopyButton);
+    document.querySelectorAll('.exercise-editor').forEach(enhance);
     observer.observe(document.body, { childList: true, subtree: true });
   });
 })();

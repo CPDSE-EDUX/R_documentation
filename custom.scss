@@ -586,12 +586,20 @@ details.arg-item {
   --exercise-main-bg: #{$c-bg-sec};
   --exercise-code-block-bg: #{$c-bg-sec};
   --exercise-code-block-color: #{$c-text};
-  --exercise-cap-bg: #{$c-bg-sec};
+  // Toolbar (card-header) surface: a faint green tint so it reads as a
+  // distinct control bar above the editor, not a flat continuation of it.
+  --exercise-cap-bg: #{mix($forest-green, $c-bg-sec, 6%)};
 
   .card {
     border: 0.5px solid $c-border;
     border-radius: $radius-lg;
     overflow: hidden;
+  }
+
+  // Cleaner divider under the toolbar (extension default is rgba(0,0,0,.175)).
+  .card-header {
+    border-bottom: 0.5px solid $c-border !important;
+    gap: 0.4rem;
   }
 }
 
@@ -609,6 +617,25 @@ details.arg-item {
 .btn-exercise-editor {
   font-family: $sans;
   font-size: 13px;
+  // Soft, pill-ish shape — a deliberate local exception (site default is
+  // $radius-lg: 0). Run Code inherits this too, keeping the toolbar consistent.
+  border-radius: 7px;
+  padding: 0.2rem 0.6rem;
+
+  // Secondary buttons (Reset / Hint / Solution / Copy) render as btn-outline-dark,
+  // which is black (#333) by default. Recolor to a quiet gray that stays
+  // borderless until hover, so only the green Run Code button reads as primary.
+  &.btn-outline-dark {
+    --bs-btn-color: #{$c-text-sec};
+    --bs-btn-border-color: transparent;
+    --bs-btn-bg: transparent;
+    --bs-btn-hover-color: #{$c-text};
+    --bs-btn-hover-bg: #{$c-bg-ter};
+    --bs-btn-hover-border-color: #{$c-border-md};
+    --bs-btn-active-color: #{$c-text};
+    --bs-btn-active-bg: #{$c-bg-ter};
+    --bs-btn-active-border-color: #{$c-border-md};
+  }
 }
 
 // ── Source link pill (e.g. "readr docs") ──────────────────────────────────────
