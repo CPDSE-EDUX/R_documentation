@@ -132,7 +132,7 @@ Useful if the file has metadata rows above the header row. The example will skip
 ```{webr}
 library(tidyverse)
 
-data <- read_csv("data/weights_export.csv", skip = 3)
+data <- read_csv("data/weights_export.csv", skip = 4)
 
 head(data)
 ```
