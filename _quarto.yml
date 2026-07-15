@@ -87,6 +87,8 @@ website:
               href: functions/coef.qmd
             - text: "lm( )"
               href: functions/lm.qmd
+            - text: "predict( )"
+              href: functions/predict.qmd
             - text: "summary( )"
               href: functions/summary.qmd
         - section: "Visualize"

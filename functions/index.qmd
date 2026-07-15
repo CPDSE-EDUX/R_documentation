@@ -50,6 +50,9 @@ Extract estimated coefficients from fitted model objects.
 ### **[lm( )](lm.qmd)**
 Fit linear regression models and extract slope, intercept, and model fit statistics.
 
+### **[predict( )](predict.qmd)**
+Predict new values from a fitted model.
+
 ### **[summary( )](summary.qmd)**
 Produce a compact summary of vectors, data frames, and model objects.
 

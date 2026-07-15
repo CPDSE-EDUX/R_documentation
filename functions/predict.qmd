@@ -1,0 +1,156 @@
+---
+title: "predict( )"
+subtitle: "Use a fitted model to calculate predicted values. predict() is a generic function, and for models made with lm(), it uses the predict.lm() method behind the scenes."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/predict.lm.html" target="_blank" rel="noopener">predict.lm() Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# predict() is part of base R (stats), loaded by default — no package installation needed
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+predict(object)
+predict(object, newdata = df)
+```
+::: {.desc-item}
+Once you have fitted a linear regression model with `lm()`, `predict(object)` gives you the model's predicted values for the data you used to fit it.
+If you instead want predictions for new x-values, `predict(object, newdata = df)` lets you supply a data frame of new predictor values and returns the model's predicted response for each one.
+:::
+
+::: {.callout-tip collapse="true"}
+## When should you use `predict()`?
+`predict()` is the natural next step after fitting a linear regression model with `lm()`. Once you have a model that describes the relationship between your x and y variables, `predict()` lets you use that relationship to estimate y for any x-value, including ones not in your original data.
+:::
+
+::: {.callout-note collapse="true"}
+## `predict()` is generic
+You will use `predict()` the same way regardless of what kind of model you have fitted. Behind the scenes, R picks the right calculation to use based on the model's class, so for an `lm()` model, R automatically uses `predict.lm()` without you needing to specify this.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Get predicted values for the data used to fit the model</summary>
+<div class="example-body">
+First-order degradation is linear when you plot the natural log of concentration against time. This example fits that linear model and calculates the predicted log-concentration at each time point already in the data set — useful for checking how well the model fits.
+
+```{webr}
+library(tidyverse)
+
+degradation <- tibble(
+  time_h = c(0, 2, 4, 6, 8, 10),
+  conc_mg_ml = c(10.05, 9.15, 8.05, 7.55, 6.58, 6.20)
+)
+
+model <- lm(log(conc_mg_ml) ~ time_h, data = degradation)
+
+predict(model)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Predict new values based on model</summary>
+<div class="example-body">
+Because the model was fitted on log-transformed concentration, `predict()` returns predicted log-concentration values. To get the predicted concentration itself, back-transform with `exp()`.
+
+```{webr}
+library(tidyverse)
+
+degradation <- tibble(
+  time_h = c(0, 2, 4, 6, 8, 10),
+  conc_mg_ml = c(10.05, 9.15, 8.05, 7.55, 6.58, 6.20)
+)
+
+model <- lm(log(conc_mg_ml) ~ time_h, data = degradation)
+
+new_time <- tibble(time_h = c(3, 12, 24))
+pred_log_conc <- predict(model, newdata = new_time)
+
+# exp() reverses the log() from the model, converting back to concentration (mg/mL)
+# bind_cols() joins this predicted concentration to the corresponding time point
+bind_cols(new_time, tibble(pred_conc_mg_ml = exp(pred_log_conc)))
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Compare predicted and actual values</summary>
+<div class="example-body">
+Adding the predicted values as a new column lets you see, row by row, how close the model's estimates are to the concentrations you actually measured. Since the model works on the log scale, the predicted values are back-transformed with `exp()` before comparing.
+
+```{webr}
+library(tidyverse)
+
+degradation <- tibble(
+  time_h = c(0, 2, 4, 6, 8, 10),
+  conc_mg_ml = c(10.05, 9.15, 8.05, 7.55, 6.58, 6.20)
+)
+
+model <- lm(log(conc_mg_ml) ~ time_h, data = degradation)
+
+degradation %>%
+  mutate(predicted_conc_mg_ml = exp(predict(model)))
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>object</code> — fitted model object <span class="arg-types">model object</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The fitted model to use for prediction.
+For this site, the common example is an `lm()` model.
+
+```r
+predict(model)
+```
+
+<p class="data-types"><strong>Data Types:</strong> model object, usually from <code>lm()</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>newdata</code> — new predictor values <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Data frame containing new predictor values for prediction.
+The column names must match the predictor names used in the model.
+
+```r
+predict(model, newdata = new_conc)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code> · Default: original model data if omitted</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — method-specific prediction options <span class="arg-types">various</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Additional arguments passed to the method used by `predict()`.
+For linear models, this includes options such as confidence intervals or standard errors.
+
+<p class="data-types"><strong>Data Types:</strong> depends on the model class</p>
+</div>
+</details>
+:::
