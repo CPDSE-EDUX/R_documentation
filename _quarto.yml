@@ -63,6 +63,12 @@ website:
               href: functions/read-excel.qmd
             - text: "tibble( )"
               href: functions/tibble.qmd
+        - section: "Inspect"
+          contents:
+            - text: "glimpse( )"
+              href: functions/glimpse.qmd
+            - text: "head( )"
+              href: functions/head.qmd
         - section: "Transform"
           contents:
             - text: "arrange( )"
@@ -89,8 +95,6 @@ website:
               href: functions/ggplot.qmd
         - section: "Report"
           contents:
-            - text: "glimpse( )"
-              href: functions/glimpse.qmd
             - text: "cat( )"
               href: functions/cat.qmd
             - text: "round( )"

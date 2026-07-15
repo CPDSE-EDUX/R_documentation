@@ -17,6 +17,14 @@ Import an Excel worksheet into R as a tibble.
 ### **[tibble( )](tibble.qmd)**
 Create a tidy table from vectors or values.
 
+## Inspect {.glossary-letter}
+
+### **[glimpse( )](glimpse.qmd)**
+Inspect a data object by showing columns, data types, and example values.
+
+### **[head( )](head.qmd)**
+Preview the first rows of an object.
+
 ## Transform {.glossary-letter}
 
 ### **[arrange( )](arrange.qmd)**
@@ -51,9 +59,6 @@ Produce a compact summary of vectors, data frames, and model objects.
 Create plots by mapping variables to visual aesthetics and adding layers.
 
 ## Report {.glossary-letter}
-
-### **[glimpse( )](glimpse.qmd)**
-Inspect a data object by showing columns, data types, and example values.
 
 ### **[cat( )](cat.qmd)**
 Print values to the console as readable text, useful for clear labelled output.

@@ -1,0 +1,119 @@
+---
+title: "head( )"
+subtitle: "Preview the first rows of an object. head() is a base R function."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/head" target="_blank" rel="noopener">Original Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# head() is part of base R — no package installation needed
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+head(x)
+head(x, n = 3)
+```
+::: {.desc-item}
+`head(x)` shows the first 6 rows of a data frame or tibble by default.
+Use `n` to choose a different number of rows.
+:::
+
+::: {.callout-tip collapse="true"}
+## When should you use `head()`?
+Use `head()` when you want a quick preview of the top of a data set.
+It is handy right after import and is good practice when inspecting large data sets.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Preview the first rows of tablet weights</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+head(tablet_weights)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Show only the first 3 rows</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+head(tablet_weights, n = 3)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Show the last rows with <code>tail()</code></summary>
+<div class="example-body">
+
+`tail()` works like `head()`, but it shows the last rows instead of the first rows.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tail(tablet_weights)
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — object to preview <span class="arg-types">vector | matrix | data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The object to preview.
+`head()` is most commonly used with data frames and tibbles, but it also works with vectors and matrices.
+
+```r
+head(tablet_weights)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>vector</code> | <code>matrix</code> | <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>n</code> — number of rows to show <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+The number of rows to return from the start of the object.
+Default is `6`.
+
+```r
+head(tablet_weights, n = 3)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> · Default: <code>6</code></p>
+</div>
+</details>
+:::
