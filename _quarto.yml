@@ -65,12 +65,12 @@ website:
               href: functions/tibble.qmd
         - section: "Transform"
           contents:
-            - text: "group_by( )"
-              href: functions/group-by.qmd
-            - text: "filter( )"
-              href: functions/filter.qmd
             - text: "arrange( )"
               href: functions/arrange.qmd
+            - text: "filter( )"
+              href: functions/filter.qmd
+            - text: "group_by( )"
+              href: functions/group-by.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
             - text: "summarise( )"
