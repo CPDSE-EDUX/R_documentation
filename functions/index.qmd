@@ -25,6 +25,9 @@ Group rows by one or more columns so dplyr verbs can work within each group.
 ### **[filter( )](filter.qmd)**
 Keep rows that match one or more logical conditions.
 
+### **[arrange( )](arrange.qmd)**
+Sort rows by one or more columns.
+
 ### **[mutate( )](mutate.qmd)**
 Add new columns or transform existing columns in a data frame.
 

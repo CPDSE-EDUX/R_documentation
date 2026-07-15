@@ -69,6 +69,8 @@ website:
               href: functions/group-by.qmd
             - text: "filter( )"
               href: functions/filter.qmd
+            - text: "arrange( )"
+              href: functions/arrange.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
             - text: "summarise( )"
