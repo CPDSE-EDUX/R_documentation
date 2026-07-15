@@ -52,6 +52,9 @@ Create plots by mapping variables to visual aesthetics and adding layers.
 
 ## Report {.glossary-letter}
 
+### **[glimpse( )](glimpse.qmd)**
+Inspect a data object by showing columns, data types, and example values.
+
 ### **[cat( )](cat.qmd)**
 Print values to the console as readable text, useful for clear labelled output.
 

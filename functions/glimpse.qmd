@@ -1,0 +1,144 @@
+---
+title: "glimpse( )"
+subtitle: "Inspect a data object by showing columns, data types, and example values. glimpse() is re-exported by dplyr and available through the tidyverse."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/glimpse.html" target="_blank" rel="noopener">dplyr Documentation ↗</a>
+<a class="source-link" href="https://pillar.r-lib.org/reference/glimpse.html" target="_blank" rel="noopener">pillar Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+# Pipe style
+df %>% glimpse()
+
+# Non-pipe style
+glimpse(df)
+```
+::: {.desc-item}
+`df %>% glimpse()` and `glimpse(df)` print a compact overview of the object.
+For tibbles and data frames, the output shows the number of rows and columns, each column name, its data type, and example values.
+:::
+
+```{r, eval=FALSE}
+glimpse(df, width = 60)
+```
+::: {.desc-item}
+Use `width =` when you want to control how much horizontal space the printed output uses.
+Smaller widths wrap sooner; larger widths can show more values on one line.
+:::
+
+::: {.callout-tip collapse="true"}
+## Why use `glimpse()` instead of `View()` or `print()`?
+`glimpse()` gives you a quick look at your data: column names, types, and the first few values, all in one view. Unlike `print()`, it won't cut off columns when your dataframe is wide. Unlike `View()`, it shows up right in your script, so you don't need to open a separate window.
+It also doesn't change your data — it just shows it to you and passes it along, so you can use it inside a pipe without breaking your workflow.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Inspect a tibble after importing it</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+glimpse(tablet_weights)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Use glimpse() inside a pipe</summary>
+<div class="example-body">
+Because `glimpse()` returns the original data invisibly, you can inspect the data and continue the pipeline.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  glimpse() %>%
+  filter(weight_mg > 505)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Control how much output is shown with width</summary>
+<div class="example-body">
+By default, `glimpse()` uses the full width of your console. Set `width` to limit how many characters are printed per line, which is useful for narrower windows or when sharing output.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+glimpse(tablet_weights, width = 50)
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>x</code> — object to inspect <span class="arg-types">data frame | tibble | other R object</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The object to inspect.
+`glimpse()` is most commonly used with tibbles and data frames, but it can also inspect other R objects.
+
+```r
+glimpse(tablet_weights)
+```
+
+<p class="data-types"><strong>Data Types:</strong> usually <code>tibble</code> or <code>data.frame</code>, but other object types are also accepted</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>width</code> — output width <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Controls how wide the printed output can be.
+If omitted, `glimpse()` uses the current console width.
+
+```r
+glimpse(tablet_weights, width = 60)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code> · Default: <code>NULL</code> (use console width)</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — unused extra arguments <span class="arg-types">various</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Reserved for extensibility.
+Most users can ignore this and call `glimpse(x)` with no extra arguments.
+
+<p class="data-types"><strong>Data Types:</strong> not typically used in beginner workflows</p>
+</div>
+</details>
+:::

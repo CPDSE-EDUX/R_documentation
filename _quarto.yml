@@ -89,6 +89,8 @@ website:
               href: functions/ggplot.qmd
         - section: "Report"
           contents:
+            - text: "glimpse( )"
+              href: functions/glimpse.qmd
             - text: "cat( )"
               href: functions/cat.qmd
             - text: "round( )"
