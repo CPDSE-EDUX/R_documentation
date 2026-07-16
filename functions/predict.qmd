@@ -44,29 +44,11 @@ You will use `predict()` the same way regardless of what kind of model you have 
 <div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
 
 <details class="example-item">
-<summary>Get predicted values for the data used to fit the model</summary>
-<div class="example-body">
-First-order degradation is linear when you plot the natural log of concentration against time. This example fits that linear model and calculates the predicted log-concentration at each time point already in the data set — useful for checking how well the model fits.
-
-```{webr}
-library(tidyverse)
-
-degradation <- tibble(
-  time_h = c(0, 2, 4, 6, 8, 10),
-  conc_mg_ml = c(10.05, 9.15, 8.05, 7.55, 6.58, 6.20)
-)
-
-model <- lm(log(conc_mg_ml) ~ time_h, data = degradation)
-
-predict(model)
-```
-</div>
-</details>
-
-<details class="example-item">
 <summary>Predict new values based on model</summary>
 <div class="example-body">
-Because the model was fitted on log-transformed concentration, `predict()` returns predicted log-concentration values. To get the predicted concentration itself, back-transform with `exp()`.
+This model describes first-order drug degradation, where the natural log of concentration decreases linearly with time. Because the model was fitted on log-transformed concentration, `predict()` returns predicted log-concentration values. To get the predicted concentration itself, back-transform with `exp()`.
+
+Rather than calculating the predictions separately and joining them back on afterwards, you can do it in one step with `mutate()`. Inside the pipe, `.` refers to `new_time` itself as it flows through — so `newdata = .` tells `predict()` to use these new time points, and wrapping the whole thing in `exp()` back-transforms the result before `mutate()` adds it as a new column.
 
 ```{webr}
 library(tidyverse)
@@ -79,11 +61,38 @@ degradation <- tibble(
 model <- lm(log(conc_mg_ml) ~ time_h, data = degradation)
 
 new_time <- tibble(time_h = c(3, 12, 24))
-pred_log_conc <- predict(model, newdata = new_time)
 
+# newdata = . passes new_time itself into predict(), as it flows through the pipe
 # exp() reverses the log() from the model, converting back to concentration (mg/mL)
-# bind_cols() joins this predicted concentration to the corresponding time point
-bind_cols(new_time, tibble(pred_conc_mg_ml = exp(pred_log_conc)))
+new_time %>%
+  mutate(pred_conc_mg_ml = exp(predict(model, newdata = .)))
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Predict a single new value and extract the result</summary>
+<div class="example-body">
+If you only need a prediction for one new time point, `predict()` still returns a vector — here, a vector of length 1. Since the model was fitted on log-transformed concentration, the result needs to be back-transformed with `exp()`. Because there's only one value, you can pull it out directly as a plain number with `[[1]]`, rather than keeping it inside a data frame.
+
+```{webr}
+library(tidyverse)
+
+degradation <- tibble(
+  time_h = c(0, 2, 4, 6, 8, 10),
+  conc_mg_ml = c(10.05, 9.15, 8.05, 7.55, 6.58, 6.20)
+)
+
+model <- lm(log(conc_mg_ml) ~ time_h, data = degradation)
+
+# A single new time point, as a one-row tibble
+new_time_single <- tibble(time_h = 5)
+
+# predict() returns a vector of length 1 here;
+# [[1]] extracts the plain number, exp() back-transforms it
+pred_conc <- exp(predict(model, newdata = new_time_single))[[1]]
+
+pred_conc
 ```
 </div>
 </details>
@@ -91,7 +100,7 @@ bind_cols(new_time, tibble(pred_conc_mg_ml = exp(pred_log_conc)))
 <details class="example-item">
 <summary>Compare predicted and actual values</summary>
 <div class="example-body">
-Adding the predicted values as a new column lets you see, row by row, how close the model's estimates are to the concentrations you actually measured. Since the model works on the log scale, the predicted values are back-transformed with `exp()` before comparing.
+This model describes first-order drug degradation, where log-concentration decreases linearly with time. Adding the predicted values as a new column lets you see, row by row, how close the model's estimates are to the concentrations you actually measured. Since the model works on the log scale, the predicted values are back-transformed with `exp()` before comparing.
 
 ```{webr}
 library(tidyverse)
