@@ -673,6 +673,12 @@ details.arg-item {
   margin-bottom: 0;
 }
 
+// Download pills on the Datasets page sit inside collapsible bodies,
+// where the default 2rem stacked margin is too much
+.download-link {
+  margin-bottom: 0.75rem;
+}
+
 
 // ── Type pill (param tables, arg headers) ─────────────────────────────────────
 

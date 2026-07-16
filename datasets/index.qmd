@@ -1,0 +1,314 @@
+---
+title: "Datasets"
+subtitle: "The example data used across this site: a quality-control lab working with ibuprofen 400 mg tablets. View each dataset, read what it contains, and download it for your own work."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+All examples on this site share one running story: a QC lab receives a batch of
+**ibuprofen 400 mg tablets** and works through four classic experiments —
+weigh the tablets, dissolve them, titrate the extracted drug, and build a UV
+calibration curve.
+
+The files follow a simple design rule: **one defect per file**. Four datasets
+are clean, and each "messy" variant reuses one of them with exactly one
+realistic problem, so you learn the data once and then only have to learn the
+defect.
+
+Every interactive code cell on this site can load these files directly with
+`read_csv("data/...")` — no setup needed. To use a dataset in RStudio, click
+its download button and place the file in a `data/` folder inside your R
+project.
+
+## Clean datasets
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary><code>tablet_weights.csv</code> — tablet weights off the production line</summary>
+<div class="example-body">
+
+24 individual tablets weighed straight off the line, 8 from each of three
+batches (A, B, C), with a target weight of about 500 mg. This is the go-to
+dataset for inspecting, filtering, grouping, and summarising.
+
+| Column | Type | Meaning |
+|--------|------|---------|
+| `tablet_id` | numeric | Tablet number (1–24) |
+| `batch` | character | Production batch: `A`, `B`, or `C` |
+| `weight_mg` | numeric | Measured tablet weight in milligrams |
+
+<a class="source-link download-link" href="../data/tablet_weights.csv" download>Download tablet_weights.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>dissolution.csv</code> — drug release over time</summary>
+<div class="example-body">
+
+Six tablets placed in dissolution fluid, with the percentage of drug released
+measured at seven time points per tablet (42 rows). The release climbs toward
+100% following first-order kinetics — ideal for plotting curves with
+[`ggplot()`](../functions/ggplot.qmd).
+
+| Column | Type | Meaning |
+|--------|------|---------|
+| `tablet_id` | numeric | Tablet number (1–6) |
+| `time_min` | numeric | Sampling time in minutes |
+| `pct_dissolved` | numeric | Percent of the drug released so far |
+
+<a class="source-link download-link" href="../data/dissolution.csv" download>Download dissolution.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+dissolution <- read_csv("data/dissolution.csv")
+
+dissolution
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>titration.csv</code> — acid–base titration curves</summary>
+<div class="example-body">
+
+Acid–base titration of extracted ibuprofen (a weak acid, pKa 4.91) with
+0.100 M NaOH. Three replicate samples (A, B, C) are titrated in 2 mL steps,
+26 readings each, with equivalence points at 24.5, 25.0, and 25.5 mL.
+
+| Column | Type | Meaning |
+|--------|------|---------|
+| `sample_id` | character | Replicate sample: `A`, `B`, or `C` |
+| `volume_ml` | numeric | Volume of NaOH added, in mL |
+| `pH` | numeric | Measured pH |
+
+<a class="source-link download-link" href="../data/titration.csv" download>Download titration.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+titration <- read_csv("data/titration.csv")
+
+titration
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>calibration.csv</code> — UV calibration curve</summary>
+<div class="example-body">
+
+An ibuprofen UV calibration series following the Beer–Lambert law: absorbance
+rises linearly with concentration across 11 standards (R² ≈ 0.9999). This is
+the dataset for [`lm()`](../functions/lm.qmd),
+[`coef()`](../functions/coef.qmd), and
+[`predict()`](../functions/predict.qmd).
+
+| Column | Type | Meaning |
+|--------|------|---------|
+| `conc_ug_ml` | numeric | Standard concentration in µg/mL |
+| `absorbance` | numeric | Measured UV absorbance |
+
+<a class="source-link download-link" href="../data/calibration.csv" download>Download calibration.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+calibration <- read_csv("data/calibration.csv")
+
+calibration
+```
+</div>
+</details>
+
+</div>
+
+## Messy variants
+
+Each file below is one of the clean datasets with a single realistic problem
+built in. Run the cell to see the problem for yourself — the page for the
+matching function shows how to fix it.
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary><code>dissolution_dk.csv</code> — Danish CSV export (semicolons and comma decimals)</summary>
+<div class="example-body">
+
+The dissolution data as exported by software with Danish regional settings:
+semicolons separate the columns and commas mark the decimals. A plain
+`read_csv()` crams everything into one column — this file teaches
+[`read_csv2()`](../functions/read-csv.qmd).
+
+<a class="source-link download-link" href="../data/dissolution_dk.csv" download>Download dissolution_dk.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+read_csv("data/dissolution_dk.csv")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>titration_missing.csv</code> — mixed missing-value codes</summary>
+<div class="example-body">
+
+The titration data for sample B, but a few pH readings were recorded as
+`N/A`, `-`, or simply left blank. Because of the text codes, `read_csv()`
+imports the whole `pH` column as text instead of numbers — this file teaches
+the [`na =` argument of `read_csv()`](../functions/read-csv.qmd).
+
+<a class="source-link download-link" href="../data/titration_missing.csv" download>Download titration_missing.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+read_csv("data/titration_missing.csv")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>weights_units.csv</code> — numbers stored as text</summary>
+<div class="example-body">
+
+The tablet weights, but someone typed the unit into every cell
+(`"506.3 mg"`). The `weight_mg` column arrives as text, so you can't
+calculate with it — this file teaches `parse_number()` and type conversion.
+
+<a class="source-link download-link" href="../data/weights_units.csv" download>Download weights_units.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+read_csv("data/weights_units.csv")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>weights_duplicates.csv</code> — rows logged twice</summary>
+<div class="example-body">
+
+The tablet weights, but tablets 5 and 18 were accidentally logged twice, so
+the file has 26 rows for 24 tablets. Counting the IDs reveals the duplicates
+— this file teaches `distinct()`.
+
+<a class="source-link download-link" href="../data/weights_duplicates.csv" download>Download weights_duplicates.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+weights <- read_csv("data/weights_duplicates.csv")
+
+weights %>% count(tablet_id, sort = TRUE)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>batches_messy.csv</code> — inconsistent batch labels</summary>
+<div class="example-body">
+
+The tablet weights, but the batch column was typed by hand: the same batch
+appears as `A`, `a`, `Batch A`, and `" A"` (with a stray space). Grouping or
+counting by batch splits one batch into several — this file teaches
+`str_trim()` and `str_to_upper()`.
+
+<a class="source-link download-link" href="../data/batches_messy.csv" download>Download batches_messy.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+batches <- read_csv("data/batches_messy.csv")
+
+batches %>% count(batch)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>weights_export.csv</code> — instrument export with metadata block</summary>
+<div class="example-body">
+
+The tablet weights as a raw balance export: four metadata lines sit above the
+header, **and** missing readings use mixed codes (`NA`, `N/A`, `-`, blank).
+This is the one deliberate two-defect file, so you can combine
+[`skip =` and `na =` in a single `read_csv()` call](../functions/read-csv.qmd).
+
+<a class="source-link download-link" href="../data/weights_export.csv" download>Download weights_export.csv ⬇</a>
+
+```{webr}
+library(tidyverse)
+
+read_csv("data/weights_export.csv")
+```
+</div>
+</details>
+
+</div>
+
+## Excel workbooks
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary><code>lab_results.xlsx</code> — all four experiments in one workbook</summary>
+<div class="example-body">
+
+One workbook with five sheets: `Weights`, `Dissolution`, `Titration`, and
+`Calibration` (the four clean datasets), plus `Weights (missing)` — the
+weights with four readings gone, written with mixed NA codes (`N/A`, `-`,
+`ND`, blank). It teaches [`read_excel()`](../functions/read-excel.qmd) with
+the `sheet =` and `na =` arguments.
+
+<a class="source-link download-link" href="../data/lab_results.xlsx" download>Download lab_results.xlsx ⬇</a>
+
+```{webr}
+library(readxl)
+
+excel_sheets("data/lab_results.xlsx")
+```
+
+```{webr}
+library(readxl)
+
+read_excel("data/lab_results.xlsx", sheet = "Dissolution")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary><code>lab_results_titled.xlsx</code> — title block above the header</summary>
+<div class="example-body">
+
+The weights data with a three-row title block above the column names, so the
+real header sits on row 4. Reading it naively turns the title into column
+names — this file teaches
+[`read_excel(skip = 3)`](../functions/read-excel.qmd).
+
+<a class="source-link download-link" href="../data/lab_results_titled.xlsx" download>Download lab_results_titled.xlsx ⬇</a>
+
+```{webr}
+library(readxl)
+
+read_excel("data/lab_results_titled.xlsx")
+```
+</div>
+</details>
+
+</div>

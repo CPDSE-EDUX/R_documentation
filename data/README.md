@@ -76,7 +76,9 @@ python  data/build_xlsx.py
 
 ## Legacy files (not part of the set above)
 
-- `capsules.csv` — still referenced by `topics/data-handling.qmd`.
+- `capsules.csv` — earlier example data (data-handling was migrated to
+  `tablet_weights.csv` in July 2026).
 - `dissolution_data_raw.csv` — earlier raw-format example.
 
-Leave these in place until the topic pages that use them are migrated.
+No site page reads these anymore; they are kept in the repo only and can be
+deleted once nothing external depends on them.

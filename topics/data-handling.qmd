@@ -16,9 +16,9 @@ First, you have to load the data.
 ```{webr}
 library(tidyverse)
 
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules
+tablet_weights
 ```
 
 </div>
@@ -33,28 +33,28 @@ Keep only rows where a condition is `TRUE`.
 ## Filter based on one condition
 
 ```{webr}
-# Keep only batch A capsules
+# Keep only batch A tablets
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
+tablet_weights %>%
   filter(batch == "A")
 ```
 
-![Illustration of filtering batch A capsules](../assets/images/filter_function.svg){width=100%}
+![Illustration of filtering batch A tablets](../assets/images/filter_function.svg){width=100%}
 
 ## Filter based on multiple conditions
 
 ```{webr}
 # Keep rows matching two conditions
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  filter(batch == "A" & pct_label > 100)
+tablet_weights %>%
+  filter(batch == "A" & weight_mg > 502)
 ```
 
-![Illustration of filtering batch A capsules with a pct_label value larger than 100](../assets/images/filter_function2.svg){width=100%}
+![Illustration of filtering batch A tablets with a weight above 502 mg](../assets/images/filter_function2.svg){width=100%}
 
 ::: {.callout-tip}
 ## Available Operators
@@ -80,10 +80,10 @@ Keep only the columns you need.
 
 ```{webr}
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  select(capsule_id, batch, pct_label)
+tablet_weights %>%
+  select(tablet_id, weight_mg)
 ```
 
 ![Illustration of selecting columns](../assets/images/select_function.svg){width=100%}
@@ -93,10 +93,10 @@ capsules %>%
 ```{webr}
 # Drop a column with -
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  select(-fill_mass_mg)
+tablet_weights %>%
+  select(-weight_mg)
 ```
 
 ![Illustration of dropping a column](../assets/images/select_function2.svg){width=100%}
@@ -112,10 +112,10 @@ Rename a column: `rename(new_name = old_name)`.
 
 ```{webr}
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  rename(id = capsule_id, pct = pct_label)
+tablet_weights %>%
+  rename(id = tablet_id, weight = weight_mg)
 ```
 
 ![Illustration of renaming a column](../assets/images/rename_function.svg){width=100%}
@@ -132,10 +132,10 @@ Sort rows by a column.
 ##  Ascending order
 ```{webr}
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  arrange(pct_label)
+tablet_weights %>%
+  arrange(weight_mg)
 ```
 
 ![Illustration of arranging rows in ascending order](../assets/images/arrange_function.svg){width=100%}
@@ -144,10 +144,10 @@ capsules %>%
 
 ```{webr}
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  arrange(desc(pct_label))
+tablet_weights %>%
+  arrange(desc(weight_mg))
 ```
 
 ![Illustration of arranging rows in descending order](../assets/images/arrange_function2.svg){width=100%}
@@ -162,11 +162,12 @@ capsules %>%
 Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
 
 ```{webr}
+# The target weight is 500 mg — express each tablet as % of target
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
-  mutate(ibu_mg = fill_mass_mg * 0.43)
+tablet_weights %>%
+  mutate(pct_target = weight_mg / 500 * 100)
 ```
 
 ![Illustration of adding a column with newly calculated values](../assets/images/mutate_function.svg){width=100%}
@@ -182,12 +183,12 @@ Chain any number of operations with the pipe — each result flows into the next
 
 ```{webr}
 library(tidyverse)
-capsules <- read_csv("data/capsules.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
-capsules %>%
+tablet_weights %>%
   filter(batch == "B") %>%
-  arrange(pct_label) %>%
-  select(capsule_id, fill_mass_mg, pct_label)
+  arrange(weight_mg) %>%
+  select(tablet_id, weight_mg)
 ```
 
 ![Illustration of combining steps with the pipe operator](../assets/images/data_handling_pipe.svg){width=100%}
