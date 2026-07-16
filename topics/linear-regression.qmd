@@ -1,6 +1,6 @@
 ---
 title: "Linear Regression"
-subtitle: "Simple linear regression with lm(): coefficients, R-squared, prediction, and plotting."
+subtitle: "Simple linear regression with lm(): coefficients, R^2^, prediction, and plotting."
 toc: false
 ---
 
@@ -95,7 +95,7 @@ cat("Slope:    ", signif(slope, 4), "\n")
 </details>
 
 <details class="topic-card">
-<summary>Use summary() and extract R-squared</summary>
+<summary>Use summary() and extract R^2^</summary>
 <div class="topic-card-body">
 
 R^2^, used to interpret goodness of fit, can be assessed from `summary(model)` and extracted as `$r.squared`.
@@ -121,7 +121,7 @@ If you run `summary(model)` and scroll through the output, you also get:
 - Residuals (differences between observed and predicted values)
 - Coefficients table (estimate, standard error, t value, p-value)
 - Residual standard error
-- Adjusted R-squared
+- Adjusted R^2^
 - F-statistic
 
 For full output, run:
@@ -171,6 +171,46 @@ Use a forced-zero model only when it is scientifically justified. Otherwise, it 
 </details>
 
 <details class="topic-card">
+<summary>Fit separate regressions for each group with group_by()</summary>
+<div class="topic-card-body">
+
+Sometimes one regression line isn't appropriate for the whole data set — for example, if you ran calibration curves for three different compounds and want to check each one's line separately. `group_by()` combined with `summarise()` lets you fit a separate `lm()` model per compound and pull out coefficients and R² for each, in one step.
+
+The tricky part is that `lm()` normally expects a named data frame to point to with `data = ...`. Inside `summarise()`, there isn't one — you're working through the data group by group, not from an existing table. `pick(everything())` solves this: it reassembles the current group's columns into a small data frame on the spot, so `lm()` has something to fit. Since `lm()` returns a whole model object rather than a single number, it's wrapped in `list()` so it can be stored in a single table cell; `model[[1]]` then unwraps that list to get the actual model back out, so `coef()` and `summary()` can work on it.
+
+```{webr}
+library(tidyverse)
+
+calibration_compounds <- tibble(
+  compound = rep(c("Compound 1", "Compound 2", "Compound 3"), each = 6),
+  conc_ug_ml = rep(c(0, 2.5, 5.0, 10.0, 20.0, 40.0), times = 3),
+  absorbance = c(
+    0.004, 0.058, 0.112, 0.229, 0.438, 0.885,   # Compound 1
+    0.002, 0.061, 0.105, 0.223, 0.446, 0.895,   # Compound 2
+    0.006, 0.052, 0.118, 0.233, 0.430, 0.870    # Compound 3
+  )
+)
+
+calibration_compounds %>%
+  group_by(compound) %>%
+  summarise(
+    # Fit one lm() per compound, using just that compound's rows
+    model = list(lm(absorbance ~ conc_ug_ml, data = pick(everything()))),
+
+    # Pull out slope, intercept, and R-squared for this compound's model
+    intercept = coef(model[[1]])[[1]],
+    slope = coef(model[[1]])[[2]],
+    r_squared = summary(model[[1]])$r.squared
+  ) %>%
+  select(-model)   # model column was only needed to get the numbers above
+```
+
+The result is one row per compound, with its own slope, intercept, and R², all pulled out using the same `coef()` and `summary()` from earlier on this page — just applied automatically to each group instead of repeating the code three times by hand.
+
+</div>
+</details>
+
+<details class="topic-card">
 <summary>Predict new values with the regression model</summary>
 <div class="topic-card-body">
 
@@ -183,6 +223,8 @@ If your model is `absorbance ~ conc_ug_ml`, that means:
 - input: new concentration values
 - output: predicted absorbance values
 
+Rather than calculating the predictions separately and joining them back on afterwards, you can do it in one step with `mutate()`. Inside the pipe, `.` refers to `new_conc` itself as it flows through — so `predict(model, newdata = .)` tells `predict()` to use these new concentration values, and `mutate()` adds the result directly as a new column.
+
 ```{webr}
 library(tidyverse)
 
@@ -194,12 +236,12 @@ calibration <- tibble(
 model <- lm(absorbance ~ conc_ug_ml, data = calibration)
 
 new_conc <- tibble(conc_ug_ml = c(7.5, 15, 30))
-pred_abs <- predict(model, newdata = new_conc)
 
-bind_cols(new_conc, tibble(pred_absorbance = pred_abs))
+new_conc %>%
+  mutate(pred_absorbance = predict(model, newdata = .))
 ```
 
-## Calibration workflow: estimate concentration from absorbance
+## Going the other way: estimating x from new y values
 
 The opposite direction can also be useful: if you have new response values (`y`) and want the corresponding predictor values (`x`).
 
@@ -229,10 +271,10 @@ b <- coefs[[1]]
 a <- coefs[[2]]
 
 # New absorbance readings from samples
-sample_abs <- tibble(absorbance = c(0.180, 0.320, 0.750))
+new_abs <- tibble(absorbance = c(0.180, 0.320, 0.750))
 
 # Estimate concentrations from absorbance
-sample_abs %>%
+new_abs %>%
   mutate(pred_conc_ug_ml = (absorbance - b) / a)
 ```
 
@@ -294,10 +336,10 @@ ggplot(calibration, aes(x = conc_ug_ml, y = absorbance)) +
 </details>
 
 <details class="topic-card">
-<summary>Annotate equation and R2 on the plot</summary>
+<summary>Annotate equation and R^2^ &nbsp;on the plot</summary>
 <div class="topic-card-body">
 
-You can extract slope/intercept and $R^2$, print them with `cat()`, and also place them on the plot.
+You can extract slope/intercept and R^2^, print them with `cat()`, and also place them on the plot.
 
 ```{webr}
 library(tidyverse)

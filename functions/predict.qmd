@@ -22,6 +22,7 @@ subtitle: "Use a fitted model to calculate predicted values. predict() is a gene
 predict(object)
 predict(object, newdata = df)
 ```
+
 ::: {.desc-item}
 Once you have fitted a linear regression model with `lm()`, `predict(object)` gives you the model's predicted values for the data you used to fit it.
 If you instead want predictions for new x-values, `predict(object, newdata = df)` lets you supply a data frame of new predictor values and returns the model's predicted response for each one.
