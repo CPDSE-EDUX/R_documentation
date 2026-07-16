@@ -18,8 +18,6 @@ website:
     logo: /assets/layout/logo_snake_gold.png
     logo-alt: "CPDSE"
     left:
-      - text: "Home"
-        href: index.qmd
       - text: "Topics covered"
         menu:
           - text: "Getting Started"
@@ -40,6 +38,8 @@ website:
             href: topics/linear-regression.qmd
       - text: "Functions"
         href: functions/index.qmd
+      - text: "Datasets"
+        href: datasets/index.qmd
       - text: Glossary
         href: glossary.qmd
       - text: Coding Conventions
