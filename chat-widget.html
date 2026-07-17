@@ -222,6 +222,38 @@
     color: #1c3b1f;
   }
 
+  .cpdse-chat-codewrap {
+    position: relative;
+  }
+
+  .cpdse-chat-copy {
+    position: absolute;
+    top: 12px;
+    right: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid rgba(60, 94, 62, 0.25);
+    border-radius: 7px;
+    background: #ffffff;
+    color: var(--cpdse-chat-forest);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 3px 7px;
+    cursor: pointer;
+    opacity: 0.85;
+  }
+
+  .cpdse-chat-copy:hover {
+    opacity: 1;
+  }
+
+  .cpdse-chat-copy svg {
+    width: 12px;
+    height: 12px;
+  }
+
   .cpdse-chat-message ul,
   .cpdse-chat-message ol {
     margin: 6px 0;
@@ -835,6 +867,59 @@
       return html;
     }
 
+    var COPY_SVG = '<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/></svg>';
+
+    function addCopyButtons(wrap) {
+      Array.prototype.forEach.call(wrap.querySelectorAll("pre"), function (pre) {
+        var holder = document.createElement("div");
+        holder.className = "cpdse-chat-codewrap";
+        pre.parentNode.insertBefore(holder, pre);
+        holder.appendChild(pre);
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "cpdse-chat-copy";
+        btn.setAttribute("aria-label", "Copy code");
+        btn.innerHTML = COPY_SVG + "<span>Copy</span>";
+
+        btn.addEventListener("click", function () {
+          var code = pre.textContent;
+          var label = btn.querySelector("span");
+          function flash(text) {
+            label.textContent = text;
+            setTimeout(function () {
+              label.textContent = "Copy";
+            }, 1500);
+          }
+          // Same fallback chain as the site's editor Copy buttons (scripts.html):
+          // older browsers, non-secure contexts, or a rejected Clipboard API call.
+          function legacyCopy() {
+            var ta = document.createElement("textarea");
+            ta.value = code;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = false;
+            try {
+              ok = document.execCommand("copy");
+            } catch (err) {}
+            document.body.removeChild(ta);
+            flash(ok ? "Copied!" : "Copy failed");
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).then(function () {
+              flash("Copied!");
+            }, legacyCopy);
+          } else {
+            legacyCopy();
+          }
+        });
+
+        holder.appendChild(btn);
+      });
+    }
+
     function appendMessage(role, content, opts) {
       var options = opts || {};
       var wrap = document.createElement("div");
@@ -845,6 +930,7 @@
         wrap.innerHTML = "<span class=\"cpdse-chat-message-thinking\"><span class=\"cpdse-chat-spinner\" aria-hidden=\"true\"></span><span>Thinking...</span></span>";
       } else if (role === "assistant") {
         wrap.innerHTML = formatAssistantText(content);
+        addCopyButtons(wrap);
       } else {
         wrap.innerHTML = "<p>" + escapeHtml(content).replace(/\n/g, "<br>") + "</p>";
       }
