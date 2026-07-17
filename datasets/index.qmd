@@ -157,7 +157,7 @@ semicolons separate the columns and commas mark the decimals. A plain
 ```{webr}
 library(tidyverse)
 
-read_csv("data/dissolution_dk.csv")
+read_csv2("data/dissolution_dk.csv")
 ```
 </div>
 </details>
