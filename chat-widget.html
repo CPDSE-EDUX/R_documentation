@@ -1,5 +1,6 @@
 <div id="cpdse-chatbot" class="cpdse-chatbot" data-open="false">
-  <!-- Temporarily hidden; this chatbot button will be included again at a later point in time. -->
+  <!-- The launcher stays hidden until API_URL in the script below is set to a real
+       Cloudflare Worker URL (see _chatbot-worker/README.md); the script reveals it. -->
   <button
     id="cpdse-chat-launcher"
     class="cpdse-chat-launcher"
@@ -9,7 +10,7 @@
     aria-expanded="false"
   >
     <span class="cpdse-chat-launcher-dot" aria-hidden="true"></span>
-    Ask Chatbot
+    Chatbot
   </button>
 
   <section
@@ -23,14 +24,10 @@
     <header class="cpdse-chat-header">
       <div>
         <h2>R Tutor</h2>
-        <p>Help with basic R questions.</p>
+        <p>Help with basic R questions, based on this website.</p>
       </div>
       <button id="cpdse-chat-close" class="cpdse-chat-close" type="button" aria-label="Close chat">×</button>
     </header>
-
-    <p class="cpdse-chat-wakeup-note" id="cpdse-chat-wakeup-note">
-      I am a prototype. First reply may take up to a minute while the assistant wakes up.
-    </p>
 
     <div id="cpdse-chat-messages" class="cpdse-chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
 
@@ -46,7 +43,7 @@
       <button id="cpdse-chat-send" class="cpdse-chat-send" type="submit">Send</button>
     </form>
 
-    <p class="cpdse-chat-privacy">No login. Messages stay in your browser session.</p>
+    <p class="cpdse-chat-privacy">Your questions are sent to Google Gemini to generate answers.</p>
   </section>
 </div>
 
@@ -225,6 +222,22 @@
     color: #1c3b1f;
   }
 
+  .cpdse-chat-message ul,
+  .cpdse-chat-message ol {
+    margin: 6px 0;
+    padding-left: 20px;
+  }
+
+  .cpdse-chat-message li {
+    margin: 2px 0;
+  }
+
+  .cpdse-chat-message a {
+    color: var(--cpdse-chat-forest);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
   .cpdse-chat-message-thinking {
     display: inline-flex;
     align-items: center;
@@ -271,6 +284,11 @@
     font-weight: 600;
     padding: 8px 12px;
     cursor: pointer;
+  }
+
+  .cpdse-chat-send:disabled {
+    opacity: 0.55;
+    cursor: default;
   }
 
   .cpdse-chat-privacy {
@@ -340,10 +358,63 @@
 
 <script>
   (function () {
-    var API_URL = "https://sarahmit-r-docs-chatbot.hf.space/gradio_api/call/chat";
-    var API_MODE = "gradio_call";
-    var REQUEST_TIMEOUT_MS = 90000;
+    // Cloudflare Worker URL that proxies to Gemini (see _chatbot-worker/README.md).
+    // The launcher button stays hidden until this is a real https:// URL.
+    var API_URL = "https://r-docs.mittenentzwei.workers.dev";
+    var REQUEST_TIMEOUT_MS = 30000;
     var MAX_HISTORY_TURNS = 6;
+
+    // Retrieval budget for excerpts from search.json.
+    var MAX_CONTEXT_ENTRIES = 6;
+    var MAX_CONTEXT_CHARS = 8000;
+    var MAX_ENTRY_CHARS = 2500;
+    var MAX_SECTIONS_PER_PAGE = 2;
+    var SEND_COOLDOWN_MS = 3000;
+
+    // The chat history survives page changes within the same browser tab via
+    // sessionStorage (cleared automatically when the tab is closed).
+    var STORAGE_KEY = "cpdse-chat-history-v1";
+    var OPEN_KEY = "cpdse-chat-open-v1";
+    var MAX_STORED_MESSAGES = 40;
+
+    // "R Tutor" must appear in this prompt: the Worker rejects requests without it.
+    var SYSTEM_PROMPT = [
+      'You are "R Tutor", a friendly teaching assistant on the website "Basic R for Pharmacy"',
+      "(Center for Pharmaceutical Data Science Education). You help pharmacy students with basic R questions.",
+      "",
+      "RULES:",
+      "1. GROUNDING: The question may include a SITE CONTEXT block with excerpts from this website,",
+      "   each with a URL. When the context answers the question, base your answer on it and cite the",
+      "   relevant page(s) as markdown links, e.g. See [read_csv()](url-from-context). Only cite URLs",
+      "   that appear in the SITE CONTEXT block - never invent links.",
+      "2. FALLBACK: If the question is about R but the site context does not cover it, give a brief,",
+      "   correct answer using standard tidyverse practice and add one sentence noting that this topic",
+      "   is not covered on this website.",
+      "3. SCOPE: If the question is not about R, statistics, or this website, politely say you can only",
+      "   help with R questions for this course.",
+      "4. CODE STYLE: All R code you write MUST follow the course coding conventions below, even in",
+      "   fallback answers.",
+      "5. BREVITY: Answer ONLY what was asked, as simply as possible: one or two short sentences, then",
+      "   one minimal runnable example. Do NOT explain optional arguments, edge cases, or related",
+      "   features (e.g. when asked how to read a CSV, do not show how to skip lines or handle missing",
+      "   values). If the site context covers such extras, you may end with ONE short sentence naming",
+      "   them as things the student can ask about next - without showing code for them. Keep answers",
+      '   under about 120 words. Use markdown: **bold**, `inline code`, fenced ```r code blocks, and',
+      '   "-" bullet lists.',
+      "",
+      "COURSE CODING CONVENTIONS (summary):",
+      "- snake_case names with units where relevant: powder_mass_mg, concentration_ug_ml, pct_label.",
+      "- Always assign with <- (never =); use = only for function arguments. Spaces around <- and operators.",
+      '- Print labelled results with cat(), e.g. cat("Mean content:", signif(mean_content_mg, 3), "mg\\n").',
+      "- Inspect data frames with view(data) or head(data, 5), not by printing whole tables.",
+      "- Keep full precision while computing; round only at print time with signif() or round().",
+      "- Pipe with %>%, each step on its own line.",
+      "- ggplot2: theme_classic(), axes labelled with units in parentheses via labs(), one + layer per",
+      '  line, "steelblue" as the default single-series colour.',
+      "- Comments explain why (and units), not what.",
+      "",
+      "Full conventions page: <SITE_ROOT>coding-conventions.html"
+    ].join("\n");
 
     var root = document.getElementById("cpdse-chatbot");
     if (!root) return;
@@ -355,19 +426,335 @@
     var input = document.getElementById("cpdse-chat-input");
     var sendBtn = document.getElementById("cpdse-chat-send");
     var messagesEl = document.getElementById("cpdse-chat-messages");
-    var wakeNote = document.getElementById("cpdse-chat-wakeup-note");
 
     var messages = [];
-    var hasRequestedOnce = false;
+    var indexPromise = null;
+    var SITE_ROOT = getSiteRoot();
+
+    if (/^https:\/\//.test(API_URL)) {
+      launcher.hidden = false;
+      launcher.style.display = "inline-flex";
+    }
 
     function setOpen(isOpen) {
       root.setAttribute("data-open", String(isOpen));
       launcher.setAttribute("aria-expanded", String(isOpen));
       panel.setAttribute("aria-hidden", String(!isOpen));
+      try {
+        sessionStorage.setItem(OPEN_KEY, String(isOpen));
+      } catch (err) {}
       if (isOpen) {
+        ensureIndex();
         input.focus();
       }
     }
+
+    function saveHistory() {
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_STORED_MESSAGES)));
+      } catch (err) {
+        // Storage unavailable: the chat still works, it just won't survive navigation.
+      }
+    }
+
+    function pushMessage(role, content) {
+      messages.push({ role: role, content: content });
+      saveHistory();
+    }
+
+    function restoreSession() {
+      var stored = null;
+      try {
+        stored = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null");
+      } catch (err) {
+        stored = null;
+      }
+      if (Array.isArray(stored)) {
+        for (var i = 0; i < stored.length; i += 1) {
+          var m = stored[i];
+          if (m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string") {
+            messages.push({ role: m.role, content: m.content });
+            appendMessage(m.role, m.content);
+          }
+        }
+      }
+      if (!messages.length) {
+        appendMessage(
+          "assistant",
+          "Hi, I am your R Tutor. Ask me a small R coding question and I will point you to the right pages on this website."
+        );
+      }
+
+      var wasOpen = null;
+      try {
+        wasOpen = sessionStorage.getItem(OPEN_KEY);
+      } catch (err) {}
+      if (wasOpen === "true") {
+        // Reopen directly (not via setOpen) so page focus is not stolen on load.
+        root.setAttribute("data-open", "true");
+        launcher.setAttribute("aria-expanded", "true");
+        panel.setAttribute("aria-hidden", "false");
+        ensureIndex();
+      }
+    }
+
+    /* ---------- Site root + retrieval over Quarto's search.json ---------- */
+
+    function getSiteRoot() {
+      // Every Quarto page loads site_libs scripts by page-relative path, which
+      // reveals the site root even under a subpath like /R_documentation/.
+      var libScript = document.querySelector('script[src*="site_libs/"]');
+      if (libScript) {
+        var abs = new URL(libScript.getAttribute("src"), document.baseURI).href;
+        return abs.slice(0, abs.indexOf("site_libs/"));
+      }
+      return new URL("./", document.baseURI).href;
+    }
+
+    function decodeEntities(text) {
+      return String(text)
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&amp;/g, "&");
+    }
+
+    var STOPWORDS = {
+      the: 1, a: 1, an: 1, and: 1, or: 1, of: 1, in: 1, on: 1, to: 1, for: 1,
+      with: 1, how: 1, do: 1, does: 1, can: 1, you: 1, what: 1, is: 1, are: 1,
+      my: 1, me: 1, it: 1, that: 1, this: 1, when: 1, why: 1, i: 1, should: 1,
+      would: 1, please: 1
+    };
+
+    function tokenize(text) {
+      // Keep _ % < > - so R tokens like %>%, <-, group_by and lm survive.
+      return String(text)
+        .toLowerCase()
+        .replace(/[^a-z0-9_%<>-]+/g, " ")
+        .split(/\s+/)
+        .filter(function (t) {
+          return t.length >= 2 && !STOPWORDS[t];
+        });
+    }
+
+    function buildIndex(rawEntries) {
+      var index = { entries: [], df: {}, n: 0 };
+      if (!Array.isArray(rawEntries)) return index;
+
+      for (var i = 0; i < rawEntries.length; i += 1) {
+        var raw = rawEntries[i];
+        if (!raw || !raw.href) continue;
+        var title = decodeEntities(raw.title || "");
+        var section = decodeEntities(raw.section || "");
+        var text = decodeEntities(raw.text || "");
+
+        var counts = {};
+        var tokens = tokenize(title + " " + section + " " + text);
+        for (var j = 0; j < tokens.length; j += 1) {
+          counts[tokens[j]] = (counts[tokens[j]] || 0) + 1;
+        }
+        for (var token in counts) {
+          index.df[token] = (index.df[token] || 0) + 1;
+        }
+
+        // Include both raw and underscore/dash-split forms so the query token
+        // "csv" boosts the title "read_csv( )".
+        var titleLower = title.toLowerCase();
+        var sectionLower = section.toLowerCase();
+        index.entries.push({
+          href: raw.href,
+          title: title,
+          section: section,
+          text: text,
+          counts: counts,
+          titleNorm: titleLower + " " + titleLower.replace(/[_-]+/g, " "),
+          sectionNorm: sectionLower + " " + sectionLower.replace(/[_-]+/g, " ")
+        });
+      }
+      index.n = index.entries.length;
+      return index;
+    }
+
+    function ensureIndex() {
+      if (!indexPromise) {
+        indexPromise = fetchWithTimeout(SITE_ROOT + "search.json", { method: "GET" }, 15000)
+          .then(function (response) {
+            if (!response.ok) throw new Error("search.json returned " + response.status);
+            return response.json();
+          })
+          .then(buildIndex)
+          .catch(function () {
+            // Degrade to answering without site context; retry on the next question.
+            indexPromise = null;
+            return null;
+          });
+      }
+      return indexPromise;
+    }
+
+    function scoreEntry(entry, queryTokens, df, nEntries) {
+      var score = 0;
+      for (var i = 0; i < queryTokens.length; i += 1) {
+        var token = queryTokens[i];
+        var tf = entry.counts[token] || 0;
+        if (!tf) continue;
+        var idf = Math.log(1 + nEntries / (1 + (df[token] || 0)));
+        var boost = 1;
+        if (entry.titleNorm.indexOf(token) !== -1) boost += 2;
+        if (entry.sectionNorm.indexOf(token) !== -1) boost += 1;
+        score += idf * Math.min(tf, 3) * boost;
+      }
+      return score;
+    }
+
+    function selectContext(index, question) {
+      if (!index || !index.n) return [];
+      var queryTokens = tokenize(question);
+      if (!queryTokens.length) return [];
+
+      var scored = [];
+      for (var i = 0; i < index.entries.length; i += 1) {
+        var score = scoreEntry(index.entries[i], queryTokens, index.df, index.n);
+        if (score > 0) scored.push({ entry: index.entries[i], score: score });
+      }
+      scored.sort(function (a, b) {
+        return b.score - a.score;
+      });
+
+      var picked = [];
+      var perPage = {};
+      var totalChars = 0;
+      for (var k = 0; k < scored.length; k += 1) {
+        if (picked.length >= MAX_CONTEXT_ENTRIES) break;
+        var entry = scored[k].entry;
+        var page = entry.href.split("#")[0];
+        if ((perPage[page] || 0) >= MAX_SECTIONS_PER_PAGE) continue;
+
+        var text = entry.text;
+        if (text.length > MAX_ENTRY_CHARS) {
+          text = text.slice(0, MAX_ENTRY_CHARS) + " [...]";
+        }
+        if (picked.length > 0 && totalChars + text.length > MAX_CONTEXT_CHARS) continue;
+
+        perPage[page] = (perPage[page] || 0) + 1;
+        totalChars += text.length;
+        picked.push({
+          title: entry.title,
+          section: entry.section,
+          url: SITE_ROOT + entry.href,
+          text: text
+        });
+      }
+      return picked;
+    }
+
+    /* ---------- Prompt assembly + Worker request ---------- */
+
+    function buildFinalUserText(question, context) {
+      if (!context.length) {
+        return "SITE CONTEXT: (none found for this question)\n\nQUESTION: " + question;
+      }
+      var blocks = [];
+      for (var i = 0; i < context.length; i += 1) {
+        var c = context[i];
+        blocks.push(
+          "[" + (i + 1) + '] Page: "' + c.title + '"' +
+          (c.section ? ' - Section: "' + c.section + '"' : "") +
+          "\nURL: " + c.url +
+          "\n" + c.text
+        );
+      }
+      return (
+        "SITE CONTEXT (excerpts from the course website):\n\n" +
+        blocks.join("\n\n") +
+        "\n\nQUESTION: " + question
+      );
+    }
+
+    function buildShortHistory() {
+      var turns = [];
+      var currentUser = null;
+
+      for (var i = 0; i < messages.length; i += 1) {
+        var m = messages[i];
+        if (m.role === "user") {
+          currentUser = m.content;
+        } else if (m.role === "assistant" && currentUser) {
+          turns.push([currentUser, m.content]);
+          currentUser = null;
+        }
+      }
+
+      if (turns.length > MAX_HISTORY_TURNS) {
+        return turns.slice(turns.length - MAX_HISTORY_TURNS);
+      }
+      return turns;
+    }
+
+    function buildContents(history, finalUserText) {
+      var contents = [];
+      for (var i = 0; i < history.length; i += 1) {
+        contents.push({ role: "user", parts: [{ text: history[i][0] }] });
+        contents.push({ role: "model", parts: [{ text: history[i][1] }] });
+      }
+      contents.push({ role: "user", parts: [{ text: finalUserText }] });
+      return contents;
+    }
+
+    async function fetchWithTimeout(url, options, timeoutMs) {
+      var controller = new AbortController();
+      var timer = setTimeout(function () {
+        controller.abort();
+      }, timeoutMs);
+
+      var merged = Object.assign({}, options || {}, { signal: controller.signal });
+      try {
+        return await fetch(url, merged);
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    async function getAssistantReply(question) {
+      var index = await ensureIndex();
+      var context = selectContext(index, question);
+      var payload = {
+        system: SYSTEM_PROMPT.replace(/<SITE_ROOT>/g, SITE_ROOT),
+        contents: buildContents(buildShortHistory(), buildFinalUserText(question, context))
+      };
+
+      var response = await fetchWithTimeout(
+        API_URL,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        },
+        REQUEST_TIMEOUT_MS
+      );
+
+      if (response.status === 429) {
+        var limitError = new Error("Rate limited");
+        limitError.code = "rate_limited";
+        throw limitError;
+      }
+      if (!response.ok) {
+        var upstreamError = new Error("Request failed with status " + response.status);
+        upstreamError.code = "upstream";
+        throw upstreamError;
+      }
+
+      var data = await response.json();
+      if (!data || typeof data.reply !== "string" || !data.reply.trim()) {
+        var emptyError = new Error("No assistant reply in response.");
+        emptyError.code = "upstream";
+        throw emptyError;
+      }
+      return data.reply;
+    }
+
+    /* ---------- Rendering (minimal markdown: code, bold, links, lists) ---------- */
 
     function escapeHtml(text) {
       return String(text)
@@ -378,11 +765,62 @@
         .replace(/'/g, "&#039;");
     }
 
+    function renderInline(escaped) {
+      // Input is already HTML-escaped; only https? URLs become links, so no
+      // javascript: injection, and quotes cannot break out of the href.
+      return escaped
+        .replace(/`([^`]+)`/g, "<code>$1</code>")
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(
+          /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+        );
+    }
+
+    function renderTextBlock(raw) {
+      var lines = escapeHtml(raw).split("\n");
+      var html = "";
+      var listTag = null;
+
+      function closeList() {
+        if (listTag) {
+          html += "</" + listTag + ">";
+          listTag = null;
+        }
+      }
+
+      for (var i = 0; i < lines.length; i += 1) {
+        var line = lines[i];
+        var bullet = line.match(/^\s*[-*]\s+(.*)$/);
+        var numbered = line.match(/^\s*\d+[.)]\s+(.*)$/);
+        var heading = line.match(/^\s*#{1,4}\s+(.*)$/);
+
+        if (bullet || numbered) {
+          var wanted = bullet ? "ul" : "ol";
+          if (listTag !== wanted) {
+            closeList();
+            html += "<" + wanted + ">";
+            listTag = wanted;
+          }
+          html += "<li>" + renderInline((bullet || numbered)[1]) + "</li>";
+        } else {
+          closeList();
+          if (heading) {
+            html += "<p><strong>" + renderInline(heading[1]) + "</strong></p>";
+          } else if (line.trim()) {
+            html += "<p>" + renderInline(line) + "</p>";
+          }
+        }
+      }
+      closeList();
+      return html;
+    }
+
     function formatAssistantText(text) {
       var raw = String(text || "");
       var parts = raw.split(/```[a-zA-Z]*\n?|```/g);
       if (parts.length === 1) {
-        return "<p>" + escapeHtml(raw).replace(/\n/g, "<br>") + "</p>";
+        return renderTextBlock(raw);
       }
 
       var html = "";
@@ -391,7 +829,7 @@
         if (i % 2 === 1) {
           html += "<pre><code>" + escapeHtml(parts[i].trim()) + "</code></pre>";
         } else {
-          html += "<p>" + escapeHtml(parts[i]).replace(/\n/g, "<br>") + "</p>";
+          html += renderTextBlock(parts[i]);
         }
       }
       return html;
@@ -422,173 +860,16 @@
       }
     }
 
-    function collectStrings(value, out) {
-      if (typeof value === "string") {
-        out.push(value);
-        return;
-      }
-      if (Array.isArray(value)) {
-        for (var i = 0; i < value.length; i += 1) {
-          collectStrings(value[i], out);
-        }
-        return;
-      }
-      if (value && typeof value === "object") {
-        var keys = Object.keys(value);
-        for (var j = 0; j < keys.length; j += 1) {
-          collectStrings(value[keys[j]], out);
-        }
-      }
-    }
-
-    function extractReply(payload) {
-      if (typeof payload === "string") return payload;
-      if (!payload) return "";
-
-      if (payload.reply && typeof payload.reply === "string") return payload.reply;
-      if (payload.answer && typeof payload.answer === "string") return payload.answer;
-      if (payload.output && typeof payload.output === "string") return payload.output;
-
-      if (Array.isArray(payload) && payload.length > 0) {
-        var last = payload[payload.length - 1];
-        if (typeof last === "string") return last;
-      }
-
-      var found = [];
-      collectStrings(payload, found);
-      found = found.filter(function (x) {
-        return x && x.trim();
-      });
-      if (!found.length) return "";
-      found.sort(function (a, b) {
-        return b.length - a.length;
-      });
-      return found[0];
-    }
-
-    function buildShortHistory() {
-      var turns = [];
-      var currentUser = null;
-
-      for (var i = 0; i < messages.length; i += 1) {
-        var m = messages[i];
-        if (m.role === "user") {
-          currentUser = m.content;
-        } else if (m.role === "assistant" && currentUser) {
-          turns.push([currentUser, m.content]);
-          currentUser = null;
-        }
-      }
-
-      if (turns.length > MAX_HISTORY_TURNS) {
-        return turns.slice(turns.length - MAX_HISTORY_TURNS);
-      }
-      return turns;
-    }
-
-    async function fetchWithTimeout(url, options, timeoutMs) {
-      var controller = new AbortController();
-      var timer = setTimeout(function () {
-        controller.abort();
-      }, timeoutMs);
-
-      var merged = Object.assign({}, options || {}, { signal: controller.signal });
-      try {
-        return await fetch(url, merged);
-      } finally {
-        clearTimeout(timer);
-      }
-    }
-
-    async function requestViaJsonEndpoint(message, history) {
-      var response = await fetchWithTimeout(
-        API_URL,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: message, history: history })
-        },
-        REQUEST_TIMEOUT_MS
-      );
-
-      if (!response.ok) {
-        throw new Error("Request failed with status " + response.status);
-      }
-
-      var payload = await response.json();
-      var reply = extractReply(payload);
-      if (!reply) {
-        throw new Error("No assistant reply in response.");
-      }
-      return reply;
-    }
-
-    async function requestViaGradioCall(message, history) {
-      var callResponse = await fetchWithTimeout(
-        API_URL,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data: [message, history] })
-        },
-        REQUEST_TIMEOUT_MS
-      );
-
-      if (!callResponse.ok) {
-        throw new Error("Call request failed with status " + callResponse.status);
-      }
-
-      var callPayload = await callResponse.json();
-      if (!callPayload.event_id) {
-        throw new Error("Missing event_id from Gradio call response.");
-      }
-
-      var resultUrl = API_URL + "/" + encodeURIComponent(callPayload.event_id);
-      var resultResponse = await fetchWithTimeout(resultUrl, { method: "GET" }, REQUEST_TIMEOUT_MS);
-      if (!resultResponse.ok) {
-        throw new Error("Result request failed with status " + resultResponse.status);
-      }
-
-      var streamText = await resultResponse.text();
-      var lines = streamText.split(/\r?\n/);
-      var reply = "";
-
-      for (var i = 0; i < lines.length; i += 1) {
-        var line = lines[i];
-        if (!line || line.indexOf("data:") !== 0) continue;
-        var jsonPart = line.slice(5).trim();
-        if (!jsonPart || jsonPart === "[DONE]") continue;
-
-        try {
-          var parsed = JSON.parse(jsonPart);
-          var candidate = extractReply(parsed);
-          if (candidate) reply = candidate;
-        } catch (err) {
-          // Skip lines that are not JSON payloads.
-        }
-      }
-
-      if (!reply) {
-        throw new Error("Could not parse a reply from Gradio result stream.");
-      }
-
-      return reply;
-    }
-
-    async function getAssistantReply(message) {
-      var history = buildShortHistory();
-      if (API_MODE === "json") {
-        return requestViaJsonEndpoint(message, history);
-      }
-      return requestViaGradioCall(message, history);
-    }
+    /* ---------- Send flow ---------- */
 
     async function handleSend(text) {
+      // The disabled flag also guards Enter-key sends during a request or cooldown.
+      if (sendBtn.disabled) return;
       var question = String(text || "").trim();
       if (!question) return;
 
       appendMessage("user", question);
-      messages.push({ role: "user", content: question });
+      pushMessage("user", question);
 
       input.value = "";
       input.focus();
@@ -596,27 +877,28 @@
       var thinkingId = "cpdse-chat-thinking";
       appendMessage("assistant", "", { thinking: true, id: thinkingId });
 
-      if (!hasRequestedOnce) {
-        hasRequestedOnce = true;
-      } else if (wakeNote) {
-        wakeNote.style.display = "none";
-      }
-
       try {
         var reply = await getAssistantReply(question);
         removeById(thinkingId);
         appendMessage("assistant", reply);
-        messages.push({ role: "assistant", content: reply });
+        pushMessage("assistant", reply);
       } catch (error) {
         removeById(thinkingId);
         var errorText = "I could not reach the tutor just now. Please try again in a few seconds.";
         if (String(error && error.name) === "AbortError") {
           errorText = "The request timed out while waiting for the assistant. Please try again.";
+        } else if (error && error.code === "rate_limited") {
+          errorText = "The tutor has hit its free usage limit right now. Please wait a minute and try again.";
+        } else if (error && error.code === "upstream") {
+          errorText = "The tutor had a problem generating an answer. Please rephrase your question or try again.";
         }
         appendMessage("assistant", errorText);
-        messages.push({ role: "assistant", content: errorText });
+        pushMessage("assistant", errorText);
       } finally {
-        sendBtn.disabled = false;
+        // Short cooldown softens the shared free-tier rate limit in a classroom.
+        setTimeout(function () {
+          sendBtn.disabled = false;
+        }, SEND_COOLDOWN_MS);
       }
     }
 
@@ -648,9 +930,19 @@
       }
     });
 
-    appendMessage(
-      "assistant",
-      "Hi, I am your R Tutor. Ask me a small R coding question and I will explain with a simple example."
-    );
+    restoreSession();
+
+    // Console access for tuning retrieval and rendering (not used by the widget itself).
+    window.__cpdseChatDebug = {
+      siteRoot: SITE_ROOT,
+      ensureIndex: ensureIndex,
+      selectContext: function (question) {
+        return ensureIndex().then(function (index) {
+          return selectContext(index, question);
+        });
+      },
+      formatAssistantText: formatAssistantText,
+      appendMessage: appendMessage
+    };
   })();
 </script>
