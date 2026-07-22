@@ -86,16 +86,6 @@ setwd("C:/Users/Morten/Documents/practical3")
 A path like `C:/Users/Morten/...` only exists on your machine. The moment a classmate, a teacher, or a lab computer opens your script, it breaks. Project-relative paths work everywhere, so your analysis stays reproducible.
 :::
 
-If you organise scripts into subfolders, the [`here`](https://here.r-lib.org) package builds paths from the project root reliably, wherever the script sits:
-
-```r
-library(here)
-
-tablet_weights <- read_csv(here("data", "tablet_weights.csv"))
-```
-
-For most beginner practicals a plain relative path like `"data/tablet_weights.csv"` is all you need.
-
 </div>
 </details>
 
@@ -135,12 +125,6 @@ A few small habits make your work reliable enough that anyone — including you,
 - **Restart R with a clean environment** and re-run the whole script from the top before you trust a result. This proves the script works on its own, not because of leftover objects in memory. (In RStudio: **Session → Restart R**.)
 - **Write a short `README.md`** saying what the project does and the order to run the scripts.
 - **Keep raw data read-only** — save cleaned data to `output/` instead of overwriting files in `data/`.
-
-::: {.callout-note}
-## Where to go next
-- New to R and RStudio? Start with [Getting Started](../topics/getting-started.qmd).
-- Ready to load data into your project? See [Datasets](../datasets/index.qmd) and [Data Handling](../topics/data-handling.qmd).
-:::
 
 </div>
 </details>

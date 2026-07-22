@@ -42,22 +42,25 @@ You create an object by assigning a value to a name using `<-`. On the left side
 - Good: `dose_mg`, `patient_id`, `reaction_time_s`
 - Avoid: `dose mg` (space), `2dose` (starts with number), `x` (too vague)
 
-```r
+```{webr}
 temperature <- 22.5
 capital_city <- "Copenhagen"
 ```
 
 Multiple values of the same type can be combined using the `c()` function to form a vector:
 
-```r
+```{webr}
 cities <- c("Copenhagen", "Aarhus", "Odense")
 temperatures <- c(22.5, 19.3, 21.0)
 ```
 
 And when you organize vectors into columns, you get a tibble. Since a tibble is a function from the tidyverse, remember to load the library:
 
-```r
+```{webr}
 library(tidyverse)
+
+cities <- c("Copenhagen", "Aarhus", "Odense")
+temperatures <- c(22.5, 19.3, 21.0)
 
 weather <- tibble(
   city        = cities,
@@ -86,7 +89,7 @@ view(name_of_your_object)
 
 Lines starting with `#` are comments — R ignores them when running code. Use comments to explain what your code does:
 
-```r
+```{webr}
 # This is a comment — R will not execute this line
 dose_mg <- 500   # you can also add a comment after code
 ```
@@ -149,7 +152,7 @@ The pipe takes the output of one step and passes it as the input to the next —
 In R, data and computation are kept separate. You first store your data in objects, and then write expressions that compute with those objects.
 This is different from working in Excel, where data and formulas are mixed together in the same cells. In R, your data stays fixed in its object — computation produces a new object, leaving the original unchanged.
 
-```r
+```{webr}
 dose_mg   <- 500      # data
 weight_kg <- 70       # data
 
@@ -158,7 +161,7 @@ dose_per_kg <- dose_mg / weight_kg   # computation — dose_mg and weight_kg unc
 
 However, it is possible to overwrite the content of objects if you assign a different value to an existing object.
 
-```r
+```{webr}
 weight_kg <- 70    # data
 weight_kg <- 80    # overwrites the previous value — weight_kg is now 80
 ```
@@ -167,8 +170,10 @@ You can add or transform columns in a tibble using [`mutate()`](../functions/mut
 
 A common application case for computing is when you calculate new values and add them as new columns in an existing tibble using [`mutate()`](../functions/mutate.qmd). Assume `capsules` is a tibble you loaded before containing the column `fill_mass_mg`. You now add two columns `ibu_mg` and `pct_label` which store newly computed values.
 
-```r
+```{webr}
 library(tidyverse)
+
+capsules <- tibble(fill_mass_mg = c(170, 176, 172))
 
 # Add computed columns to an existing tibble
 capsules <- capsules %>%
@@ -193,7 +198,11 @@ R produces output in three main ways: printing to the console, viewing objects, 
 
 For a quick check, run a line that contains only an object name:
 
-```r
+```{webr}
+dose_mg <- 500
+weight_kg <- 70
+dose_per_kg <- dose_mg / weight_kg
+
 dose_per_kg
 ```
 
@@ -211,9 +220,9 @@ cat("Dose per kg:", signif(dose_per_kg, 3), "mg/kg\n")
 
 Always round at the point of printing — store intermediate values at full precision:
 
-```r
+```{webr}
 # ✓ Correct
-pct_label <- ibu_mg / label_claim_mg * 100       # full precision stored
+pct_label <- 74.3 / 75 * 100                       # full precision stored
 cat("Label claim:", round(pct_label, 2), "%\n")  # round only when printing
 ```
 
@@ -260,24 +269,38 @@ A typical R script follows this pattern:
 3. **Compute** — `mutate()`, `filter()`, `summarise()`, `mean()`, `sd()`
 4. **Output** — `cat()`, `view()`, `ggplot()`
 
-```r
+```{webr}
 # 1. Load packages
 library(tidyverse)
 
 # 2. Read data
-capsules <- read_csv("data/capsule_weights.csv")
+tablet_weights <- read_csv("data/tablet_weights.csv")
 
 # 3. Compute
-capsules <- capsules %>%
+tablet_weights <- tablet_weights %>%
   mutate(
-    fill_mass_mg = mass_filled_mg - mass_empty_mg,
-    ibu_mg       = fill_mass_mg * ibu_per_mg_powder,
-    pct_label    = ibu_mg / label_claim_mg * 100
+    deviation_mg = weight_mg - 500
   )
 
 # 4. Output
-cat("Mean % label claim:", round(mean(capsules$pct_label), 2), "%\n")
-cat("SD:",                 round(sd(capsules$pct_label),   2), "%\n")
+cat("Overall mean weight:", round(mean(tablet_weights$weight_mg), 2), "mg\n")
+cat("Overall SD:",          round(sd(tablet_weights$weight_mg),   2), "mg\n")
+
+tablet_weights %>%
+  group_by(batch) %>%
+  summarise(
+    mean_weight_mg = round(mean(weight_mg), 2),
+    sd_weight_mg   = round(sd(weight_mg), 2)
+  )
+
+ggplot(tablet_weights, aes(x = tablet_id, y = weight_mg)) +
+  geom_point(color = "steelblue", size = 2) +
+  labs(
+    title = "Tablet Weights by Tablet ID",
+    x     = "Tablet ID",
+    y     = "Weight (mg)"
+  ) +
+  theme_classic()
 ```
 
 Browse the [function reference](../functions/index.qmd) to see all covered functions.
