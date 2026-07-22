@@ -363,5 +363,10 @@ cat("SD:",                 round(sd(capsules$pct_label),   2), "%\n")
 
 Browse the [function reference](../functions/index.qmd) to see all covered functions.
 
+::: {.callout-tip}
+## Next step
+Before your first real practical, see [Setting Up an R Project](../topics/project-setup.qmd) to organize your scripts and data so your work stays reproducible.
+:::
+
 </div>
 </details>

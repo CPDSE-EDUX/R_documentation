@@ -19,7 +19,8 @@ defect.
 Every interactive code cell on this site can load these files directly with
 `read_csv("data/...")` — no setup needed. To use a dataset in RStudio, click
 its download button and place the file in a `data/` folder inside your R
-project.
+project — see [Setting Up an R Project](../topics/project-setup.qmd) for the
+recommended folder layout.
 
 ## Clean datasets
 

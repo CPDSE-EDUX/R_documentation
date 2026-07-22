@@ -22,6 +22,8 @@ website:
         menu:
           - text: "Getting Started"
             href: topics/getting-started.qmd
+          - text: "Setting Up an R Project"
+            href: topics/project-setup.qmd
           - text: "Error Handling and Debugging"
             href: topics/error-handling-and-debugging.qmd
           - text: "Data Handling"
