@@ -38,8 +38,7 @@ Inside your project folder, group files by what they are. A simple, reliable lay
 ├── 📁 data/               # raw data files (read-only)
 ├── 📁 R/                  # your .R analysis scripts (some prefer scripts/)
 ├── 📁 output/             # generated results, cleaned data
-├── 📁 figures/            # saved plots
-└── 📄 README.md           # what the project is and how to run it
+└── 📁 figures/            # saved plots
 ```
 
 <p class="tree-legend">📁 = folder&nbsp;&nbsp;·&nbsp;&nbsp;📄 = file</p>
@@ -50,13 +49,19 @@ Inside your project folder, group files by what they are. A simple, reliable lay
 | **`R/`** (or `scripts/`) | Your `.R` scripts that import, clean, analyse, and plot. |
 | **`output/`** | Results your code produces: cleaned datasets, tables, summaries. |
 | **`figures/`** | Plots you save with `ggsave()` or similar. |
-| **`README.md`** | A few lines describing the project and the order to run the scripts. |
 
 Keeping raw data separate and untouched means you can always re-run your analysis from scratch and get the same result. If something goes wrong, your original data is still safe.
 
 ::: {.callout-note}
 ## This is the layout used on this site
 Every dataset on this site lives in a `data/` folder and is read with a project-relative path such as `read_csv("data/tablet_weights.csv")`. When you set up your own project the same way, the examples here work unchanged.
+:::
+
+::: {.callout-tip}
+## Download a ready-to-run example
+Grab this exact layout as a working project: [**Download the example project (ZIP)**](../my_project.zip){download="my_project.zip"}.
+
+Unzip it, open `my_project.Rproj` in RStudio, then open `R/analysis.R` and click **Source** to run it. Using the [`tablet_weights.csv`](../datasets/index.qmd) dataset, it prints a per-batch summary, writes `output/batch_summary.csv`, and saves `figures/weight_by_batch.png` — no setup needed beyond having the [tidyverse](getting-started.qmd) installed.
 :::
 
 </div>
@@ -123,7 +128,6 @@ A few small habits make your work reliable enough that anyone — including you,
 
 - **Load packages at the top of every script** with `library()`, so it is clear what the script needs.
 - **Restart R with a clean environment** and re-run the whole script from the top before you trust a result. This proves the script works on its own, not because of leftover objects in memory. (In RStudio: **Session → Restart R**.)
-- **Write a short `README.md`** saying what the project does and the order to run the scripts.
 - **Keep raw data read-only** — save cleaned data to `output/` instead of overwriting files in `data/`.
 
 </div>

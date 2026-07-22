@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
     - data/**
+    - my_project.zip
 
 website:
   title: "Basic R for Pharmacy"
