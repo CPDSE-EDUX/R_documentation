@@ -1142,6 +1142,42 @@ details.example-item {
   }
 }
 
+.card-grid-essential {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+// Uniform card height across both topic grids (multi-column widths only, so
+// the essentials row and the normal row read as identical boxes save for
+// coloring). Below 769px the cards stack one-per-row and size naturally.
+@media (min-width: 769px) {
+  .feature-card { min-height: 242px; }
+}
+
+.feature-card-essential {
+  border: 1px solid $antique-gold;
+  background: $ivory;
+
+  &:hover { box-shadow: 0 3px 12px rgba($forest-green, 0.12); }
+}
+
+.topics-start-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $forest-green;
+  margin: 1.5rem 0 0.25rem;
+}
+
+.topics-more-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin: 2rem 0 0.25rem;
+}
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 .nav-footer {
@@ -1157,10 +1193,15 @@ details.example-item {
 
 // ── Responsive ────────────────────────────────────────────────────────────────
 
+@media (max-width: 900px) {
+  .card-grid-essential { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
   .hero-banner { padding: 2.5rem 1rem; h1 { font-size: 1.65rem; } }
   .fn-card-grid { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: 1fr; }
+  .card-grid-essential { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

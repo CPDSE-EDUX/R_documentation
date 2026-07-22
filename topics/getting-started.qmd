@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-subtitle: "Set up R and RStudio, and run your first lines of code"
+subtitle: "What R is, how to install it, and how to run your first commands"
 toc: false
 ---
 
@@ -8,7 +8,26 @@ toc: false
 {{< include /_webr-options.qmd >}}
 
 <details class="topic-card" open>
-<summary>Installing the R Language and a Development Environment (IDE)</summary>
+<summary>What Is R?</summary>
+<div class="topic-card-body">
+
+**R** is a free, open-source programming language for statistics, data analysis, and visualization. Instead of clicking through menus and typing formulas into cells (as in Excel), you write short instructions — **code** — that R runs for you.
+
+Most of this site uses the **[tidyverse](https://www.tidyverse.org)**: a collection of R packages (such as `dplyr`, `ggplot2`, and `readr`) built to work together with a consistent, readable style. It makes the common data tasks — importing, tidying, summarising, and plotting — approachable for beginners.
+
+### Why R instead of Excel?
+
+- **Reproducible** — your whole analysis is a script you can re-run and share, and anyone gets the same result.
+- **Fewer hidden errors** — every step is written down, not hand-edited in cells you cannot audit later.
+- **Scales to real data** — R handles large, messy datasets far beyond a spreadsheet's comfort zone.
+- **Free and widely used** — standard across pharmaceutical sciences, research, and industry.
+- **Publication-quality plots** — flexible, repeatable figures produced straight from your code.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Installing R and RStudio</summary>
 <div class="topic-card-body">
 
 To follow along locally you need two free pieces of software:
@@ -34,19 +53,7 @@ When you open RStudio you will see four panes:
 | **Environment** (top-right) | See all objects currently in memory |
 | **Files / Plots** (bottom-right) | Browse files, view plots, read help pages |
 
-At first, the **Source** pane may be empty or not visible yet. That is normal: the Source pane shows script files, so you need to create or open one before it appears.
-
-To create your first script, go to **File -> New File -> R Script**. Save it with a meaningful name (for example `my_first_script.R`).
-
-Good beginner habit: write code in the Source pane and run it from there, rather than typing everything directly in the Console. This gives you a saved, reusable record of your work.
-
-To run code from a script:
-
-- Place the cursor on a line (or select multiple lines)
-- Press **Ctrl+Enter** (Windows) / **Cmd+Enter** (Mac)
-- Read output in the **Console**
-
-As you run code, created objects appear in the **Environment** pane, and plots appear in the **Plots** tab.
+At first, the **Source** pane may be empty or not visible yet. That is normal: the Source pane shows script files, so you need to create or open one before it appears (see the next section).
 
 [For a detailed explanation watch: RStudio in 3 minutes (YouTube) ↗](https://www.youtube.com/watch?v=GEuuhg7NBko){target="_blank" rel="noopener"}
 
@@ -89,283 +96,99 @@ Packages only need to be **installed** once, but must be **loaded** (`library()`
 </details>
 
 <details class="topic-card">
-<summary>Data</summary>
-<div class="topic-card-body">
-Data is information that a computer can store and work with. It comes in different types — the most common ones you will encounter in R are:
-
-| Type | Example values | R type |
-|---|---|---|
-| Numbers | `74.2`, `3.14` | `numeric` / `double` |
-| Whole numbers | `1`, `6`, `100` | `integer` |
-| Text | `"PASS"`, `"batch_01"` | `character` |
-| True/False | `TRUE`, `FALSE` | `logical or boolean` |
-
-::: {.callout-note}
-In R, decimal numbers use a `.` not a `,` — so three and a half is written `3.5`, not `3,5`.
-:::
-
-The type matters because it determines what you can do with a value. You can calculate the average of numbers, but not of text.
-
-In R, even a single value is stored as an object. When you have multiple values of the same type, they form a vector. And when you organize vectors into columns, you get a tibble — a modern version of a data frame with rows (observations) and columns (variables), similar to a table.
-
-You create an object by assigning a value to a name using `<-`. On the left side of `<-` you write the object name. On the right side you write the value you want to store.
-
-## Naming rules:
-
-- Start names with a letter
-- Use only letters, numbers, and `_`
-- Do not use spaces or special characters like `-`, `/`, `?`, `!`
-- Names are case-sensitive (`dose_mg` and `Dose_mg` are different)
-- Use descriptive names, ideally with units when relevant (for example `weight_kg`)
-
-## Examples:
-
-- Good: `dose_mg`, `patient_id`, `reaction_time_s`
-- Avoid: `dose mg` (space), `2dose` (starts with number), `x` (too vague)
-
-```r
-temperature <- 22.5 
-capital_city <- "Copenhagen"  
-```
-
-Multiple values of the same type can be combined using the `c()` function to form a vector:
-
-```r
-cities <- c("Copenhagen", "Aarhus", "Odense")
-temperatures <- c(22.5, 19.3, 21.0)
-```
-
-And when you organize vectors into columns, you get a tibble. Since a tibble is a function from the tidyverse, remember to load the library:
-
-```r
-library(tidyverse)
-
-weather <- tibble(
-  city        = cities,
-  temperature = temperatures
-)
-```
-
-::: {.callout-note}
-Use clear, consistent naming from the beginning. Prefer `snake_case` (lowercase with `_`) such as `air_temperature` and `dose_mg`.
-:::
-
-Data is read into R from files using functions like [`read_csv()`](../functions/read-csv.qmd).
-
-Within RStudio, you can inspect your data objects in the Environment panel, or using
-
-```r
-view(name_of_your_object)
-```
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Comments</summary>
+<summary>Creating and saving a script</summary>
 <div class="topic-card-body">
 
-Lines starting with `#` are comments — R ignores them when running code. Use comments to explain what your code does:
+Your R code lives in **script files** (ending in `.R`). A script is a plain-text record of your commands that you can save, re-run, and share.
 
-```r
-# This is a comment — R will not execute this line
-dose_mg <- 500   # you can also add a comment after code
-```
+To create one in RStudio, go to **File → New File → R Script**. This opens an empty file in the **Source** pane (top-left). Save it with a meaningful name (for example `my_first_script.R`) using **File → Save** or **Ctrl+S** / **Cmd+S**.
 
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Operations</summary>
-<div class="topic-card-body">
-
-An operator is a symbol that performs an action on one or more values. They cover assignment (<-), arithmetic (+, -, etc.), comparison (==, >, etc.), and the pipe (%>%).
-
-
-### Assignment operator
-
-| Operator | Meaning | Example | Result |
-|---|---|---|---|
-| `<-` | Assign a value to a name | `x <- 42` | `x` now stores `42` |
-
-### Arithmetic operators
-
-| Operator | Meaning | Example | Result |
-|---|---|---|---|
-| `+` | Addition | `3 + 2` | `5` |
-| `-` | Subtraction | `10 - 4` | `6` |
-| `*` | Multiplication | `5 * 3` | `15` |
-| `/` | Division | `20 / 4` | `5` |
-| `^` | Exponentiation | `2 ^ 3` | `8` |
-| `%%` | Modulo (remainder) | `7 %% 3` | `1` |
-
-### Comparison operators
-
-Used to test conditions — return `TRUE` or `FALSE`:
-
-| Operator | Meaning | Example | Result |
-|---|---|---|---|
-| `==` | Equal to | `5 == 5` | `TRUE` |
-| `!=` | Not equal to | `5 != 3` | `TRUE` |
-| `>` | Greater than | `7 > 3` | `TRUE` |
-| `<` | Less than | `2 < 1` | `FALSE` |
-| `>=` | Greater or equal | `5 >= 5` | `TRUE` |
-| `<=` | Less or equal | `3 <= 2` | `FALSE` |
-
-### Pipe Operator
-
-The pipe takes the output of one step and passes it as the input to the next — read it as "and then". This allows you to chain multiple operations into a readable sequence without creating intermediate objects.
-
-| Operator | Meaning | Example | Result |
-|---|---|---|---|
-| `%>%` | Pass result to next function | `data %>% filter(age > 18)` | Filtered data frame containing entries where age is larger than 18 |
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Computation</summary>
-<div class="topic-card-body">
-
-In R, data and computation are kept separate. You first store your data in objects, and then write expressions that compute with those objects.
-This is different from working in Excel, where data and formulas are mixed together in the same cells. In R, your data stays fixed in its object — computation produces a new object, leaving the original unchanged. 
-
-```r
-dose_mg   <- 500      # data
-weight_kg <- 70       # data
-
-dose_per_kg <- dose_mg / weight_kg   # computation — dose_mg and weight_kg unchanged
-```
-
-However, it is possible to overwrite the content of objects if you assign a different value to an existing object.
-
-```r
-weight_kg <- 70    # data
-weight_kg <- 80    # overwrites the previous value — weight_kg is now 80
-```
-
-You can add or transform columns in a tibble using [`mutate()`](../functions/mutate.qmd):
-
-A common application case for computing is when you calculate new values and add them as new columns in an existing tibble using [`mutate()`](../functions/mutate.qmd). Assume `capsules` is a tibble you loaded before containing the column `fill_mass_mg`. You now add two columns `ibu_mg` and `pct_label` which store newly computed values.
-
-```r
-library(tidyverse)
-
-# Add computed columns to an existing tibble
-capsules <- capsules %>%
-  mutate(
-    ibu_mg    = fill_mass_mg * 0.43,        # active ingredient
-    pct_label = ibu_mg / 75.0 * 100         # % of label claim
-  )
-```
-
-R is **vectorised** — operations apply to entire columns at once, with no need for loops.
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Output</summary>
-<div class="topic-card-body">
-
-R produces output in three main ways: printing to the console, viewing objects, and plotting.
-
-### Print to Console
-
-For a quick check, run a line that contains only an object name:
-
-```r
-dose_per_kg
-```
-
-R will print the current value in the Console. This is useful when you just want to inspect a result quickly.
-
-When you want clear labels and units in your output, use [`cat()`](../functions/cat.qmd):
-
-```{webr}
-dose_mg     <- 500
-weight_kg   <- 70
-dose_per_kg <- dose_mg / weight_kg
-
-cat("Dose per kg:", signif(dose_per_kg, 3), "mg/kg\n")
-```
-
-Always round at the point of printing — store intermediate values at full precision:
-
-```r
-# ✓ Correct
-pct_label <- ibu_mg / label_claim_mg * 100       # full precision stored
-cat("Label claim:", round(pct_label, 2), "%\n")  # round only when printing
-```
-
-Use [`signif()`](../functions/signif.qmd) for concentrations and masses (significant figures), and [`round()`](../functions/round.qmd) for percentages and fixed decimal places.
-
-### View Objects
-
-Inspect a data object in the RStudio **Environment panel**.
-
-For tibbles/data frames, start with `glimpse()` to quickly see column names, data types, and example values:
-
-```r
-glimpse(your_data_object)
-```
-
-If you want a spreadsheet-like view, open it as a table:
-
-```r
-view(your_data_object)
-```
-
-### Plotting
-
-Visualize data using `ggplot2`:
-
-```r
-ggplot(your_data_object, aes(x = fill_mass_mg, y = pct_label)) +
-  geom_point()
-```
-
-Plots appear in the **Plots panel** in RStudio.
-
-</div>
-</details>
-
-<details class="topic-card">
-<summary>Workflow</summary>
-<div class="topic-card-body">
-
-A typical R script follows this pattern:
-
-1. **Load packages** — `library()`
-2. **Read data** — `read_csv()`
-3. **Compute** — `mutate()`, `filter()`, `summarise()`, `mean()`, `sd()`
-4. **Output** — `cat()`, `view()`, `ggplot()`
-
-```r
-# 1. Load packages
-library(tidyverse)
-
-# 2. Read data
-capsules <- read_csv("data/capsule_weights.csv")
-
-# 3. Compute
-capsules <- capsules %>%
-  mutate(
-    fill_mass_mg = mass_filled_mg - mass_empty_mg,
-    ibu_mg       = fill_mass_mg * ibu_per_mg_powder,
-    pct_label    = ibu_mg / label_claim_mg * 100
-  )
-
-# 4. Output
-cat("Mean % label claim:", round(mean(capsules$pct_label), 2), "%\n")
-cat("SD:",                 round(sd(capsules$pct_label),   2), "%\n")
-```
-
-Browse the [function reference](../functions/index.qmd) to see all covered functions.
+Good beginner habit: write your code in the Source pane and run it from there, rather than typing everything directly in the Console. This gives you a saved, reusable record of your work.
 
 ::: {.callout-tip}
-## Next step
-Before your first real practical, see [Setting Up an R Project](../topics/project-setup.qmd) to organize your scripts and data so your work stays reproducible.
+## Organizing your files
+This covers making a single script. For a clean folder structure that keeps your scripts, data, and results together, see [Setting Up an R Project](../topics/project-setup.qmd).
+:::
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Running your first command</summary>
+<div class="topic-card-body">
+
+### The Console vs. scripts
+
+There are two places to run code in RStudio:
+
+- **Console** (bottom-left) — type a command, press **Enter**, and R answers immediately. Great for quick tries and one-off calculations.
+- **Source / scripts** (top-left) — write code, save it, and run it line by line. Use this for work you want to keep.
+
+To run a line from a script, place the cursor on it (or select several lines) and press **Ctrl+Enter** (Windows) / **Cmd+Enter** (Mac). The result appears in the Console. As you run code, created objects appear in the **Environment** pane and plots appear in the **Plots** tab.
+
+### Try it
+
+Print a message with `print()`:
+
+```{webr}
+print("Hello")
+```
+
+R is also a powerful calculator:
+
+```{webr}
+2 + 2
+```
+
+Store a value in an object with `<-`, then use it:
+
+```{webr}
+dose_mg   <- 500
+weight_kg <- 70
+
+dose_mg / weight_kg
+```
+
+Running a line that is just an object's name prints its current value — a quick way to check a result.
+
+::: {.callout-note}
+Want to understand objects, data types, operators, and output in more depth? That is covered next in [R Basics](../topics/r-basics.qmd).
+:::
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Learning Path Recommendations</summary>
+<div class="topic-card-body">
+
+New to R? Here is a suggested order to work through this site.
+
+**Start with the basics**
+
+1. **Getting Started** (this page) — set up R and run your first commands.
+2. [R Basics](../topics/r-basics.qmd) — objects, data types, operators, and how R computes and shows results.
+3. [Setting Up an R Project](../topics/project-setup.qmd) — organize your files for reproducible work.
+
+**Core data skills**
+
+4. [Data Handling](../topics/data-handling.qmd) — import spreadsheets and tidy real data.
+5. [Pipe Operator (%>%)](../topics/pipe-operator.qmd) — chain steps into readable pipelines.
+6. [Math Operations](../topics/math-operations.qmd) — arithmetic and math functions.
+
+**Analyse and present**
+
+7. [Descriptive Statistics](../topics/descriptive-stats.qmd) — summarise your data.
+8. [Visualization](../topics/visualization.qmd) — plot with ggplot2.
+9. [Linear Regression](../topics/linear-regression.qmd) — fit and interpret straight-line models.
+
+**Keep these handy throughout**
+
+- [Error Handling and Debugging](../topics/error-handling-and-debugging.qmd) — whenever you get stuck on an error.
+- [R Coding Conventions](../coding-conventions.qmd) — write clean, consistent code from the start.
+
+::: {.callout-tip}
+Browse the [function reference](../functions/index.qmd) any time to look up a specific function.
 :::
 
 </div>

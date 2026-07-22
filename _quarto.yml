@@ -24,8 +24,11 @@ website:
             href: topics/getting-started.qmd
           - text: "Setting Up an R Project"
             href: topics/project-setup.qmd
+          - text: "R Basics"
+            href: topics/r-basics.qmd
           - text: "Error Handling and Debugging"
             href: topics/error-handling-and-debugging.qmd
+          - text: "---"
           - text: "Data Handling"
             href: topics/data-handling.qmd
           - text: "Visualization"

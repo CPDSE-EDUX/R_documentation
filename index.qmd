@@ -17,17 +17,32 @@ Written for learners in plain language, tidyverse style, and with pharmacy examp
 
 ## Topics covered
 ```{=html}
-<div class="card-grid">
-<a href="topics/getting-started.qmd" class="feature-card">
+<p class="topics-start-label">Basics</p>
+<div class="card-grid card-grid-essential">
+<a href="topics/getting-started.qmd" class="feature-card feature-card-essential">
 <div class="card-icon">🚀</div>
 <h3>Getting Started</h3>
 <p>Set up R and RStudio, and run your very first lines of code.</p>
 </a>
-<a href="topics/error-handling-and-debugging.qmd" class="feature-card">
+<a href="topics/project-setup.qmd" class="feature-card feature-card-essential">
+<div class="card-icon">🗂️</div>
+<h3>Setting Up an R Project</h3>
+<p>Organize your files with a clean folder structure so your work is reproducible.</p>
+</a>
+<a href="topics/r-basics.qmd" class="feature-card feature-card-essential">
+<div class="card-icon">🧱</div>
+<h3>R Basics</h3>
+<p>Data types and objects, operators, computation, output, and a typical script workflow.</p>
+</a>
+<a href="topics/error-handling-and-debugging.qmd" class="feature-card feature-card-essential">
 <div class="card-icon">🛠️</div>
 <h3>Error Handling and Debugging</h3>
 <p>Learn to diagnose common R errors and fix them with a clear step-by-step workflow.</p>
 </a>
+</div>
+
+<p class="topics-more-label">More topics</p>
+<div class="card-grid">
 <a href="topics/data-handling.qmd" class="feature-card">
 <div class="card-icon">📂</div>
 <h3>Data Handling</h3>
