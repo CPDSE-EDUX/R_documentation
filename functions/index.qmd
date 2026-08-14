@@ -42,6 +42,9 @@ Add new columns or transform existing columns in a data frame.
 ### **[select( )](select.qmd)**
 Keep only the columns you want.
 
+### **[pull( )](pull.qmd)**
+Pull one column out as a vector.
+
 ### **[summarise( )](summarise.qmd)**
 Create compact summary tables from a data frame or grouped data frame.
 

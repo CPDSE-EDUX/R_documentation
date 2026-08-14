@@ -1,0 +1,153 @@
+---
+title: "pull( )"
+subtitle: "Pull out a column as a vector. pull() is from the dplyr package, which is part of the tidyverse."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/pull.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Syntax
+
+```r
+# Pipe style
+df %>% pull(column)
+
+# Non-pipe style
+pull(df, column)
+```
+::: {.desc-item}
+`pull()` extracts one column from a data frame or tibble and returns it as a vector.
+It works a bit like using `$` to extract one column, but it fits more naturally inside a pipe.
+:::
+
+```r
+df %>% pull(column) %>% mean()
+```
+::: {.desc-item}
+Because `pull()` returns a vector, you can use the result in calculations right away.
+:::
+
+::: {.callout-tip collapse="true"}
+## When should you use `pull()`?
+Use `pull()` when you want the values from one column, not the full data frame.
+It is handy before calculations, summaries, or printing a column as a vector.
+Unlike `select()`, which keeps columns in a data frame, `pull()` returns just the values as a vector.
+That makes it a good choice when you want to use the result in a calculation.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Pull one column as a vector</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+weights <- tablet_weights %>% pull(weight_mg)
+weights
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Use pulled values in a calculation</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+mean_weight <- tablet_weights %>%
+  pull(weight_mg) %>%
+  mean()
+
+cat("Mean tablet weight:", round(mean_weight, 1), "mg\n")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Pull values for a quick comparison</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  pull(weight_mg) %>%
+  range()
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to pull a column from. In a pipe (`%>%`), this is passed automatically from the left-hand side.
+
+```r
+tablet_weights %>% pull(weight_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>var</code> — column to extract <span class="arg-types">column name | position</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+The column to extract.
+You can use a column name or a numeric position.
+If omitted, `pull()` uses the last column.
+
+```r
+pull(tablet_weights, weight_mg)
+pull(tablet_weights, 3)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column name or integer position · Default: last column</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>name</code> — column to use for names <span class="arg-types">column name | position</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+If you want the output vector to have names, supply a second column to use as the names.
+If omitted, the returned vector is unnamed.
+
+```r
+tablet_weights %>% pull(weight_mg, name = tablet_id)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column name or integer position · Default: <code>NULL</code></p>
+</div>
+</details>
+:::
