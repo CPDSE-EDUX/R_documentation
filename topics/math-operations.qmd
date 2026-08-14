@@ -172,12 +172,21 @@ Use `seq()` to generate regular sequences of values. This is especially handy fo
 
 The basic syntax is `seq(from, to, by = step)` when you want evenly spaced values. You can also use `length.out` when you care about how many values you want rather than the step size.
 
+You can also create integer sequences with the `:` operator.
+For quick consecutive integers, `:` is shorter and often easier to read.
+
 ```{webr}
 # Sampling times every 4 hours across a 24 hour window
 seq(0, 24, by = 4)
+
+# Quick integer sequence with :
+1:10
 ```
 
 A regular sequence like this is a good starting point for plotting profiles or comparing changes over time.
+
+Use `:` for simple integer steps (for example `1:10` or `10:1`).
+Use `seq()` when you need a custom step size like `0.25`, a fixed number of values (`length.out`), or more explicit control.
 
 </div>
 </details>
