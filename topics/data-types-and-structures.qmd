@@ -1,0 +1,490 @@
+---
+title: "Data Types and Data Structures"
+subtitle: "Understand what values are, how data is organized, and how to extract the parts you need"
+toc: false
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+## Data types
+
+Data types describe what individual values are and what operations make sense for them. The sections below cover the types you will encounter most often when working with data in R.
+
+<details class="topic-card" open>
+<summary>Important data types in R</summary>
+<div class="topic-card-body">
+
+Most beginner errors in R come from a mismatch between what a value means and what type R thinks it is.
+
+| Type | What it stores | Example | Typical use |
+|---|---|---|---|
+| `numeric` | Decimal values (double precision) | `74.3`, `3.14` | Continuous measurements and arithmetic |
+| `integer` | Whole-number values | `1L`, `2L`, `3L` | Counts, whole numbers |
+| `character` | Text strings | `"A"`, `"sample_01"` | Names, IDs, labels |
+| `logical` | Truth values | `TRUE`, `FALSE` | Filtering and condition checks |   
+| `factor` | Categorical levels | `factor(c("Low", "High"))` | Grouping in summaries, models, and plots |
+| `Date` | Calendar date | `as.Date("2026-08-14")` | Day-level time tracking |
+| `POSIXct` | Date and time | `as.POSIXct("2026-08-14 09:30")` | Timestamps and time-based events |
+
+Quick inspection example:
+
+```{webr}
+x_num  <- c(500.1, 498.7, 503.0)
+x_int  <- c(500L, 499L, 503L)
+x_chr  <- c("A", "B", "A")
+x_lgl  <- c(TRUE, FALSE, TRUE)
+x_fac  <- factor(x_chr)
+x_date <- as.Date(c("2026-01-10", "2026-01-11", "2026-01-12"))
+
+class(x_num)
+class(x_int)
+class(x_chr)
+class(x_lgl)
+class(x_fac)
+class(x_date)
+```
+
+::: {.callout-note}
+R treats `1` and `1L` differently: `1` is `numeric` and `1L` is `integer`. In many beginner workflows, plain `1` is fine. Use `L` when you explicitly want integer type.
+:::
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Numeric and integer</summary>
+<div class="topic-card-body">
+
+Use `numeric` for measurements and calculations where decimal precision matters. Use `integer` for whole-number counts and explicit indexing values.
+
+```{webr}
+x_num <- c(74.3, 72.9, 75.1)
+x_int <- c(1L, 2L, 3L)
+
+mean(x_num)
+sum(x_int)
+
+typeof(x_num)
+typeof(x_int)
+```
+
+Type conversion is possible, but be careful about what changes:
+
+```{webr}
+as.integer(3.9)  # truncates to 3
+as.numeric(3L)   # becomes 3 as numeric
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Character</summary>
+<div class="topic-card-body">
+
+Use `character` for text by wrapping in quotes (""). Even if text looks like a number, it is still text until converted.
+
+```{webr}
+sample_id <- c("S01", "S02", "S03")
+score_txt <- c("10", "20", "30")
+
+class(sample_id)
+class(score_txt)
+
+class(as.numeric(score_txt))
+```
+
+If conversion fails, invalid entries become `NA`:
+
+```{webr}
+bad_txt <- c("10", "A", "30")
+as.numeric(bad_txt)
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Logical</summary>
+<div class="topic-card-body">
+
+Logical values are either `TRUE` or `FALSE`. Comparisons create logical values, which R can then use to make decisions or select data.
+
+For example, `>` asks whether each value is greater than 500. R checks every value and returns one logical result for each comparison:
+
+```{webr}
+weight_mg <- c(498.2, 501.4, 499.7, 503.1)
+
+weight_mg > 500
+```
+
+The result can be stored in a named object. Here, `is_heavy` is a logical vector with the same length as `weight_mg`:
+
+```{webr}
+is_heavy <- weight_mg > 500
+
+is_heavy
+class(is_heavy)
+length(is_heavy)
+```
+
+Logical vectors are useful for selecting matching values. R keeps the values where the logical index is `TRUE` and drops the values where it is `FALSE`:
+
+```{webr}
+weight_mg[is_heavy]
+```
+
+You can also combine or reverse logical conditions. Use `&` when both conditions must be true, `|` when either condition may be true, and `!` to reverse `TRUE` to `FALSE` or `FALSE` to `TRUE`:
+
+```{webr}
+# Between 499 and 502 mg, including both boundaries
+weight_mg[weight_mg >= 499 & weight_mg <= 502]
+
+# Below 499 mg or above 502 mg
+weight_mg[weight_mg < 499 | weight_mg > 502]
+
+# Values that are not heavier than 500 mg
+weight_mg[!is_heavy]
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Factor (categorical data)</summary>
+<div class="topic-card-body">
+
+Use factors when values represent specific categories. Converting to factors can change how R interprets the values, especially for numerical variables that should be treated as discrete groups.
+
+Consider a first-order degradation study. The measured concentration decreases over time at three temperatures:
+
+```{webr}
+library(tidyverse)
+
+degradation <- tibble(
+  time_h = rep(c(0, 12, 24, 36), times = 3),
+  temperature_c = rep(c(20, 30, 40), each = 4),
+  concentration_mg_mL = c(
+    100, 90, 81, 73,
+    100, 83, 69, 58,
+    100, 67, 45, 30
+  )
+)
+
+degradation
+```
+
+Here, temperature is genuinely numeric. A temperature of 40 °C is higher than 30 °C, and the difference between temperatures has meaning. A continuous colour scale communicates that ordering:
+
+```{webr}
+# Numeric temperature -> continuous colour scale
+ggplot(
+  degradation,
+  aes(x = time_h, y = concentration_mg_mL, color = temperature_c)
+) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(color = "Temperature (°C)")
+```
+
+However, you may want to treat the tested temperatures as separate experimental groups. In that case, convert the column to a factor. The temperature values are no longer used to determine a continuous colour gradient; they define three discrete groups:
+
+```{webr}
+degradation_fac <- degradation %>%
+  mutate(
+    temperature_c = as_factor(temperature_c)
+  )
+
+class(degradation_fac$temperature_c)
+levels(degradation_fac$temperature_c)
+```
+
+Now the colour scale is discrete and the data is grouped by temperature:
+
+```{webr}
+# Factor temperature -> discrete colour scale
+ggplot(
+  degradation_fac,
+  aes(x = time_h, y = concentration_mg_mL, color = temperature_c)
+) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(color = "Temperature")
+```
+
+The factor version is useful when the temperatures are experimental groups that you want to compare. The numeric version is useful when you want the plot to emphasize that temperature is ordered and that the spacing between 20, 30, and 40 °C matters. Factor conversion changes the interpretation of the variable, not only how it prints.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Date and POSIXct </summary>
+<div class="topic-card-body">
+
+Use `Date` for day-level data and `POSIXct` when time-of-day matters.
+
+```{webr}
+sample_date <- as.Date(c("2026-08-10", "2026-08-12"))
+run_time <- as.POSIXct(c("2026-08-10 09:30", "2026-08-10 14:45"))
+
+class(sample_date)
+class(run_time)
+```
+
+Dates can be compared and sorted. Subtracting one `Date` from another gives the time between them in days:
+
+```{webr}
+sample_date[2] > sample_date[1]  # Is the second date later?
+sort(sample_date)               # Put dates in chronological order
+sample_date[2] - sample_date[1]  # Number of days between first and last
+```
+
+You can add or subtract whole numbers of days from a `Date`:
+
+```{webr}
+sample_date + 7  # Dates one week later
+sample_date - 1  # Dates one day earlier
+```
+
+POSIXct values also include a time of day, so subtracting them gives a duration in seconds:
+
+```{webr}
+run_time[2] > run_time[1]       # Is the second event later?
+sort(run_time)                  # Put timestamps in chronological order
+run_time[2] - run_time[1]       # A difftime object; R chooses a readable display unit
+```
+
+The subtraction above does not round the duration. Request the unit explicitly when you need a numeric result:
+
+```{webr}
+time_between <- run_time[2] - run_time[1]
+
+as.numeric(time_between, units = "secs")   # Exact duration in seconds
+as.numeric(time_between, units = "hours")  # Same duration expressed in hours
+```
+
+Use `Date` when the time of day is not relevant. Use `POSIXct` when the order or duration of events matters within a day.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Missing and special values: NA, NaN, NULL, Inf</summary>
+<div class="topic-card-body">
+
+These values are common in real data and affect calculations differently.
+
+| Value | Meaning | Typical source |
+|---|---|---|
+| `NA` | Missing value | Not recorded or unavailable data |
+| `NaN` | Undefined numeric result | Invalid math like `0/0` |
+| `Inf` / `-Inf` | Infinite value | Division by zero |
+| `NULL` | No value/object exists | Empty list element, optional input omitted |
+
+```{webr}
+x <- c(500, NA, 498)
+
+mean(x)                # NA
+mean(x, na.rm = TRUE)  # 499
+
+is.na(x)
+is.nan(0/0)
+is.infinite(c(1/0, 5))
+is.null(NULL)
+```
+
+</div>
+</details>
+
+<hr>
+
+## Data structures
+
+Data types describe what values are. Data structures describe how values are arranged and stored together. The next sections introduce the main structures you will work with in R.
+
+<details class="topic-card">
+<summary>Vector, list, data frame, tibble</summary>
+<div class="topic-card-body">
+
+The structure determines how you access and work with the values inside it.
+
+### Vector
+
+A vector is a sequence of values of the same type. The values have positions, so vectors are useful for calculations and simple indexing.
+
+```{webr}
+v <- c(10, 20, 30)
+
+v
+length(v)  # Number of values
+class(v)   # Type of object
+```
+
+You can also create a named vector directly. Names are labels that make the contents easier to read and identify:
+
+```{webr}
+v_named <- c(
+  morning = 10,
+  noon = 20,
+  evening = 30
+)
+
+v_named
+names(v_named)
+```
+
+### List
+
+A list can contain different types or objects (even other vectors or lists). Each component can have its own length and structure.
+
+```{webr}
+lst <- list("S01", TRUE, c(10, 20, 30))
+
+lst
+str(lst)  # Compact view of each component
+```
+
+You can also create a named list directly. This is optional, but names make a list easier to understand:
+
+```{webr}
+lst_named <- list(
+  id = "S01",
+  passed = TRUE,
+  values = c(10, 20, 30)
+)
+
+lst_named
+names(lst_named)
+```
+
+Names are labels, not replacements for the values themselves. They are especially useful when positions may change or when the meaning of a value is more important than its position.
+
+### Data frame and tibble
+
+A data frame or tibble stores vectors of equal length as columns. Each row represents one observation, and each column can have a different type.
+
+```{webr}
+library(tidyverse)
+
+df <- data.frame(
+  id = c("A", "B", "C"),
+  value = c(5.1, 6.2, 7.3)
+)
+
+tb <- tibble(
+  id = c("A", "B", "C"),
+  value = c(5.1, 6.2, 7.3)
+)
+
+df
+tb
+```
+
+Both objects are tables with two rows and two columns. A tibble is a modern version of a data frame with cleaner printing and stricter behavior. `glimpse()` shows the columns, their types, and example values without printing the whole table:
+
+```{webr}
+glimpse(tb)
+```
+
+The structures are related but not interchangeable: a column in a tibble is a vector, while a tibble itself is a collection of columns. The next sections show how indexing extracts values from each structure.
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Indexing vectors and lists</summary>
+<div class="topic-card-body">
+
+Indexing means selecting part of an object. For vectors, use square brackets `[]` with a position, a name, or a logical condition. R indexing starts at `1`, so the first element is at position `1`. A single index can return one value, while a range or condition can return several values.
+
+
+
+```{webr}
+dose_mg <- c(500, 250, 125, 500)
+dose_mg_named <- c(morning = 500, noon = 250, evening = 125, night = 500)
+
+dose_mg[1]               # by position
+dose_mg[2:4]             # range
+dose_mg[-2]              # exclude position
+dose_mg[dose_mg >= 250]  # logical index
+dose_mg_named["night"]   # by name
+```
+
+For lists, the brackets determine whether you keep the result as a list or extract the element inside it. `[]` selects one or more list components and returns a list. `[[]]` extracts the contents of one component and returns that component itself.
+
+```{webr}
+sample_list <- list("A", c(10.1, 10.4, 9.9))
+
+sample_list[2]   # A list containing the second component
+sample_list[[2]] # The numeric vector inside the second component
+```
+
+The same rule works with a named list. In that case, you can use either the position or the component name:
+
+```{webr}
+sample_named <- list(
+  batch = "A",
+  values = c(10.1, 10.4, 9.9)
+)
+
+sample_named["values"]    # A list containing the named component
+sample_named[["values"]]  # The numeric vector inside the component
+```
+
+</div>
+</details>
+
+<details class="topic-card">
+<summary>Indexing data frames and tibbles ([], [[ ]], $)</summary>
+<div class="topic-card-body">
+
+Data frames and tibbles have two dimensions: rows and columns. The general form is `[rows, columns]`. The comma separates the row index from the column index:
+
+- Before the comma, specify which rows to keep.
+- After the comma, specify which columns to keep.
+- Leaving one side empty means “keep all” rows or columns.
+
+```{webr}
+library(tidyverse)
+
+tablets <- tibble(
+  tablet_id = c("T1", "T2", "T3", "T4"),
+  batch = c("A", "A", "B", "B"),
+  weight_mg = c(498.2, 501.4, 499.7, 503.1)
+)
+
+tablets[1, ]   # First row, all columns
+tablets[, 2]   # All rows, second column
+tablets[1, 2]  # First row and second column
+```
+
+The result of `[rows, columns]` is still a tibble/data frame, even when it contains one row or one column. To select several columns, provide their names as a character vector or use a range of numeric positions:
+
+```{webr}
+tablets[, c("tablet_id", "weight_mg")]
+tablets[, 1:2]  # First two columns
+```
+
+To extract one column as a vector, use `$` or `[[ ]]`:
+
+```{webr}
+tablets$batch            # Column selected by name
+tablets[[3]]             # Column selected by numeric position
+```
+
+For common data-analysis tasks, tidyverse functions make the intention more explicit:
+
+```{webr}
+tablets %>% filter(batch == "A")         # Keep rows matching a condition
+tablets %>% select(tablet_id, weight_mg) # Keep selected columns
+tablets %>% slice(1:2)                   # Keep rows by position
+tablets %>% pull(weight_mg)              # Extract one column as a vector
+```
+
+::: {.callout-tip}
+See [Data Handling](../topics/data-handling.qmd) for a fuller workflow with `filter()`, `select()`, and `mutate()`.
+:::
+
+</div>
+</details>

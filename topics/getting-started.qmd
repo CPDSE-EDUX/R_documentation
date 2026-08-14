@@ -172,15 +172,16 @@ New to R? Here is a suggested order to work through this site.
 
 **Core data skills**
 
-4. [Data Handling](../topics/data-handling.qmd) — import spreadsheets and tidy real data.
-5. [Pipe Operator (%>%)](../topics/pipe-operator.qmd) — chain steps into readable pipelines.
-6. [Math Operations](../topics/math-operations.qmd) — arithmetic and math functions.
+4. [Data Types and Data Structures](../topics/data-types-and-structures.qmd) — understand R value types, data organization, and indexing with practical examples.
+5. [Data Handling](../topics/data-handling.qmd) — import spreadsheets and tidy real data.
+6. [Pipe Operator (%>%)](../topics/pipe-operator.qmd) — chain steps into readable pipelines.
+7. [Math Operations](../topics/math-operations.qmd) — arithmetic and math functions.
 
 **Analyse and present**
 
-7. [Descriptive Statistics](../topics/descriptive-stats.qmd) — summarise your data.
-8. [Visualization](../topics/visualization.qmd) — plot with ggplot2.
-9. [Linear Regression](../topics/linear-regression.qmd) — fit and interpret straight-line models.
+8. [Descriptive Statistics](../topics/descriptive-stats.qmd) — summarise your data.
+9. [Visualization](../topics/visualization.qmd) — plot with ggplot2.
+10. [Linear Regression](../topics/linear-regression.qmd) — fit and interpret straight-line models.
 
 **Keep these handy throughout**
 
