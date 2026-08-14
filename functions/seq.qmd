@@ -1,0 +1,143 @@
+---
+title: "seq( )"
+subtitle: "Generate sequences of numbers. seq() is a base R function."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://rdrr.io/r/base/seq.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# seq() is part of base R — no package installation needed
+```
+
+## Syntax
+
+```r
+seq(from, to)
+seq(from, to, by = step)
+seq(from, to, length.out = n)
+```
+::: {.desc-item}
+`seq()` creates a numeric sequence from a start value to an end value.
+You can control the spacing with `by`, or request a fixed number of values with `length.out`.
+:::
+
+::: {.callout-tip collapse="true"}
+## When should you use `seq()`?
+Use `seq()` whenever you need evenly spaced numeric values.
+Common uses include time vectors, concentration grids, and x-values for plotting smooth curves.
+:::
+
+::: {.callout-note collapse="true"}
+## `seq()` vs `:`
+The `:` operator is quick for simple integer steps like `1:10`.
+Use `seq()` when you need decimal steps, a fixed output length, or descending sequences with custom step size.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Create a basic integer sequence</summary>
+<div class="example-body">
+
+```{webr}
+seq(1, 10)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Set a custom step size with <code>by</code></summary>
+<div class="example-body">
+
+```{webr}
+seq(0, 2, by = 0.25)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Generate a fixed number of values with <code>length.out</code></summary>
+<div class="example-body">
+
+```{webr}
+seq(0.1, 100, length.out = 8)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Create a descending sequence</summary>
+<div class="example-body">
+
+```{webr}
+seq(10, 0, by = -2)
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>from</code> — start value <span class="arg-types">numeric</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The first value in the sequence.
+
+```r
+seq(from = 0, to = 1, by = 0.2)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>to</code> — end value <span class="arg-types">numeric</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The target end value of the sequence.
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>by</code> — step size <span class="arg-types">numeric</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Difference between consecutive values.
+Use a negative value for descending sequences.
+
+```r
+seq(10, 0, by = -2)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>numeric</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>length.out</code> — number of output values <span class="arg-types">integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Creates exactly this many values between `from` and `to`.
+
+```r
+seq(0, 1, length.out = 6)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code></p>
+</div>
+</details>
+:::

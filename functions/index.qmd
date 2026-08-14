@@ -8,6 +8,9 @@ body-classes: "function-reference-page"
 
 ## Import & Create {.glossary-letter}
 
+### **[seq( )](seq.qmd)**
+Generate numeric sequences.
+
 ### **[read_csv( )](read-csv.qmd)**
 Import a comma-separated file into R as a tibble.
 

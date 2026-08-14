@@ -63,6 +63,8 @@ website:
       contents:
         - section: "Import & Create"
           contents:
+            - text: "seq( )"
+              href: functions/seq.qmd
             - text: "read_csv( )"
               href: functions/read-csv.qmd
             - text: "read_excel( )"
