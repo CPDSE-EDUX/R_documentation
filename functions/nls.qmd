@@ -1,0 +1,272 @@
+---
+title: "nls( )"
+subtitle: "Fit non-linear models to data. nls() is part of base R (stats package)."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/nls.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://www.rdocumentation.org/packages/stats/topics/nls" target="_blank" rel="noopener">R Documentation ↗</a>
+</div>
+
+## Required Library
+```r
+# nls() is in base R (stats), loaded by default — no package installation needed
+```
+
+## Syntax
+
+```r
+nls(formula, data = df, start = list(param1 = value1, param2 = value2))
+```
+::: {.desc-item}
+`nls()` fits non-linear models by estimating parameter values that best match the data.
+Unlike `lm()`, you write the full model equation directly in the formula.
+:::
+
+::: {.callout-tip collapse="true"}
+## Why use `nls()`?
+Use `nls()` when your data follows a curved relationship that a straight line cannot describe well.
+Typical examples in pharmacy include dose-response curves (e.g., sigmoidal Emax models), dissolution profiles (e.g., Weibull models), and saturation/enzyme kinetics (e.g., Michaelis-Menten).
+:::
+
+::: {.callout-note collapse="true"}
+## Start values are required
+`nls()` needs reasonable starting guesses in `start = list(...)`.
+They do not need to be exact, but should be in the right range.
+:::
+
+## Model Used In These Examples
+
+For simplicity, the examples below use a 3-parameter sigmoidal model with fixed slope (`Hill = 1`):
+
+$$
+y = \text{Bottom} + \frac{\text{Top} - \text{Bottom}}{1 + (\text{EC}_{50}/x)}
+$$
+
+`Bottom` and `Top` are the lower and upper plateaus, and `EC50` is the concentration where response is halfway between them.
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Fit a simple dose-response curve</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+dose_response <- tibble(
+  dose_uM = c(0.1, 0.3, 1, 3, 10, 30, 100),
+  response_pct = c(2, 6, 14, 35, 63, 86, 96)
+)
+
+fit_sigmoid <- nls(
+  # 3-parameter sigmoid with fixed slope (Hill = 1)
+  response_pct ~ Bottom + (Top - Bottom) / (1 + (EC50 / dose_uM)),
+  data = dose_response,
+  # Start guesses: low plateau, high plateau, midpoint concentration
+  start = list(Bottom = 0, Top = 100, EC50 = 5)
+)
+
+coef(fit_sigmoid)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Extract EC50 from the fitted model</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+dose_response <- tibble(
+  dose_uM = c(0.1, 0.3, 1, 3, 10, 30, 100),
+  response_pct = c(2, 6, 14, 35, 63, 86, 96)
+)
+
+fit_sigmoid <- nls(
+  # Same model as above
+  response_pct ~ Bottom + (Top - Bottom) / (1 + (EC50 / dose_uM)),
+  data = dose_response,
+  start = list(Bottom = 0, Top = 100, EC50 = 5)
+)
+
+ec50 <- coef(fit_sigmoid)[["EC50"]]
+cat("EC50:", signif(ec50, 3), "uM\n")
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Predict and plot the fitted non-linear curve</summary>
+<div class="example-body">
+The points are your measured data.
+The line is built from many model predictions across a fine x-grid, then added with `geom_line()`.
+
+```{webr}
+library(tidyverse)
+
+dose_response <- tibble(
+  dose_uM = c(0.1, 0.3, 1, 3, 10, 30, 100),
+  response_pct = c(2, 6, 14, 35, 63, 86, 96)
+)
+
+fit_sigmoid <- nls(
+  response_pct ~ Bottom + (Top - Bottom) / (1 + (EC50 / dose_uM)),
+  data = dose_response,
+  start = list(Bottom = 0, Top = 100, EC50 = 5)
+)
+
+curve_data <- tibble(
+  # Creates a fine grid of x-values for plotting the fitted curve
+  dose_uM = seq(0.1, 100, length.out = 500)) %>%
+  # Predict y-values from fitted model for each x in the grid
+  mutate(pred_response_pct = predict(fit_sigmoid, newdata = .))
+
+ggplot(dose_response, aes(x = dose_uM, y = response_pct)) +
+  geom_point(size = 2) +
+  geom_line(data = curve_data, aes(y = pred_response_pct), linewidth = 1, colour = "#3C5E3E") +
+  scale_x_log10() +
+  labs(
+    title = "Dose-Response Curve Fitted with nls()",
+    x = "Dose (uM)",
+    y = "Response (%)"
+  ) +
+  theme_classic()
+```
+</div>
+</details>
+
+</div>
+
+## Evaluating Model Fit
+
+Fitting a curve is only useful if it actually describes the data well. A few diagnostics help you judge that.
+
+::: {.callout-tip collapse="true"}
+## What to check
+- **Residual standard error** — how far, on average, the observed values fall from the fitted curve (smaller is better, in the units of your response).
+- **Parameter estimates and standard errors** — from `summary()`; large standard errors relative to the estimate suggest the parameter is poorly identified by your data.
+- **Residual plot** — residuals should scatter randomly around zero with no obvious curve or trend. A pattern means the model shape may be wrong.
+- **Convergence** — `nls()` should finish without a "singular gradient" or "convergence failure" error; if it does, your start values may need adjusting.
+:::
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Check the model summary</summary>
+<div class="example-body">
+`summary()` reports parameter estimates, standard errors, and the residual standard error.
+
+```{webr}
+library(tidyverse)
+
+dose_response <- tibble(
+  dose_uM = c(0.1, 0.3, 1, 3, 10, 30, 100),
+  response_pct = c(2, 6, 14, 35, 63, 86, 96)
+)
+
+fit_sigmoid <- nls(
+  response_pct ~ Bottom + (Top - Bottom) / (1 + (EC50 / dose_uM)),
+  data = dose_response,
+  start = list(Bottom = 0, Top = 100, EC50 = 5)
+)
+
+summary(fit_sigmoid)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Plot residuals to check for patterns</summary>
+<div class="example-body">
+`residuals()` gives the difference between observed and predicted values for each point.
+Random scatter around zero suggests a good fit; a curve or trend suggests the model doesn't match the data's shape.
+
+```{webr}
+library(tidyverse)
+
+dose_response <- tibble(
+  dose_uM = c(0.1, 0.3, 1, 3, 10, 30, 100),
+  response_pct = c(2, 6, 14, 35, 63, 86, 96)
+)
+
+fit_sigmoid <- nls(
+  response_pct ~ Bottom + (Top - Bottom) / (1 + (EC50 / dose_uM)),
+  data = dose_response,
+  start = list(Bottom = 0, Top = 100, EC50 = 5)
+)
+
+residual_data <- dose_response %>%
+  mutate(resid = residuals(fit_sigmoid))
+
+ggplot(residual_data, aes(x = dose_uM, y = resid)) +
+  geom_point(size = 2) +
+  geom_hline(yintercept = 0, linetype = "dashed", colour = "grey50") +
+  scale_x_log10() +
+  labs(
+    title = "Residuals from Sigmoid Fit",
+    x = "Dose (uM)",
+    y = "Residual (Observed - Predicted)"
+  ) +
+  theme_classic()
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>formula</code> — non-linear model equation <span class="arg-types">formula</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Defines the model you want to fit.
+Write the response on the left and the full non-linear expression on the right.
+
+```r
+response_pct ~ Bottom + (Top - Bottom) / (1 + (EC50 / dose_uM))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>formula</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>data</code> — data frame with model variables <span class="arg-types">data frame | tibble</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Data source used to evaluate the variables in the formula.
+
+```r
+nls(formula = ..., data = dose_response, start = ...)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>start</code> — starting values for parameters <span class="arg-types">named list</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Named list with initial guesses for all unknown parameters.
+`nls()` uses these values as the starting point for optimisation.
+
+```r
+start = list(Bottom = 0, Top = 100, EC50 = 5)
+```
+
+<p class="data-types"><strong>Data Types:</strong> named <code>list</code> of numeric values</p>
+</div>
+</details>
+:::

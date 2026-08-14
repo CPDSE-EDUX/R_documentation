@@ -59,6 +59,9 @@ Extract estimated coefficients from fitted model objects.
 ### **[lm( )](lm.qmd)**
 Fit linear regression models and extract slope, intercept, and model fit statistics.
 
+### **[nls( )](nls.qmd)**
+Fit custom non-linear models to data.
+
 ### **[predict( )](predict.qmd)**
 Predict new values from a fitted model.
 

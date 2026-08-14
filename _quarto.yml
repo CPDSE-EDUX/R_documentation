@@ -99,6 +99,8 @@ website:
               href: functions/coef.qmd
             - text: "lm( )"
               href: functions/lm.qmd
+            - text: "nls( )"
+              href: functions/nls.qmd
             - text: "predict( )"
               href: functions/predict.qmd
             - text: "summary( )"
