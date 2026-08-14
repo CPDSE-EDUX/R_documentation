@@ -1,0 +1,149 @@
+---
+title: "if_else( )"
+subtitle: "Choose one value when a condition is TRUE and another when it is FALSE. if_else() is from the dplyr package, which is part of the tidyverse."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/if_else.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Syntax
+
+```r
+if_else(condition, true, false)
+```
+::: {.desc-item}
+`if_else()` is a vectorised if/else function.
+For every value in `condition`, it returns the matching value from `true` or `false`.
+:::
+
+```r
+df %>% mutate(new_col = if_else(condition, true_value, false_value))
+```
+::: {.desc-item}
+`if_else()` works especially well inside `mutate()` when you want to create a new column based on a condition.
+:::
+
+::: {.callout-tip collapse="true"}
+## When should you use `if_else()`?
+Use `if_else()` when you need a row-by-row choice between two values.
+It is a clean way to do conditional calculations inside `mutate()`.
+:::
+
+::: {.callout-note collapse="true"}
+## Why not use base `if` here?
+Base `if` works on a single TRUE/FALSE value.
+`if_else()` is vectorised, so it can make a choice for every row in a column.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Classify tablet weights as pass or fail</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  # classifies each tablet as pass or fail if it is within 5 mg of the target weight of 500 mg
+  mutate(within_spec = if_else(abs(weight_mg - 500) <= 5, "pass", "fail")) 
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Correct dilution only for specific samples</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+dilution_factor <- 10
+
+assay_results <- tibble(
+  sample_id = c("S01", "S02", "S03", "S04", "S05"),
+  measured_conc_ug_ml = c(12.4, 1.8, 11.9, 12.1, 2.0),
+)
+
+assay_results %>%
+  mutate(
+    # Correct the measured concentration for samples S02 and S05 only
+    corrected_conc_ug_ml = if_else(
+      sample_id %in% c("S02", "S05"),
+      measured_conc_ug_ml * dilution_factor,
+      measured_conc_ug_ml
+    )
+  )
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>condition</code> <span class="arg-types">logical vector</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+A logical test that is evaluated row by row.
+
+```r
+abs(weight_mg - 500) <= 15
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>logical</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>true</code> <span class="arg-types">vector</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Values returned when `condition` is `TRUE`.
+
+```r
+if_else(abs(weight_mg - 500) <= 15, "pass", "fail")
+```
+
+<p class="data-types"><strong>Data Types:</strong> any vector type that matches the output type</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>false</code> <span class="arg-types">vector</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+Values returned when `condition` is `FALSE`.
+
+<p class="data-types"><strong>Data Types:</strong> any vector type that matches the output type</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>missing</code> <span class="arg-types">vector</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Value used when `condition` is `NA`.
+If omitted, missing values in the condition stay missing in the result.
+
+<p class="data-types"><strong>Data Types:</strong> any vector type that matches the output type · Default: <code>NULL</code></p>
+</div>
+</details>
+:::

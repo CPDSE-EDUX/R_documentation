@@ -39,6 +39,9 @@ Group rows by one or more columns so dplyr verbs can work within each group.
 ### **[mutate( )](mutate.qmd)**
 Add new columns or transform existing columns in a data frame.
 
+### **[if_else( )](if-else.qmd)**
+Choose values row by row based on a condition.
+
 ### **[select( )](select.qmd)**
 Keep only the columns you want.
 

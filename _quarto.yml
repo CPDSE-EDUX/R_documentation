@@ -85,6 +85,8 @@ website:
               href: functions/group-by.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
+            - text: "if_else( )"
+              href: functions/if-else.qmd
             - text: "pull( )"
               href: functions/pull.qmd
             - text: "select( )"
