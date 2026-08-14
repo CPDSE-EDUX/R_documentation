@@ -1,0 +1,144 @@
+---
+title: "select( )"
+subtitle: "Keep only the columns you want. select() is from the dplyr package, which is part of the tidyverse."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/select.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Syntax
+
+```r
+# Pipe style
+df %>% select(col1, col2)
+
+# Non-pipe style
+select(df, col1, col2)
+```
+::: {.desc-item}
+`df %>% select(col1, col2)` and `select(df, col1, col2)` keep only the columns you list.
+The order you write the columns becomes the order of the result.
+
+![](../assets/images/select_function.svg)
+:::
+
+```r
+df %>% select(col_start:col_end)
+```
+::: {.desc-item}
+Use `:` to select a continuous range of columns.
+This is useful when the columns you want are next to each other in the data set.
+:::
+
+```r
+df %>% select(-col_to_drop)
+```
+::: {.desc-item}
+Use `-` in front of a column name when you want to remove it instead of keep it.
+
+![](../assets/images/select_function2.svg)
+:::
+
+::: {.callout-tip collapse="true"}
+## When should you use `select()`?
+Use `select()` when you want a smaller table with just the columns you need.
+It is also useful when you want to move important columns to the front.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Keep only the tablet ID and weight</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  select(tablet_id, weight_mg)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Drop one column with <code>-</code></summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  select(-batch)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Select a range of adjacent columns with <code>:</code></summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  select(tablet_id:weight_mg)
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to select columns from. In a pipe (`%>%`), this is passed automatically from the left-hand side.
+
+```r
+tablet_weights %>% select(tablet_id, weight_mg)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — columns to keep or drop <span class="arg-types">column name(s) | helpers</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more columns to keep in the output.
+Use a minus sign to drop a column instead, for example `-batch`.
+
+```r
+select(tablet_weights, tablet_id, weight_mg)
+select(tablet_weights, -batch)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column names or simple selection helpers such as <code>-batch</code></p>
+</div>
+</details>
+:::

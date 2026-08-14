@@ -85,6 +85,8 @@ website:
               href: functions/group-by.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
+            - text: "select( )"
+              href: functions/select.qmd
             - text: "summarise( )"
               href: functions/summarise.qmd
         - section: "Model"

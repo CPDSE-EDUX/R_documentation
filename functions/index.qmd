@@ -39,6 +39,9 @@ Group rows by one or more columns so dplyr verbs can work within each group.
 ### **[mutate( )](mutate.qmd)**
 Add new columns or transform existing columns in a data frame.
 
+### **[select( )](select.qmd)**
+Keep only the columns you want.
+
 ### **[summarise( )](summarise.qmd)**
 Create compact summary tables from a data frame or grouped data frame.
 
