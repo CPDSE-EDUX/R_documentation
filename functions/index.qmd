@@ -42,6 +42,9 @@ Group rows by one or more columns so dplyr verbs can work within each group.
 ### **[if_else( )](if-else.qmd)**
 Choose values row by row based on a condition.
 
+### **[lag( ) / lead( )](lag-lead.qmd)**
+Shift a column's values backward or forward by a chosen number of rows.
+
 ### **[mutate( )](mutate.qmd)**
 Add new columns or transform existing columns in a data frame.
 

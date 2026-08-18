@@ -89,6 +89,8 @@ website:
               href: functions/group-by.qmd
             - text: "if_else( )"
               href: functions/if-else.qmd
+            - text: "lag( ) / lead( )"
+              href: functions/lag-lead.qmd
             - text: "mutate( )"
               href: functions/mutate.qmd
             - text: "pull( )"
