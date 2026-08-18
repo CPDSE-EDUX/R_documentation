@@ -65,12 +65,12 @@ website:
       contents:
         - section: "Import & Create"
           contents:
-            - text: "seq( )"
-              href: functions/seq.qmd
             - text: "read_csv( )"
               href: functions/read-csv.qmd
             - text: "read_excel( )"
               href: functions/read-excel.qmd
+            - text: "seq( )"
+              href: functions/seq.qmd
             - text: "tibble( )"
               href: functions/tibble.qmd
         - section: "Inspect"
@@ -87,14 +87,16 @@ website:
               href: functions/filter.qmd
             - text: "group_by( )"
               href: functions/group-by.qmd
-            - text: "mutate( )"
-              href: functions/mutate.qmd
             - text: "if_else( )"
               href: functions/if-else.qmd
+            - text: "mutate( )"
+              href: functions/mutate.qmd
             - text: "pull( )"
               href: functions/pull.qmd
             - text: "select( )"
               href: functions/select.qmd
+            - text: "slice( )"
+              href: functions/slice.qmd
             - text: "summarise( )"
               href: functions/summarise.qmd
         - section: "Model"

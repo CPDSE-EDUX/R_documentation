@@ -8,14 +8,14 @@ body-classes: "function-reference-page"
 
 ## Import & Create {.glossary-letter}
 
-### **[seq( )](seq.qmd)**
-Generate numeric sequences.
-
 ### **[read_csv( )](read-csv.qmd)**
 Import a comma-separated file into R as a tibble.
 
 ### **[read_excel( )](read-excel.qmd)**
 Import an Excel worksheet into R as a tibble.
+
+### **[seq( )](seq.qmd)**
+Generate numeric sequences.
 
 ### **[tibble( )](tibble.qmd)**
 Create a tidy table from vectors or values.
@@ -39,17 +39,20 @@ Keep rows that match one or more logical conditions.
 ### **[group_by( )](group-by.qmd)**
 Group rows by one or more columns so dplyr verbs can work within each group.
 
+### **[if_else( )](if-else.qmd)**
+Choose values row by row based on a condition.
+
 ### **[mutate( )](mutate.qmd)**
 Add new columns or transform existing columns in a data frame.
 
-### **[if_else( )](if-else.qmd)**
-Choose values row by row based on a condition.
+### **[pull( )](pull.qmd)**
+Pull one column out as a vector.
 
 ### **[select( )](select.qmd)**
 Keep only the columns you want.
 
-### **[pull( )](pull.qmd)**
-Pull one column out as a vector.
+### **[slice( )](slice.qmd)**
+Keep or drop rows by position, including the top or bottom rows per group.
 
 ### **[summarise( )](summarise.qmd)**
 Create compact summary tables from a data frame or grouped data frame.

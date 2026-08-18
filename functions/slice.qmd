@@ -1,0 +1,202 @@
+---
+title: "slice( )"
+subtitle: "Keep rows by their position. slice() is from the dplyr package, which is part of the tidyverse."
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<div class="source-links">
+<a class="source-link" href="https://dplyr.tidyverse.org/reference/slice.html" target="_blank" rel="noopener">Original Documentation ↗</a>
+<a class="source-link" href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" target="_blank" rel="noopener">dplyr Cheatsheet ↗</a>
+</div>
+
+## Required Library
+```r
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+## Syntax
+
+```{r, eval=FALSE}
+# Pipe style
+df %>% slice(row_numbers)
+
+# Non-pipe style
+slice(df, row_numbers)
+```
+
+::: {.desc-item}
+`df %>% slice(2:4)` and `slice(df, 2:4)` keep rows by their position in the data,
+not by a condition on the values. Negative positions drop rows instead of keeping them.
+:::
+
+```{r, eval=FALSE}
+df %>% slice_max(column, n = 1)
+df %>% slice_min(column, n = 1)
+```
+
+::: {.desc-item}
+`slice_max()` and `slice_min()` keep the row(s) with the highest or lowest value of a column.
+They are a shortcut for `arrange()` followed by `slice()`, and handle ties explicitly.
+:::
+
+::: {.callout-tip collapse="true"}
+## When do you use `slice()`?
+Use `slice()` when you want rows by position — for example the first three rows,
+every other row, or "the row with the highest value" per group.
+Use `filter()` instead when you want rows that match a logical condition on their values.
+:::
+
+## Examples
+
+<div class="example-section">
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="example-item">
+<summary>Keep rows by position</summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  slice(2:4)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Drop rows by position</summary>
+<div class="example-body">
+A negative position removes that row instead of keeping it.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  slice(-1)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Keep the row with the highest value using <code>slice_max()</code></summary>
+<div class="example-body">
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  slice_max(weight_mg, n = 1)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Keep the first row of each group</summary>
+<div class="example-body">
+`slice()` respects `group_by()`, so it can pick rows within each group instead of across the whole table.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  group_by(batch) %>%
+  slice(1)
+```
+</div>
+</details>
+
+<details class="example-item">
+<summary>Extract a single value with <code>pull()</code></summary>
+<div class="example-body">
+`slice()` always returns a data frame, even for one row.
+Chain in `pull()` when you want the bare value instead of a one-row table.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  slice_max(weight_mg, n = 1) %>%
+  pull(weight_mg)
+```
+</div>
+</details>
+
+</div>
+
+## Argument Overview
+<p class="arg-intro">Required arguments must be included when using a function while optional arguments can be included on demand.</p>
+
+::: {.arg-section}
+<div class="collapse-toolbar"><button class="collapse-btn">Expand All</button></div>
+
+<details class="arg-item">
+<summary><code>.data</code> <span class="arg-types">data frame | tibble</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+The data frame to slice. In a pipe (`%>%`), this is passed automatically from the left-hand side.
+
+```r
+tablet_weights %>% slice(1:3)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>data.frame</code> | <code>tibble</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>...</code> — row positions to keep <span class="arg-types">integer(s) | range</span> <span class="arg-badge required">Required</span></summary>
+<div class="arg-body">
+One or more row positions, given as numbers or a range such as `2:4`.
+Use negative numbers to drop rows instead of keeping them.
+Positions can't be mixed positive and negative in the same call.
+
+```r
+tablet_weights %>% slice(c(1, 3, 5))
+tablet_weights %>% slice(-c(1, 2))
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>integer</code> vector or range</p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>.by</code> — group rows before slicing <span class="arg-types">column name(s)</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+Slice within each group instead of across the whole table, without needing a separate `group_by()` call.
+
+```r
+tablet_weights %>% slice(1, .by = batch)
+```
+
+<p class="data-types"><strong>Data Types:</strong> column name(s) · Default: <code>NULL</code></p>
+</div>
+</details>
+
+<details class="arg-item">
+<summary><code>order_by / n</code> — used by <code>slice_max()</code> and <code>slice_min()</code> <span class="arg-types">column | integer</span> <span class="arg-badge optional">Optional</span></summary>
+<div class="arg-body">
+`slice_max()` and `slice_min()` take a column to rank by and an `n` for how many rows to keep.
+Ties are kept by default, so more than `n` rows can be returned.
+
+```r
+tablet_weights %>% slice_max(weight_mg, n = 1)
+tablet_weights %>% slice_min(weight_mg, n = 3)
+```
+
+<p class="data-types"><strong>Data Types:</strong> <code>order_by</code>: column name · <code>n</code>: <code>integer</code>, default <code>1</code></p>
+</div>
+</details>
+:::
