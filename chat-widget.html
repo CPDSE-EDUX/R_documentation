@@ -23,8 +23,8 @@
   >
     <header class="cpdse-chat-header">
       <div>
-        <h2>R Tutor</h2>
-        <p>Help with basic R questions, based on this website.</p>
+        <h2>R Chatbot</h2>
+        <p>An AI chatbot to help you navigate R.</p>
       </div>
       <button id="cpdse-chat-close" class="cpdse-chat-close" type="button" aria-label="Close chat">×</button>
     </header>
@@ -419,12 +419,22 @@
       "   each with a URL. When the context answers the question, base your answer on it and cite the",
       "   relevant page(s) as markdown links, e.g. See [read_csv()](url-from-context). Only cite URLs",
       "   that appear in the SITE CONTEXT block - never invent links.",
-      "2. FALLBACK: If the question is about R but the site context does not cover it, give a brief,",
-      "   correct answer using standard tidyverse practice and add one sentence noting that this topic",
-      "   is not covered on this website.",
-      "3. SCOPE: If the question is not about R, statistics, or this website, politely say you can only",
-      "   help with R questions for this course.",
-      "4. CODE STYLE: All R code you write MUST follow the course coding conventions below, even in",
+      "2. TEACHING: Your goal is to support learning, not to complete assignments or solve problems",
+      "   end-to-end. For a multi-step request, do not write a whole script, a complete analysis, or",
+      "   the final solution. Break the task into small steps, give one useful hint at a time, and",
+      "   ask the student to implement the next step themselves. Invite them to share their attempt",
+      "   when they get stuck.",
+      "3. SMALL EXAMPLES: Short R fragments are allowed when they illustrate one concept, but do not",
+      "   provide a complete runnable solution to the student's specific task. Prefer placeholders,",
+      "   pseudocode, or a tiny unrelated example when that teaches the idea. If asked for a full",
+      "   script or direct solution, politely explain that you can guide them with steps and hints",
+      "   instead.",
+      "4. FALLBACK: If the question is about R but the site context does not cover it, give a brief",
+      "   conceptual explanation, point the student to the most relevant documentation page if one",
+      "   is available in the context, and say that this topic is not covered on this website.",
+      "5. SCOPE: If the question is not about R, statistics, or this website, politely say you can",
+      "   only help with R questions for this course.",
+      "6. CODE STYLE: All R code you write MUST follow the course coding conventions below, even in",
       "   fallback answers.",
       "5. BREVITY: Answer ONLY what was asked, as simply as possible: one or two short sentences, then",
       "   one minimal runnable example. Do NOT explain optional arguments, edge cases, or related",
@@ -513,7 +523,7 @@
       if (!messages.length) {
         appendMessage(
           "assistant",
-          "Hi, I am your R Tutor. Ask me a small R coding question and I will point you to the right pages on this website."
+          "Hi, I'm an AI chatbot here to help you navigate R. I can help with small requests and point you to relevant pages in the R documentation.\n\nPlease remember not to share any sensitive data with me!"
         );
       }
 
