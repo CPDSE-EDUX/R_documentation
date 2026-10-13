@@ -1,0 +1,12 @@
+---
+title: "Cleaning Data"
+body-classes: "data-handling-page"
+---
+
+<p class="subpage-back"><a href="data-handling.qmd">← Back to Data Handling</a></p>
+
+## Numbers stored as text {#numbers-stored-as-text}
+
+## Inconsistent labels {#inconsistent-labels}
+
+## Duplicated rows {#duplicated-rows}

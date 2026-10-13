@@ -1,0 +1,80 @@
+---
+title: "Working with Rows"
+body-classes: "data-handling-page"
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<p class="subpage-back"><a href="data-handling.qmd">← Back to Data Handling</a></p>
+
+## filter( ) {#filter}
+
+Keep only rows where a condition is `TRUE`.
+
+### Filter based on one condition {#filter-one-condition}
+
+```{webr}
+# Keep only batch A tablets
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  filter(batch == "A")
+```
+
+![Illustration of filtering batch A tablets](../assets/images/filter_function.svg){width=100%}
+
+### Filter based on multiple conditions {#filter-multiple-conditions}
+
+```{webr}
+# Keep rows matching two conditions
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  filter(batch == "A" & weight_mg > 502)
+```
+
+![Illustration of filtering batch A tablets with a weight above 502 mg](../assets/images/filter_function2.svg){width=100%}
+
+::: {.callout-tip}
+## Available Operators
+
+- `==` **equal** — is the value exactly this?
+- `!=` **not equal** — exclude this value
+- `>` / `<` **greater / less than** — strictly above or below
+- `>=` / `<=` **greater / less than or equal** — includes the boundary value
+- `&` **and** — both conditions must be true
+- `|` **or** — at least one condition must be true
+:::
+
+## arrange( ) {#arrange}
+
+Sort rows by a column.
+
+### Ascending order {#arrange-ascending}
+
+```{webr}
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  arrange(weight_mg)
+```
+
+![Illustration of arranging rows in ascending order](../assets/images/arrange_function.svg){width=100%}
+
+### Descending order {#arrange-descending}
+
+```{webr}
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  arrange(desc(weight_mg))
+```
+
+![Illustration of arranging rows in descending order](../assets/images/arrange_function2.svg){width=100%}
+
+## slice( ) {#slice}

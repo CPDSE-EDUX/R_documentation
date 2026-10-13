@@ -1,0 +1,67 @@
+---
+title: "Working with Columns"
+body-classes: "data-handling-page"
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<p class="subpage-back"><a href="data-handling.qmd">← Back to Data Handling</a></p>
+
+## select( ) {#select}
+
+Keep only the columns you need.
+
+### Select columns by name {#select-by-name}
+
+```{webr}
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  select(tablet_id, weight_mg)
+```
+
+![Illustration of selecting columns](../assets/images/select_function.svg){width=100%}
+
+### Drop a column by name {#select-drop}
+
+```{webr}
+# Drop a column with -
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  select(-weight_mg)
+```
+
+![Illustration of dropping a column](../assets/images/select_function2.svg){width=100%}
+
+## rename( ) {#rename}
+
+Rename a column: `rename(new_name = old_name)`.
+
+```{webr}
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  rename(id = tablet_id, weight = weight_mg)
+```
+
+![Illustration of renaming a column](../assets/images/rename_function.svg){width=100%}
+
+## mutate( ) {#mutate}
+
+Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
+
+```{webr}
+# The target weight is 500 mg — express each tablet as % of target
+library(tidyverse)
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights %>%
+  mutate(pct_target = weight_mg / 500 * 100)
+```
+
+![Illustration of adding a column with newly calculated values](../assets/images/mutate_function.svg){width=100%}

@@ -1,185 +1,59 @@
 ---
 title: "Data Handling"
 subtitle: "Filter rows, pick columns, sort, and reshape your data with dplyr."
-toc: false
+body-classes: "data-handling-page"
 ---
 
 {{< include /_extensions/r-wasm/live/_knitr.qmd >}}
 {{< include /_webr-options.qmd >}}
 
-<details class="topic-card" open>
-<summary>Load the Data</summary>
-<div class="topic-card-body">
-
-First, you have to load the data.
-
-```{webr}
-library(tidyverse)
-
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights
-```
-
+```{=html}
+<div class="card-grid subpage-grid">
+<a href="importing-data.qmd" class="feature-card">
+<div class="card-head">
+<div class="card-icon">📥</div>
+<h3>Importing Data</h3>
 </div>
-</details>
-
-<details class="topic-card">
-<summary>filter( )</summary>
-<div class="topic-card-body">
-
-Keep only rows where a condition is `TRUE`.
-
-## Filter based on one condition
-
-```{webr}
-# Keep only batch A tablets
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  filter(batch == "A")
-```
-
-![Illustration of filtering batch A tablets](../assets/images/filter_function.svg){width=100%}
-
-## Filter based on multiple conditions
-
-```{webr}
-# Keep rows matching two conditions
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  filter(batch == "A" & weight_mg > 502)
-```
-
-![Illustration of filtering batch A tablets with a weight above 502 mg](../assets/images/filter_function2.svg){width=100%}
-
-::: {.callout-tip}
-## Available Operators
-
-- `==` **equal** — is the value exactly this?
-- `!=` **not equal** — exclude this value
-- `>` / `<` **greater / less than** — strictly above or below
-- `>=` / `<=` **greater / less than or equal** — includes the boundary value
-- `&` **and** — both conditions must be true
-- `|` **or** — at least one condition must be true
-:::
-
+<p>Read CSV and Excel files into R using <code>read_csv()</code>, <code>read_csv2()</code> and <code>read_excel()</code>.</p>
+</a>
+<a href="missing-data.qmd" class="feature-card">
+<div class="card-head">
+<div class="card-icon">❓</div>
+<h3>Missing Data</h3>
 </div>
-</details>
-
-<details class="topic-card">
-<summary>select( )</summary>
-<div class="topic-card-body">
-
-Keep only the columns you need.
-
-## Select columns by name
-
-```{webr}
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  select(tablet_id, weight_mg)
-```
-
-![Illustration of selecting columns](../assets/images/select_function.svg){width=100%}
-
-## Drop a column by name
-
-```{webr}
-# Drop a column with -
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  select(-weight_mg)
-```
-
-![Illustration of dropping a column](../assets/images/select_function2.svg){width=100%}
-
+<p>How to deal with NA values and empty cells in your data using <code>is.na()</code>, <code>drop_na()</code> and <code>replace_na()</code>.</p>
+</a>
+<a href="cleaning-data.qmd" class="feature-card">
+<div class="card-head">
+<div class="card-icon">🧹</div>
+<h3>Cleaning Data</h3>
 </div>
-</details>
-
-<details class="topic-card">
-<summary>rename( )</summary>
-<div class="topic-card-body">
-
-Rename a column: `rename(new_name = old_name)`.
-
-```{webr}
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  rename(id = tablet_id, weight = weight_mg)
-```
-
-![Illustration of renaming a column](../assets/images/rename_function.svg){width=100%}
-
+<p>Fix numbers stored as text, messy labels and duplicate rows using <code>parse_number()</code>, <code>str_trim()</code> and <code>distinct()</code>.</p>
+</a>
+<a href="working-with-rows.qmd" class="feature-card">
+<div class="card-head">
+<div class="card-icon">🔎</div>
+<h3>Working with Rows</h3>
 </div>
-</details>
-
-<details class="topic-card">
-<summary>arrange( )</summary>
-<div class="topic-card-body">
-
-Sort rows by a column.
-
-##  Ascending order
-```{webr}
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  arrange(weight_mg)
-```
-
-![Illustration of arranging rows in ascending order](../assets/images/arrange_function.svg){width=100%}
-
-## Descending order
-
-```{webr}
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  arrange(desc(weight_mg))
-```
-
-![Illustration of arranging rows in descending order](../assets/images/arrange_function2.svg){width=100%}
-
+<p>Keep, sort and pick rows using <code>filter()</code>, <code>arrange()</code> and <code>slice()</code>.</p>
+</a>
+<a href="working-with-columns.qmd" class="feature-card">
+<div class="card-head">
+<div class="card-icon">🏛️</div>
+<h3>Working with Columns</h3>
 </div>
-</details>
-
-<details class="topic-card">
-<summary>mutate( )</summary>
-<div class="topic-card-body">
-
-Add or transform columns. See the full [`mutate()` reference page](../functions/mutate.qmd) for details.
-
-```{webr}
-# The target weight is 500 mg — express each tablet as % of target
-library(tidyverse)
-tablet_weights <- read_csv("data/tablet_weights.csv")
-
-tablet_weights %>%
-  mutate(pct_target = weight_mg / 500 * 100)
+<p>Choose, rename and calculate columns using <code>select()</code>, <code>rename()</code> and <code>mutate()</code>.</p>
+</a>
+</div>
 ```
 
-![Illustration of adding a column with newly calculated values](../assets/images/mutate_function.svg){width=100%}
+## What is data handling? {#what-is-data-handling}
 
-</div>
-</details>
+Data handling is everything you do to get data into a usable shape before you analyse it: importing it into R, dealing with missing or messy values, and selecting, sorting, and calculating the rows and columns you need.
 
-<details class="topic-card">
-<summary>Combining steps</summary>
-<div class="topic-card-body">
+## Combining steps {#combining-steps}
 
-Chain any number of operations with the pipe — each result flows into the next.
+The subpages above cover individual functions for working with your data. Several of these can be combined using the pipe operator.
 
 ```{webr}
 library(tidyverse)
@@ -193,5 +67,81 @@ tablet_weights %>%
 
 ![Illustration of combining steps with the pipe operator](../assets/images/data_handling_pipe.svg){width=100%}
 
-</div>
-</details>
+## A complete workflow {#complete-workflow}
+
+In pharmaceutical production, quality control (QC) means checking that every batch of a medicine meets its specification before it is released. A routine check is weighing tablets: each tablet should be close to its target weight, otherwise it may contain too little or too much drug.
+
+In this example, a QC lab weighed ibuprofen tablets (target weight 500 mg) from three batches, A, B and C, and exported the results from the balance. The file has instrument information at the top, and some tablets have no reading. The goal is to find out, for each batch, how many tablets are within ±1 % of the 500 mg target.
+
+### Look at the data {#workflow-data}
+
+```{webr}
+library(tidyverse)
+
+# Skip the 4 instrument lines at the top of the file and treat the
+# missing-value codes as NA. Only the first rows are printed.
+weights <- read_csv(
+  "data/weights_export.csv",
+  skip = 4,
+  na = c("", "NA", "N/A", "-")
+)
+
+weights
+```
+
+### Import, clean, and summarise {#workflow-summary}
+
+```{webr}
+library(tidyverse)
+
+# 1. Import: skip the 4 instrument lines and treat the missing-value codes as NA
+weights <- read_csv(
+  "data/weights_export.csv",
+  skip = 4,
+  na = c("", "NA", "N/A", "-")
+)
+
+# 2. Clean and calculate: drop tablets without a reading,
+#    express each weight as % of target, and flag tablets outside ±1 %
+qc <- weights %>%
+  drop_na(weight_mg) %>%
+  mutate(
+    pct_target = weight_mg / 500 * 100,
+    status = if_else(abs(pct_target - 100) <= 1, "in spec", "out of spec")
+  )
+
+# 3. Summarise: one row per batch
+qc %>%
+  group_by(batch) %>%
+  summarise(
+    n_tablets = n(),
+    mean_weight_mg = round(mean(weight_mg), 1),
+    sd_weight_mg = round(sd(weight_mg), 1),
+    n_out_of_spec = sum(status == "out of spec")
+  )
+```
+
+### Plot the result {#workflow-plot}
+
+```{webr}
+library(tidyverse)
+
+weights <- read_csv(
+  "data/weights_export.csv",
+  skip = 4,
+  na = c("", "NA", "N/A", "-")
+)
+
+qc <- weights %>%
+  drop_na(weight_mg) %>%
+  mutate(
+    pct_target = weight_mg / 500 * 100,
+    status = if_else(abs(pct_target - 100) <= 1, "in spec", "out of spec")
+  )
+
+# Every tablet as a point, coloured by whether it is in spec
+ggplot(qc, aes(x = batch, y = weight_mg, colour = status)) +
+  geom_jitter(width = 0.1, size = 3) +
+  geom_hline(yintercept = 500, linetype = "dashed") +
+  labs(x = "Batch", y = "Weight (mg)", colour = NULL)
+```

@@ -1,0 +1,14 @@
+---
+title: "Missing Data"
+body-classes: "data-handling-page"
+---
+
+<p class="subpage-back"><a href="data-handling.qmd">← Back to Data Handling</a></p>
+
+## How missing values arrive {#how-missing-values-arrive}
+
+## Find missing values {#find-missing-values}
+
+## Missing values in calculations {#missing-values-in-calculations}
+
+## Remove or replace missing values {#remove-or-replace}

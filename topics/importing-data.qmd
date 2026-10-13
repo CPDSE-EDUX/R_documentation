@@ -1,0 +1,27 @@
+---
+title: "Importing Data"
+body-classes: "data-handling-page"
+---
+
+{{< include /_extensions/r-wasm/live/_knitr.qmd >}}
+{{< include /_webr-options.qmd >}}
+
+<p class="subpage-back"><a href="data-handling.qmd">← Back to Data Handling</a></p>
+
+## CSV files {#csv-files}
+
+First, you have to load the data.
+
+```{webr}
+library(tidyverse)
+
+tablet_weights <- read_csv("data/tablet_weights.csv")
+
+tablet_weights
+```
+
+## Semicolon-separated files {#semicolon-separated-files}
+
+## Files with extra lines on top {#extra-lines-on-top}
+
+## Excel files {#excel-files}
